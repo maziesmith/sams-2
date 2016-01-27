@@ -58,6 +58,7 @@ class ContactsController extends CI_Controller {
             if( null != $wildcard )
             {
                 $contacts = $this->Contact->like($wildcard, $start_from, $limit)->result_array();
+                $total    = $this->Contact->like($wildcard)->num_rows();
             }
             else
             {
@@ -214,26 +215,31 @@ class ContactsController extends CI_Controller {
         }
     }
 
-    public function delete($id)
+    public function delete($id=null)
     {
         if( $this->input->is_ajax_request() )
         {
-            // if( null == $id || !isset($id) )
-            // {
-            //     $ids = $this->input->post('contacts_id');
-            //     if( $this->Contact->delete($ids) )
-            //     {
-            //         $data['message'] = 'Contacts were successfully deleted';
-            //         $data['type'] = 'success';
-            //     }
-            //     else
-            //     {
-            //         $data['message'] = 'An unhandled error occured. Record was not deleted';
-            //         $data['type'] = 'error';
-            //     }
-            //     echo json_encode( $data );
-            //     exit();
-            // }
+            /**
+             * If $id is null
+             * then it's a POST request not DELETE.
+             * POST will delete many records
+             */
+            if( null == $id || !isset($id) )
+            {
+                $ids = $this->input->post('contacts_id');
+                if( $this->Contact->delete($ids) )
+                {
+                    $data['message'] = 'Contacts were successfully deleted';
+                    $data['type'] = 'success';
+                }
+                else
+                {
+                    $data['message'] = 'An unhandled error occured. Record was not deleted';
+                    $data['type'] = 'error';
+                }
+                echo json_encode( $data );
+                exit();
+            }
 
             $data = array();
             if( $this->Contact->delete($id) )

@@ -57,6 +57,7 @@ class GroupsController extends CI_Controller {
             if( null != $wildcard )
             {
                 $groups = $this->Group->like($wildcard, $start_from, $limit)->result_array();
+                $total  = $this->Group->like($wildcard)->num_rows();
             }
             else
             {

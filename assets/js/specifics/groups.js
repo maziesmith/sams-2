@@ -430,12 +430,10 @@ function init_edit_group_table()
         },
         url: $('#contacts-table-command-edit-link').val() + '/' + $('#edit-group-form').find('[name=groups_id]').val(),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
-        // keepSelection: true,
 
-        // selection: true,
-        // multiSelect: true,
-        // caseSensitive: false,
+        caseSensitive: false,
     }).on("loaded.rs.jquery.bootgrid", function (e) {
+
         /*
         | -----------------------------------------------------------
         | # Delete From List

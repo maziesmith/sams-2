@@ -114,7 +114,7 @@ $(document).ready(function(){
     */
     $('body').on('click', '#delete-contact-btn', function (e) {
         e.preventDefault();
-        console.log(G_selectedRows);
+        // console.log(G_selectedRows);
         var url  = $('#contact-table-command-delete-many-button').val();
         swal({
             title: "Are you sure?",
@@ -130,7 +130,7 @@ $(document).ready(function(){
                 url: url,
                 data: {'contacts_id[]': G_selectedRows},
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                     var data = $.parseJSON(data);
                     reload_table();
                     swal("Deleted", data.message, data.type);
@@ -207,7 +207,7 @@ $(document).ready(function(){
                     data: $(form).serialize(),
                     success: function (data) {
                         data = JSON.parse(data);
-                        console.log(data);
+                        // console.log(data);
                         resetWarningMessages('.form-group-validation');
                         if( data.type != 'success' )
                         {

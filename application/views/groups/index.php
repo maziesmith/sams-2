@@ -12,7 +12,7 @@
                 <input id="group-table-command-delete-button" type="hidden" value="<?php echo base_url('groups') ?>">
                 <input id="group-table-command-delete-many-button" type="hidden" value="<?php echo base_url('groups/delete/many') ?>">
 
-                <table id="group-table-command" class="table table-condensed table-vmiddle">
+                <table id="group-table-command" class="table table-condensed table-hover table-vmiddle">
                     <thead>
                         <tr>
                             <th data-column-id="count_id"           data-order="asc" data-type="numeric">#</th>

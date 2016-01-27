@@ -1,0 +1,175 @@
+#header,
+#top-search-wrap {
+	background: #5f5f5f;
+}
+.card .card-header {
+	background-color: #f7f7f7;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+	background: #5f5f5f;
+}
+.main-menu > li.active > a:before {
+	content: "\f273";
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+}
+.main-menu > li.active.toggled > a:before {
+	content: "\f278";
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
+}
+.main-menu > li.active > a:before{
+	content: "";
+}
+.main-menu > li.sub-menu > ul > li.active > a,
+.main-menu > li.sub-menu > ul > li:hover > a {
+	color: #000000;
+}
+.main-menu > li.sub-menu > ul > li.active > a {
+	font-weight: bold;
+}
+.form-group {
+	margin-bottom: 15px;
+}
+/*
+| ------------------------------------
+| # Modals
+| ------------------------------------
+*/
+.modal .modal-body:nth-of-type(3) {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.modal .modal-footer button[value="Save changes"] {
+	background-color: #eee;
+}
+.modal .modal-footer button[value="Save changes"]:hover {
+	background-color: #c5c5c5 !important;
+	transition: .2s all ease-in-out;
+}
+.modal .modal-body {
+	padding-top: 20px;
+}
+.modal-header {
+	background: #f1f1f1;
+}
+.modal-dialog-wide {
+	width: 90% !important;
+}
+
+.bootstrap-select .btn {
+	margin-top: -3px !important;
+}
+.fg-line textarea {
+	padding-top: 8px !important;
+}
+ul.breadcrumb {
+	padding: 0 !important;
+	border: none;
+	margin: 0;
+	font-size: 14px;
+}
+ul.breadcrumb .active {
+	color: #000;
+	font-weight: 400;
+}
+.sel-event .chosen-container {
+	margin-top: 9px;
+}
+.modal .bootgrid-footer {
+	margin-bottom: -20px;
+}
+
+/*
+| -----------------
+| # App 1 Overrides
+| -----------------
+*/
+.fg-float .fg-toggled + .fg-label,
+.fg-float .fg-line input:valid + .fg-label {
+	top: -12px;
+}
+/*
+| ----------------------------
+| # Growl
+| ----------------------------
+*/
+.alert.growl-animated {
+	z-index: 1052 !important;
+}
+.growl-animated.alert-success {
+	background: rgba(76,175,80,1);
+}
+
+.fixed-width {
+	width: 228px;
+}
+/*
+| -----------------------------------
+| # Floating Command Button Overrides
+| -----------------------------------
+*/
+.m-btn.delete-all {
+	bottom: 100px;
+	right: -100px;
+}
+.m-btn.delete-all.show {
+	right: 40px;
+}
+/*
+| --------------------------
+| # Command Button Overrides
+| --------------------------
+*/
+.command-edit, .command-delete, .command-print, .command-reload {
+	margin: 3px;
+}
+
+/*
+| ----------------------------
+| # Media Queries
+| ----------------------------
+*/
+@media (min-width: 768px) {
+	.modal-fluid {
+		width: 95%;
+	}
+  	.modal-xl {
+    	width: 90%;
+   		max-width:1200px;
+  	}
+}
+@media(min-width: 768px) {
+	.pad-zero-left {
+		padding-left: 0;
+	}
+	.pad-zero-right {
+		padding-right: 0;
+	}
+}
+@media (min-width: 1200px) {
+	.top-menu #toggle-width .toggle-switch input:checked + .ts-helper {
+		box-shadow: inset 0px 2px 1px rgba(0,0,0,0.2);
+	}
+	.sw-toggled  .top-menu #toggle-width .toggle-switch input:checked + .ts-helper {
+        background: #a7e7a0;
+	}
+}
+
+noscript {
+	padding: 20px;
+	text-align: center;
+	width: 100%;
+	display: block;
+	background-color: rgba(255,0,0,0.3);
+	color: #ffffff;
+}

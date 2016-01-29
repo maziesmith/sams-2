@@ -5,9 +5,9 @@
                 <div class="card blog-post">
                     <div class="bp-header">
                         <img src="<?php echo base_url('assets/img/headers/1.png') ?>" alt="">
-                        <a href="" class="bp-title bgm-orange">
-                            <h2>Contact Manager</h2>
-                            <small>Vivamus sagittis lacus vel augue laoreet rutrum</small>
+                        <a href="<?php echo base_url('contacts') ?>" class="bp-title bgm-orange">
+                            <h2>Contacts Manager</h2>
+                            <small>Add, update, or remove Contacts</small>
                         </a>
                     </div>
                 </div>
@@ -16,7 +16,7 @@
                 <div class="card blog-post">
                     <div class="bp-header">
                         <img src="<?php echo base_url('assets/img/headers/2.png') ?>" alt="">
-                        <a href="" class="bp-title">
+                        <a href="<?php echo base_url('groups') ?>" class="bp-title">
                             <h2>Group Manager</h2>
                             <small>Vivamus sagittis lacus vel augue laoreet rutrum</small>
                         </a>

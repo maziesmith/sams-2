@@ -48,16 +48,36 @@ class Group extends CI_Model {
         }
     }
 
+    public function debug()
+    {
+        $sort = ['groups_name'=>'desc', 'groups_description'=>'asc'];
+        if( is_array($sort) )
+        {
+            foreach ($sort as $key => $value) {
+                $this->db->order_by($key, $value);
+            }
+        }
+        return $this->db;
+    }
+
     public function all()
     {
         $query = $this->db->get($this->table);
         return $query->result();
     }
 
-    public function get_all($start_from=0, $limit=0)
+    public function get_all($start_from=0, $limit=0, $sort=null)
     {
-        $query = $this->db->limit( $limit, $start_from )->get($this->table);
-        return $query;
+        if( null != $sort )
+        {
+            foreach ($sort as $field_name => $order) {
+                $this->db->order_by($field_name, $order);
+            }
+        }
+
+        $this->db->limit( $limit, $start_from );
+
+        return $this->db->get($this->table);
     }
 
     public function find($id)
@@ -66,7 +86,7 @@ class Group extends CI_Model {
         return $query->row();
     }
 
-    public function like($wildcard='', $start_from=0, $limit=0)
+    public function like($wildcard='', $start_from=0, $limit=0, $sort=null)
     {
         $first = ''; $last='';
         if(preg_match('/\s/', $wildcard))
@@ -80,8 +100,17 @@ class Group extends CI_Model {
                 ->or_where('groups_description LIKE', '%' . $wildcard . '%')
                 ->or_where('groups_code LIKE', $wildcard . '%')
                 ->from($this->table)
-                ->select('*')
-                ->limit( $limit, $start_from );
+                ->select('*');
+
+        if( null != $sort )
+        {
+            foreach ($sort as $field_name => $order) {
+                $this->db->order_by($field_name, $order);
+            }
+        }
+
+        $this->db->limit( $limit, $start_from );
+
         return $this->db->get();
     }
 

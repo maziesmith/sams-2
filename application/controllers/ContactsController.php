@@ -48,21 +48,22 @@ class ContactsController extends CI_Controller {
         if( $this->input->is_ajax_request() )
         {
             $bootgrid_arr = [];
-            $current      = null != $this->input->post('current') ? $this->input->post('current') : 1;
+            $current      = $this->input->post('current');
             $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
             $page         = $current !== null ? $current : 1;
             $start_from   = ($page-1) * $limit;
+            $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
             $total        = $this->Contact->get_all()->num_rows();
 
             if( null != $wildcard )
             {
-                $contacts = $this->Contact->like($wildcard, $start_from, $limit)->result_array();
+                $contacts = $this->Contact->like($wildcard, $start_from, $limit, $sort)->result_array();
                 $total    = $this->Contact->like($wildcard)->num_rows();
             }
             else
             {
-                $contacts = $this->Contact->get_all($start_from, $limit)->result_array();
+                $contacts = $this->Contact->get_all($start_from, $limit, $sort)->result_array();
             }
 
             foreach ($contacts as $key => $contact) {
@@ -72,7 +73,7 @@ class ContactsController extends CI_Controller {
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
                     'contacts_id'        => $contact['contacts_id'],
-                    'contacts_name'      => arraytostring([$contact['contacts_firstname'], $contact['contacts_middlename'] ? substr($contact['contacts_middlename'], 0,1) . '.' : '', $contact['contacts_lastname']], ' '),
+                    'contacts_firstname' => arraytostring([$contact['contacts_firstname'], $contact['contacts_middlename'] ? substr($contact['contacts_middlename'], 0,1) . '.' : '', $contact['contacts_lastname']], ' '),
                     'contacts_level'     => $contact['contacts_level'],
                     'contacts_type'      => $contact['contacts_type'],
                     'contacts_address'   => arraytostring([$contact['contacts_blockno'], $contact['contacts_street'], $contact['contacts_brgy'], $contact['contacts_city'], $contact['contacts_zip']]),
@@ -176,6 +177,19 @@ class ContactsController extends CI_Controller {
             | # Validation
             | --------------------------------------
             */
+            if( null != $this->input->post('updating') )
+            {
+                $contact_data = array(
+                    $this->input->post('updating') => $this->input->post('value'),
+                );
+                $this->Contact->update($id, $contact_data);
+                $data = array(
+                    'message' => 'Contact was successfully updated',
+                    'type' => 'success'
+                );
+                echo json_encode( $data );
+                exit();
+            }
             if( $this->Contact->validate(false, $id, $this->input->post('contacts_email')) )
             {
                 /*
@@ -210,7 +224,7 @@ class ContactsController extends CI_Controller {
             }
             else
             {
-                echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
+                echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'error']); exit();
             }
         }
     }
@@ -257,78 +271,50 @@ class ContactsController extends CI_Controller {
         }
     }
 
-    public function delete_many()
-    {
-        if( $this->input->is_ajax_request() )
-        {
-            $ids = $this->input->post('contacts_ids');
-            $this->Contact->delete($ids);
-            $data['message'] = 'Contacts were successfully deleted';
-            $data['type'] = 'success';
-            echo json_encode( $data );
-            exit();
-        }
-    }
-
-    public function grouping($id)
-    {
-        if( $this->input->is_ajax_request() )
-        {
-            $where = ['contacts_group'=>$id];
-            $bootgrid_arr = [];
-            $current      = null != $this->input->post('current') ? $this->input->post('current') : 1;
-            $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
-            $page         = $current !== null ? $current : 1;
-            $start_from   = ($page-1) * $limit;
-            $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
-            $total        = $this->Contact->where($where)->get()->num_rows();
-
-            if( null != $wildcard )
-            {
-                $contacts = $this->Contact->like($wildcard, $start_from, $limit)->where($where)->result_array();
-            }
-            else
-            {
-                $contacts = $this->Contact->where($where, $start_from, $limit)->get()->result_array();
-            }
-
-            foreach ($contacts as $key => $contact) {
-
-                if( null !== $contact['contacts_group'] ) $group = $this->Group->find( $contact['contacts_group'] );
-
-                $bootgrid_arr[] = array(
-                    'count_id'           => $key + 1 + $start_from,
-                    'contacts_id'        => $contact['contacts_id'],
-                    'contacts_name'      => arraytostring([$contact['contacts_firstname'], $contact['contacts_middlename'] ? substr($contact['contacts_middlename'], 0,1) . '.' : '', $contact['contacts_lastname']], ' '),
-                    'contacts_level'     => $contact['contacts_level'],
-                    'contacts_type'      => $contact['contacts_type'],
-                    'contacts_address'   => arraytostring([$contact['contacts_blockno'], $contact['contacts_street'], $contact['contacts_brgy'], $contact['contacts_city'], $contact['contacts_zip']]),
-                    'contacts_telephone' => $contact['contacts_telephone'],
-                    'contacts_mobile'    => $contact['contacts_mobile'],
-                    'contacts_email'     => $contact['contacts_email'],
-                    'contacts_group'     => isset($group->groups_name) ? $group->groups_name : '',
-                    'groups_id'          => isset($group->groups_id) ? $group->groups_id : '',
-                );
-            }
-            $data = array(
-                "current"       => intval($current),
-                "rowCount"      => $limit,
-                "searchPhrase"  => $wildcard,
-                "total"         => intval( $total ),
-                "rows"          => $bootgrid_arr,
-            );
-            echo json_encode( $data );
-            exit();
-        }
-    }
-
     /**
      * Import Page for this controller
      * @return [type] [description]
      */
     public function import()
     {
+        if( $this->input->is_ajax_request() )
+        {
+
+            $this->load->library('upload', ['upload_path'=>'./uploads/', 'allowed_types'=>'csv']);
+
+            if ( !$this->upload->do_upload('file'))
+            {
+                $data = array('message' => $this->upload->display_errors(), 'type'=>'error');
+            }
+            else
+            {
+                # Import
+                if( $this->Contact->import(  $this->upload->data()['full_path'] ) )
+                {
+                    # Delete uploaded file
+                    # --- delete statements go here...
+
+                    # Response
+                    $data = array('message' => 'Contacts successfully imported.', 'type'=>'success');
+
+                } else {
+                    $data = array('message' => 'Something went wrong importing the file', 'type'=>'error');
+                }
+
+
+            }
+            echo json_encode( $data );
+            exit();
+
+        }
+
+        $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/dropzone/dropzone.css').'"></link>';
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/dropzone/dropzone.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/contactsImport.js').'"></script>';
+
         $this->load->view('layouts/main', $this->Data);
+
     }
 
     /**
@@ -340,13 +326,5 @@ class ContactsController extends CI_Controller {
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/export.js').'"></script>';
 
         $this->load->view('layouts/main', $this->Data);
-    }
-    public function postexport()
-    {
-        if( $this->input->is_ajax_request() )
-        {
-            echo json_encode('Lorem ipsum dolor sit.');
-            exit();
-        }
     }
 }

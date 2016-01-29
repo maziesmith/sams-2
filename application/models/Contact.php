@@ -5,6 +5,7 @@ class Contact extends CI_Model {
 
     private $table = 'contacts';
     private $column_id = 'contacts_id';
+    private $time_limit = 128;
     public $validations = array(
         array( 'field' => 'contacts_firstname', 'label' => 'First Name', 'rules' => 'required|trim' ),
         array( 'field' => 'contacts_lastname', 'label' => 'Last Name', 'rules' => 'required|trim' ),
@@ -59,12 +60,8 @@ class Contact extends CI_Model {
             }
         }
 
-        if ($this->form_validation->run() == FALSE)
-        {
-            return false;
-        } else {
-            return true;
-        }
+        if ($this->form_validation->run() == FALSE) { return false; }
+        else { return true; }
     }
 
     public function all()
@@ -73,10 +70,18 @@ class Contact extends CI_Model {
         return $query->result();
     }
 
-    public function get_all($start_from=0, $limit=0)
+    public function get_all($start_from=0, $limit=0, $sort=null)
     {
-        $query = $this->db->limit( $limit, $start_from )->get($this->table);
-        return $query;
+        if( null != $sort )
+        {
+            foreach ($sort as $field_name => $order) {
+                $this->db->order_by($field_name, $order);
+            }
+        }
+
+        $this->db->limit( $limit, $start_from );
+
+        return $this->db->get($this->table);
     }
 
     public function find($id)
@@ -85,7 +90,7 @@ class Contact extends CI_Model {
         return $query->row();
     }
 
-    public function like($wildcard='', $start_from=0, $limit=0)
+    public function like($wildcard='', $start_from=0, $limit=0, $sort=null)
     {
         $first = ''; $last='';
         if(preg_match('/\s/', $wildcard))
@@ -119,8 +124,17 @@ class Contact extends CI_Model {
                 ->or_where('contacts_lastname', $first)
 
                 ->from($this->table)
-                ->select('*')
-                ->limit( $limit, $start_from );
+                ->select('*');
+
+        if( null != $sort )
+        {
+            foreach ($sort as $field_name => $order) {
+                $this->db->order_by($field_name, $order);
+            }
+        }
+
+        $this->db->limit( $limit, $start_from );
+
         return $this->db->get();
     }
 
@@ -157,6 +171,24 @@ class Contact extends CI_Model {
         }
         $this->db->limit($limit, $start_from);
         return $this->db;
+    }
+
+    public function import($file=null, $truncate=true)
+    {
+        $this->pdo = $this->load->database('pdo', true);
+        // $pdo = new PDO("mysql:host=localhost;dbname=sams_db", 'root', '', array(PDO::MYSQL_ATTR_LOCAL_INFILE => true));
+
+        if(!file_exists($file) || !is_readable($file)) return false;
+
+        # Load the data to database
+        set_time_limit($this->time_limit); // for longer execution time if needed
+
+        if( $truncate ) $this->db->truncate($this->table); // truncate the table if all is good
+
+        $columns = 'contacts_id, contacts_firstname, contacts_middlename, contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group';
+        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\\n' IGNORE 1 LINES (contacts_id, contacts_firstname, contacts_middlename, contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group)";
+        // $query = "SELECT * FROM ". $this->pdo->dbprefix . 'groups';
+        return $this->pdo->query($query);
     }
 
 }

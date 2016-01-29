@@ -1,9 +1,10 @@
 <div class="modal fade" id="edit-contact" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <?php echo form_open("contacts/update", array('id'=>'edit-contact-form', 'class'=>'m-t-25', 'method'=>'POST'), array('contacts_id'=>'AJAX_CALL_ONLY')); ?>
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Contact</h4>
+            <?php echo form_open("contacts/update", array('id'=>'edit-contact-form', 'class'=>'m-t-25 card', 'method'=>'POST'), array('contacts_id'=>'AJAX_CALL_ONLY')); ?>
+                <div class="card-header bgm-amber">
+                    <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
+                    <h2>Edit Contact</h2>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">

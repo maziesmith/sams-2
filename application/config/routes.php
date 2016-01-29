@@ -64,11 +64,10 @@ $route['dashboard'] = 'PageController/index';
 */
 $route['contacts']['get'] = 'ContactsController/index';
 
+$route['contacts/listing']['post']  = 'ContactsController/listing/';
+
 $route['contacts/delete/(:num)']['delete']  = 'ContactsController/delete/$1';
 $route['contacts/delete']['post']  = 'ContactsController/delete';
-
-$route['contacts/listing']['post']  = 'ContactsController/listing/';
-$route['contacts/listing/group/(:any)']['post']  = 'ContactsController/grouping/$1';
 
 $route['contacts/add']['post']  = 'ContactsController/add';
 
@@ -76,8 +75,10 @@ $route['contacts/edit/(:num)']['post']  = 'ContactsController/edit/$1';
 $route['contacts/update/(:num)']['post']  = 'ContactsController/update/$1';
 
 $route['contacts/import']['get']  = 'ContactsController/import';
+$route['contacts/import']['post']  = 'ContactsController/import';
+
 $route['contacts/export']['get']  = 'ContactsController/export';
-$route['contacts/export']['post']  = 'ContactsController/postexport';
+$route['contacts/export']['post']  = 'ContactsController/export';
 
 /*
 | ----------------
@@ -85,12 +86,17 @@ $route['contacts/export']['post']  = 'ContactsController/postexport';
 | ----------------
 */
 $route['groups']  = 'GroupsController/index';
-// $route['groups/(:any)']  = 'GroupsController/$1';
-$route['groups/(:num)']['delete']  = 'GroupsController/delete/$1';
-$route['groups/delete/many']['post']  = 'GroupsController/delete_many/';
+
+$route['groups/listing']['post']  = 'GroupsController/listing';
+
+$route['groups/delete/(:num)']['delete']  = 'GroupsController/delete/$1';
+$route['groups/delete']['post']  = 'GroupsController/delete/';
+
 $route['groups/add']['post']  = 'GroupsController/add';
+
 $route['groups/edit/(:num)']['post']  = 'GroupsController/edit/$1';
 $route['groups/update/(:num)']['post']  = 'GroupsController/update/$1';
+
 $route['groups/import']['get']  = 'GroupsController/import';
 $route['groups/export']['get']  = 'GroupsController/export';
 

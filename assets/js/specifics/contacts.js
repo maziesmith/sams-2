@@ -115,7 +115,7 @@ $(document).ready(function(){
     $('body').on('click', '#delete-contact-btn', function (e) {
         e.preventDefault();
         // console.log(G_selectedRows);
-        var url  = $('#contact-table-command-delete-many-button').val();
+        var url  =  base_url('contacts/delete');
         swal({
             title: "Are you sure?",
             text: "The selected Contacts will be deleted permanently from your record",
@@ -222,7 +222,7 @@ $(document).ready(function(){
                             notify(data.message, data.type, 9000);
                             reload_table();
                             $('#edit-contact-form')[0].reset();
-                            $('select').trigger("chosen:updated");
+                            reload_selectpickers();
                         }
                     },
                 });
@@ -248,9 +248,9 @@ function init_table() {
         css: {
             icon: 'zmdi icon',
             iconColumns: 'zmdi-view-module',
-            iconDown: 'zmdi-expand-more',
+            iconDown: 'zmdi-caret-down',
             iconRefresh: 'zmdi-refresh',
-            iconUp: 'zmdi-expand-less',
+            iconUp: 'zmdi-caret-up',
         },
         formatters: {
             commands: function (column, row) {
@@ -274,14 +274,13 @@ function init_table() {
             // console.log(request);
             return request;
         },
-        url: $('#contact-table-command-list').val(),
+        url: base_url('contacts/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: true,
 
-        multiSort: true,
         selection: true,
         multiSelect: true,
-        // rowSelect: true,
+
         caseSensitive: false,
     }).on('appended.rs.jquery.bootgrid', function (e, arr) {
         // console.log(arr);
@@ -310,6 +309,7 @@ function init_table() {
         }
 
     }).on("loaded.rs.jquery.bootgrid", function (e) {
+        reload_dom();
         /*
         | ---------------------------------
         | # Checkbox
@@ -337,7 +337,7 @@ function init_table() {
         */
         contactTable.find(".command-edit").on("click", function () {
             var contacts_id = $(this).parents('tr').data('row-id'),
-                url = $('#contact-table-command-edit-button').val() + '/' + contacts_id;
+                url = base_url('contacts/edit/' + contacts_id);
 
             $.ajax({
                 type: 'POST',
@@ -350,7 +350,7 @@ function init_table() {
 
                     $.each(contact, function (k, v) {
                         _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        $('select').trigger("chosen:updated");
+                        reload_selectpickers();
                     });
                 }
             });
@@ -363,8 +363,8 @@ function init_table() {
         */
         contactTable.find(".command-delete").on("click", function (e) {
             var id   = $(this).parents('tr').data('row-id'),
-                name = $(this).parents('tr').find('td.contacts_name').text(),
-                url  = $('#contact-table-command-delete-button').val() + '/' + id;
+                name = $(this).parents('tr').find('td.contacts_firstname').text(),
+                url  = base_url('contacts/delete/' + id);
             e.preventDefault();
             swal({
                 title: "Are you sure?",

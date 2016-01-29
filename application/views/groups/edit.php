@@ -7,8 +7,9 @@
             <input id="contacts-table-command-update-button" type="hidden" value="<?php echo base_url('contacts/update') ?>">
 
             <?php echo form_open("groups/update", array('id'=>'edit-group-form', 'class'=>'m-t-25 card', 'method'=>'POST'), array('groups_id'=>'AJAX_CALL_ONLY')); ?>
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Group</h4>
+                <div class="card-header bgm-amber">
+                    <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
+                    <h2>Edit Group</h2>
                 </div>
                 <div class="modal-body">
                     <p class="c-black f-500 m-b-10 text-uppercase"><strong>Group Details</strong></p>
@@ -55,21 +56,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="modal-body">
-                            <p class="c-black f-500 m-b-10 text-uppercase"><strong>Add Group Contacts</strong></p>
-                            <small>Add Contacts in this group</small>
+                            <p class="c-black f-500 m-b-10 text-uppercase"><strong>Group Contacts List</strong></p>
+                            <small>List of Contacts to Add / Remove in this Group</small>
                         </div>
                         <div class="row">
                             <div class="col-md-12 m-b-0">
                                 <div class="table-responsive">
-                                    <input id="contacts-table-command-edit-link" type="hidden" value="<?php echo base_url('contacts/listing/group') ?>">
                                     <table id="contacts-table-command-edit" class="contacts-table-command table table-condensed table-vmiddle">
                                         <thead>
                                             <tr>
-                                                <th data-column-id="count_id" data-type="numeric">#</th>
-                                                <th data-column-id="contacts_id" data-identifier="true" data-visible="false">Contacts ID</th>
-                                                <th data-column-id="contacts_name">Name</th>
+                                                <th data-column-id="count_id" data-sortable="false" data-type="numeric">#</th>
+                                                <th data-column-id="contacts_id" data-identifier="true" data-order="asc" data-visible="false">Contacts ID</th>
+                                                <th data-column-id="contacts_firstname">Name</th>
                                                 <th data-column-id="contacts_level" data-visible="false">Level</th>
-                                                <th data-column-id="contacts_group" data-order="asc" data-css-class="group">Current Group</th>
+                                                <th data-column-id="contacts_group" data-css-class="group">Current Group</th>
                                                 <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th>
                                             </tr>
                                         </thead>

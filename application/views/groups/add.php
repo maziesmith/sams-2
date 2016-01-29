@@ -5,7 +5,8 @@
             <input type="hidden" id="group-add-table-command-list" value="<?php echo base_url('contacts/listing') ?>">
 
             <?php echo form_open("groups/add", array('id'=>'add-new-group-form', 'class'=>'m-t-25 card')); ?>
-                <div class="card-header">
+                <div class="card-header bgm-green">
+                    <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
                     <h2>New Group</h2>
                 </div>
                 <div class="modal-body">
@@ -58,11 +59,11 @@
                             <table id="contacts-table-command-add" class="contacts-table-command table table-condensed table-vmiddle">
                                 <thead>
                                     <tr>
-                                        <th data-column-id="count_id" data-type="numeric">#</th>
-                                        <th data-column-id="contacts_id" data-identifier="true" data-visible="false">Contacts ID</th>
-                                        <th data-column-id="contacts_name">Name</th>
+                                        <th data-column-id="count_id" data-type="numeric" data-sortable="false">#</th>
+                                        <th data-column-id="contacts_id" data-order="asc" data-identifier="true" data-visible="false">Contacts ID</th>
+                                        <th data-column-id="contacts_firstname">Name</th>
                                         <th data-column-id="contacts_level" data-visible="false">Level</th>
-                                        <th data-column-id="contacts_group" data-order="asc">Current Group</th>
+                                        <th data-column-id="contacts_group">Current Group</th>
                                     </tr>
                                 </thead>
                                 <tbody>

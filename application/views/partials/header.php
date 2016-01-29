@@ -42,6 +42,14 @@
         closedir($handle);
         echo $css;
     } ?>
+    <script>
+        //////////////////////
+        // Global Variables //
+        //////////////////////
+        var base_url = function (segments) {
+            return "<?php echo base_url(); ?>" + segments;
+        }
+    </script>
 </head>
 <body>
     <noscript>

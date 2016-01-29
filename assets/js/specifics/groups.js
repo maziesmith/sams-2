@@ -1,5 +1,4 @@
 var groupTable;
-var G_selectedGroupRows = [];
 $(document).ready(function() {
     /*
     | ----------------------------------
@@ -7,6 +6,8 @@ $(document).ready(function() {
     | ----------------------------------
     */
     init_group_table();
+    init_add_group_table();
+    init_edit_group_contacts_table();
 
     /*
     | ----------------------------------
@@ -131,12 +132,9 @@ $(document).ready(function() {
                         }
                         else
                         {
-                            console.log(data);
                             $('#edit-group-form').find('button[name=groups_close]').delay(900).queue(function(next){ $(this).click(); next(); });
                             notify(data.message, data.type, 9000);
                             reload_group_table();
-                            $('#edit-group-form')[0].reset();
-                            $('select').trigger("chosen:updated");
                         }
                     },
                 });
@@ -150,8 +148,6 @@ $(document).ready(function() {
     */
     $('body').on('click', '#delete-group-btn', function (e) {
         e.preventDefault();
-        // console.log(G_selectedGroupRows);
-        var url  = $('#group-table-command-delete-many-button').val();
         swal({
             title: "Are you sure?",
             text: "The selected Groups will be deleted permanently from your record",
@@ -163,14 +159,12 @@ $(document).ready(function() {
         }, function(){
             $.ajax({
                 type: 'POST',
-                url: url,
-                data: {'groups_ids[]': G_selectedGroupRows},
+                url: base_url('groups/delete'),
+                data: {'groups_ids[]': $('#group-table-command').bootgrid('getSelectedRows')},
                 success: function (data) {
-                    console.log(G_selectedGroupRows);
                     var data = $.parseJSON(data);
                     reload_group_table();
                     swal("Deleted", data.message, data.type);
-                    G_selectedGroupRows = [];
                     $('#delete-group-btn').removeClass('show');
                 },
             });
@@ -204,15 +198,15 @@ function init_group_table()
         css: {
             icon: 'zmdi icon',
             iconColumns: 'zmdi-view-module',
-            iconDown: 'zmdi-expand-more',
+            iconDown: 'zmdi-caret-down',
             iconRefresh: 'zmdi-refresh',
-            iconUp: 'zmdi-expand-less',
+            iconUp: 'zmdi-caret-up',
         },
         formatters: {
             commands: function (column, row) {
                 return  '<button role="button" class="wave-effect btn btn-icon command-edit"    data-row-id="' + row.groups_id + '"><span class="zmdi zmdi-edit"></span></button> ' +
                         '<button type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.groups_id + '"><span class="zmdi zmdi-delete"></span></button> ';
-            }
+            },
         },
 
         ajax: true,
@@ -223,15 +217,13 @@ function init_group_table()
         requestHandler: function (request)
         {
             // To accumulate custom parameter with the request object
-            // request.customPost = 'anything';
             // console.log(request);
             return request;
         },
-        url: $('#group-table-command-list').val(),
+        url: base_url('groups/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: true,
 
-        multiSort: true,
         selection: true,
         multiSelect: true,
         // rowSelect: true,
@@ -242,60 +234,48 @@ function init_group_table()
     {
         // console.log(rows);
         selectedGroupRowCount.push(rows);
-        G_selectedGroupRows.push(rows[0].groups_id);
-        // console.log(G_selectedGroupRows);
-        if( selectedGroupRowCount.length >= 2 )
+        if( selectedGroupRowCount.length > 1 )
         {
             $('#delete-group-btn').addClass('show');
         } else {
             $('#delete-group-btn').removeClass('show');
         }
+
+        var _selectedRows = groupTable.bootgrid('getSelectedRows');
+
+        if( _selectedRows.length > 1 )
+        {
+            $('#delete-group-btn').addClass('show');
+        }
+
     }).on("deselected.rs.jquery.bootgrid", function(e, rows)
     {
         selectedGroupRowCount.splice(-1, 1);
-        G_selectedGroupRows.splice(-1, 1);
 
         // console.log(selectedGroupRowCount);
-        if( selectedGroupRowCount.length >= 2 )
+        if( selectedGroupRowCount.length > 1 )
         {
             $('#delete-group-btn').addClass('show');
         } else {
+            $('#delete-group-btn').removeClass('show');
+        }
+
+        if( _selectedRows.length < 1 )
+        {
             $('#delete-group-btn').removeClass('show');
         }
 
     }).on("loaded.rs.jquery.bootgrid", function (e) {
-        /*
-        | ---------------------------------
-        | # Checkbox
-        | ---------------------------------
-        */
-        $('.select-box[value="all"]').click(function(){
-            var select_all = $('.select-box[value="all"]:checked').length;
-            if( select_all > 0 )
-            {
-                selectedGroupRowCount.push(1);
-                if( selectedGroupRowCount.length >= 2 )
-                {
-                    $('#delete-group-btn').addClass('show');
-                } else {
-                    $('#delete-group-btn').removeClass('show');
-                }
-            } else {
-                selectedGroupRowCount.splice(-1, selectedGroupRowCount.length-1);
-            }
-        });
         /*
         | -----------------------------------------------------------
         | # Edit
         | -----------------------------------------------------------
         */
         groupTable.find(".command-edit").on("click", function () {
-            var groups_id = $(this).parents('tr').data('row-id'),
-                url = $('#group-table-command-edit').val() + '/' + groups_id;
-
+            var groups_id = $(this).parents('tr').data('row-id');
             $.ajax({
                 type: 'POST',
-                url: url,
+                url: base_url('groups/edit/' + groups_id),
                 data: {groups_id: groups_id},
                 success: function (data) {
                     var group = $.parseJSON(data);
@@ -307,7 +287,7 @@ function init_group_table()
                         $('select').trigger("chosen:updated");
                     });
 
-                    init_edit_group_table();
+                    init_edit_group_contacts_table();
                 }
             });
         });
@@ -320,7 +300,7 @@ function init_group_table()
         groupTable.find(".command-delete").on("click", function (e) {
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.groups_name').text(),
-                url  = $('#group-table-command-delete-button').val() + '/' + id;
+                url  = base_url('groups/delete/') + '/' + id;
             e.preventDefault();
             swal({
                 title: "Are you sure?",
@@ -344,6 +324,7 @@ function init_group_table()
             });
         });
     });
+    var _selectedRows = $('#group-table-command').bootgrid('getSelectedRows');
 }
 
 function init_add_group_table () {
@@ -359,9 +340,9 @@ function init_add_group_table () {
         css: {
             icon: 'zmdi icon',
             iconColumns: 'zmdi-view-module',
-            iconDown: 'zmdi-expand-more',
+            iconDown: 'zmdi-caret-down',
             iconRefresh: 'zmdi-refresh',
-            iconUp: 'zmdi-expand-less',
+            iconUp: 'zmdi-caret-up',
         },
 
         ajax: true,
@@ -383,17 +364,19 @@ function init_add_group_table () {
             console.log(response);
             return response;
         },
-        url: $('#group-add-table-command-list').val(),
+        url: base_url('contacts/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
-        keepSelection: true,
+        keepSelection: false,
 
         selection: true,
         multiSelect: true,
         caseSensitive: false,
+    }).on("loaded.rs.jquery.bootgrid", function (e) {
+        reload_dom();
     });
 }
 
-function init_edit_group_table()
+function init_edit_group_contacts_table()
 {
     /*
     | ------------------------------------
@@ -413,7 +396,8 @@ function init_edit_group_table()
         },
         formatters: {
             commands: function (column, row) {
-                return  '<button type="button" title="Remove from list" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.contacts_id + '"><span class="zmdi zmdi-delete"></span></button> ';
+                return  '<button type="button" data-toggle="tooltip" data-placement="top" title="Add to this Group" class="wave-effect btn btn-icon btn-xs command-add" data-row-id="' + row.contacts_id + '"><span class="zmdi zmdi-plus"></span></button> ' +
+                        '<button type="button" data-toggle="tooltip" data-placement="top" title="Remove from this Group" class="wave-effect btn btn-icon btn-xs command-delete" data-row-id="' + row.contacts_id + '"><span class="zmdi zmdi-close"></span></button> ';
             }
         },
 
@@ -425,36 +409,80 @@ function init_edit_group_table()
         requestHandler: function (request)
         {
             // To accumulate custom parameter with the request object
-            // console.log(request);
             return request;
         },
-        url: $('#contacts-table-command-edit-link').val() + '/' + $('#edit-group-form').find('[name=groups_id]').val(),
+        url: base_url( 'contacts/listing' ),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
 
         caseSensitive: false,
     }).on("loaded.rs.jquery.bootgrid", function (e) {
+        reload_dom();
+        /*
+        | -----------------------------------------------------------
+        | # Add To List
+        | -----------------------------------------------------------
+        */
+        $("#contacts-table-command-edit").find(".command-add").on('click', function (e) {
+            e.preventDefault();
+            var id   = $(this).parents('tr').data('row-id'),
+                name = $(this).parents('tr').find('td.contacts_name').text(),
+                url  = base_url('contacts/update/' + id),
+                value= $('#edit-group-form').find('[name=groups_id]').val();
+            $(this).prop('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { updating: 'contacts_group', value: value },
+                success: function (data) {
+                    var data = $.parseJSON(data);
+                    reload_group_table();
+                    if( 'success' == data.type )
+                    {
+                        notify(data.message, data.type);
+                    }
+                    else
+                    {
+                        swal('Error', data.message, data.type);
+                    }
+                },
+                done: function (data) {
+                    $(this).prop('disabled', '');
+                }
+            });
+            return false;
+        });
 
         /*
         | -----------------------------------------------------------
         | # Delete From List
         | -----------------------------------------------------------
         */
-        contactsTableCommandEdit.find(".command-delete").on("click", function (e) {
+        $("#contacts-table-command-edit").find(".command-delete").on("click", function (e) {
+            e.preventDefault();
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.contacts_name').text(),
-                url  = $('#contacts-table-command-update-button').val() + '/' + id;
-            e.preventDefault();
-            notify('Please work on this now!', 'danger', 3000);
-            // $.ajax({
-            //     type: 'POST',
-            //     url: url,
-            //     data: { contacts_group: '' },
-            //     success: function (data) {
-            //         var data = $.parseJSON(data);
-            //         reload_group_table();
-            //         notify(data.message, data.type);
-            //     }
-            // });
+                url  = base_url('contacts/update/' + id);
+            $(this).prop('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: { updating: 'contacts_group', value: '' },
+                success: function (data) {
+                    var data = $.parseJSON(data);
+                    reload_group_table();
+                    if( 'success' == data.type )
+                    {
+                        notify(data.message, data.type);
+                    }
+                    else
+                    {
+                        swal('Error', data.message, data.type);
+                    }
+                },
+                done: function (data) {
+                    $(this).prop('disabled', '');
+                }
+            });
         });
     });
 }

@@ -2,8 +2,8 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <?php echo form_open("contacts/add", array('id'=>'add-new-contact-form', 'class'=>'m-t-25 card')); ?>
-                <div class="card-header">
-                    <!-- <p class="c-black f-500 text-uppercase"><strong>New Contact</strong></p> -->
+                <div class="card-header bgm-green">
+                    <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
                     <h2>New Contact</h2>
                 </div>
                 <div class="modal-body">

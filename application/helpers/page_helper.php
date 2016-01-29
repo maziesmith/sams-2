@@ -13,7 +13,7 @@ if ( ! function_exists('get_page_headers'))
         $Headers = new stdClass();
 
         $Headers->Page_Title = "SAMS";
-        $Headers->Title      = $Headers->Page_Title . " | " . ucfirst($CI->uri->segment(1)) . (null !== $CI->uri->segment(2) ? " | " . ucfirst($CI->uri->segment(2)) : '');
+        $Headers->Title      = $Headers->Page_Title . " | " . ucfirst($CI->uri->segment(1)) . (null !== $CI->uri->segment(2) ? " - " . ucfirst($CI->uri->segment(2)) : '');
         $Headers->Page       = $CI->uri->segment(1) . "/" . (null !== $CI->uri->segment(2) ? $CI->uri->segment(2) : 'index');
         $Headers->CSS        = '';
         $Headers->JS         = '';

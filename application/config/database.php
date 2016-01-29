@@ -94,3 +94,26 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+
+$db['pdo'] = array(
+	'dsn' => 'mysql:dbname=sams_db;host=localhost;charset=utf8;',
+	// 'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'sams_db',
+	'dbdriver' => 'pdo',
+	'dbprefix' => 'sams_',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE,
+	'options' => array(PDO::MYSQL_ATTR_LOCAL_INFILE => true),
+);

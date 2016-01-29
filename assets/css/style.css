@@ -88,6 +88,17 @@ ul.breadcrumb .active {
 .modal .bootgrid-footer {
 	margin-bottom: -20px;
 }
+/*
+| ------------------------------
+| # Easy Colors
+| ------------------------------
+*/
+.c-white {
+	color: #ffffff;
+}
+.c-black {
+	color: #454545;
+}
 
 /*
 | -----------------
@@ -97,6 +108,39 @@ ul.breadcrumb .active {
 .fg-float .fg-toggled + .fg-label,
 .fg-float .fg-line input:valid + .fg-label {
 	top: -12px;
+}
+.dropup .dropdown-menu:not([data-animation]):not(.pull-right):not(.dropdown-menu-right) {
+	min-height: 284px;
+}
+.chosen-container .chosen-results > li.active-result.highlighted {
+	background: #e4e4e4 !important;
+}
+/*
+| -----------------
+| # App 2 Overrides
+| -----------------
+*/
+@media only screen and (max-width: 480px) {
+	.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 504px) {
+	.search.form-group {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.actions.btn-group {
+		position: relative;
+		width: 100%;
+		display: table;
+		margin: 0 auto;
+		overflow: visible;
+		top: 0;
+		right: 0;
+		left: 0;
+	}
+
 }
 /*
 | ----------------------------
@@ -108,10 +152,51 @@ ul.breadcrumb .active {
 }
 .growl-animated.alert-success {
 	background: rgba(76,175,80,1);
+	box-shadow: 0 0 8px 1px rgba(0,0,0,0.1);
+    border: 1px solid rgba(76, 200, 80, 1);
 }
 
 .fixed-width {
 	width: 228px;
+}
+/*
+| -----------------------------------
+| # Buttons
+| -----------------------------------
+*/
+.btn:not(.confirm):not([class=*"command-"]):focus,
+.dropdown.btn-group:focus .btn {
+	background-color: #e0e0e0 !important;
+}
+.modal:not([data-modal-color]) .modal-footer .btn-link:focus {
+    background-color: #eee;
+}
+.actions.btn-group {
+	border: 1px solid #e0e0e0;
+}
+.actions.btn-group .btn {
+	padding: 8px 12px;
+	border-top: none;
+}
+.actions.btn-group .btn {
+	border-left: 1px solid #e0e0e0;
+}
+.actions.btn-group > .btn:first-child {
+	border-left: none;
+}
+.actions.btn-group .dropdown.btn-group {
+	border: none;
+}
+.btn-md {
+	padding: 8px 12px;
+}
+.btn-icon.btn-xs {
+	width: 30px;
+	height: 30px;
+	margin: 0 6px;
+}
+.btn-icon.btn-xs .zmdi {
+	font-size: 10px;
 }
 /*
 | -----------------------------------
@@ -130,10 +215,51 @@ ul.breadcrumb .active {
 | # Command Button Overrides
 | --------------------------
 */
-.command-edit, .command-delete, .command-print, .command-reload {
+.command-edit, .command-delete,
+.command-print, .command-reload,
+.command-add {
 	margin: 3px;
+	background: #ffffff;
+    border: 1px solid #eeeeee;
+}
+.command-edit:hover .zmdi,
+.command-edit:focus .zmdi {
+	color: #ffc107;
+}
+.command-delete:hover .zmdi,
+.command-delete:focus .zmdi {
+	color: #F44336;
 }
 
+/*
+| -------------------------
+| # Card
+| -------------------------
+*/
+.card {
+	-webkit-transition: all 0.3s ease-in;
+	-o-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
+}
+/*
+| ----------
+| # Tooltips
+| ----------
+*/
+.tooltip {
+	margin-left: 30px;
+}
+.tooltip-arrow {
+	display: none;
+}
+/*
+| ----------------------------
+| # Tables
+| ----------------------------
+*/
+.groups_description {
+	max-width: 300px;
+}
 /*
 | ----------------------------
 | # Media Queries

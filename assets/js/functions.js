@@ -42,6 +42,10 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 }
 
 $(document).ready(function(){
+    /**
+     * Tooltips
+     */
+    $('[data-toggle="tooltip"]').tooltip();
     /*
      * Top Search
      */
@@ -450,11 +454,9 @@ $(document).ready(function(){
     if($('.tag-select')[0]) {
         $('.tag-select').chosen({
             width: '100%',
-            allow_single_deselect: true
+            allow_single_deselect: true,
+            disable_search_threshold: 5,
         });
-    }
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-        $('.tag-select').selectpicker('mobile');
     }
 
 
@@ -894,6 +896,8 @@ $(document).ready(function(){
  */
 function notify(message, type, delay, dismiss, placement, offset){
 
+    $('body').find('[data-growl=container]').remove();
+
     if( placement == null || placement == undefined ) placement = ['top', 'right'];
     if( offset == null || offset == undefined ) offset = [20, 85];
     if( delay == null || delay == undefined ) delay = 2000;
@@ -935,4 +939,23 @@ function slugify ($text) {
             .toLowerCase()
             .replace(/ /g,'-')
             .replace(/[^\w-]+/g,'');
+}
+
+function reload_dom()
+{
+    $('[data-toggle="tooltip"]').tooltip();
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+        $('.tag-select').selectpicker({
+            liveSearch: true,
+        });
+    }
+}
+function reload_selectpickers()
+{
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+        $('select').selectpicker('refresh');
+    } else {
+        $('select').trigger("chosen:updated");
+    }
+
 }

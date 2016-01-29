@@ -1,25 +1,18 @@
 <section id="content">
     <div class="container">
-
         <div class="card">
 
             <?php echo breadcrumbs(); ?>
 
             <div class="table-responsive">
-
-                <input id="group-table-command-list" type="hidden" value="<?php echo base_url('groups') ?>">
-                <input id="group-table-command-edit" type="hidden" value="<?php echo base_url('groups/edit') ?>">
-                <input id="group-table-command-delete-button" type="hidden" value="<?php echo base_url('groups') ?>">
-                <input id="group-table-command-delete-many-button" type="hidden" value="<?php echo base_url('groups/delete/many') ?>">
-
                 <table id="group-table-command" class="table table-condensed table-hover table-vmiddle">
                     <thead>
                         <tr>
-                            <th data-column-id="count_id"           data-order="asc" data-type="numeric">#</th>
+                            <th data-column-id="count_id"           data-type="numeric" data-sortable="false">#</th>
                             <th data-column-id="groups_id"          data-css-class="groups_id" data-order="asc" data-visible="false" data-identifier="true">Group ID</th>
-                            <th data-column-id="groups_name"        data-css-class="groups_name">Group Name</th>
-                            <th data-column-id="groups_description" data-css-class="groups_description" >Description</th>
-                            <th data-column-id="groups_code"        data-css-class="groups_code" >Code</th>
+                            <th data-column-id="groups_name"        data-css-class="groups_name" data-order="asc">Group Name</th>
+                            <th data-column-id="groups_description" data-css-class="groups_description" data-order="asc">Description</th>
+                            <th data-column-id="groups_code"        data-css-class="groups_code" data-order="asc">Code</th>
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false">Actions</th>
                         </tr>
                     </thead>

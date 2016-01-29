@@ -9,6 +9,7 @@ class GroupsController extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Group', '', TRUE);
+        $this->load->model('Contact', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -34,8 +35,6 @@ class GroupsController extends CI_Controller {
     {
         $this->Data['groups'] = $this->Group->all();
         $this->load->view('layouts/main', $this->Data);
-
-        $this->listing();
     }
 
     public function listing()
@@ -51,17 +50,18 @@ class GroupsController extends CI_Controller {
             $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
             $page         = $current !== null ? $current : 1;
             $start_from   = ($page-1) * $limit;
+            $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
             $total        = $this->Group->get_all()->num_rows();
 
             if( null != $wildcard )
             {
-                $groups = $this->Group->like($wildcard, $start_from, $limit)->result_array();
+                $groups = $this->Group->like($wildcard, $start_from, $limit, $sort)->result_array();
                 $total  = $this->Group->like($wildcard)->num_rows();
             }
             else
             {
-                $groups = $this->Group->get_all($start_from, $limit)->result_array();
+                $groups = $this->Group->get_all($start_from, $limit, $sort)->result_array();
             }
 
             foreach ($groups as $key => $group) {
@@ -122,7 +122,6 @@ class GroupsController extends CI_Controller {
                 */
                 if( null !== $this->input->post('groups_contacts') && $contacts_ids = $this->input->post('groups_contacts') )
                 {
-                    $this->load->model('Contact', '', TRUE);
                     $groups_contacts = explode(",", $contacts_ids);
 
                     foreach ($groups_contacts as $contact_id) {
@@ -185,8 +184,6 @@ class GroupsController extends CI_Controller {
             | # Validation
             | --------------------------------------
             */
-            $this->load->library('form_validation');
-
             if( $this->Group->validate(false, $id, $this->input->post('groups_code')) )
             {
                 /*
@@ -207,7 +204,6 @@ class GroupsController extends CI_Controller {
                 */
                 if( null !== $this->input->post('groups_contacts') && $contacts_ids = $this->input->post('groups_contacts') )
                 {
-                    $this->load->model('Contact', '', TRUE);
                     $groups_contacts = explode(",", $contacts_ids);
 
                     foreach ($groups_contacts as $contact_id) {
@@ -229,34 +225,69 @@ class GroupsController extends CI_Controller {
         }
     }
 
-    public function delete($id)
+    public function delete($id=null)
     {
         if( $this->input->is_ajax_request() )
         {
+            /**
+             * If $id is null
+             * then it's a POST request not DELETE.
+             * POST will delete many records
+             */
+            if( null == $id || !isset($id) )
+            {
+                $ids = $this->input->post('groups_ids');
+                if( $this->Group->delete($ids) )
+                {
+                    $data['message'] = 'Groups were successfully deleted';
+                    $data['type'] = 'success';
+
+                    /*
+                    | --------------------------------
+                    | # Update Many Contacts
+                    | --------------------------------
+                    | All Contacts with this Groups ID
+                    */
+                    foreach ($ids as $contacts_id) {
+                        $contacts = $this->Contact->where(['contacts_group'=>$contacts_id])->get()->result_array();
+                        foreach ($contacts as $contact) {
+                            $this->Contact->update($contact['contacts_id'], ['contacts_group'=>'']);
+                        }
+                    }
+                }
+                else
+                {
+                    $data['message'] = 'An unhandled error occured. Record was not deleted';
+                    $data['type'] = 'error';
+                }
+                echo json_encode( $data );
+                exit();
+            }
+
             $data = array();
             if( $this->Group->delete($id) )
             {
                 $data['message'] = 'Group was successfully deleted';
                 $data['type'] = 'success';
+
+                /*
+                | --------------------------------
+                | # Update Contacts
+                | --------------------------------
+                | All Contacts with this Groups ID
+                */
+                $contacts = $this->Contact->where(['contacts_group'=>$id])->get()->result_array();
+                foreach ($contacts as $contact) {
+                    $this->Contact->update($contact['contacts_id'], ['contacts_group'=>'']);
+                }
+
+
             }
             else
             {
                 $data['message'] = 'An unhandled error occured. Record was not deleted';
                 $data['type'] = 'danger';
             }
-            echo json_encode( $data );
-            exit();
-        }
-    }
-
-    public function delete_many()
-    {
-        if( $this->input->is_ajax_request() )
-        {
-            $ids = $this->input->post('groups_ids');
-            $this->Group->delete($ids);
-            $data['message'] = 'Groups were successfully deleted';
-            $data['type'] = 'success';
             echo json_encode( $data );
             exit();
         }

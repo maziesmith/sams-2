@@ -115,5 +115,5 @@ $db['pdo'] = array(
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE,
-	'options' => array(PDO::MYSQL_ATTR_LOCAL_INFILE => true),
+	'options' => array( PDO::MYSQL_ATTR_LOCAL_INFILE => true ),
 );

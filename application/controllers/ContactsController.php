@@ -277,9 +277,9 @@ class ContactsController extends CI_Controller {
      */
     public function import()
     {
+
         if( $this->input->is_ajax_request() )
         {
-
             $this->load->library('upload', ['upload_path'=>'./uploads/', 'allowed_types'=>'csv']);
 
             if ( !$this->upload->do_upload('file'))
@@ -289,10 +289,10 @@ class ContactsController extends CI_Controller {
             else
             {
                 # Import
-                if( $this->Contact->import(  $this->upload->data()['full_path'] ) )
+                if( $this->Contact->import( $full_path = $this->upload->data()['full_path'] ) )
                 {
                     # Delete uploaded file
-                    # --- delete statements go here...
+                    // clean_folder( $full_path );
 
                     # Response
                     $data = array('message' => 'Contacts successfully imported.', 'type'=>'success');

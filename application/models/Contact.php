@@ -5,7 +5,7 @@ class Contact extends CI_Model {
 
     private $table = 'contacts';
     private $column_id = 'contacts_id';
-    private $time_limit = 128;
+    private $time_limit = 600;
     public $validations = array(
         array( 'field' => 'contacts_firstname', 'label' => 'First Name', 'rules' => 'required|trim' ),
         array( 'field' => 'contacts_lastname', 'label' => 'Last Name', 'rules' => 'required|trim' ),
@@ -176,6 +176,7 @@ class Contact extends CI_Model {
     public function import($file=null, $truncate=true)
     {
         $this->pdo = $this->load->database('pdo', true);
+        $this->pdo->query( "SET NAMES 'utf8'" );
         // $pdo = new PDO("mysql:host=localhost;dbname=sams_db", 'root', '', array(PDO::MYSQL_ATTR_LOCAL_INFILE => true));
 
         if(!file_exists($file) || !is_readable($file)) return false;
@@ -184,9 +185,10 @@ class Contact extends CI_Model {
         set_time_limit($this->time_limit); // for longer execution time if needed
 
         if( $truncate ) $this->db->truncate($this->table); // truncate the table if all is good
+        // return true;
+        $columns = 'contacts_id, contacts_firstname, contacts_middlename, @contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group';
+        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 0 LINES (`contacts_id`, `contacts_firstname`, `contacts_middlename`, `contacts_lastname`, `contacts_level`, `contacts_type`, `contacts_blockno`, `contacts_street`, `contacts_brgy`, `contacts_city`, `contacts_zip`, `contacts_telephone`, `contacts_mobile`, `contacts_email`, `contacts_group`)";
 
-        $columns = 'contacts_id, contacts_firstname, contacts_middlename, contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group';
-        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\\n' IGNORE 1 LINES (contacts_id, contacts_firstname, contacts_middlename, contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group)";
         // $query = "SELECT * FROM ". $this->pdo->dbprefix . 'groups';
         return $this->pdo->query($query);
     }

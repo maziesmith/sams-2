@@ -289,10 +289,11 @@ class ContactsController extends CI_Controller {
             else
             {
                 # Import
-                if( $this->Contact->import( $full_path = $this->upload->data()['full_path'] ) )
+                $full_path = $this->upload->data()['full_path'];
+                if( $this->Contact->import( $this->upload->data()['full_path'] ) )
                 {
                     # Delete uploaded file
-                    // clean_folder( $full_path );
+                    clean_upload_folder( $full_path );
 
                     # Response
                     $data = array('message' => 'Contacts successfully imported.', 'type'=>'success');

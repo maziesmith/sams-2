@@ -13,9 +13,8 @@
                     </div>
                 </div> -->
 
-                <p class="f-500 c-black">Import CSV FILE</p>
+                <!-- <p class="f-500 c-black">Accepts CSV file</p> -->
                 <?php echo form_open_multipart("contacts/import", array('id'=>'dropzone', 'class'=>'dropzone m-t-25')); ?>
-
                     <div class="fileinput fileinput-new fallback" data-provides="fileinput">
                         <span class="btn btn-primary btn-file m-r-10">
                             <span class="fileinput-new">Select file</span>
@@ -28,6 +27,7 @@
                         <button type="submit" class="btn btn-primary hidden">Submit</button>
                     </div>
                 <?php echo form_close() ?>
+
             </div>
         </div>
     </div>

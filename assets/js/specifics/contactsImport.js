@@ -8,14 +8,14 @@ $(document).on('ready', function() {
             });
 
             this.on("success", function (file, response) {
-                var response = $.parseJSON(response);
                 if( 'error' === response.type )
                 {
-                    swal('Error', $(response.message).text(), response.type);
+                    swal('Error', response.message, response.type);
                     this.removeFile(file);
                 }
                 else
                 {
+                    var response = $.parseJSON(response);
                     notify(response.message, response.type, 2000);
                     this.removeFile(file);
                     // console.log(response);
@@ -24,8 +24,7 @@ $(document).on('ready', function() {
 
         },
         error: function(file, response) {
-            var response = $.parseJSON(response);
-            swal('Error', $(response.message).text(), response.type);
+            notify(response, 'danger', 0);
             this.removeFile(file);
         }
     };

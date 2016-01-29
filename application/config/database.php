@@ -86,7 +86,7 @@ $db['default'] = array(
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
+	'dbcollat' => 'utf8_unicode_ci',
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
@@ -96,7 +96,7 @@ $db['default'] = array(
 );
 
 $db['pdo'] = array(
-	'dsn' => 'mysql:dbname=sams_db;host=localhost;charset=utf8;',
+	'dsn' => 'mysql:dbname=sams_db;host=localhost;charset=utf8',
 	// 'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
@@ -108,12 +108,16 @@ $db['pdo'] = array(
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
-	'dbcollat' => 'utf8_general_ci',
+	'dbcollat' => 'utf8_unicode_ci',
 	'swap_pre' => '',
 	'encrypt' => FALSE,
 	'compress' => FALSE,
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE,
-	'options' => array( PDO::MYSQL_ATTR_LOCAL_INFILE => true ),
+	'options' => array(
+		PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
+		PDO::MYSQL_ATTR_LOCAL_INFILE => true,
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+	),
 );

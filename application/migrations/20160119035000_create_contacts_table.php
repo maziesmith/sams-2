@@ -61,7 +61,7 @@ class Migration_create_contacts_table extends CI_Migration {
             ),
         ));
         $this->dbforge->add_key('contacts_id', TRUE);
-        $this->dbforge->create_table('contacts');
+        $this->dbforge->create_table('contacts', false);
     }
 
     public function down()

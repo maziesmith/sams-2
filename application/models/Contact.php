@@ -195,9 +195,11 @@ class Contact extends CI_Model {
         return $this->pdo->query($query);
     }
 
-    public function export($start_date=null, $end_date=null)
+    public function export($all=true, $start_date=null, $end_date=null)
     {
-        return $this->db->select('*')->where('created_at BETWEEN "'.date('Y-m-d', strtotime($start_date)).'" AND "'.date('Y-m-d', strtotime($end_date)).'"')->get($this->table);
+        // 'created_at BETWEEN "'.date('Y-m-d H:i:s', strtotime($start_date)).'" AND "'.date('Y-m-d H:i:s', strtotime($end_date)).'"'
+        if(!$all) return $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'")->get($this->table);
+        return $this->db->select('*')->get($this->table);
     }
 
 }

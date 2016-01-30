@@ -52,13 +52,14 @@ $(document).ready(function () {
         else {
             // var start = $('[name=export_start]').val(), end = $('[name=export_end]').val();
             // notify('<i class="zmdi zmdi-settings zmdi-hc-spin"></i>&nbsp;<span>Exporting Contacts from '+start+' - '+end+'...</span>', 'danger', 0, false);
-            $(this).parents('form').submit();
+            $('#export-contacts-form').submit();
             // $.ajax({
             //     type: 'POST',
-            //     url: $(this).attr('action'),
-            //     data: $(this).serialize(),
+            //     url: $('#export-contacts-form').attr('action'),
+            //     data: $('#export-contacts-form').serialize(),
             //     success: function (data) {
-            //         notify(data.message, data.type);
+            //         var data = $.parseJSON(data);
+            //         notify(data.message, data.type, 0);
             //         console.log(data);
             //     }
             // })

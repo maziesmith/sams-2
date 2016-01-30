@@ -326,51 +326,52 @@ class ContactsController extends CI_Controller {
     {
         if( null != $this->input->post('export_start') )
         {
-            # Load the DB Utility
-            $this->load->dbutil();
-
-            $export = $this->Contact->export($this->input->post('export_start'), $this->input->post('export_end'));
-
-            if( empty($export->result()) )
+            $export = $this->Contact->export( true, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') );
+            /*
+            | ---------------------------------------------
+            | # Validation
+            | ---------------------------------------------
+            */
+            $result = $this->Contact->export( true, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') )->result();
+            if( empty( $result ) )
             {
-                $data = array('message' => 'export is empty', 'type'=>'danger');
-                echo json_encode( $data );
-                exit();
+                $this->Data['messages']['error'] = 'No Record was found in the Dates or Level specified';
             }
-
-            switch ( $this->input->post('export_format') ) {
-                case 'CSV':
-                    $CSV =  $this->dbutil->csv_from_result( $export );
-                    $csv_name = 'Contacts_' . date('YmdHi') . '.csv';
-                    force_download($csv_name, $CSV);
-                    break;
-
-                case 'SQL':
-                    break;
-
-                case 'PDF':
-                    break;
-
-                default:
-                    break;
-            }
-
-
-
-            if( $this->input->is_ajax_request() )
+            else
             {
-                $data = array('message' => 'exports/'.$csv_name, 'type'=>'success');
-                echo json_encode( $data );
-                exit();
+                # Export
+                #// Load the DB Utility
+                $this->load->dbutil();
+                switch ( $this->input->post('export_format') ) {
+                    case 'CSV':
+                        $CSV =  $this->dbutil->csv_from_result( $export );
+                        $csv_name = 'Contacts_' . date('Y-m-d-H-i') . '.export.csv';
+                        force_download($csv_name, $CSV);
+                        // $data = array('message' => 'Export was successful', 'type'=>'success');
+                        break;
+
+                    case 'SQL':
+                        $SQL = $this->dbutil->backup(['tables'=>'{PRE}contacts']);
+                        $sql_name = 'Contacts_' . date('Y-m-d-H-i') . '.export.zip';
+                        force_download($sql_name, $SQL);
+                        break;
+
+                    case 'PDF':
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+                # Response
+                # -- No response yet --
             }
         }
+
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/contactsExport.js').'"></script>';
         $this->load->view('layouts/main', $this->Data);
     }
 
-    public function download()
-    {
-        echo "yeahdasd";
-    }
 }

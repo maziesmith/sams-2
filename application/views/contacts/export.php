@@ -1,5 +1,11 @@
 <section id="content">
     <div class="container">
+        <?php if( isset($messages) ): ?>
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <?php echo $messages['error']; ?>
+            </div>
+        <?php endif; ?>
         <div class="card">
             <?php echo breadcrumbs('', 'Export Contact') ?>
             <div class="card-body card-padding">
@@ -35,7 +41,7 @@
                                     array(
                                         ''=>'Select Format',
                                         'CSV' => 'CSV',
-                                        'MySQL' => 'MySQL',
+                                        'SQL' => 'MySQL',
                                         'PDF' => 'PDF'
                                     ),
                                     set_value('export_format'), 'class="tag-select"'

@@ -111,5 +111,5 @@ $route['groups/export']['get']  = 'GroupsController/export';
 // $route['(:any)'] = 'PageController/view/$1';
 
 $route['default_controller'] = 'PageController/index';
-$route['404_override'] = '';
+$route['404_override'] = 'Error404Controller';
 $route['translate_uri_dashes'] = FALSE;

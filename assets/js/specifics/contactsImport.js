@@ -54,7 +54,7 @@ $(document).on('ready', function() {
 
                         caseSensitive: false,
                     }).removeClass('hidden');
-                    reload_table();
+                    $('#contact-import-table-command').bootgrid('reload');
                     // console.log(response);
                 }
             });

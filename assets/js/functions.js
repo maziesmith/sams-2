@@ -4,6 +4,16 @@
 | -----------
 */
 $('noscript').remove();
+
+/*
+| -------------------------
+| # Profile Menu Background
+| -------------------------
+*/
+$('.profile-menu > a').css({
+    'display':'block',
+    'background-image': 'url('+base_url('assets/img/headers/10.png')+')', //+(Math.floor(Math.random()*12)+1)+
+});
 /*
 * Layout
 */

@@ -1,0 +1,70 @@
+$.validator.setDefaults({ ignore: ":hidden:not(.tag-select)" })
+// add the rule here
+$.validator.addMethod("valueNotEquals", function(value, element, arg){
+    return arg != value;
+}, "Please select an item");
+
+$(document).ready(function () {
+
+    $('[name=export_start]').datetimepicker({
+        format: 'MMMM DD, YYYY',
+    });
+    $('[name=export_end]').datetimepicker({
+        format: 'MMMM DD, YYYY',
+        useCurrent: false
+    });
+    $("[name=export_start]").on("dp.change", function (e) {
+        $('[name=export_end]').data("DateTimePicker").minDate(e.date);
+    });
+    $("[name=export_end]").on("dp.change", function (e) {
+        $('[name=export_start]').data("DateTimePicker").maxDate(e.date);
+    });
+
+
+    $('#export-contacts-form').validate({
+        rules: {
+            export_start: 'required',
+            export_end: 'required',
+            export_format: { valueNotEquals: "" },
+            export_level: { valueNotEquals: "" },
+        },
+        messages: {
+            export_format: { valueNotEquals: "Please select a Format" },
+            export_level: { valueNotEquals: "Please select a Level" },
+        },
+        errorElement: 'small',
+        errorPlacement: function (error, element) {
+            $(error).addClass('help-block');
+            $(element).parents('.form-group-validation').addClass('has-warning').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').addClass('has-warning');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').removeClass('has-warning');
+            $(element).parents('.form-group-validation').find('.help-block').remove();
+        },
+    });
+    $('#export-btn').click(function (e) {
+        e.preventDefault();
+
+        if(!$(this).parents('form').valid()) { return false; }
+        else {
+            // var start = $('[name=export_start]').val(), end = $('[name=export_end]').val();
+            // notify('<i class="zmdi zmdi-settings zmdi-hc-spin"></i>&nbsp;<span>Exporting Contacts from '+start+' - '+end+'...</span>', 'danger', 0, false);
+            $(this).parents('form').submit();
+            // $.ajax({
+            //     type: 'POST',
+            //     url: $(this).attr('action'),
+            //     data: $(this).serialize(),
+            //     success: function (data) {
+            //         notify(data.message, data.type);
+            //         console.log(data);
+            //     }
+            // })
+        }
+
+        // $(this).prop('disabled', 'disabled');
+
+    });
+});

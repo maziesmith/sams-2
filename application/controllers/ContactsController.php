@@ -324,8 +324,53 @@ class ContactsController extends CI_Controller {
      */
     public function export()
     {
-        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/export.js').'"></script>';
+        if( null != $this->input->post('export_start') )
+        {
+            # Load the DB Utility
+            $this->load->dbutil();
 
+            $export = $this->Contact->export($this->input->post('export_start'), $this->input->post('export_end'));
+
+            if( empty($export->result()) )
+            {
+                $data = array('message' => 'export is empty', 'type'=>'danger');
+                echo json_encode( $data );
+                exit();
+            }
+
+            switch ( $this->input->post('export_format') ) {
+                case 'CSV':
+                    $CSV =  $this->dbutil->csv_from_result( $export );
+                    $csv_name = 'Contacts_' . date('YmdHi') . '.csv';
+                    force_download($csv_name, $CSV);
+                    break;
+
+                case 'SQL':
+                    break;
+
+                case 'PDF':
+                    break;
+
+                default:
+                    break;
+            }
+
+
+
+            if( $this->input->is_ajax_request() )
+            {
+                $data = array('message' => 'exports/'.$csv_name, 'type'=>'success');
+                echo json_encode( $data );
+                exit();
+            }
+        }
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/contactsExport.js').'"></script>';
         $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function download()
+    {
+        echo "yeahdasd";
     }
 }

@@ -4,11 +4,16 @@
             <div class="col-sm-3">
                 <div class="card blog-post">
                     <div class="bp-header">
-                        <img src="<?php echo base_url('assets/img/headers/1.png') ?>" alt="">
+                        <img src="<?php echo base_url('assets/img/headers/1.png') ?>" class="img-wide">
                         <a href="<?php echo base_url('contacts') ?>" class="bp-title bgm-orange">
                             <h2>Contacts Manager</h2>
                             <small>Add, update, or remove Contacts</small>
                         </a>
+                        <!-- <div class="btn-group btn-group-justified">
+                            <a href="<?php echo base_url('contacts') ?>" class="btn btn-default">Manage</a>
+                            <a href="<?php echo base_url('contacts/import') ?>" class="btn btn-default">Import</a>
+                            <a href="<?php echo base_url('contacts/export') ?>" class="btn btn-default">Export</a>
+                        </div> -->
                     </div>
                 </div>
             </div>

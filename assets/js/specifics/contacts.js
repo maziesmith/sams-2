@@ -95,6 +95,7 @@ $(document).ready(function(){
                         $('#add-new-contact-form')[0].reset();
                         $('#add-new-contact-form [name=contacts_firstname]').focus();
                         reload_table();
+                        reload_selectpickers();
                     }
                 },
                 dataType: 'html',

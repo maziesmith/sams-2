@@ -185,12 +185,19 @@ class Contact extends CI_Model {
         set_time_limit($this->time_limit); // for longer execution time if needed
 
         if( $truncate ) $this->db->truncate($this->table); // truncate the table if all is good
-        // return true;
-        $columns = 'contacts_id, contacts_firstname, contacts_middlename, @contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group';
-        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 0 LINES (`contacts_id`, `contacts_firstname`, `contacts_middlename`, `contacts_lastname`, `contacts_level`, `contacts_type`, `contacts_blockno`, `contacts_street`, `contacts_brgy`, `contacts_city`, `contacts_zip`, `contacts_telephone`, `contacts_mobile`, `contacts_email`, `contacts_group`)";
 
-        // $query = "SELECT * FROM ". $this->pdo->dbprefix . 'groups';
+        // $columns = 'contacts_id, contacts_firstname, contacts_middlename, contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group';
+
+        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES";
+
+        // $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\n' IGNORE 0 LINES (contacts_id, contacts_firstname, contacts_middlename, contacts_lastname, contacts_level, contacts_type, contacts_blockno, contacts_street, contacts_brgy, contacts_city, contacts_zip, contacts_telephone, contacts_mobile, contacts_email, contacts_group, @created_at, @updated_at) SET created_at = STR_TO_DATE(@created_at, '%Y-%m-%d %H:%i:%s'), updated_at = STR_TO_DATE(@updated_at, '%Y-%m-%d %H:%i:%s')";
+
         return $this->pdo->query($query);
+    }
+
+    public function export($start_date=null, $end_date=null)
+    {
+        return $this->db->select('*')->where('created_at BETWEEN "'.date('Y-m-d', strtotime($start_date)).'" AND "'.date('Y-m-d', strtotime($end_date)).'"')->get($this->table);
     }
 
 }

@@ -324,28 +324,21 @@ class ContactsController extends CI_Controller {
      */
     public function export()
     {
-        // $x = $this->Contact->export( date('Y-m-d H:i:s', strtotime('January 1, 2016')), date('Y-m-d H:i:s', strtotime('January 2, 2016' . ' +1 day')) );
-        // echo "<pre>";
-        //     var_dump( $x->result_array() ); die();
-        // echo "</pre>";
         if( null != $this->input->post('export_start') )
         {
+            $export = $this->Contact->export( true, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') );
             /*
             | ---------------------------------------------
             | # Validation
             | ---------------------------------------------
             */
-            // $export = $this->Contact->export( false, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')) );
-            $export = $this->Contact->export();
-
-            if( empty( $export->result() ) )
+            $result = $this->Contact->export( true, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') )->result();
+            if( empty( $result ) )
             {
                 $this->Data['messages']['error'] = 'No Record was found in the Dates or Level specified';
             }
             else
             {
-                # Validation
-
                 # Export
                 #// Load the DB Utility
                 $this->load->dbutil();
@@ -354,11 +347,13 @@ class ContactsController extends CI_Controller {
                         $CSV =  $this->dbutil->csv_from_result( $export );
                         $csv_name = 'Contacts_' . date('Y-m-d-H-i') . '.export.csv';
                         force_download($csv_name, $CSV);
-                        exit();
                         // $data = array('message' => 'Export was successful', 'type'=>'success');
                         break;
 
                     case 'SQL':
+                        $SQL = $this->dbutil->backup(['tables'=>'{PRE}contacts']);
+                        $sql_name = 'Contacts_' . date('Y-m-d-H-i') . '.export.zip';
+                        force_download($sql_name, $SQL);
                         break;
 
                     case 'PDF':
@@ -370,13 +365,7 @@ class ContactsController extends CI_Controller {
 
 
                 # Response
-                if( $this->input->is_ajax_request() )
-                {
-                    echo json_encode( $data );
-                    exit();
-                } else {
-                    // redirect('contacts');
-                }
+                # -- No response yet --
             }
         }
 

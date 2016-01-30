@@ -79,7 +79,6 @@ $route['contacts/import']['post']  = 'ContactsController/import';
 
 $route['contacts/export']['get']  = 'ContactsController/export';
 $route['contacts/export']['post']  = 'ContactsController/export';
-$route['contacts/export/download']['get']  = 'ContactsController/download';
 
 /*
 | ----------------

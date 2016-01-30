@@ -41,7 +41,7 @@
                                     array(
                                         ''=>'Select Format',
                                         'CSV' => 'CSV',
-                                        'MySQL' => 'MySQL',
+                                        'SQL' => 'MySQL',
                                         'PDF' => 'PDF'
                                     ),
                                     set_value('export_format'), 'class="tag-select"'

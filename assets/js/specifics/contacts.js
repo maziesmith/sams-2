@@ -97,6 +97,7 @@ $(document).ready(function(){
                         reload_table();
                         reload_selectpickers();
                     }
+                    console.log(data);
                 },
                 dataType: 'html',
             };
@@ -208,7 +209,7 @@ $(document).ready(function(){
                     data: $(form).serialize(),
                     success: function (data) {
                         data = JSON.parse(data);
-                        // console.log(data);
+                        console.log(data);
                         resetWarningMessages('.form-group-validation');
                         if( data.type != 'success' )
                         {
@@ -351,7 +352,7 @@ function init_table() {
 
                     $.each(contact, function (k, v) {
                         _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        reload_selectpickers();
+                        reload_selectpickers( (k == 'contacts_group') ? v : null);
                     });
                 }
             });

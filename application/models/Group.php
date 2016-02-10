@@ -82,6 +82,12 @@ class Group extends CI_Model {
 
     public function find($id)
     {
+        if( is_array($id) )
+        {
+          $query = $this->db->where_in($this->column_id, $id)->get($this->table);
+          return $query->result();
+        }
+
         $query = $this->db->where($this->column_id, $id)->get($this->table);
         return $query->row();
     }

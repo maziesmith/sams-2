@@ -960,12 +960,16 @@ function reload_dom()
         });
     }
 }
-function reload_selectpickers()
+function reload_selectpickers($values)
 {
+
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
         $('select').selectpicker('refresh');
     } else {
         $('select').trigger("chosen:updated");
     }
 
+    if( $values != null && $values != undefined ) {
+        $('select').val( $values.split(",") ).trigger("chosen:updated");
+    }
 }

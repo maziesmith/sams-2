@@ -80,10 +80,10 @@
                             <div class="col-md-4 m-b-20">
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
-                                        <?php echo form_label('Group', 'contacts_group', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
-                                        <?php echo form_dropdown('contacts_group',
+                                        <?php echo form_label('Group', 'contacts_group[]', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
+                                        <?php echo form_dropdown('contacts_group[]',
                                             $form['groups_list'],
-                                            set_value('contacts_group'), 'class="tag-select"'
+                                            set_value('contacts_group'), 'class="tag-select" multiple'
                                         ) ?>
                                     </div>
                                 </div>

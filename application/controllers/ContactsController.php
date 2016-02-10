@@ -68,7 +68,19 @@ class ContactsController extends CI_Controller {
 
             foreach ($contacts as $key => $contact) {
 
-                if( null !== $contact['contacts_group'] ) $group = $this->Group->find( $contact['contacts_group'] );
+                if( null !== $contact['contacts_group'] )
+                    $group = $this->Group->find( explodetoarray($contact['contacts_group']) );
+
+                $groups_name_arr = [];
+                $groups_id_arr = [];
+                if( is_array( $group ) )
+                {
+                    foreach ($group as $group_single) {
+                        $groups_name_arr[] = $group_single->groups_name;
+                        $groups_id_arr[] = $group_single->groups_id;
+                    }
+                }
+
 
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
@@ -80,8 +92,8 @@ class ContactsController extends CI_Controller {
                     'contacts_telephone' => $contact['contacts_telephone'],
                     'contacts_mobile'    => $contact['contacts_mobile'],
                     'contacts_email'     => $contact['contacts_email'],
-                    'contacts_group'     => isset($group->groups_name) ? $group->groups_name : '',
-                    'groups_id'          => isset($group->groups_id) ? $group->groups_id : '',
+                    'contacts_group'     => $groups_name_arr ? arraytostring($groups_name_arr, ", ") : '', //isset($group->groups_name) ? $group->groups_name : '',
+                    'groups_id'          => $groups_id_arr ? $groups_id_arr : '',//isset($group->groups_id) ? $group->groups_id : '',
                 );
             }
             $data = array(
@@ -90,6 +102,7 @@ class ContactsController extends CI_Controller {
                 "searchPhrase"  => $wildcard,
                 "total"         => intval( $total ),
                 "rows"          => $bootgrid_arr,
+                "debug" => $group,
             );
             echo json_encode( $data );
             exit();
@@ -126,7 +139,7 @@ class ContactsController extends CI_Controller {
                     'contacts_telephone'    => $this->input->post('contacts_telephone'),
                     'contacts_mobile'       => $this->input->post('contacts_mobile'),
                     'contacts_email'        => $this->input->post('contacts_email'),
-                    'contacts_group'        => $this->input->post('contacts_group'),
+                    'contacts_group'        => arraytoimplode($this->input->post('contacts_group')),
                 );
                 $this->Contact->insert($contact);
 
@@ -137,7 +150,8 @@ class ContactsController extends CI_Controller {
                 */
                 $data = array(
                     'message' => 'Contact was successfully added',
-                    'type'    => 'success'
+                    'type'    => 'success',
+                    'debug'   => $this->input->post('contacts_group'),
                 );
                 echo json_encode( $data ); exit();
             }
@@ -211,13 +225,14 @@ class ContactsController extends CI_Controller {
                     'contacts_telephone' => $this->input->post('contacts_telephone'),
                     'contacts_mobile' => $this->input->post('contacts_mobile'),
                     'contacts_email' => $this->input->post('contacts_email'),
-                    'contacts_group' => $this->input->post('contacts_group'),
+                    'contacts_group' => arraytoimplode( $this->input->post('contacts_group') ),
                 );
                 $this->Contact->update($id, $contact);
 
                 $data = array(
                     'message' => 'Contact was successfully updated',
-                    'type' => 'success'
+                    'type' => 'success',
+                    'debug'=>$contact,
                 );
                 echo json_encode( $data );
                 exit();
@@ -301,7 +316,6 @@ class ContactsController extends CI_Controller {
                 } else {
                     $data = array('message' => 'Something went wrong importing the file', 'type'=>'error');
                 }
-
 
             }
             echo json_encode( $data );

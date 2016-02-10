@@ -137,3 +137,20 @@ if ( ! function_exists('dropdown_list'))
         return  $a;
     }
 }
+
+
+if ( ! function_exists('arraytoimplode'))
+{
+    function arraytoimplode($array, $glue=",")
+    {
+        return  (is_array($array)) ? implode($glue, $array) : $array;
+    }
+}
+
+if ( ! function_exists('explodetoarray'))
+{
+    function explodetoarray($string, $delimeter=",")
+    {
+        return  (is_string($string)) ? explode($delimeter, trim($string)) : $string;
+    }
+}

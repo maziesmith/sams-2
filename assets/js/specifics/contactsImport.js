@@ -1,10 +1,14 @@
 $(document).on('ready', function() {
     window.Dropzone.options.dropzone = {
+        maxFiles: 1,
         acceptedFiles: '.csv',
         addRemoveLinks: true,
         init: function () {
+            this.on("maxfilesexceeded", function(file){
+
+            });
             this.on("addedfile", function (file) {
-                console.log('file added...');
+                // console.log('file added...');
             });
 
             this.on("success", function (file, response) {

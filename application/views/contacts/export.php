@@ -19,7 +19,7 @@
                             <div class="form-group form-group-validation">
                                 <?php echo form_label('Date From', 'export_start', array('class'=>'c-black f-500 m-b-20')) ?>
                                 <div class="dtp-container fg-line">
-                                    <?php echo form_input('export_start', set_value('export_start'), array('id'=>'export_start', 'class'=>'form-control date-picker', 'placeholder'=>'mm/dd/YYYY')) ?>
+                                    <?php echo form_input('export_start', set_value('export_start'), array('id'=>'export_start', 'class'=>'form-control date-picker', 'placeholder'=>'MM/DD/YYYY')) ?>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                             <div class="form-group form-group-validation">
                                 <?php echo form_label('Date To', 'export_end', array('class'=>'c-black f-500 m-b-20')) ?>
                                 <div class="dtp-container fg-line">
-                                    <?php echo form_input('export_end', set_value('export_end'), array('id'=>'export_end', 'class'=>'form-control date-picker', 'placeholder'=>'mm/dd/YYYY')) ?>
+                                    <?php echo form_input('export_end', set_value('export_end'), array('id'=>'export_end', 'class'=>'form-control date-picker', 'placeholder'=>'MM/DD/YYYY')) ?>
                                 </div>
                             </div>
                         </div>

@@ -191,33 +191,54 @@ class ContactsController extends CI_Controller {
             | # Validation
             | --------------------------------------
             */
-            if( null != $this->input->post('updating') )
+            if( null != $this->input->post('updating_group') )
             {
                 $contact = $this->Contact->find($id);
                 $contact_group = explode( ",", $contact->contacts_group);
 
-                # Check if the value is already in the resource,
-                # add to array if not.
-                if( !in_array($this->input->post('value'), $contact_group) ) {
-                    $contact_group[] = $this->input->post('value');
-                } else {
-                    $data = array(
-                        'message' => 'Contact is already in this group',
-                        'type' => 'danger',
-                        // 'debug' => $contact_group,
-                        // "input" => $this->input->post('value'),
-                    );
-                    echo json_encode( $data );
-                    exit();
+                # If we're Adding a Group
+                if( "add" == $this->input->post('action') ) {
+                    # Check if the value is already in the resource,
+                    # add to array if not.
+                    if( !in_array($this->input->post('value'), $contact_group) ) {
+                        $contact_group[] = $this->input->post('value');
+                    } else {
+                        $data = array(
+                            'message' => 'Contact is already in this group',
+                            'type' => 'danger',
+                            // 'debug' => $contact_group,
+                            // "input" => $this->input->post('value'),
+                        );
+                        echo json_encode( $data );
+                        exit();
+                    }
+                }
+
+                # If we're Removing a Group
+                if( "remove" == $this->input->post('action') ) {
+                    # Remove the value if in the resource
+                    if( in_array($this->input->post('value'), $contact_group) ) {
+                        $index = array_search($this->input->post('value'), $contact_group);
+                        unset( $contact_group[$index] );
+                    } else {
+                        $data = array(
+                            'message' => 'Contact is already not in this group',
+                            'type' => 'danger',
+                            // 'debug' => $contact_group,
+                            // "input" => $this->input->post('value'),
+                        );
+                        echo json_encode( $data );
+                        exit();
+                    }
                 }
 
                 # Prepare data
                 $contact_group = arraytoimplode($contact_group);   // stringify the array E.g. `array("1", "2")` will be `"1,2"`
                 $contact_data = array(
-                    $this->input->post('updating') => $contact_group,
+                    $this->input->post('updating_group') => $contact_group,
                 );
 
-                # Update
+                 # Update
                 $this->Contact->update($id, $contact_data);
 
                 # Response
@@ -229,7 +250,9 @@ class ContactsController extends CI_Controller {
                 );
                 echo json_encode( $data );
                 exit();
+
             }
+
             if( $this->Contact->validate(false, $id, $this->input->post('contacts_email')) )
             {
                 /*

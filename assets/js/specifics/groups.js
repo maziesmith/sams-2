@@ -432,7 +432,7 @@ function init_edit_group_contacts_table()
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: { updating: 'contacts_group', value: value },
+                data: { updating_group: 'contacts_group', value: value, action: 'add' },
                 success: function (data) {
                     console.log(data);
                     var data = $.parseJSON(data);
@@ -462,22 +462,23 @@ function init_edit_group_contacts_table()
             e.preventDefault();
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.contacts_name').text(),
-                url  = base_url('contacts/update/' + id);
+                url  = base_url('contacts/update/' + id),
+                value= $('#edit-group-form').find('[name=groups_id]').val();
             $(this).prop('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: { updating: 'contacts_group', value: '' },
+                data: { updating_group: 'contacts_group', value: value, action: 'remove' },
                 success: function (data) {
                     var data = $.parseJSON(data);
                     reload_group_table();
-                    if( 'success' == data.type )
+                    if( 'error' == data.type )
                     {
-                        notify(data.message, data.type);
+                        swal('Error', data.message, data.type);
                     }
                     else
                     {
-                        swal('Error', data.message, data.type);
+                        notify(data.message, data.type);
                     }
                 },
                 done: function (data) {

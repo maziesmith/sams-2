@@ -1,6 +1,7 @@
 <?php
 
-$this->load->view('partials/header'); ?>
+$this->load->view('partials/header');
+$this->load->view('partials/utilitybar'); ?>
 
 <section id="main"><?php
 

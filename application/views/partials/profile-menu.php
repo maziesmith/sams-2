@@ -5,7 +5,7 @@
         </div>
         <div class="profile-info">
             Malinda Hollaway
-            <i class="zmdi zmdi-arrow-drop-down"></i>
+            <i class="zmdi zmdi-caret-down-circle"></i>
         </div>
     </a>
     <ul class="main-menu">

@@ -434,15 +434,16 @@ function init_edit_group_contacts_table()
                 url: url,
                 data: { updating: 'contacts_group', value: value },
                 success: function (data) {
+                    console.log(data);
                     var data = $.parseJSON(data);
                     reload_group_table();
-                    if( 'success' == data.type )
+                    if( 'error' == data.type )
                     {
-                        notify(data.message, data.type);
+                        swal('Error', data.message, data.type);
                     }
                     else
                     {
-                        swal('Error', data.message, data.type);
+                        notify(data.message, data.type);
                     }
                 },
                 done: function (data) {

@@ -51,6 +51,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 /*
+| ------------
+| # Auth Route
+| ------------
+*/
+$route['auth/login']['get'] = 'AuthController/index';
+
+/*
 | -----------------
 | # Dashboard Route
 | -----------------

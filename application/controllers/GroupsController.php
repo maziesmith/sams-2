@@ -123,9 +123,27 @@ class GroupsController extends CI_Controller {
                 if( null !== $this->input->post('groups_contacts') && $contacts_ids = $this->input->post('groups_contacts') )
                 {
                     $groups_contacts = explode(",", $contacts_ids);
-
                     foreach ($groups_contacts as $contact_id) {
-                        $this->Contact->update($contact_id, array('contacts_group'=> $group_id));
+                        $contact = $this->Contact->find($contact_id);
+                        $contact_group = explode( ",", $contact->contacts_group);
+
+                        # Check if the value is already in the resource,
+                        # add to array if not.
+                        if( !in_array($group_id, $contact_group) ) {
+                            $contact_group[] = $group_id;
+                        } else {
+                            $data = array(
+                                'message' => 'Contact is already in this group',
+                                'type' => 'danger',
+                                // 'debug' => $contact_group,
+                                // "input" => $this->input->post('value'),
+                            );
+                            echo json_encode( $data );
+                            exit();
+                        }
+
+                        $contact_group = arraytoimplode($contact_group);
+                        $this->Contact->update($contact_id, array('contacts_group'=> $contact_group));
                     }
                 }
 

@@ -72,6 +72,7 @@ $route['dashboard'] = 'PageController/index';
 $route['contacts']['get'] = 'ContactsController/index';
 
 $route['contacts/listing']['post']  = 'ContactsController/listing/';
+$route['contacts/listing']['get']  = 'ContactsController/listing/';
 
 $route['contacts/delete/(:num)']['delete']  = 'ContactsController/delete/$1';
 $route['contacts/delete']['post']  = 'ContactsController/delete';
@@ -97,7 +98,7 @@ $route['groups']  = 'GroupsController/index';
 $route['groups/listing']['post']  = 'GroupsController/listing';
 
 $route['groups/delete/(:num)']['delete']  = 'GroupsController/delete/$1';
-$route['groups/delete']['post']  = 'GroupsController/delete/';
+$route['groups/delete']['post']  = 'GroupsController/delete';
 
 $route['groups/add']['post']  = 'GroupsController/add';
 
@@ -106,6 +107,46 @@ $route['groups/update/(:num)']['post']  = 'GroupsController/update/$1';
 
 $route['groups/import']['get']  = 'GroupsController/import';
 $route['groups/export']['get']  = 'GroupsController/export';
+
+/*
+|-----------------
+| # Levels Route
+|-----------------
+*/
+$route['levels']  = 'LevelsController/index';
+
+$route['levels/listing']['post']  = 'LevelsController/listing';
+
+$route['levels/delete/(:num)']['delete']  = 'LevelsController/delete/$1';
+$route['levels/delete']['post']  = 'LevelsController/delete';
+
+$route['levels/add']['post']  = 'LevelsController/add';
+
+$route['levels/edit/(:num)']['post']  = 'LevelsController/edit/$1';
+$route['levels/update/(:num)']['post']  = 'LevelsController/update/$1';
+
+$route['levels/import']['get']  = 'LevelsController/import';
+$route['levels/export']['get']  = 'LevelsController/export';
+
+/*
+|-----------------
+| # Types Route
+|-----------------
+*/
+$route['types']  = 'TypesController/index';
+
+$route['types/listing']['post']  = 'TypesController/listing';
+
+$route['types/delete/(:num)']['delete']  = 'TypesController/delete/$1';
+$route['types/delete']['post']  = 'TypesController/delete';
+
+$route['types/add']['post']  = 'TypesController/add';
+
+$route['types/edit/(:num)']['post']  = 'TypesController/edit/$1';
+$route['types/update/(:num)']['post']  = 'TypesController/update/$1';
+
+$route['types/import']['get']  = 'TypesController/import';
+$route['types/export']['get']  = 'TypesController/export';
 
 /*
 | ---------------

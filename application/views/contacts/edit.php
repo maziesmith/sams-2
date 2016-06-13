@@ -52,12 +52,8 @@
                                     <div class="form-group fg-float form-group-validation">
                                         <?php echo form_label('Level', 'contacts_level', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
                                         <?php echo form_dropdown('contacts_level',
-                                            array(
-                                                ''=>'Select Course',
-                                                'Level 1' => 'Level 1',
-                                                'Level 2' => 'Level 2',
-                                                'Level 3' => 'Level 3'
-                                            ), set_value('contacts_level'), 'class="tag-select"'
+                                            $form['levels_list'],
+                                            set_value('contacts_level'), 'class="tag-select"'
                                         ) ?>
                                     </div>
                                 </div>
@@ -67,12 +63,8 @@
                                     <div class="form-group fg-float form-group-validation">
                                         <?php echo form_label('Type', 'contacts_type', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
                                         <?php echo form_dropdown('contacts_type',
-                                            array(
-                                                ''=>'Select Course',
-                                                'Type 1' => 'Type 1',
-                                                'Type 2' => 'Type 2',
-                                                'Type 3' => 'Type 3'
-                                            ), set_value('contacts_type'), 'class="tag-select"'
+                                            $form['types_list'],
+                                            set_value('contacts_type'), 'class="tag-select"'
                                         ) ?>
                                     </div>
                                 </div>

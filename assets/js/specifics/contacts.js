@@ -276,6 +276,14 @@ function init_table() {
             // console.log(request);
             return request;
         },
+        responseHandler: function (response)
+        {
+            // To accumulate custom parameter with the response object
+            // response.customPost = 'anything';
+            // response.current = 2;
+            console.log(response);
+            return response;
+        },
         url: base_url('contacts/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: true,
@@ -352,7 +360,9 @@ function init_table() {
 
                     $.each(contact, function (k, v) {
                         _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        reload_selectpickers( (k == 'contacts_group') ? v : null);
+                        reload_selectpickers_key( (k == 'contacts_type') ? k : null, (k == 'contacts_type') ? v : null);
+                        reload_selectpickers_key( (k == 'contacts_group') ? k : null, (k == 'contacts_group') ? v : null);
+                        reload_selectpickers_key( (k == 'contacts_level') ? k : null, (k == 'contacts_level') ? v : null);
                     });
                 }
             });

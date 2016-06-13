@@ -2,13 +2,13 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Group extends CI_Model {
+class Level extends CI_Model {
 
-    private $table = 'groups';
-    private $column_id = 'groups_id';
+    private $table = 'levels';
+    private $column_id = 'levels_id';
     public $validate = array(
-        array( 'field' => 'groups_name', 'label' => 'Group Name', 'rules' => 'required|trim' ),
-        array( 'field' => 'groups_code', 'label' => 'Code', 'rules' => 'trim' ),
+        array( 'field' => 'levels_name', 'label' => 'Level Name', 'rules' => 'required|trim' ),
+        array( 'field' => 'levels_code', 'label' => 'Code', 'rules' => 'trim' ),
     );
 
     function __construct()
@@ -28,14 +28,14 @@ class Group extends CI_Model {
         if($is_first_time)
         {
             $this->form_validation->set_message('is_unique', 'The %s is already in use');
-            $this->form_validation->set_rules( 'groups_code', 'Code', 'is_unique[groups.groups_code]' );
+            $this->form_validation->set_rules( 'levels_code', 'Code', 'is_unique[levels.levels_code]' );
         }
         else
         {
-            $original_value = $this->db->where('groups_id', $id)->get($this->table)->row()->groups_code;
+            $original_value = $this->db->where('levels_id', $id)->get($this->table)->row()->levels_code;
             if( $value != $original_value ) {
                 $this->form_validation->set_message('is_unique', 'The %s is already in use');
-                $this->form_validation->set_rules( 'groups_code', 'Code', 'is_unique[groups.groups_code]' );
+                $this->form_validation->set_rules( 'levels_code', 'Code', 'is_unique[levels.levels_code]' );
             }
         }
 
@@ -51,7 +51,7 @@ class Group extends CI_Model {
 
     public function debug()
     {
-        $sort = ['groups_name'=>'desc', 'groups_description'=>'asc'];
+        $sort = ['levels_name'=>'desc', 'levels_description'=>'asc'];
         if( is_array($sort) )
         {
             foreach ($sort as $key => $value) {
@@ -102,10 +102,10 @@ class Group extends CI_Model {
             $first = $name[0];
             $last = $name[1];
         }
-        $this->db->where('groups_name LIKE', $wildcard . '%')
-                ->or_where('groups_id LIKE', $wildcard . '%')
-                ->or_where('groups_description LIKE', '%' . $wildcard . '%')
-                ->or_where('groups_code LIKE', $wildcard . '%')
+        $this->db->where('levels_name LIKE', $wildcard . '%')
+                ->or_where('levels_id LIKE', $wildcard . '%')
+                ->or_where('levels_description LIKE', '%' . $wildcard . '%')
+                ->or_where('levels_code LIKE', $wildcard . '%')
                 ->from($this->table)
                 ->select('*');
 

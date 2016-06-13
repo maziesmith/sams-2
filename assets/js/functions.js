@@ -962,7 +962,6 @@ function reload_dom()
 }
 function reload_selectpickers($values)
 {
-
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
         $('select').selectpicker('refresh');
     } else {
@@ -971,5 +970,17 @@ function reload_selectpickers($values)
 
     if( $values != null && $values != undefined ) {
         $('select').val( $values.split(",") ).trigger("chosen:updated");
+    }
+}
+function reload_selectpickers_key($key, $values)
+{
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+        $('select').selectpicker('refresh');
+    } else {
+        $('select').trigger("chosen:updated");
+    }
+
+    if( $values != null && $values != undefined ) {
+        $('select[name='+$key+']').val( $values.split(",") ).trigger("chosen:updated");
     }
 }

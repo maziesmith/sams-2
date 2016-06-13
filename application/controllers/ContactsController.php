@@ -12,6 +12,8 @@ class ContactsController extends CI_Controller {
         $this->hidden = rand();
         $this->load->model('Contact', '', TRUE);
         $this->load->model('Group', '', TRUE);
+        $this->load->model('Level', '', TRUE);
+        $this->load->model('Type', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -36,6 +38,8 @@ class ContactsController extends CI_Controller {
     {
         $this->Data['contacts'] = $this->Contact->all();
         $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], 'No Group');
+        $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], 'No Level');
+        $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], 'No Type');
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -68,9 +72,7 @@ class ContactsController extends CI_Controller {
 
             foreach ($contacts as $key => $contact) {
 
-                if( null !== $contact['contacts_group'] )
-                    $group = $this->Group->find( explodetoarray($contact['contacts_group']) );
-
+                if( null !== $contact['contacts_group'] ) $group = $this->Group->find( explodetoarray($contact['contacts_group']) );
                 $groups_name_arr = [];
                 $groups_id_arr = [];
                 if( is_array( $group ) )
@@ -81,13 +83,36 @@ class ContactsController extends CI_Controller {
                     }
                 }
 
+                if( null !== $contact['contacts_level'] ) $level = $this->Level->find( explodetoarray($contact['contacts_level']) );
+                $levels_name_arr = [];
+                $levels_id_arr = [];
+                if( is_array( $level ) )
+                {
+                    foreach ($level as $level_single) {
+                        $levels_name_arr[] = $level_single->levels_name;
+                        $levels_id_arr[] = $level_single->levels_id;
+                    }
+                }
+
+                if( null !== $contact['contacts_type'] ) $type = $this->Type->find( explodetoarray($contact['contacts_type']) );
+                $types_name_arr = [];
+                $types_id_arr = [];
+                if( is_array( $type ) )
+                {
+                    foreach ($type as $type_single) {
+                        $types_name_arr[] = $type_single->types_name;
+                        $types_id_arr[] = $type_single->types_id;
+                    }
+                }
 
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
                     'contacts_id'        => $contact['contacts_id'],
                     'contacts_firstname' => arraytostring([$contact['contacts_firstname'], $contact['contacts_middlename'] ? substr($contact['contacts_middlename'], 0,1) . '.' : '', $contact['contacts_lastname']], ' '),
-                    'contacts_level'     => $contact['contacts_level'],
-                    'contacts_type'      => $contact['contacts_type'],
+                    'contacts_level'     => $levels_name_arr ? arraytostring($levels_name_arr, ", ") : '',
+                    'levels_id'          => $levels_id_arr ? $levels_id_arr : '',
+                    'contacts_type'      => $types_name_arr ? arraytostring($types_name_arr, ", ") : '',
+                    'types_id'          => $types_id_arr ? $types_id_arr : '',
                     'contacts_address'   => arraytostring([$contact['contacts_blockno'], $contact['contacts_street'], $contact['contacts_brgy'], $contact['contacts_city'], $contact['contacts_zip']]),
                     'contacts_telephone' => $contact['contacts_telephone'],
                     'contacts_mobile'    => $contact['contacts_mobile'],
@@ -102,7 +127,7 @@ class ContactsController extends CI_Controller {
                 "searchPhrase"  => $wildcard,
                 "total"         => intval( $total ),
                 "rows"          => $bootgrid_arr,
-                "debug" => $group,
+                // "debug" => $contact['contacts_type'],
             );
             echo json_encode( $data );
             exit();
@@ -129,8 +154,8 @@ class ContactsController extends CI_Controller {
                     'contacts_firstname'    => $this->input->post('contacts_firstname'),
                     'contacts_middlename'   => $this->input->post('contacts_middlename'),
                     'contacts_lastname'     => $this->input->post('contacts_lastname'),
-                    'contacts_level'        => $this->input->post('contacts_level'),
-                    'contacts_type'         => $this->input->post('contacts_type'),
+                    'contacts_level'        => arraytoimplode($this->input->post('contacts_level')),
+                    'contacts_type'         => arraytoimplode($this->input->post('contacts_type')),
                     'contacts_blockno'      => $this->input->post('contacts_blockno'),
                     'contacts_street'       => $this->input->post('contacts_street'),
                     'contacts_brgy'         => $this->input->post('contacts_brgy'),
@@ -253,6 +278,130 @@ class ContactsController extends CI_Controller {
 
             }
 
+            if( null != $this->input->post('updating_level') )
+            {
+                $contact = $this->Contact->find($id);
+                $contact_level = explode( ",", $contact->contacts_level);
+
+                # If we're Adding a Group
+                if( "add" == $this->input->post('action') ) {
+                    # Check if the value is already in the resource,
+                    # add to array if not.
+                    if( !in_array($this->input->post('value'), $contact_level) ) {
+                        $contact_level[] = $this->input->post('value');
+                    } else {
+                        $data = array(
+                            'message' => 'Contact is already in this level',
+                            'type' => 'danger',
+                            // 'debug' => $contact_level,
+                            // "input" => $this->input->post('value'),
+                        );
+                        echo json_encode( $data );
+                        exit();
+                    }
+                }
+
+                # If we're Removing a Group
+                if( "remove" == $this->input->post('action') ) {
+                    # Remove the value if in the resource
+                    if( in_array($this->input->post('value'), $contact_level) ) {
+                        $index = array_search($this->input->post('value'), $contact_level);
+                        unset( $contact_level[$index] );
+                    } else {
+                        $data = array(
+                            'message' => 'Contact is already not in this level',
+                            'type' => 'danger',
+                            // 'debug' => $contact_level,
+                            // "input" => $this->input->post('value'),
+                        );
+                        echo json_encode( $data );
+                        exit();
+                    }
+                }
+
+                # Prepare data
+                $contact_level = arraytoimplode($contact_level);   // stringify the array E.g. `array("1", "2")` will be `"1,2"`
+                $contact_data = array(
+                    $this->input->post('updating_level') => $contact_level,
+                );
+
+                 # Update
+                $this->Contact->update($id, $contact_data);
+
+                # Response
+                $data = array(
+                    'message' => 'Contact was successfully updated',
+                    'type' => 'success',
+                    // 'debug' => $contact_level,
+                    // "input" => $this->input->post('value'),
+                );
+                echo json_encode( $data );
+                exit();
+
+            }
+
+            if( null != $this->input->post('updating_type') )
+            {
+                $contact = $this->Contact->find($id);
+                $contact_type = explode( ",", $contact->contacts_type);
+
+                # If we're Adding a Type
+                if( "add" == $this->input->post('action') ) {
+                    # Check if the value is already in the resource,
+                    # add to array if not.
+                    if( !in_array($this->input->post('value'), $contact_type) ) {
+                        $contact_type[] = $this->input->post('value');
+                    } else {
+                        $data = array(
+                            'message' => 'Contact is already in this type',
+                            'type' => 'danger',
+                            // 'debug' => $contact_type,
+                            // "input" => $this->input->post('value'),
+                        );
+                        echo json_encode( $data );
+                        exit();
+                    }
+                }
+
+                # If we're Removing a Type
+                if( "remove" == $this->input->post('action') ) {
+                    # Remove the value if in the resource
+                    if( in_array($this->input->post('value'), $contact_type) ) {
+                        $index = array_search($this->input->post('value'), $contact_type);
+                        unset( $contact_type[$index] );
+                    } else {
+                        $data = array(
+                            'message' => 'Contact is already not in this type',
+                            'type' => 'danger',
+                            // 'debug' => $contact_type,
+                            // "input" => $this->input->post('value'),
+                        );
+                        echo json_encode( $data );
+                        exit();
+                    }
+                }
+
+                # Prepare data
+                $contact_type = arraytoimplode($contact_type);   // stringify the array E.g. `array("1", "2")` will be `"1,2"`
+                $contact_data = array(
+                    $this->input->post('updating_type') => $contact_type,
+                );
+
+                 # Update
+                $this->Contact->update($id, $contact_data);
+
+                # Response
+                $data = array(
+                    'message' => 'Contact was successfully updated',
+                    'type' => 'success',
+                    // 'debug' => $contact_type,
+                    // "input" => $this->input->post('value'),
+                );
+                echo json_encode( $data );
+                exit();
+
+            }
+
             if( $this->Contact->validate(false, $id, $this->input->post('contacts_email')) )
             {
                 /*
@@ -264,8 +413,8 @@ class ContactsController extends CI_Controller {
                     'contacts_firstname' => $this->input->post('contacts_firstname'),
                     'contacts_middlename' => $this->input->post('contacts_middlename'),
                     'contacts_lastname' => $this->input->post('contacts_lastname'),
-                    'contacts_level' => $this->input->post('contacts_level'),
-                    'contacts_type' => $this->input->post('contacts_type'),
+                    'contacts_level' => arraytoimplode( $this->input->post('contacts_level') ),
+                    'contacts_type' => arraytoimplode( $this->input->post('contacts_type') ),
                     'contacts_blockno' => $this->input->post('contacts_blockno'),
                     'contacts_street' => $this->input->post('contacts_street'),
                     'contacts_brgy' => $this->input->post('contacts_brgy'),
@@ -431,7 +580,6 @@ class ContactsController extends CI_Controller {
                 # -- No response yet --
             }
         }
-
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/contactsExport.js').'"></script>';
         $this->load->view('layouts/main', $this->Data);

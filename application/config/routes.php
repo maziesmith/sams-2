@@ -55,7 +55,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | # Auth Route
 | ------------
 */
-$route['auth/login']['get'] = 'AuthController/index';
+$route['login']['get'] = 'AuthController/index';
+$route['auth/login']['post'] = 'AuthController/login';
+
+/*
+|------------------
+| # Users Route
+|------------------
+*/
+$route['users']['get'] = 'UsersController/index';
+
+$route['users/listing']['post']  = 'UsersController/listing/';
+$route['users/listing']['get']  = 'UsersController/listing/';
+
+$route['users/delete/(:num)']['delete']  = 'UsersController/delete/$1';
+$route['users/delete']['post']  = 'UsersController/delete';
+
+$route['users/add']['post']  = 'UsersController/add';
+
+$route['users/edit/(:num)']['post']  = 'UsersController/edit/$1';
+$route['users/update/(:num)']['post']  = 'UsersController/update/$1';
+
+$route['users/import']['get']  = 'UsersController/import';
+$route['users/import']['post']  = 'UsersController/import';
+
+$route['users/export']['get']  = 'UsersController/export';
+$route['users/export']['post']  = 'UsersController/export';
 
 /*
 | -----------------
@@ -154,7 +179,7 @@ $route['types/export']['get']  = 'TypesController/export';
 | ---------------
 */
 // $route['migrate/(:num)'] = 'migrate/index/$1';
-// $route['migrate/(:any)'] = 'migrate/$1';
+$route['migrate/(:any)'] = 'migrate/$1';
 
 // $route['(:any)'] = 'PageController/view/$1';
 

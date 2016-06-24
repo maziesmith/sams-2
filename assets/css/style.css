@@ -269,6 +269,13 @@ ul.breadcrumb .active {
 .groups_description {
 	max-width: 300px;
 }
+
+/*Login*/
+@media (min-width: 1199px) {
+	body.sw-toggled.login-content #footer {
+		padding-left: 0;
+	}
+}
 /*
 | ----------------------------
 | # Media Queries

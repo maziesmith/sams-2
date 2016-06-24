@@ -17,6 +17,7 @@ class AuthController extends CI_Controller {
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/bootstrap-growl/bootstrap-growl.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/login.js').'"></script>';
         $this->Data['Headers']->bodyClass = 'login-content';
     }
     /**
@@ -26,9 +27,19 @@ class AuthController extends CI_Controller {
      */
     public function index()
     {
-        $this->Data['contacts'] = $this->Contact->all();
-        $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], 'No Group');
-        $this->load->view('layouts/login', $this->Data);
+        return $this->load->view('auth/login', $this->Data);
     }
 
+    /**
+     * POST perform login
+     *
+     * @return
+     */
+    public function login()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+
+        echo json_encode(['asd'=>$username]); exit();
+    }
 }

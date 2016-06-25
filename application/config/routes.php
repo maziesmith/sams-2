@@ -177,6 +177,7 @@ $route['types/export']['get']  = 'TypesController/export';
 | ---------------
 | # Migration
 | ---------------
+| This should be commented out in production mode
 */
 // $route['migrate/(:num)'] = 'migrate/index/$1';
 $route['migrate/(:any)'] = 'migrate/$1';

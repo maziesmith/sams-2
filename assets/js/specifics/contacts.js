@@ -117,10 +117,10 @@ $(document).ready(function(){
     $('body').on('click', '#delete-contact-btn', function (e) {
         e.preventDefault();
         // console.log(G_selectedRows);
-        var url  =  base_url('contacts/delete');
+        var url  =  base_url('contacts/remove');
         swal({
             title: "Are you sure?",
-            text: "The selected Contacts will be deleted permanently from your record",
+            text: "The selected Contacts will be removed from your record",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -130,12 +130,12 @@ $(document).ready(function(){
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: {'contacts_id[]': G_selectedRows},
+                data: {'contacts_id[]': $("#contact-table-command").bootgrid('getSelectedRows')},
                 success: function (data) {
                     // console.log(data);
                     var data = $.parseJSON(data);
                     reload_table();
-                    swal("Deleted", data.message, data.type);
+                    swal("Removed", data.contact.message, data.contact.type);
                     G_selectedRows = [];
                     $('#delete-contact-btn').removeClass('show');
                 },
@@ -360,9 +360,9 @@ function init_table() {
 
                     $.each(contact, function (k, v) {
                         _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        reload_selectpickers_key( (k == 'contacts_type') ? k : null, (k == 'contacts_type') ? v : null);
-                        reload_selectpickers_key( (k == 'contacts_group') ? k + "[]" : null, (k == 'contacts_group') ? v : null);
-                        reload_selectpickers_key( (k == 'contacts_level') ? k : null, (k == 'contacts_level') ? v : null);
+                        if( k == 'contacts_type' ) reload_selectpickers_key( k, v);
+                        if( k == 'contacts_group' ) reload_selectpickers_key( k+"[]", v);
+                        if( k == 'contacts_level' ) reload_selectpickers_key( k, v);
                     });
                 }
             });
@@ -376,11 +376,11 @@ function init_table() {
         contactTable.find(".command-delete").on("click", function (e) {
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.contacts_firstname').text(),
-                url  = base_url('contacts/delete/' + id);
+                url  = base_url('contacts/remove/' + id);
             e.preventDefault();
             swal({
                 title: "Are you sure?",
-                text: name + " will be deleted permanently from your contacts",
+                text: name + " will be trashed.",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -389,12 +389,13 @@ function init_table() {
             }, function(){
                 // on deleting button
                 $.ajax({
-                    type: 'DELETE',
+                    type: 'POST',
                     url: url,
                     success: function (data) {
                         var data = $.parseJSON(data);
+                        console.log(data);
                         reload_table();
-                        swal("Deleted", data.message, data.type);
+                        swal("Removed", data.contact.message, data.contact.type);
                     }
                 });
             });

@@ -1,6 +1,5 @@
 <section id="content">
     <div class="container">
-
         <?php if(!is_null($this->session->contact)) : ?>
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -9,14 +8,13 @@
         <?php endif; ?>
 
         <div class="toolbar-group text-right">
-            <a href="<?php echo base_url('contacts/trash'); ?>" class="btn btn-danger btn-link toolbar-item"><i class="fa fa-trash">&nbsp;</i>Trash</a>
+            <a href="<?php echo base_url('contacts'); ?>" class="btn btn-danger btn-link toolbar-item"><i class="fa fa-arrow-left">&nbsp;</i>Go Back</a>
         </div>
 
         <div class="card">
             <?php echo breadcrumbs(); ?>
-
             <div class="table-responsive">
-                <table id="contact-table-command" class="table table-condensed table-vmiddle table-hover">
+                <table id="trashed-contact-table-command" class="table table-condensed table-vmiddle table-hover">
                     <thead>
                         <tr>
                             <th data-column-id="count_id"           data-visible="true" data-type="numeric" data-sortable="false">#</th>
@@ -32,15 +30,9 @@
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th>
                         </tr>
                     </thead>
-
                 </table>
             </div>
         </div>
-    </div>
-    <button id="delete-contact-btn" title="Delete all selected Contacts" class="btn btn-float bgm-red delete-all m-btn"><i class="zmdi zmdi zmdi-delete"></i></button>
-    <button id="add-new-contact-btn" title="Add new Contact" class="btn btn-float bgm-green add-new m-btn" data-toggle="modal" href="#add-contact"><i class="zmdi zmdi-plus-square"></i></button>
-</section>
 
-<?php
-$this->load->view('contacts/add');
-$this->load->view('contacts/edit') ?>
+    </div>
+</section>

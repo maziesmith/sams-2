@@ -76,9 +76,13 @@ class UsersController extends CI_Controller {
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
                     'users_id'          => $user['id'],
-                    'users_name'        => $user['username'],
-                    'users_description' => $user['fullname'],
-                    'users_code'        => $user['users_code'],
+                    'username'        => $user['username'],
+                    'fullname' => arraytostring([
+                                                $user['firstname'],
+                                                $user['middlename'] ? substr($user['middlename'], 0,1) . '.' : '',
+                                                $user['lastname']], ' '),
+                    'email'        => $user['email'],
+                    'role'        => '',
                 );
             }
             $data = array(

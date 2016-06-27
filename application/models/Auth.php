@@ -23,8 +23,8 @@ class Auth extends CI_Model {
             if( password_verify($password, $row->password) ) {
                 $data = array(
                         'id' => $row->userid,
-                        'firstname' => $row->fname,
-                        'lastname' => $row->lname,
+                        'firstname' => $row->firstname,
+                        'lastname' => $row->lastname,
                         'username' => $row->username,
                         'validated' => true
                 );

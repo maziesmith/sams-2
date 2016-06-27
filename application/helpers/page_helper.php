@@ -154,3 +154,14 @@ if ( ! function_exists('explodetoarray'))
         return  (is_string($string)) ? explode($delimeter, trim($string)) : $string;
     }
 }
+
+if( !function_exists('get_fullname') ) {
+    function get_fullname($formal=false)
+    {
+        $CI = get_instance();
+        $firstname = $CI->session->firstname;
+        $lastname = $CI->session->lastname;
+        if( $formal ) return $lastname . ", " . $firstname;
+        return $firstname . " " . $lastname;
+    }
+}

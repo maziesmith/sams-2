@@ -26,10 +26,12 @@ class Migration_create_contacts_table extends CI_Migration {
             'contacts_level' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',
+                'null' => TRUE,
             ),
             'contacts_type' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',
+                'null' => TRUE,
             ),
             'contacts_blockno' => array(
                 'type' => 'TEXT',
@@ -58,11 +60,14 @@ class Migration_create_contacts_table extends CI_Migration {
             'contacts_group' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',
+                'null' => TRUE,
             )
         ));
 
         $this->dbforge->add_field('created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP');
         $this->dbforge->add_field('updated_at TIMESTAMP DEFAULT "0000-00-00 00:00:00" ON UPDATE CURRENT_TIMESTAMP');
+        $this->dbforge->add_field('removed_at TIMESTAMP NULL');
+
         $this->dbforge->add_key('contacts_id', TRUE);
         $this->dbforge->create_table('contacts', false);
     }

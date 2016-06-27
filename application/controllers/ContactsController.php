@@ -81,7 +81,8 @@ class ContactsController extends CI_Controller {
 
             foreach ($contacts as $key => $contact) {
 
-                if( null !== $contact['contacts_group'] ) $group = $this->Group->find( explodetoarray($contact['contacts_group']) );
+                $group = null;
+                if( null != $contact['contacts_group'] ) $group = $this->Group->find( explodetoarray($contact['contacts_group']) );
                 $groups_name_arr = [];
                 $groups_id_arr = [];
                 if( is_array( $group ) )
@@ -145,8 +146,8 @@ class ContactsController extends CI_Controller {
 
     public function add()
     {
-        if( $this->input->is_ajax_request() )
-        {
+        // if( $this->input->is_ajax_request() )
+        // {
             /*
             | --------------------------------------
             | # Validation
@@ -194,11 +195,11 @@ class ContactsController extends CI_Controller {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
             }
 
-        }
-        else
-        {
-            redirect( base_url('contacts') );
-        }
+        // }
+        // else
+        // {
+        //     redirect( base_url('contacts') );
+        // }
     }
 
     /**
@@ -228,14 +229,8 @@ class ContactsController extends CI_Controller {
             if( null != $this->input->post('updating_group') )
             {
                 $contact = $this->Contact->find($id);
-                $contact_group = explode(",", $contact->contacts_group);
-                $data = array(
-                            'message' => 'Contact is already in this group',
-                            'type' => 'danger',
-                            'debug' => $contact_group,
-                            // "input" => $this->input->post('value'),
-                        );
-                        echo json_encode( $data ); exit();
+                $contact_group = [];
+                if( !empty($contact->contacts_group) ) $contact_group = explode(",", $contact->contacts_group);
 
                 # If we're Adding a Group
                 if( "add" == $this->input->post('action') ) {
@@ -297,7 +292,8 @@ class ContactsController extends CI_Controller {
             if( null != $this->input->post('updating_level') )
             {
                 $contact = $this->Contact->find($id);
-                $contact_level = explode( ",", $contact->contacts_level);
+                $contact_level = [];
+                if( !empty($contact->contacts_level) )$contact_level = explode(",", $contact->contacts_level);
 
                 # If we're Adding a Group
                 if( "add" == $this->input->post('action') ) {
@@ -336,7 +332,7 @@ class ContactsController extends CI_Controller {
                 }
 
                 # Prepare data
-                $contact_level = arraytoimplode($contact_level);   // stringify the array E.g. `array("1", "2")` will be `"1,2"`
+                $contact_level = implode(",", $contact_level);   // stringify the array E.g. `array("1", "2")` will be `"1,2"`
                 $contact_data = array(
                     $this->input->post('updating_level') => $contact_level,
                 );
@@ -359,7 +355,8 @@ class ContactsController extends CI_Controller {
             if( null != $this->input->post('updating_type') )
             {
                 $contact = $this->Contact->find($id);
-                $contact_type = explode( ",", $contact->contacts_type);
+                $contact_type = [];
+                if( !empty($contact->contacts_type) ) $contact_type = explode(",", $contact->contacts_type);
 
                 # If we're Adding a Type
                 if( "add" == $this->input->post('action') ) {
@@ -371,7 +368,7 @@ class ContactsController extends CI_Controller {
                         $data = array(
                             'message' => 'Contact is already in this type',
                             'type' => 'danger',
-                            // 'debug' => $contact_type,
+                            'debug' => $contact_type,
                             // "input" => $this->input->post('value'),
                         );
                         echo json_encode( $data );
@@ -398,7 +395,7 @@ class ContactsController extends CI_Controller {
                 }
 
                 # Prepare data
-                $contact_type = arraytoimplode($contact_type);   // stringify the array E.g. `array("1", "2")` will be `"1,2"`
+                $contact_type = implode(",", $contact_type);   // stringify the array E.g. `array("1", "2")` will be `"1,2"`
                 $contact_data = array(
                     $this->input->post('updating_type') => $contact_type,
                 );
@@ -455,6 +452,32 @@ class ContactsController extends CI_Controller {
             {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'error']); exit();
             }
+        }
+    }
+
+    public function trash()
+    {
+        $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function remove($id=null)
+    {
+        if( null === $id ) $id = $this->input->post('contacts_id');
+
+        if( $this->Contact->remove($id) ) {
+            $data['contact']['message'] = 'Contact was successfully removed';
+            $data['contact']['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while removing the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data );
+            exit();
+        } else {
+            $this->session->set_userdata( $data );
+            redirect('contacts');
         }
     }
 

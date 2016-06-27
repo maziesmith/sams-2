@@ -100,8 +100,11 @@ $route['contacts']['get'] = 'ContactsController/index';
 $route['contacts/listing']['post']  = 'ContactsController/listing/';
 $route['contacts/listing']['get']  = 'ContactsController/listing/';
 
+$route['contacts/trash']['get']  = 'ContactsController/trash';
 $route['contacts/delete/(:num)']['delete']  = 'ContactsController/delete/$1';
 $route['contacts/delete']['post']  = 'ContactsController/delete';
+$route['contacts/remove']['post']  = 'ContactsController/remove';
+$route['contacts/remove/(:num)']['post']  = 'ContactsController/remove/$1';
 
 $route['contacts/add']['post']  = 'ContactsController/add';
 
@@ -188,7 +191,7 @@ $route['migrate/(:any)'] = 'migrate/$1';
 | # Seeds
 |----------------
 */
-// $route['seed/users'] = 'UsersController/seed';
+$route['seed/users'] = 'UsersController/seed';
 
 // $route['(:any)'] = 'PageController/view/$1';
 

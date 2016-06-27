@@ -66,7 +66,7 @@ class Contact extends CI_Model {
 
     public function all()
     {
-        $query = $this->db->get($this->table);
+        $query = $this->db->where('removed_at', NULL)->get($this->table);
         return $query->result();
     }
 
@@ -81,7 +81,7 @@ class Contact extends CI_Model {
 
         $this->db->limit( $limit, $start_from );
 
-        return $this->db->get($this->table);
+        return $this->db->where('removed_at', NULL)->get($this->table);
     }
 
     public function find($id)
@@ -135,7 +135,7 @@ class Contact extends CI_Model {
 
         $this->db->limit( $limit, $start_from );
 
-        return $this->db->get();
+        return $this->db->where('removed_at', NULL)->get();
     }
 
     public function insert($data)
@@ -147,6 +147,18 @@ class Contact extends CI_Model {
     {
         $this->db->where($this->column_id, $id);
         $this->db->update($this->table, $data);
+        return true;
+    }
+
+    public function remove($id)
+    {
+        if( is_array($id) ) {
+            $this->db->where_in($this->column_id, $id)->update($this->table, ['removed_at'=>date('Y-m-d H:i:s')]);
+            return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, ['removed_at'=>date('Y-m-d H:i:s')]);
         return true;
     }
 
@@ -199,6 +211,7 @@ class Contact extends CI_Model {
     {
         if($all) return $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'")->get($this->table);
         $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'");
+        $this->db->where('removed_at', NULL);
         return $this->db->where('contacts_level', $level)->get($this->table);
     }
 

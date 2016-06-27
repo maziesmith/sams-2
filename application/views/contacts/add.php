@@ -160,7 +160,7 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('contacts_mobile', set_value('contacts_mobile'), array('class'=>'bfh-phone form-control fg-input', 'data-format'=>'d(ddd) ddd-dddd')) ?>
+                                            <?php echo form_input('contacts_mobile', set_value('contacts_mobile'), array('class'=>'bfh-phone form-control fg-input', 'data-format'=>'ddddddddddd')) ?>
                                         </div>
                                         <?php echo form_label('Mobile No.', 'contacts_mobile', array('class'=>'fg-label')) ?>
                                     </div>

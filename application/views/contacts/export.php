@@ -52,12 +52,7 @@
                             <div class="form-group form-group-validation">
                                 <?php echo form_label('Select Level', 'export_level', array('class'=>'c-black f-500 m-b-20')) ?>
                                 <?php echo form_dropdown('export_level',
-                                    array(
-                                        ''=>'Select Level',
-                                        'Level 1' => 'Level 1',
-                                        'Level 2' => 'Level 2',
-                                        'Level 3' => 'Level 3'
-                                    ),
+                                    $form['levels_list'],
                                     set_value('export_level'), 'class="tag-select"'
                                 ) ?>
                             </div>

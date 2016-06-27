@@ -173,7 +173,7 @@ class Contact extends CI_Model {
         return $this->db;
     }
 
-    public function import($file=null, $truncate=true)
+    public function import($file=null, $truncate=false)
     {
         $this->pdo = $this->load->database('pdo', true);
         $this->pdo->query( "SET NAMES 'utf8'" );
@@ -195,10 +195,11 @@ class Contact extends CI_Model {
         return $this->pdo->query($query);
     }
 
-    public function export($all=true, $start_date=null, $end_date=null, $level=null)
+    public function export($all=false, $start_date=null, $end_date=null, $level=null)
     {
         if($all) return $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'")->get($this->table);
-        return $this->db->select('*')->get($this->table);
+        $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'");
+        return $this->db->where('contacts_level', $level)->get($this->table);
     }
 
 }

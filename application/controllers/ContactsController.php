@@ -220,6 +220,13 @@ class ContactsController extends CI_Controller {
             {
                 $contact = $this->Contact->find($id);
                 $contact_group = explode(",", $contact->contacts_group);
+                $data = array(
+                            'message' => 'Contact is already in this group',
+                            'type' => 'danger',
+                            'debug' => $contact_group,
+                            // "input" => $this->input->post('value'),
+                        );
+                        echo json_encode( $data ); exit();
 
                 # If we're Adding a Group
                 if( "add" == $this->input->post('action') ) {
@@ -522,7 +529,6 @@ class ContactsController extends CI_Controller {
         }
 
         $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/dropzone/dropzone.css').'"></link>';
-
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/dropzone/dropzone.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/contactsImport.js').'"></script>';
 
@@ -538,18 +544,16 @@ class ContactsController extends CI_Controller {
     {
         if( null != $this->input->post('export_start') )
         {
-            $export = $this->Contact->export( true, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') );
+            $export = $this->Contact->export( false, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') );
             /*
             | ---------------------------------------------
             | # Validation
             | ---------------------------------------------
             */
-            $result = $this->Contact->export( true, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') )->result();
-            if( empty( $result ) )
-            {
+            $result = $this->Contact->export( false, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') )->result();
+            if( empty( $result ) ) {
                 $this->Data['messages']['error'] = 'No Record was found in the Dates or Level specified';
-            }
-            else
+            } else
             {
                 # Export
                 #// Load the DB Utility
@@ -569,8 +573,8 @@ class ContactsController extends CI_Controller {
                         break;
 
                     case 'PDF':
+                        die('PDF is not available on your user level');
                         break;
-
                     default:
                         break;
                 }
@@ -582,6 +586,7 @@ class ContactsController extends CI_Controller {
         }
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/contactsExport.js').'"></script>';
+        $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], 'No Level');
         $this->load->view('layouts/main', $this->Data);
     }
 

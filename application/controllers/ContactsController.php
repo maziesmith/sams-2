@@ -219,7 +219,7 @@ class ContactsController extends CI_Controller {
             if( null != $this->input->post('updating_group') )
             {
                 $contact = $this->Contact->find($id);
-                $contact_group = explode( ",", $contact->contacts_group);
+                $contact_group = explode(",", $contact->contacts_group);
 
                 # If we're Adding a Group
                 if( "add" == $this->input->post('action') ) {

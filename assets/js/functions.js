@@ -981,6 +981,6 @@ function reload_selectpickers_key($key, $values)
     }
 
     if( $values != null && $values != undefined ) {
-        $('select[name='+$key+']').val( $values.split(",") ).trigger("chosen:updated");
+        $('select[name="'+$key+'"]').val( $values.split(",") ).trigger("chosen:updated");
     }
 }

@@ -361,7 +361,7 @@ function init_table() {
                     $.each(contact, function (k, v) {
                         _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
                         reload_selectpickers_key( (k == 'contacts_type') ? k : null, (k == 'contacts_type') ? v : null);
-                        reload_selectpickers_key( (k == 'contacts_group') ? k : null, (k == 'contacts_group') ? v : null);
+                        reload_selectpickers_key( (k == 'contacts_group') ? k + "[]" : null, (k == 'contacts_group') ? v : null);
                         reload_selectpickers_key( (k == 'contacts_level') ? k : null, (k == 'contacts_level') ? v : null);
                     });
                 }

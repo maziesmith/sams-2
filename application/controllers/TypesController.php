@@ -8,6 +8,8 @@ class TypesController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->validated();
+
         $this->load->model('Type', '', TRUE);
         $this->load->model('Contact', '', TRUE);
 
@@ -26,6 +28,13 @@ class TypesController extends CI_Controller {
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/types.js').'"></script>';
     }
+
+    public function validated()
+    {
+        $this->session->set_userdata('error', "You are not logged in");
+        if(!$this->session->userdata('validated')) redirect('login');
+    }
+
     /**
      * Index Page for this controller.
      *

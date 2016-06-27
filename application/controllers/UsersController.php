@@ -8,6 +8,8 @@ class UsersController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        // $this->validated();
+
         $this->load->model('User', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
@@ -25,6 +27,13 @@ class UsersController extends CI_Controller {
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/users.js').'"></script>';
     }
+
+    public function validated()
+    {
+        $this->session->set_userdata('error', "You are not logged in");
+        if(!$this->session->userdata('validated')) redirect('login');
+    }
+
     /**
      * Index Page for this controller.
      *
@@ -326,5 +335,22 @@ class UsersController extends CI_Controller {
     public function export()
     {
         $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function seed()
+    {
+        // $this->load->library('PasswordHash', array(8, FALSE));
+        // $check = $this->PasswordHash->CheckPassword($password, $actualPassword);
+        $data = array(
+            'username'    => 'admin',
+            'password'   => password_hash('admin', PASSWORD_BCRYPT),
+            'email'     => 'john.dionisio1@gmail.com',
+            'firstname'        => 'John Lioneil',
+            'middlename'         => 'Palanas',
+            'lastname'      => 'Dionisio',
+            'remember_token'       => 0,
+        );
+        $this->User->insert($data);
+        echo "alright"; exit();
     }
 }

@@ -7,6 +7,12 @@ $this->load->view('partials/header'); ?>
 # $this->load->view($Headers->Page); ?>
 <!-- Login -->
 <div class="lc-block toggled" id="l-login">
+    <?php if(!is_null($message)) : ?>
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <?php echo $message; ?>
+        </div>
+    <?php endif; ?>
     <form id="form-login" action="<?php echo base_url('auth/login') ?>" method="POST" accept-charset="utf-8">
         <input type="hidden" name="_token" value="<?php #echo token() ?>">
         <div class="input-group m-b-20">

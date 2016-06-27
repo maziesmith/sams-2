@@ -10,7 +10,7 @@ class AuthController extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Contact', '', TRUE);
-        $this->load->model('Group', '', TRUE);
+        $this->load->model('Auth', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -25,8 +25,9 @@ class AuthController extends CI_Controller {
      *
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    public function index()
+    public function index($message = null)
     {
+        $this->Data['message'] = $this->session->error;
         return $this->load->view('auth/login', $this->Data);
     }
 
@@ -37,9 +38,27 @@ class AuthController extends CI_Controller {
      */
     public function login()
     {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
+        $username = $this->security->xss_clean($this->input->post('username'));
+        $password = $this->security->xss_clean($this->input->post('password'));
+        $remember_me = $this->input->post('remember_me');
 
-        echo json_encode(['asd'=>$username]); exit();
+        // $q = $this->Auth->find(1);
+
+        // echo "<pre>";
+        //         var_dump( password_verify('admin', $q->password) ); die();
+        // echo "</pre>";
+
+        if( $this->Auth->check($username, $password, $remember_me) ) {
+            redirect('dashboard');
+        }
+
+        $this->session->set_userdata('error', "Invalid credentials");
+        redirect('login');
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('login');
     }
 }

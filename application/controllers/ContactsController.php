@@ -9,6 +9,8 @@ class ContactsController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->validated();
+
         $this->hidden = rand();
         $this->load->model('Contact', '', TRUE);
         $this->load->model('Group', '', TRUE);
@@ -29,6 +31,13 @@ class ContactsController extends CI_Controller {
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/contacts.js').'"></script>';
     }
+
+    public function validated()
+    {
+        $this->session->set_userdata('error', "You are not logged in");
+        if(!$this->session->userdata('validated')) redirect('login');
+    }
+
     /**
      * Index Page for this controller.
      *

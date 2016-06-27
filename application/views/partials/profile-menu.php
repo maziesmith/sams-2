@@ -19,7 +19,7 @@
             <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
         </li>
         <li>
-            <a href=""><i class="zmdi zmdi-time-restore"></i> Logout</a>
+            <a href="<?php echo base_url('logout'); ?>"><i class="zmdi zmdi-time-restore"></i> Logout</a>
         </li>
     </ul>
 </div>

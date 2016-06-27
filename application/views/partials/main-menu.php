@@ -2,6 +2,7 @@
     <li class="<?php echo check_link(''); ?>">
         <?php echo anchor('', '<i class="zmdi zmdi-home"></i>Dashboard'); ?>
     </li>
+    <li><hr></li>
     <li class="sub-menu <?php echo check_link(['contacts', 'contacts/import', 'contacts/export']) ?>">
         <a role="button"><i class="zmdi zmdi-account-box"></i> Contacts</a>
         <ul>
@@ -35,10 +36,24 @@
         </ul>
     </li>
     <li><hr></li>
-    <li class="sub-menu <?php echo check_link(['users', 'users/import', 'users/export']) ?>">
+    <li class="sub-menu <?php echo check_link(['messaging/inbox', 'messaging/outbox', 'messaging/tracking', 'messaging/templates']) ?>">
+        <a role="button"><i class="zmdi zmdi-email"></i> Messaging</a>
+        <ul>
+            <li class="<?php echo check_link('messaging/inbox') ?>" ><?php echo anchor( base_url('messaging/inbox'), 'Inbox' ); ?></li>
+            <li class="<?php echo check_link('messaging/outbox') ?>" ><?php echo anchor( base_url('messaging/outbox'), 'Outbox' ); ?></li>
+            <li class="<?php echo check_link('messaging/tracking') ?>" ><?php echo anchor( base_url('messaging/tracking'), 'Tracking' ); ?></li>
+            <li class="<?php echo check_link('messaging/templates') ?>" ><?php echo anchor( base_url('messaging/templates'), 'Templates' ); ?></li>
+            <!-- <li class="<?php echo check_link('messaging/export') ?>" ><?php echo anchor( base_url('messaging/export'), 'Export Types' ); ?></li>
+            <li class="<?php echo check_link('messaging/import') ?>" ><?php echo anchor( base_url('messaging/import'), 'Import Types' ); ?></li> -->
+        </ul>
+    </li>
+    <li><hr></li>
+    <li class="sub-menu <?php echo check_link(['users', 'users/privileges', 'users/modules', 'users/import', 'users/export']) ?>">
         <a role="button"><i class="zmdi zmdi-account"></i> Users</a>
         <ul>
             <li class="<?php echo check_link('users') ?>" ><?php echo anchor( base_url('users'), 'All Users' ); ?></li>
+            <li class="<?php echo check_link('users/privileges') ?>" ><?php echo anchor( base_url('users/privileges'), 'Privileges' ); ?></li>
+            <li class="<?php echo check_link('users/modules') ?>" ><?php echo anchor( base_url('users/modules'), 'Modules' ); ?></li>
             <li class="<?php echo check_link('users/export') ?>" ><?php echo anchor( base_url('users/export'), 'Export Users' ); ?></li>
             <li class="<?php echo check_link('users/import') ?>" ><?php echo anchor( base_url('users/import'), 'Import Users' ); ?></li>
         </ul>

@@ -49,6 +49,11 @@ class User extends CI_Model {
         }
     }
 
+    public function insert($data)
+    {
+        $this->db->insert($this->table, $data);
+    }
+
     public function all()
     {
         $query = $this->db->get($this->table);

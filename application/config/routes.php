@@ -57,6 +57,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['login']['get'] = 'AuthController/index';
 $route['auth/login']['post'] = 'AuthController/login';
+$route['logout']['get'] = 'AuthController/logout';
 
 /*
 |------------------
@@ -181,6 +182,13 @@ $route['types/export']['get']  = 'TypesController/export';
 */
 // $route['migrate/(:num)'] = 'migrate/index/$1';
 $route['migrate/(:any)'] = 'migrate/$1';
+
+/*
+|----------------
+| # Seeds
+|----------------
+*/
+// $route['seed/users'] = 'UsersController/seed';
 
 // $route['(:any)'] = 'PageController/view/$1';
 

@@ -97,8 +97,8 @@ $route['dashboard'] = 'PageController/index';
 */
 $route['contacts']['get'] = 'ContactsController/index';
 
-$route['contacts/listing']['post']  = 'ContactsController/listing/';
-$route['contacts/listing']['get']  = 'ContactsController/listing/';
+$route['contacts/listing']['post']  = 'ContactsController/listing';
+$route['contacts/listing']['get']  = 'ContactsController/listing';
 
 $route['contacts/trash']['get']  = 'ContactsController/trash';
 $route['contacts/delete/(:num)']['delete']  = 'ContactsController/delete/$1';
@@ -176,6 +176,13 @@ $route['types/update/(:num)']['post']  = 'TypesController/update/$1';
 
 $route['types/import']['get']  = 'TypesController/import';
 $route['types/export']['get']  = 'TypesController/export';
+
+/*
+|----------------
+| # Messaging
+|----------------
+*/
+$route['messaging/inbox']['get'] = 'MessagesController/index';
 
 /*
 | ---------------

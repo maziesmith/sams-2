@@ -34,10 +34,7 @@
                                 <a data-action="clear-localstorage" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
                             </li>
                             <li>
-                                <a href=""><i class="zmdi zmdi-face"></i> Privacy Settings</a>
-                            </li>
-                            <li>
-                                <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
+                                <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
                             </li>
                         </ul>
                     </li>

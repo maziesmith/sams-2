@@ -5,7 +5,7 @@ class MY_Form_validation extends CI_form_validation
      * Constructor Method
      * @param type $config
      */
-    function MY_Form_validation($config = array()) {
+    function __construct($config = array()) {
         parent::__construct($config);
     }
 

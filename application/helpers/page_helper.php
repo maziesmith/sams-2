@@ -59,7 +59,7 @@ if ( ! function_exists('get_copyright'))
     function get_copyright($year, $copy=null)
     {
         $CI = get_instance();
-        if (null==$copy) $copy = 'Copyright &copy;' . $year . ($year < date('Y') ? ' - ' . date('Y') : '') . ' ';
+        if (null==$copy) $copy = 'Copyright &copy; ' . $year . ($year < date('Y') ? ' - ' . date('Y') : '') . ' ';
 
         $Headers = get_page_headers();
         $copy .= $Headers->Page_Title;

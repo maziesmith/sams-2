@@ -58,8 +58,7 @@ class ContactsController extends CI_Controller {
          * AJAX List of Data
          * Here we load the list of data in a table
          */
-        if( $this->input->is_ajax_request() )
-        {
+        if( $this->input->is_ajax_request() ) {
             $bootgrid_arr = [];
             $current      = $this->input->post('current');
             $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
@@ -146,8 +145,8 @@ class ContactsController extends CI_Controller {
 
     public function add()
     {
-        // if( $this->input->is_ajax_request() )
-        // {
+        if( $this->input->is_ajax_request() )
+        {
             /*
             | --------------------------------------
             | # Validation
@@ -195,11 +194,11 @@ class ContactsController extends CI_Controller {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
             }
 
-        // }
-        // else
-        // {
-        //     redirect( base_url('contacts') );
-        // }
+        }
+        else
+        {
+            redirect( base_url('contacts') );
+        }
     }
 
     /**

@@ -7,7 +7,7 @@ $(document).ready(function() {
     */
     init_group_table();
     init_add_group_table();
-    init_edit_group_contacts_table();
+    init_edit_group_members_table();
 
     /*
     | ----------------------------------
@@ -47,7 +47,7 @@ $(document).ready(function() {
             var add = {
                 type: form.method,
                 url: form.action,
-                data: $(form).serialize() + "&groups_contacts=" + $('#contacts-table-command-add').bootgrid('getSelectedRows'),
+                data: $(form).serialize() + "&groups_members=" + $('#members-table-command-add').bootgrid('getSelectedRows'),
                 success: function (data) {
                     data = JSON.parse(data);
                     resetWarningMessages('.form-group-validation');
@@ -118,7 +118,7 @@ $(document).ready(function() {
                 $.ajax({
                     type: 'POST',
                     url: $(form).attr('action') + '/' + groups_id,
-                    data: $(form).serialize() + "&groups_contacts=" + $('#contacts-table-command-edit').bootgrid('getSelectedRows'),
+                    data: $(form).serialize() + "&groups_members=" + $('#members-table-command-edit').bootgrid('getSelectedRows'),
                     success: function (data) {
                         data = JSON.parse(data);
                         // console.log(data);
@@ -184,7 +184,7 @@ $(document).ready(function() {
 
 function reload_group_table () {
     $('#group-table-command').bootgrid('reload');
-    $('.contacts-table-command').bootgrid('reload');
+    $('.members-table-command').bootgrid('reload');
 }
 
 function init_group_table()
@@ -287,7 +287,7 @@ function init_group_table()
                         $('select').trigger("chosen:updated");
                     });
 
-                    init_edit_group_contacts_table();
+                    init_edit_group_members_table();
                 }
             });
         });
@@ -333,9 +333,9 @@ function init_add_group_table () {
     | # Add
     | ------------------------------------
     */
-    $("#contacts-table-command-add").bootgrid({
+    $("#members-table-command-add").bootgrid({
         labels: {
-            noResults: 'No Contacts found',
+            noResults: 'No Members found',
         },
         css: {
             icon: 'zmdi icon',
@@ -355,7 +355,7 @@ function init_add_group_table () {
             // To accumulate custom parameter with the request object
             // request.customPost = 'anything';
             // console.log(request);
-            // request.selectedRows = $('.contacts-table-command').bootgrid('getSelectedRows');
+            // request.selectedRows = $('.members-table-command').bootgrid('getSelectedRows');
             // console.log('request');
             // console.log(request);
             return request;
@@ -364,7 +364,7 @@ function init_add_group_table () {
             console.log(response);
             return response;
         },
-        url: base_url('contacts/listing'),
+        url: base_url('members/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: false,
 
@@ -376,16 +376,16 @@ function init_add_group_table () {
     });
 }
 
-function init_edit_group_contacts_table()
+function init_edit_group_members_table()
 {
     /*
     | ------------------------------------
     | # Edit
     | ------------------------------------
     */
-    var contactsTableCommandEdit = $("#contacts-table-command-edit").bootgrid({
+    var membersTableCommandEdit = $("#members-table-command-edit").bootgrid({
         labels: {
-            noResults: 'No Contacts found',
+            noResults: 'No Members found',
         },
         css: {
             icon: 'zmdi icon',
@@ -396,8 +396,8 @@ function init_edit_group_contacts_table()
         },
         formatters: {
             commands: function (column, row) {
-                return  '<button type="button" data-toggle="tooltip" data-placement="top" title="Add to this Group" class="wave-effect btn btn-icon btn-xs command-add" data-row-id="' + row.contacts_id + '"><span class="zmdi zmdi-plus"></span></button> ' +
-                        '<button type="button" data-toggle="tooltip" data-placement="top" title="Remove from this Group" class="wave-effect btn btn-icon btn-xs command-delete" data-row-id="' + row.contacts_id + '"><span class="zmdi zmdi-close"></span></button> ';
+                return  '<button type="button" data-toggle="tooltip" data-placement="top" title="Add to this Group" class="wave-effect btn btn-icon btn-xs command-add" data-row-id="' + row.members_id + '"><span class="zmdi zmdi-plus"></span></button> ' +
+                        '<button type="button" data-toggle="tooltip" data-placement="top" title="Remove from this Group" class="wave-effect btn btn-icon btn-xs command-delete" data-row-id="' + row.members_id + '"><span class="zmdi zmdi-close"></span></button> ';
             }
         },
 
@@ -411,7 +411,7 @@ function init_edit_group_contacts_table()
             // To accumulate custom parameter with the request object
             return request;
         },
-        url: base_url( 'contacts/listing' ),
+        url: base_url( 'members/listing' ),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
 
         caseSensitive: false,
@@ -422,17 +422,17 @@ function init_edit_group_contacts_table()
         | # Add To List
         | -----------------------------------------------------------
         */
-        $("#contacts-table-command-edit").find(".command-add").on('click', function (e) {
+        $("#members-table-command-edit").find(".command-add").on('click', function (e) {
             e.preventDefault();
             var id   = $(this).parents('tr').data('row-id'),
-                name = $(this).parents('tr').find('td.contacts_name').text(),
-                url  = base_url('contacts/update/' + id),
+                name = $(this).parents('tr').find('td.members_name').text(),
+                url  = base_url('members/update/' + id),
                 value= $('#edit-group-form').find('[name=groups_id]').val();
             $(this).prop('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: { updating_group: 'contacts_group', value: value, action: 'add' },
+                data: { updating_groups: 'groups', value: value, action: 'add' },
                 success: function (data) {
                     console.log(data);
                     var data = $.parseJSON(data);
@@ -458,19 +458,20 @@ function init_edit_group_contacts_table()
         | # Delete From List
         | -----------------------------------------------------------
         */
-        $("#contacts-table-command-edit").find(".command-delete").on("click", function (e) {
+        $("#members-table-command-edit").find(".command-delete").on("click", function (e) {
             e.preventDefault();
             var id   = $(this).parents('tr').data('row-id'),
-                name = $(this).parents('tr').find('td.contacts_name').text(),
-                url  = base_url('contacts/update/' + id),
+                name = $(this).parents('tr').find('td.members_name').text(),
+                url  = base_url('members/update/' + id),
                 value= $('#edit-group-form').find('[name=groups_id]').val();
             $(this).prop('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
                 url: url,
-                data: { updating_group: 'contacts_group', value: value, action: 'remove' },
+                data: { updating_groups: 'groups', value: value, action: 'remove' },
                 success: function (data) {
                     var data = $.parseJSON(data);
+                    console.log(data);
                     reload_group_table();
                     if( 'error' == data.type )
                     {
@@ -482,6 +483,7 @@ function init_edit_group_contacts_table()
                     }
                 },
                 done: function (data) {
+                    console.log(data);
                     $(this).prop('disabled', '');
                 }
             });

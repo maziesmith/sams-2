@@ -2,9 +2,9 @@
     <div class="modal-dialog modal-fluid">
         <div class="modal-content">
 
-            <input id="group-edit-table-command-list" type="hidden" value="<?php echo base_url('contacts/listing') ?>">
+            <input id="group-edit-table-command-list" type="hidden" value="<?php echo base_url('members/listing') ?>">
             <input id="group-table-command-update-button" type="hidden" value="<?php echo base_url('groups/update') ?>">
-            <input id="contacts-table-command-update-button" type="hidden" value="<?php echo base_url('contacts/update') ?>">
+            <input id="members-table-command-update-button" type="hidden" value="<?php echo base_url('members/update') ?>">
 
             <?php echo form_open("groups/update", array('id'=>'edit-group-form', 'class'=>'m-t-25 card', 'method'=>'POST'), array('groups_id'=>'AJAX_CALL_ONLY')); ?>
                 <div class="card-header bgm-amber">
@@ -56,20 +56,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="modal-body">
-                            <p class="c-black f-500 m-b-10 text-uppercase"><strong>Group Contacts List</strong></p>
-                            <small>List of Contacts to Add / Remove in this Group</small>
+                            <p class="c-black f-500 m-b-10 text-uppercase"><strong>Group Members List</strong></p>
+                            <small>List of Members to Add / Remove in this Group</small>
                         </div>
                         <div class="row">
                             <div class="col-md-12 m-b-0">
                                 <div class="table-responsive">
-                                    <table id="contacts-table-command-edit" class="contacts-table-command table table-condensed table-vmiddle">
+                                    <table id="members-table-command-edit" class="members-table-command table table-condensed table-vmiddle">
                                         <thead>
                                             <tr>
                                                 <th data-column-id="count_id" data-sortable="false" data-type="numeric">#</th>
-                                                <th data-column-id="contacts_id" data-identifier="true" data-order="asc" data-visible="false">Contacts ID</th>
-                                                <th data-column-id="contacts_firstname">Name</th>
-                                                <th data-column-id="contacts_level" data-visible="false">Level</th>
-                                                <th data-column-id="contacts_group" data-css-class="group">Current Group</th>
+                                                <th data-column-id="id" data-identifier="true" data-order="asc" data-visible="false">Members ID</th>
+                                                <th data-column-id="fullname">Name</th>
+                                                <th data-column-id="level" data-visible="false">Level</th>
+                                                <th data-column-id="groups" data-css-class="group">Current Group</th>
                                                 <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th>
                                             </tr>
                                         </thead>

@@ -91,6 +91,34 @@ $route['users/export']['post']  = 'UsersController/export';
 $route['dashboard'] = 'PageController/index';
 
 /*
+|-----------------
+| # Members Route
+|-----------------
+*/
+$route['members']['get'] = 'MembersController/index';
+$route['members/listing']['post']  = 'MembersController/listing';
+$route['members/listing']['get']  = 'MembersController/listing';
+
+$route['members/trash']['get']  = 'MembersController/trash';
+$route['members/remove']['post']  = 'MembersController/remove';
+$route['members/remove/(:num)']['post']  = 'MembersController/remove/$1';
+$route['members/restore/(:num)']['post']  = 'MembersController/restore/$1';
+
+$route['members/delete']['post']  = 'MembersController/delete';
+$route['members/delete/(:num)']['delete']  = 'MembersController/delete/$1';
+
+$route['members/add']['post']  = 'MembersController/add';
+
+$route['members/edit/(:num)']['post']  = 'MembersController/edit/$1';
+$route['members/update/(:num)']['post']  = 'MembersController/update/$1';
+
+$route['members/import']['get']  = 'MembersController/import';
+$route['members/import']['post']  = 'MembersController/import';
+
+$route['members/export']['get']  = 'MembersController/export';
+$route['members/export']['post']  = 'MembersController/export';
+
+/*
 | ----------------
 | # Contacts Route
 | ----------------

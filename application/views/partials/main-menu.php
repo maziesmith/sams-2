@@ -3,7 +3,16 @@
         <?php echo anchor('', '<i class="zmdi zmdi-home"></i>Dashboard'); ?>
     </li>
     <li><hr></li>
-    <li class="sub-menu <?php echo check_link(['contacts', 'contacts/trash', 'contacts/import', 'contacts/export']) ?>">
+    <li class="sub-menu <?php echo check_link(['members', 'members/trash', 'members/import', 'members/export']) ?>">
+        <a role="button"><i class="zmdi zmdi-account-box"></i> Members</a>
+        <ul>
+            <li class="<?php echo check_link('members') ?>"><?php echo anchor( base_url('members'), 'All Members' ); ?></li>
+            <li class="<?php echo check_link('members/export') ?>"><?php echo anchor( base_url('members/export'), 'Export Members' ); ?></li>
+            <li class="<?php echo check_link('members/import') ?>"><?php echo anchor( base_url('members/import'), 'Import Members' ); ?></li>
+            <li class="<?php echo check_link('members/trash') ?>"><?php echo anchor( base_url('members/trash'), 'Trashed Members' ); ?></li>
+        </ul>
+    </li>
+    <!-- <li class="sub-menu <?php echo check_link(['contacts', 'contacts/trash', 'contacts/import', 'contacts/export']) ?>">
         <a role="button"><i class="zmdi zmdi-account-box"></i> Contacts</a>
         <ul>
             <li class="<?php echo check_link('contacts') ?>"><?php echo anchor( base_url('contacts'), 'All Contacts' ); ?></li>
@@ -11,7 +20,7 @@
             <li class="<?php echo check_link('contacts/import') ?>"><?php echo anchor( base_url('contacts/import'), 'Import Contacts' ); ?></li>
             <li class="<?php echo check_link('contacts/trash') ?>"><?php echo anchor( base_url('contacts/trash'), 'Trashed Contacts' ); ?></li>
         </ul>
-    </li>
+    </li> -->
     <li class="sub-menu <?php echo check_link(['groups', 'groups/import', 'groups/export']) ?>">
         <a role="button"><i class="zmdi zmdi-accounts"></i> Groups</a>
         <ul>

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <input type="hidden" id="group-add-table-command-list" value="<?php echo base_url('contacts/listing') ?>">
+            <input type="hidden" id="group-add-table-command-list" value="<?php echo base_url('members/listing') ?>">
 
             <?php echo form_open("groups/add", array('id'=>'add-new-group-form', 'class'=>'m-t-25 card')); ?>
                 <div class="card-header bgm-green">
@@ -51,19 +51,19 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Group Contacts</strong></p>
+                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Group Members</strong></p>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 m-b-0">
                         <div class="table-responsive">
-                            <table id="contacts-table-command-add" class="contacts-table-command table table-condensed table-vmiddle">
+                            <table id="members-table-command-add" class="members-table-command table table-condensed table-vmiddle">
                                 <thead>
                                     <tr>
                                         <th data-column-id="count_id" data-type="numeric" data-sortable="false">#</th>
-                                        <th data-column-id="contacts_id" data-order="asc" data-identifier="true" data-visible="false">Contacts ID</th>
-                                        <th data-column-id="contacts_firstname">Name</th>
-                                        <th data-column-id="contacts_level" data-visible="false">Level</th>
-                                        <th data-column-id="contacts_group">Current Group</th>
+                                        <th data-column-id="id" data-order="asc" data-identifier="true" data-visible="false">Members ID</th>
+                                        <th data-column-id="fullname">Name</th>
+                                        <th data-column-id="level" data-visible="false">Level</th>
+                                        <th data-column-id="groups">Current Group</th>
                                     </tr>
                                 </thead>
                                 <tbody>

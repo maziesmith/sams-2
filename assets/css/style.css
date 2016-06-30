@@ -224,6 +224,7 @@ ul.breadcrumb .active {
 | # Command Button Overrides
 | --------------------------
 */
+[class*="command-"],
 .command-edit, .command-delete,
 .command-print, .command-reload,
 .command-add {

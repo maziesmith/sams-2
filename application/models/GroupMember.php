@@ -43,6 +43,12 @@ class GroupMember extends CI_Model {
         return $query->row();
     }
 
+    public function lookup($column_name, $column_value)
+    {
+        $query = $this->db->where($column_name, $column_value)->get($this->table);
+        return $query;
+    }
+
     public function like($wildcard='', $start_from=0, $limit=0, $sort=null)
     {
         $first = ''; $last='';
@@ -96,6 +102,19 @@ class GroupMember extends CI_Model {
         }
 
         $this->db->where($this->column_id, $id);
+        $this->db->delete($this->table);
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function delete_member($id)
+    {
+        if( is_array($id) )
+        {
+          $this->db->where_in('member_id', $id)->delete($this->table);
+          return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where('member_id', $id);
         $this->db->delete($this->table);
         return $this->db->affected_rows() > 0;
     }

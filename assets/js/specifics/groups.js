@@ -121,21 +121,19 @@ $(document).ready(function() {
                     data: $(form).serialize() + "&groups_members=" + $('#members-table-command-edit').bootgrid('getSelectedRows'),
                     success: function (data) {
                         data = JSON.parse(data);
-                        // console.log(data);
+                        console.log(data);
                         resetWarningMessages('.form-group-validation');
-                        if( data.type != 'success' )
-                        {
+                        if( data.type != 'success' ) {
                             var errors = data.message;
                             $.each(errors, function (k, v) {
                                 $('#edit-group-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
                             });
-                        }
-                        else
-                        {
+                        } else {
                             $('#edit-group-form').find('button[name=groups_close]').delay(900).queue(function(next){ $(this).click(); next(); });
                             notify(data.message, data.type, 9000);
                             reload_group_table();
                         }
+                        init_edit_group_members_table();
                     },
                 });
             }
@@ -150,7 +148,7 @@ $(document).ready(function() {
         e.preventDefault();
         swal({
             title: "Are you sure?",
-            text: "The selected Groups will be deleted permanently from your record",
+            text: "The selected Groups will be removed from your record",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -159,12 +157,12 @@ $(document).ready(function() {
         }, function(){
             $.ajax({
                 type: 'POST',
-                url: base_url('groups/delete'),
+                url: base_url('groups/remove'),
                 data: {'groups_ids[]': $('#group-table-command').bootgrid('getSelectedRows')},
                 success: function (data) {
                     var data = $.parseJSON(data);
                     reload_group_table();
-                    swal("Deleted", data.message, data.type);
+                    swal("Removed", data.message, data.type);
                     $('#delete-group-btn').removeClass('show');
                 },
             });
@@ -300,25 +298,25 @@ function init_group_table()
         groupTable.find(".command-delete").on("click", function (e) {
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.groups_name').text(),
-                url  = base_url('groups/delete/') + '/' + id;
+                url  = base_url('groups/remove/') + '/' + id;
             e.preventDefault();
             swal({
                 title: "Are you sure?",
-                text: name + " will be deleted permanently from your groups",
+                text: name + " will be trashed",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Delete",
+                confirmButtonText: "Remove",
                 closeOnConfirm: false
             }, function(){
                 // on deleting button
                 $.ajax({
-                    type: 'DELETE',
+                    type: 'POST',
                     url: url,
                     success: function (data) {
                         var data = $.parseJSON(data);
                         reload_group_table();
-                        swal("Deleted", data.message, data.type);
+                        swal("Removed", data.message, data.type);
                     }
                 });
             });
@@ -410,6 +408,19 @@ function init_edit_group_members_table()
         {
             // To accumulate custom parameter with the request object
             return request;
+        },
+        responseHandler: function (response)
+        {
+            // To accumulate custom parameter with the response object
+            // console.log("RESPONSE", response);
+            // var members = response.rows;
+            // // members = $.parseJSON(members);
+            // for (var i = 0; i < members.length; i++) {
+            //     membersTableCommandEdit.find('tr[data-row-id="'+members[i].id+'"]').toggleClass('active').attr('aria-selected', true);
+            //     membersTableCommandEdit.find('tr[data-row-id="'+members[i].id+'"] td.select-cell input[name=select]').val(1);
+            //     console.log(members[i].id);
+            // }
+            return response;
         },
         url: base_url( 'members/listing' ),
         rowCount: [5, 10, 20, 30, 50, 100, -1],

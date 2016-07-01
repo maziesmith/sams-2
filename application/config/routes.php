@@ -161,6 +161,11 @@ $route['groups']  = 'GroupsController/index';
 
 $route['groups/listing']['post']  = 'GroupsController/listing';
 
+$route['groups/trash']['get']  = 'GroupsController/trash';
+$route['groups/remove']['post']  = 'GroupsController/remove';
+$route['groups/remove/(:num)']['post']  = 'GroupsController/remove/$1';
+$route['groups/restore/(:num)']['post']  = 'GroupsController/restore/$1';
+
 $route['groups/delete/(:num)']['delete']  = 'GroupsController/delete/$1';
 $route['groups/delete']['post']  = 'GroupsController/delete';
 

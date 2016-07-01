@@ -1,5 +1,10 @@
 <section id="content">
     <div class="container">
+
+        <div class="toolbar-group text-right">
+            <a href="<?php echo base_url('groups/trash'); ?>" class="btn btn-danger btn-link toolbar-item"><i class="fa fa-trash">&nbsp;</i>Trash</a>
+        </div>
+
         <div class="card">
 
             <?php echo breadcrumbs(); ?>

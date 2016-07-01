@@ -27,7 +27,7 @@ class AuthController extends CI_Controller {
      */
     public function index($message = null)
     {
-        $this->Data['message'] = $this->session->error;
+        $this->Data['message'] = $this->session->flashdata('error');
         return $this->load->view('auth/login', $this->Data);
     }
 
@@ -52,7 +52,7 @@ class AuthController extends CI_Controller {
             redirect('dashboard');
         }
 
-        $this->session->set_userdata('error', "Invalid credentials");
+        $this->session->set_flashdata('error', "Invalid credentials");
         redirect('login');
     }
 

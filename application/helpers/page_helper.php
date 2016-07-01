@@ -130,6 +130,7 @@ if ( ! function_exists('dropdown_list'))
         $a = [];
 
         if($first_value_is_blank) $a[''] = $first_value_text;
+        else $a[$first_value_is_blank] = $first_value_text;
         foreach ($array as $v) {
             $a[ $v[ $key_array[0] ] ] = $v[ $key_array[1] ];
         }

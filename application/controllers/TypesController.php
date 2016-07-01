@@ -31,7 +31,7 @@ class TypesController extends CI_Controller {
 
     public function validated()
     {
-        $this->session->set_userdata('error', "You are not logged in");
+        $this->session->set_flashdata('error', "You are not logged in");
         if(!$this->session->userdata('validated')) redirect('login');
     }
 

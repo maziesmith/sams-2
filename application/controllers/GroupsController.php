@@ -11,7 +11,8 @@ class GroupsController extends CI_Controller {
         $this->validated();
 
         $this->load->model('Group', '', TRUE);
-        $this->load->model('Contact', '', TRUE);
+        $this->load->model('Member', '', TRUE);
+        $this->load->model('GroupMember', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -31,7 +32,7 @@ class GroupsController extends CI_Controller {
 
     public function validated()
     {
-        $this->session->set_userdata('error', "You are not logged in");
+        $this->session->set_flashdata('error', "You are not logged in");
         if(!$this->session->userdata('validated')) redirect('login');
     }
 
@@ -111,8 +112,7 @@ class GroupsController extends CI_Controller {
             | # Validation
             | --------------------------------------
             */
-            if( $this->Group->validate(true) )
-            {
+            if( $this->Group->validate(true) ) {
                 /*
                 | --------------------------------------
                 | # Save
@@ -123,36 +123,46 @@ class GroupsController extends CI_Controller {
                     'groups_description'   => $this->input->post('groups_description'),
                     'groups_code'     => $this->input->post('groups_code')
                 );
-                $group_id = $this->Group->insert($group);
+                $this->Group->insert($group);
+                $group_id = $this->db->insert_id();
                 /*
                 | --------------------------------------
-                | # Save the Contacts Groups
+                | # Save the Members Groups
                 | --------------------------------------
                 */
-                if( null !== $this->input->post('groups_contacts') && $contacts_ids = $this->input->post('groups_contacts') )
+                if( null !== $this->input->post('groups_members') && $members_ids = $this->input->post('groups_members') )
                 {
-                    $groups_contacts = explode(",", $contacts_ids);
-                    foreach ($groups_contacts as $contact_id) {
-                        $contact = $this->Contact->find($contact_id);
-                        $contact_group = explode( ",", $contact->contacts_group);
+                    $groups_members = explode(",", $members_ids);
+                    foreach ($groups_members as $member_id) {
+                        $member = $this->Member->find($member_id);
+                        $member_group = explode( ",", $member->groups);
 
                         # Check if the value is already in the resource,
                         # add to array if not.
-                        if( !in_array($group_id, $contact_group) ) {
-                            $contact_group[] = $group_id;
+                        if( !in_array($group_id, $member_group) ) {
+                            $member_group[] = $group_id;
                         } else {
                             $data = array(
-                                'message' => 'Contact is already in this group',
+                                'message' => 'Member is already in this group',
                                 'type' => 'danger',
-                                // 'debug' => $contact_group,
+                                // 'debug' => $member_group,
                                 // "input" => $this->input->post('value'),
                             );
                             echo json_encode( $data );
                             exit();
                         }
 
-                        $contact_group = arraytoimplode($contact_group);
-                        $this->Contact->update($contact_id, array('contacts_group'=> $contact_group));
+                        $member_group = arraytoimplode($member_group);
+                        $this->Member->update($member_id, array('groups'=> $member_group));
+
+                    }
+
+                    # Add data to group_members
+                    foreach ($groups_members as $member_id) {
+                        $this->GroupMember->insert( array(
+                            'group_id' => $group_id,
+                            'member_id' => $member_id,
+                        ) );
                     }
                 }
 
@@ -166,9 +176,7 @@ class GroupsController extends CI_Controller {
                     'type'    => 'success'
                 );
                 echo json_encode( $data ); exit();
-            }
-            else
-            {
+            } else {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
             }
 
@@ -203,7 +211,7 @@ class GroupsController extends CI_Controller {
             | # Debug
             | -------------------------------------
             */
-            // $data['message'] = $this->input->post('groups_contacts');
+            // $data['message'] = $this->input->post('groups_members');
             // $data['type'] = 'success';
             // echo json_encode($data); exit();
             /*
@@ -226,16 +234,28 @@ class GroupsController extends CI_Controller {
                 $this->Group->update($id, $group);
                 /*
                 | --------------------------------------
-                | # Update the Contacts Groups
+                | # Update the Members Groups
                 | --------------------------------------
                 */
-                if( null !== $this->input->post('groups_contacts') && $contacts_ids = $this->input->post('groups_contacts') )
+                if( null !== $this->input->post('groups_members') && $members_ids = $this->input->post('groups_members') )
                 {
-                    $groups_contacts = explode(",", $contacts_ids);
+                    $groups_members = explode(",", $members_ids);
 
-                    foreach ($groups_contacts as $contact_id) {
-                        $this->Contact->update($contact_id, array('contacts_group'=> $id));
+                    foreach ($groups_members as $member_id) {
+                        $this->Member->update($member_id, array('groups'=> $id));
+
+                        /*
+                        |---------------------------
+                        | # Update the group_members
+                        |---------------------------
+                        */
+                        $this->GroupMember->remove_member($member_id);
+                        $this->GroupMember->insert( array(
+                            'group_id' => $id,
+                            'member_id' => $member_id,
+                        ) );
                     }
+
                 }
 
                 $data = array(
@@ -271,14 +291,14 @@ class GroupsController extends CI_Controller {
 
                     /*
                     | --------------------------------
-                    | # Update Many Contacts
+                    | # Update Many Members
                     | --------------------------------
-                    | All Contacts with this Groups ID
+                    | All Members with this Groups ID
                     */
-                    foreach ($ids as $contacts_id) {
-                        $contacts = $this->Contact->where(['contacts_group'=>$contacts_id])->get()->result_array();
-                        foreach ($contacts as $contact) {
-                            $this->Contact->update($contact['contacts_id'], ['contacts_group'=>'']);
+                    foreach ($ids as $members_id) {
+                        $members = $this->Member->where(['groups'=>$members_id])->get()->result_array();
+                        foreach ($members as $member) {
+                            $this->Member->update($member['members_id'], ['groups'=>'']);
                         }
                     }
                 }
@@ -299,13 +319,13 @@ class GroupsController extends CI_Controller {
 
                 /*
                 | --------------------------------
-                | # Update Contacts
+                | # Update Members
                 | --------------------------------
-                | All Contacts with this Groups ID
+                | All Members with this Groups ID
                 */
-                $contacts = $this->Contact->where(['contacts_group'=>$id])->get()->result_array();
-                foreach ($contacts as $contact) {
-                    $this->Contact->update($contact['contacts_id'], ['contacts_group'=>'']);
+                $members = $this->Member->where(['groups'=>$id])->get()->result_array();
+                foreach ($members as $member) {
+                    $this->Member->update($member['members_id'], ['groups'=>'']);
                 }
 
 

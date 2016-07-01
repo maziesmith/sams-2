@@ -395,10 +395,10 @@ function init_edit_group_members_table()
             iconUp: 'zmdi-expand-less',
         },
         formatters: {
-            commands: function (column, row) {
-                return  '<button type="button" data-toggle="tooltip" data-placement="top" title="Add to this Group" class="wave-effect btn btn-icon btn-xs command-add" data-row-id="' + row.members_id + '"><span class="zmdi zmdi-plus"></span></button> ' +
-                        '<button type="button" data-toggle="tooltip" data-placement="top" title="Remove from this Group" class="wave-effect btn btn-icon btn-xs command-delete" data-row-id="' + row.members_id + '"><span class="zmdi zmdi-close"></span></button> ';
-            }
+            // commands: function (column, row) {
+            //     // return  '<button type="button" data-toggle="tooltip" data-placement="top" title="Add to this Group" class="wave-effect btn btn-icon btn-xs command-add" data-row-id="' + row.members_id + '"><span class="zmdi zmdi-plus"></span></button> ' +
+            //             // '<button type="button" data-toggle="tooltip" data-placement="top" title="Remove from this Group" class="wave-effect btn btn-icon btn-xs command-delete" data-row-id="' + row.members_id + '"><span class="zmdi zmdi-close"></span></button> ';
+            // }
         },
 
         ajax: true,
@@ -415,6 +415,9 @@ function init_edit_group_members_table()
         rowCount: [5, 10, 20, 30, 50, 100, -1],
 
         caseSensitive: false,
+        keepSelection: true,
+        selection: true,
+        multiSelect: true,
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
         /*
@@ -465,6 +468,7 @@ function init_edit_group_members_table()
                 url  = base_url('members/update/' + id),
                 value= $('#edit-group-form').find('[name=groups_id]').val();
             $(this).prop('disabled', 'disabled');
+            $(this).attr('disabled', true);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -473,18 +477,16 @@ function init_edit_group_members_table()
                     var data = $.parseJSON(data);
                     console.log(data);
                     reload_group_table();
-                    if( 'error' == data.type )
-                    {
+                    if( 'error' == data.type ) {
                         swal('Error', data.message, data.type);
-                    }
-                    else
-                    {
+                    } else {
                         notify(data.message, data.type);
                     }
                 },
                 done: function (data) {
                     console.log(data);
                     $(this).prop('disabled', '');
+                    $(this).removeAttr('disabled');
                 }
             });
         });

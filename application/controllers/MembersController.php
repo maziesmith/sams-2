@@ -34,7 +34,7 @@ class MembersController extends CI_Controller {
 
     public function validated()
     {
-        $this->session->set_userdata('error', "You are not logged in");
+        $this->session->set_flashdata('error', "You are not logged in");
         if(!$this->session->userdata('validated')) redirect('login');
     }
 
@@ -234,6 +234,7 @@ class MembersController extends CI_Controller {
                 # add to array if not.
                 if( !in_array($this->input->post('value'), $member_groups) ) {
                     $member_groups[] = $this->input->post('value');
+
                 } else {
                     $data = array(
                         'message' => 'Member is already in this groups',
@@ -274,9 +275,15 @@ class MembersController extends CI_Controller {
             $this->Member->update($id, $member_data);
 
             # Also Update the group_members table
-            $groups_ids = explodetoarray($member_groups);
-            $group_id = $this->input->post('value');
-            $member_id = $id;
+            // $groups_ids = explodetoarray($member_groups);
+            // $group_id = $this->input->post('value');
+            // $member_id = $id;
+            // foreach ($groups_ids as $single_group_id) {
+            //     $this->GroupMember->insert( array(
+            //         'group_id' => $single_group_id,
+            //         'member_id' => $member_id
+            //     ) );
+            // }
 
 
             # Response
@@ -647,7 +654,7 @@ class MembersController extends CI_Controller {
         }
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/membersExport.js').'"></script>';
-        $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], 'No Level');
+        $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], 'All Levels', "0");
         $this->load->view('layouts/main', $this->Data);
     }
 }

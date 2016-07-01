@@ -119,6 +119,13 @@ $route['members/export']['get']  = 'MembersController/export';
 $route['members/export']['post']  = 'MembersController/export';
 
 /*
+|-----------------
+| # Group Members
+|-----------------
+*/
+// $route['group-members/update/(:num)']['post']  = 'GroupMembersController/update/$1';
+
+/*
 | ----------------
 | # Contacts Route
 | ----------------

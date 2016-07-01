@@ -209,6 +209,7 @@ class Member extends CI_Model {
         if($all) return $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'")->get($this->table);
         $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'");
         $this->db->where($this->column_softDelete, NULL);
-        return $this->db->where('level', $level)->get($this->table);
+        if( null != $level && 0 != $level ) $this->db->where('level', $level);
+        return $this->db->get($this->table);
     }
 }

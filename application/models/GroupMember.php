@@ -100,5 +100,12 @@ class GroupMember extends CI_Model {
         return $this->db->affected_rows() > 0;
     }
 
+    public function remove_member($member_id)
+    {
+        $this->db->where('member_id', $member_id);
+        $this->db->delete($this->table);
+        return $this->db->affected_rows() > 0;
+    }
+
 }
  ?>

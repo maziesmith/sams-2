@@ -70,7 +70,7 @@
                                                 <th data-column-id="fullname">Name</th>
                                                 <th data-column-id="level" data-visible="false">Level</th>
                                                 <th data-column-id="groups" data-css-class="group">Current Group</th>
-                                                <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th>
+                                                <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>

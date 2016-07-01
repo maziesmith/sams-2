@@ -67,7 +67,7 @@ class MembersController extends CI_Controller {
             $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
             $removed_only = null != $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
-            $total        = $this->Member->get_all()->num_rows();
+            $total        = $this->Member->get_all(0, 0, null, $removed_only)->num_rows();
 
             if( null != $wildcard ) {
                 $members = $this->Member->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
@@ -234,7 +234,6 @@ class MembersController extends CI_Controller {
                 # add to array if not.
                 if( !in_array($this->input->post('value'), $member_groups) ) {
                     $member_groups[] = $this->input->post('value');
-
                 } else {
                     $data = array(
                         'message' => 'Member is already in this groups',
@@ -274,17 +273,13 @@ class MembersController extends CI_Controller {
             # Update
             $this->Member->update($id, $member_data);
 
-            # Also Update the group_members table
-            // $groups_ids = explodetoarray($member_groups);
-            // $group_id = $this->input->post('value');
-            // $member_id = $id;
-            // foreach ($groups_ids as $single_group_id) {
-            //     $this->GroupMember->insert( array(
-            //         'group_id' => $single_group_id,
-            //         'member_id' => $member_id
-            //     ) );
-            // }
-
+            # Update the group_members
+            $group_ids = explodetoarray($member_groups);
+            $members_groups = $this->GroupMember->lookup('member_id', $id)->result_array();
+            $this->GroupMember->delete_member($id);
+            foreach ($group_ids as $group_id) {
+                $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $id ) );
+            }
 
             # Response
             $data = array(
@@ -442,6 +437,14 @@ class MembersController extends CI_Controller {
                 'groups' => arraytoimplode( $this->input->post('groups') ),
             );
             $this->Member->update($id, $member);
+
+            # Update the group_members
+            $group_ids = $this->input->post('groups');
+            $members_groups = $this->GroupMember->lookup('member_id', $id)->result_array();
+            $this->GroupMember->delete_member($id);
+            foreach ($group_ids as $group_id) {
+                $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $id ) );
+            }
 
             # Response
             $data = array(

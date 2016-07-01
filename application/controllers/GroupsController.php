@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class GroupsController extends CI_Controller {
 
     private $Data = array();
+    private $user_id = 0;
 
     public function __construct()
     {
@@ -13,6 +14,8 @@ class GroupsController extends CI_Controller {
         $this->load->model('Group', '', TRUE);
         $this->load->model('Member', '', TRUE);
         $this->load->model('GroupMember', '', TRUE);
+
+        $this->user_id = $this->session->userdata('id');
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -62,16 +65,17 @@ class GroupsController extends CI_Controller {
             $start_from   = ($page-1) * $limit;
             $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
-            $total        = $this->Group->get_all()->num_rows();
+            $removed_only = null != $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
+            $total        = $this->Group->get_all(0, 0, null, $removed_only)->num_rows();
 
             if( null != $wildcard )
             {
-                $groups = $this->Group->like($wildcard, $start_from, $limit, $sort)->result_array();
-                $total  = $this->Group->like($wildcard)->num_rows();
+                $groups = $this->Group->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
+                $total  = $this->Group->like($wildcard, 0, 0, null, $removed_only)->num_rows();
             }
             else
             {
-                $groups = $this->Group->get_all($start_from, $limit, $sort)->result_array();
+                $groups = $this->Group->get_all($start_from, $limit, $sort, $removed_only)->result_array();
             }
 
             foreach ($groups as $key => $group) {
@@ -97,16 +101,7 @@ class GroupsController extends CI_Controller {
 
     public function add()
     {
-        if( $this->input->is_ajax_request() )
-        {
-            /*
-            | -------------------------------------
-            | # Debug
-            | -------------------------------------
-            */
-            // $data['message'] = $this->input->post();
-            // $data['type'] = 'success';
-            // echo json_encode($data); exit();
+        if( $this->input->is_ajax_request() ) {
             /*
             | --------------------------------------
             | # Validation
@@ -119,9 +114,10 @@ class GroupsController extends CI_Controller {
                 | --------------------------------------
                 */
                 $group = array(
-                    'groups_name'    => $this->input->post('groups_name'),
-                    'groups_description'   => $this->input->post('groups_description'),
-                    'groups_code'     => $this->input->post('groups_code')
+                    'groups_name'           => $this->input->post('groups_name'),
+                    'groups_description'    => $this->input->post('groups_description'),
+                    'groups_code'           => $this->input->post('groups_code'),
+                    'created_by'            => $this->user_id,
                 );
                 $this->Group->insert($group);
                 $group_id = $this->db->insert_id();
@@ -180,9 +176,7 @@ class GroupsController extends CI_Controller {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
             }
 
-        }
-        else
-        {
+        } else {
             redirect( base_url('groups') );
         }
     }
@@ -204,23 +198,13 @@ class GroupsController extends CI_Controller {
 
     public function update($id)
     {
-        if( $this->input->is_ajax_request() )
-        {
-            /*
-            | -------------------------------------
-            | # Debug
-            | -------------------------------------
-            */
-            // $data['message'] = $this->input->post('groups_members');
-            // $data['type'] = 'success';
-            // echo json_encode($data); exit();
+        if( $this->input->is_ajax_request() ) {
             /*
             | --------------------------------------
             | # Validation
             | --------------------------------------
             */
-            if( $this->Group->validate(false, $id, $this->input->post('groups_code')) )
-            {
+            if( $this->Group->validate(false, $id, $this->input->post('groups_code')) ) {
                 /*
                 | --------------------------------------
                 | # Update
@@ -229,46 +213,82 @@ class GroupsController extends CI_Controller {
                 $group = array(
                     'groups_name'    => $this->input->post('groups_name'),
                     'groups_description'   => $this->input->post('groups_description'),
-                    'groups_code'     => $this->input->post('groups_code')
+                    'groups_code'     => $this->input->post('groups_code'),
+                    'updated_by' => $this->user_id,
                 );
                 $this->Group->update($id, $group);
-                /*
-                | --------------------------------------
-                | # Update the Members Groups
-                | --------------------------------------
-                */
-                if( null !== $this->input->post('groups_members') && $members_ids = $this->input->post('groups_members') )
-                {
-                    $groups_members = explode(",", $members_ids);
 
-                    foreach ($groups_members as $member_id) {
-                        $this->Member->update($member_id, array('groups'=> $id));
-
-                        /*
-                        |---------------------------
-                        | # Update the group_members
-                        |---------------------------
-                        */
-                        $this->GroupMember->remove_member($member_id);
-                        $this->GroupMember->insert( array(
-                            'group_id' => $id,
-                            'member_id' => $member_id,
-                        ) );
-                    }
-
+                # Update the group_members
+                $members_ids = explodetoarray($this->input->post('groups_members'));
+                $group_members = $this->GroupMember->lookup('group_id', $id)->result_array();
+                $this->GroupMember->delete($id);
+                foreach ($members_ids as $member_id) {
+                    $this->GroupMember->insert( array('group_id' => $id, 'member_id' => $member_id ) );
                 }
 
                 $data = array(
                     'message' => 'Group was successfully updated',
-                    'type' => 'success'
+                    'type' => 'success',
+                    'debug' => $this->input->post('groups_members'),
                 );
                 echo json_encode( $data );
                 exit();
-            }
-            else
-            {
+            } else {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
             }
+        }
+    }
+
+    public function trash()
+    {
+        $this->Data['members'] = $this->Group->all(true);
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/groupsTrash.js').'"></script>';
+        $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function remove($id=null)
+    {
+        $remove_many = 0;
+        if( null === $id ) $remove_many = 1;
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->Group->remove($id) ) {
+            if( 1 == $remove_many ) {
+                $data['message'] = 'Groups were successfully removed';
+            } else {
+                $data['message'] = 'Group was successfully removed';
+            }
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while removing the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('members');
+        }
+    }
+
+    public function restore($id=null)
+    {
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->Group->restore($id) ) {
+            $data['message'] = 'Group was successfully restored';
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while trying to restore the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('members');
         }
     }
 

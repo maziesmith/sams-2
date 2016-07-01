@@ -6,6 +6,9 @@ class Group extends CI_Model {
 
     private $table = 'groups';
     private $column_id = 'groups_id';
+    private $column_softDelete = 'removed_at';
+    private $column_softDeletedBy = 'removed_by';
+
     public $validate = array(
         array( 'field' => 'groups_name', 'label' => 'Group Name', 'rules' => 'required|trim' ),
         array( 'field' => 'groups_code', 'label' => 'Code', 'rules' => 'trim' ),
@@ -61,13 +64,14 @@ class Group extends CI_Model {
         return $this->db;
     }
 
-    public function all()
+    public function all($removed_only=false)
     {
-        $query = $this->db->get($this->table);
+        if( $removed_only ) return $this->db->where($this->column_softDelete ." != ", NULL)->get($this->table)->result();
+        $query = $this->db->where($this->column_softDelete, NULL)->get($this->table);
         return $query->result();
     }
 
-    public function get_all($start_from=0, $limit=0, $sort=null)
+    public function get_all($start_from=0, $limit=0, $sort=null, $removed_only=false)
     {
         if( null != $sort )
         {
@@ -78,7 +82,8 @@ class Group extends CI_Model {
 
         $this->db->limit( $limit, $start_from );
 
-        return $this->db->get($this->table);
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " != ", NULL)->get($this->table);
+        return $this->db->where($this->column_softDelete, NULL)->get($this->table);
     }
 
     public function find($id)
@@ -93,7 +98,7 @@ class Group extends CI_Model {
         return $query->row();
     }
 
-    public function like($wildcard='', $start_from=0, $limit=0, $sort=null)
+    public function like($wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)
     {
         $first = ''; $last='';
         if(preg_match('/\s/', $wildcard))
@@ -118,7 +123,8 @@ class Group extends CI_Model {
 
         $this->db->limit( $limit, $start_from );
 
-        return $this->db->get();
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->get();
+        return $this->db->where($this->column_softDelete, NULL)->get();
     }
 
     public function dropdown_list($select)
@@ -138,6 +144,30 @@ class Group extends CI_Model {
         $this->db->where($this->column_id, $id);
         $this->db->update($this->table, $data);
         return true;
+    }
+
+    public function remove($id)
+    {
+        if( is_array($id) ) {
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
+            return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function restore($id)
+    {
+        if( is_array($id) ) {
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
+            return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
+        return $this->db->affected_rows() > 0;
     }
 
     public function delete($id)

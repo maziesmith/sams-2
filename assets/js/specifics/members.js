@@ -373,7 +373,7 @@ function init_table() {
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Delete",
+                confirmButtonText: "Remove",
                 closeOnConfirm: false
             }, function(){
                 // on deleting button

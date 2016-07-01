@@ -447,8 +447,12 @@ class MembersController extends CI_Controller {
             $group_ids = $this->input->post('groups');
             $members_groups = $this->GroupMember->lookup('member_id', $id)->result_array();
             $this->GroupMember->delete_member($id);
-            foreach ($group_ids as $group_id) {
-                $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $id ) );
+            if( null !== $group_ids ) {
+                foreach ($group_ids as $group_id) {
+                    $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $id ) );
+                }
+            } else {
+                $this->GroupMember->delete_member($id);
             }
 
             # Response

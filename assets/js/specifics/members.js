@@ -351,6 +351,9 @@ function init_table() {
                     var member = $.parseJSON(data);
                     $('#edit-member').modal("show");
                     var _form = $('#edit-member-form');
+                    _form[0].reset();
+                    reload_selectpickers();
+                    _form.find('[name=firstname]').focus();
 
                     $.each(member, function (k, v) {
                         _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');

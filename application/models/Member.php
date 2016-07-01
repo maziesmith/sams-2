@@ -77,6 +77,8 @@ class Member extends CI_Model {
 
     public function find($id)
     {
+        if( is_array($id) ) return $this->db->where_in($this->column_id, $id)->get($this->table);
+
         $query = $this->db->where($this->column_id, $id)->get($this->table);
         return $query->row();
     }

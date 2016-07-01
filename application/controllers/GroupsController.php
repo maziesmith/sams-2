@@ -218,18 +218,38 @@ class GroupsController extends CI_Controller {
                 );
                 $this->Group->update($id, $group);
 
-                # Update the group_members
-                $members_ids = explodetoarray($this->input->post('groups_members'));
-                $group_members = $this->GroupMember->lookup('group_id', $id)->result_array();
-                $this->GroupMember->delete($id);
-                foreach ($members_ids as $member_id) {
-                    $this->GroupMember->insert( array('group_id' => $id, 'member_id' => $member_id ) );
+                # Update the members.groups
+                $members = $this->Member->find( explodetoarray($this->input->post('groups_members')) );
+                foreach ($members->result_array() as $member) {
+                    $member_groups = [];
+                    if(!empty($member['groups'])) $member_groups = explode(",", $member['groups']);
+
+                    if( !in_array($id, $member_groups) ) {
+                        $member_groups[] = $id;
+                    }
+
+                    $member_groups = arraytoimplode($member_groups); // implode to string
+                    # Update the member
+                    $this->Member->update($member['id'], array(
+                        'groups' => $member_groups,
+                        'updated_by' => $this->user_id,
+                    ));
+
+                    # Update the group_members
+                    $group_ids = explodetoarray($member_groups);
+                    // $members_groups = $this->GroupMember->lookup('member_id', $id)->result_array();
+                    $this->GroupMember->delete_member($member['id']);
+                    foreach ($group_ids as $group_id) {
+                        $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $member['id'] ) );
+                    }
                 }
+
 
                 $data = array(
                     'message' => 'Group was successfully updated',
                     'type' => 'success',
-                    'debug' => $this->input->post('groups_members'),
+                    // 'debug' => $mem,
+                    'debug-2' => $members->result_array()[0]['id'],
                 );
                 echo json_encode( $data );
                 exit();

@@ -15,8 +15,10 @@ $(document).ready(function() {
     | ----------------------------------
     | # Validate | Submit
     */
-    $('#add-new-type-btn').click(function () {
+    $('#add-new-type-btn').on('click', function () {
        init_add_type_table();
+       $('#add-new-type-form')[0].reset();
+       $('#add-new-type-form [name=types_name]').focus();
     });
     var $typeForm = $('#add-new-type-form').validate({
         rules: {
@@ -51,17 +53,14 @@ $(document).ready(function() {
                 success: function (data) {
                     data = JSON.parse(data);
                     resetWarningMessages('.form-type-validation');
-                    if( data.type !== 'success' )
-                    {
+                    if( data.type !== 'success' ) {
                         var errors = data.message;
 
                         $.each(errors, function (k, v) {
                             $('#add-new-type-form').find('input[name='+k+'], select[name='+k+']').parents('.form-type-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
                             console.log(k,v);
                         });
-                    }
-                    else
-                    {
+                    } else {
                         // console.log(data);
                         notify(data.message, data.type, 9000);
                         $('#add-new-type-form')[0].reset();
@@ -335,7 +334,7 @@ function init_add_type_table () {
     */
     $("#contacts-table-command-add").bootgrid({
         labels: {
-            noResults: 'No Contacts found',
+            noResults: 'No Members found',
         },
         css: {
             icon: 'zmdi icon',
@@ -385,7 +384,7 @@ function init_edit_type_contacts_table()
     */
     var contactsTableCommandEdit = $("#contacts-table-command-edit").bootgrid({
         labels: {
-            noResults: 'No Contacts found',
+            noResults: 'No Members found',
         },
         css: {
             icon: 'zmdi icon',

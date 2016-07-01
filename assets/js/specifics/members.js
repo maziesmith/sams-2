@@ -15,6 +15,11 @@ $(document).ready(function(){
     | --------------------------------------------
     | # Validate | Submit
     */
+    $('#add-new-member-btn').on('click', function (e) {
+        $('#add-new-member-form')[0].reset();
+        reload_selectpickers();
+        $('#add-new-member-form [name=firstname]').focus();
+    })
     var $memberForm = $('#add-new-member-form').validate({
         rules: {
             firstname: 'required',

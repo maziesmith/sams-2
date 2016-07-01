@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MembersController extends CI_Controller {
 
     private $Data = array();
+    private $user_id = 0;
 
     public function __construct()
     {
@@ -15,6 +16,8 @@ class MembersController extends CI_Controller {
         $this->load->model('GroupMember', '', TRUE);
         $this->load->model('Level', '', TRUE);
         $this->load->model('Type', '', TRUE);
+
+        $this->user_id = $this->session->userdata('id');
 
         $this->Data['Headers'] = get_page_headers();
 
@@ -46,9 +49,9 @@ class MembersController extends CI_Controller {
     public function index()
     {
         $this->Data['members'] = $this->Member->all();
-        $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], 'No Group');
-        $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], 'No Level');
-        $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], 'No Type');
+        $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], '', false);
+        $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], '', false);
+        $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], '', false);
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -162,6 +165,7 @@ class MembersController extends CI_Controller {
                 'msisdn'       => $this->input->post('msisdn'),
                 'email'        => $this->input->post('email'),
                 'groups'        => arraytoimplode($this->input->post('groups')),
+                'created_by'            => $this->user_id,
             );
 
             $this->Member->insert($member);
@@ -435,6 +439,7 @@ class MembersController extends CI_Controller {
                 'msisdn' => $this->input->post('msisdn'),
                 'email' => $this->input->post('email'),
                 'groups' => arraytoimplode( $this->input->post('groups') ),
+                'updated_by' => $this->user_id,
             );
             $this->Member->update($id, $member);
 

@@ -5,6 +5,7 @@ class Member extends CI_Model {
     private $table = 'members';
     private $column_id = 'id';
     private $column_softDelete = 'removed_at';
+    private $column_softDeletedBy = 'removed_by';
     private $time_limit = 600;
 
     public $validations = array(
@@ -142,24 +143,24 @@ class Member extends CI_Model {
     public function remove($id)
     {
         if( is_array($id) ) {
-            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s')]);
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
             return $this->db->affected_rows() > 0;
         }
 
         $this->db->where($this->column_id, $id);
-        $this->db->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s')]);
+        $this->db->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
         return true;
     }
 
     public function restore($id)
     {
         if( is_array($id) ) {
-            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => NULL]);
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
             return $this->db->affected_rows() > 0;
         }
 
         $this->db->where($this->column_id, $id);
-        $this->db->update($this->table, [$this->column_softDelete => NULL]);
+        $this->db->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
         return true;
     }
 

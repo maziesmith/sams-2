@@ -218,8 +218,26 @@ class GroupsController extends CI_Controller {
                 );
                 $this->Group->update($id, $group);
 
+                # Look up any member that shouldn't be in the group anymore
+                $old_members_of_this_group = $this->GroupMember->lookup('group_id', $id)->result_array();
+                foreach ($old_members_of_this_group as $group_members) {
+                    $old_member = $this->Member->find( $group_members['member_id'] );
+                    $old_member_groups = [];
+                    if(!empty($old_member->groups)) $old_member_groups = explode(",", $old_member->groups);
+                    if( !in_array($old_member->id, explodetoarray($this->input->post('groups_members'))) ) {
+                        $index = array_search($group_members['group_id'], $old_member_groups);
+                        unset( $old_member_groups[ $index ] );
+                    }
+                    $old_member_groups = arraytoimplode($old_member_groups); // implode to string
+                    # Update the member
+                    $this->Member->update($old_member->id, array(
+                        'groups' => $old_member_groups,
+                        'updated_by' => $this->user_id,
+                    ));
+                }
                 # Update the members.groups
                 $members = $this->Member->find( explodetoarray($this->input->post('groups_members')) );
+                $this->GroupMember->delete($id);
                 foreach ($members->result_array() as $member) {
                     $member_groups = [];
                     if(!empty($member['groups'])) $member_groups = explode(",", $member['groups']);
@@ -237,7 +255,6 @@ class GroupsController extends CI_Controller {
 
                     # Update the group_members
                     $group_ids = explodetoarray($member_groups);
-                    // $members_groups = $this->GroupMember->lookup('member_id', $id)->result_array();
                     $this->GroupMember->delete_member($member['id']);
                     foreach ($group_ids as $group_id) {
                         $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $member['id'] ) );
@@ -248,8 +265,7 @@ class GroupsController extends CI_Controller {
                 $data = array(
                     'message' => 'Group was successfully updated',
                     'type' => 'success',
-                    // 'debug' => $mem,
-                    'debug-2' => $members->result_array()[0]['id'],
+                    'debug-2' => $old_members_of_this_group,
                 );
                 echo json_encode( $data );
                 exit();

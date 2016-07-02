@@ -235,6 +235,7 @@ function reload_table()
     $('#member-table-command').bootgrid('reload');
 }
 function init_table() {
+    var trashCount = 0;
     var selectedRowCount = [];
     memberTable = $("#member-table-command").bootgrid({
         labels: {
@@ -275,6 +276,7 @@ function init_table() {
             // To accumulate custom parameter with the response object
             // response.customPost = 'anything';
             // response.current = 2;
+            trashCount = response.trash.count;
             console.log(response);
             return response;
         },
@@ -314,6 +316,7 @@ function init_table() {
 
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
+        $('.trash-count').text(trashCount);
         /*
         | ---------------------------------
         | # Checkbox

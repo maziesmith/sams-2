@@ -7,7 +7,7 @@ $(document).ready(function() {
     */
     init_group_table();
     init_add_group_table();
-    init_edit_group_members_table();
+    // init_edit_group_members_table();
 
     /*
     | ----------------------------------
@@ -381,6 +381,7 @@ function init_edit_group_members_table()
     | # Edit
     | ------------------------------------
     */
+    var membersEditTable = [];
     var membersTableCommandEdit = $("#members-table-command-edit").bootgrid({
         labels: {
             noResults: 'No Members found',
@@ -413,13 +414,7 @@ function init_edit_group_members_table()
         {
             // To accumulate custom parameter with the response object
             // console.log("RESPONSE", response);
-            // var members = response.rows;
-            // // members = $.parseJSON(members);
-            // for (var i = 0; i < members.length; i++) {
-            //     membersTableCommandEdit.find('tr[data-row-id="'+members[i].id+'"]').toggleClass('active').attr('aria-selected', true);
-            //     membersTableCommandEdit.find('tr[data-row-id="'+members[i].id+'"] td.select-cell input[name=select]').val(1);
-            //     console.log(members[i].id);
-            // }
+            membersEditTable = response.rows;
             return response;
         },
         url: base_url( 'members/listing' ),
@@ -431,6 +426,29 @@ function init_edit_group_members_table()
         multiSelect: true,
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
+
+        var groups_id = $('#edit-group-form [name=groups_id]').val();
+        var oldSelectedRows = membersTableCommandEdit.bootgrid('getSelectedRows');
+        // oldSelectedRows = oldSelectedRows.splice(',');
+        console.log(oldSelectedRows);
+        for (var i = 0; i < oldSelectedRows.length; i++) {
+            membersTableCommandEdit.find('tr[data-row-id="'+oldSelectedRows[i]+'"] .select-cell label').click();
+            console.log("OSR",oldSelectedRows[i]);
+        };
+        for (var i = 0; i < membersEditTable.length; i++) {
+            for (var j = 0; j < membersEditTable[i].groups_id.length; j++) {
+                var s = false;
+                if( groups_id == membersEditTable[i].groups_id[j] ) {
+                    membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell label').click();
+                    // membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').prop('checked', true);
+                    s = true;
+                } else {
+                    // membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').prop('checked', false);
+                }
+                console.log("GID:MID",groups_id, membersEditTable[i].groups_id[j], s, membersEditTable[i].id);
+            };
+        }
+
         /*
         | -----------------------------------------------------------
         | # Add To List

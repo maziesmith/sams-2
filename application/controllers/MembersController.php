@@ -52,6 +52,7 @@ class MembersController extends CI_Controller {
         $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], '', false);
         $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], '', false);
         $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], '', false);
+        $this->Data['trash']['count'] = $this->Member->get_all(0, 0, null, true)->num_rows();
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -136,6 +137,9 @@ class MembersController extends CI_Controller {
                 "searchPhrase"  => $wildcard,
                 "total"         => intval( $total ),
                 "rows"          => $bootgrid_arr,
+                "trash"         => array(
+                    "count" => $this->Member->get_all(0, 0, null, true)->num_rows(),
+                )
                 // "debug" => $member['type'],
             );
 

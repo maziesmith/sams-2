@@ -285,7 +285,7 @@ function init_group_table()
                         $('select').trigger("chosen:updated");
                     });
 
-                    $('#members-table-command-edit tr .select-cell input:checked').trigger('click.rs.jquery.bootgrid');
+                    $('#members-table-command-edit tr td.select-cell input:checked').trigger('click.rs.jquery.bootgrid');
                     init_edit_group_members_table();
                 }
             });
@@ -427,10 +427,10 @@ function init_edit_group_members_table()
         keepSelection: true,
         selection: true,
     }).on("load.rs.jquery.bootgrid", function (e) {
-        $('#members-table-command-edit tr .select-cell input:checked').trigger('click.rs.jquery.bootgrid');
+        // $('#members-table-command-edit tr td.select-cell input:checked').trigger('click.rs.jquery.bootgrid');
     }).on("loaded.rs.jquery.bootgrid", function (e) {
 
-        // $('#members-table-command-edit tr .select-cell input:checked').trigger('click.rs.jquery.bootgrid');
+        $('#members-table-command-edit tr td.select-cell input:checked').trigger('click.rs.jquery.bootgrid');
         var groups_id = $('#edit-group-form [name=groups_id]').val();
         var oldSelectedRows = membersTableCommandEdit.bootgrid('getSelectedRows');
         console.log("OSR: ", oldSelectedRows);
@@ -438,9 +438,7 @@ function init_edit_group_members_table()
         for (var i = 0; i < membersEditTable.length; i++) {
             for (var j = 0; j < membersEditTable[i].groups_id.length; j++) {
                 if( groups_id == membersEditTable[i].groups_id[j] ) {
-                    $('#members-table-command-edit tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').trigger('click.rs.jquery.bootgrid');
-                    $('#members-table-command-edit tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').trigger('click.rs.jquery.bootgrid');
-                    $('#members-table-command-edit tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').trigger('click.rs.jquery.bootgrid');
+                    $('#members-table-command-edit tr[data-row-id="'+membersEditTable[i].id+'"] td.select-cell input').trigger('click.rs.jquery.bootgrid');
                 }
             };
         }

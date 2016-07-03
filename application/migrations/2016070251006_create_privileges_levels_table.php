@@ -1,25 +1,25 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_create_groups_table extends CI_Migration {
+class Migration_create_privileges_table extends CI_Migration {
 
     public function up()
     {
         $this->dbforge->add_field(array(
-            'groups_id' => array(
+            'id' => array(
                 'type' => 'INT',
                 'unsigned' => TRUE,
                 'auto_increment' => TRUE
             ),
-            'groups_name' => array(
+            'name' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',
             ),
-            'groups_description' => array(
+            'description' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',
             ),
-            'groups_code' => array(
+            'code' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',
             )
@@ -33,12 +33,13 @@ class Migration_create_groups_table extends CI_Migration {
         $this->dbforge->add_field('updated_at TIMESTAMP DEFAULT "0000-00-00 00:00:00" ON UPDATE CURRENT_TIMESTAMP');
         $this->dbforge->add_field('removed_at TIMESTAMP NULL');
 
-        $this->dbforge->add_key('groups_id', TRUE);
-        $this->dbforge->create_table('groups');
+        $this->dbforge->add_key('id', TRUE);
+        $this->dbforge->create_table('privileges_levels');
     }
 
     public function down()
     {
-        $this->dbforge->drop_table('groups', TRUE);
+        $this->dbforge->drop_table('privileges_levels', TRUE);
     }
+
 }

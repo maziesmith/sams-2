@@ -37,7 +37,13 @@ class Migration_create_users_table extends CI_Migration {
             ),
             'remember_token' => array(
                 'type' => 'INT'
-            )
+            ),
+            'privilege' => array(
+                'type' => 'INT'
+            ),
+            'level' => array(
+                'type' => 'INT'
+            ),
         ));
 
         $this->dbforge->add_field('created_by INT');

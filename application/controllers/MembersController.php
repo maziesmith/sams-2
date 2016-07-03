@@ -494,6 +494,9 @@ class MembersController extends CI_Controller {
         if( null === $id ) $id = $this->input->post('id');
 
         if( $this->Member->remove($id) ) {
+            # Also update the TABLE `groups_members`
+            $this->GroupMember->delete_member($id);
+
             if( 1 == $remove_many ) {
                 $data['member']['message'] = 'Members were successfully removed';
             } else {
@@ -518,6 +521,15 @@ class MembersController extends CI_Controller {
         if( null === $id ) $id = $this->input->post('id');
 
         if( $this->Member->restore($id) ) {
+            # Also update the TABLE `group_members`
+            $member = $this->Member->find($id);
+            $groups = explodetoarray($member->groups);
+            foreach ($groups as $group_id) {
+                $this->GroupMember->insert( array(
+                    'group_id' => $group_id,
+                    'member_id' => $id,
+                ) );
+            }
             $data['message'] = 'Member was successfully restored';
             $data['type'] = 'success';
         } else {

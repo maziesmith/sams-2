@@ -41,9 +41,6 @@ class Migration_create_users_table extends CI_Migration {
             'privilege' => array(
                 'type' => 'INT'
             ),
-            'level' => array(
-                'type' => 'INT'
-            ),
         ));
 
         $this->dbforge->add_field('created_by INT');
@@ -52,6 +49,7 @@ class Migration_create_users_table extends CI_Migration {
 
         $this->dbforge->add_field('created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP');
         $this->dbforge->add_field('updated_at TIMESTAMP DEFAULT "0000-00-00 00:00:00" ON UPDATE CURRENT_TIMESTAMP');
+        $this->dbforge->add_field('removed_at TIMESTAMP NULL');
 
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('users');

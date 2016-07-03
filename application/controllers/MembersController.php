@@ -602,6 +602,18 @@ class MembersController extends CI_Controller {
                     # Response
                     $data = array('message' => 'Members successfully imported.', 'type'=>'success');
 
+                    # Also import on TABLE `group_members`
+                    $members = $this->Member->all();
+                    foreach ($members as $member) {
+
+                        $group_ids = explodetoarray($member->groups);
+                        $members_groups = $this->GroupMember->lookup('member_id', $member->id)->result_array();
+                        $this->GroupMember->delete_member($member->id);
+                        foreach ($group_ids as $group_id) {
+                            $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $member->id ) );
+                        }
+                    }
+
                 } else {
                     $data = array('message' => 'Something went wrong importing the file', 'type'=>'error');
                 }

@@ -15,6 +15,10 @@ class Migration_create_modules_table extends CI_Migration {
                 'type' => 'TEXT',
                 'constraint' => '255',
             ),
+            'slug' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+            ),
             'description' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',

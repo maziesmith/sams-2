@@ -200,7 +200,7 @@ class Member extends CI_Model {
 
         if( $truncate ) $this->db->truncate($this->table); // truncate the table if all is good
 
-        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES";
+        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES (id, stud_no, firstname, middlename, lastname, level, type, address_blockno, address_street, address_brgy, address_city, address_zip, telephone, msisdn, email, groups, created_by, updated_by, removed_by, created_at, updated_at, @removed_at) SET removed_at = nullif(@removed_at,'')";
 
         // $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '\"' ESCAPED BY '\"' LINES TERMINATED BY '\n' IGNORE 0 LINES (id, firstname, middlename, lastname, level, type, blockno, street, brgy, city, zip, telephone, msisdn, email, group, @created_at, @updated_at) SET created_at = STR_TO_DATE(@created_at, '%Y-%m-%d %H:%i:%s'), updated_at = STR_TO_DATE(@updated_at, '%Y-%m-%d %H:%i:%s')";
 

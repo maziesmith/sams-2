@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_create_privileges_table extends CI_Migration {
+class Migration_create_privileges_levels_table extends CI_Migration {
 
     public function up()
     {
@@ -19,9 +19,8 @@ class Migration_create_privileges_table extends CI_Migration {
                 'type' => 'TEXT',
                 'constraint' => '255',
             ),
-            'code' => array(
-                'type' => 'TEXT',
-                'constraint' => '255',
+            'modules' => array(
+                'type' => 'INT',
             )
         ));
 

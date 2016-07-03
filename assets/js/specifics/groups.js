@@ -421,31 +421,24 @@ function init_edit_group_members_table()
         rowCount: [5, 10, 20, 30, 50, 100, -1],
 
         caseSensitive: false,
+        multiSelect: true,
         keepSelection: true,
         selection: true,
-        multiSelect: true,
     }).on("loaded.rs.jquery.bootgrid", function (e) {
-        reload_dom();
 
         var groups_id = $('#edit-group-form [name=groups_id]').val();
         var oldSelectedRows = membersTableCommandEdit.bootgrid('getSelectedRows');
-        // oldSelectedRows = oldSelectedRows.splice(',');
-        console.log(oldSelectedRows);
-        for (var i = 0; i < oldSelectedRows.length; i++) {
-            membersTableCommandEdit.find('tr[data-row-id="'+oldSelectedRows[i]+'"] .select-cell label').click();
-            console.log("OSR",oldSelectedRows[i]);
-        };
+        console.log("OSR: ", oldSelectedRows);
+        reload_dom();
         for (var i = 0; i < membersEditTable.length; i++) {
             for (var j = 0; j < membersEditTable[i].groups_id.length; j++) {
-                var s = false;
                 if( groups_id == membersEditTable[i].groups_id[j] ) {
-                    membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell label').click();
-                    // membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').prop('checked', true);
-                    s = true;
+                    // membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i]+'"] .select-cell label input:checked').trigger("click.rs.jquery.bootgrid");
+                    membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').trigger('click.rs.jquery.bootgrid');
                 } else {
+                    membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input:checked').trigger('click.rs.jquery.bootgrid');
                     // membersTableCommandEdit.find('tr[data-row-id="'+membersEditTable[i].id+'"] .select-cell input').prop('checked', false);
                 }
-                console.log("GID:MID",groups_id, membersEditTable[i].groups_id[j], s, membersEditTable[i].id);
             };
         }
 

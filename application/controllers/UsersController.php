@@ -11,19 +11,19 @@ class UsersController extends CI_Controller {
         $this->validated();
 
         $this->load->model('User', '', TRUE);
+        $this->load->model('Privilege', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
-        // $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/chosen/chosen.min.css').'">';
         $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css').'">';
+        $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/chosen/chosen.min.css').'">';
 
         $this->Data['Headers']->JS  = '<script src="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.js').'"></script>';
-        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
-        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/moment/min/moment.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/bootstrap-growl/bootstrap-growl.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/moment/min/moment.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js').'"></script>';
-        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/autosize/dist/autosize.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/users.js').'"></script>';
     }
@@ -42,6 +42,7 @@ class UsersController extends CI_Controller {
     public function index()
     {
         $this->Data['users'] = $this->User->all();
+        $this->Data['form']['privileges_list'] = dropdown_list($this->Privilege->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -60,16 +61,17 @@ class UsersController extends CI_Controller {
             $start_from   = ($page-1) * $limit;
             $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
-            $total        = $this->User->get_all()->num_rows();
+            $removed_only = null != $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
+            $total        = $this->User->get_all(0, 0, null, $removed_only)->num_rows();
 
             if( null != $wildcard )
             {
-                $users = $this->User->like($wildcard, $start_from, $limit, $sort)->result_array();
-                $total  = $this->User->like($wildcard)->num_rows();
+                $users = $this->User->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
+                $total  = $this->User->like($wildcard, 0, 0, null, $removed_only)->num_rows();
             }
             else
             {
-                $users = $this->User->get_all($start_from, $limit, $sort)->result_array();
+                $users = $this->User->get_all($start_from, $limit, $sort, $removed_only)->result_array();
             }
 
             foreach ($users as $key => $user) {
@@ -78,10 +80,11 @@ class UsersController extends CI_Controller {
                     'users_id'          => $user['id'],
                     'username'        => $user['username'],
                     'fullname' => arraytostring([
-                                                $user['firstname'],
-                                                $user['middlename'] ? substr($user['middlename'], 0,1) . '.' : '',
-                                                $user['lastname']], ' '),
-                    'email'        => $user['email'],
+                        $user['firstname'],
+                        $user['middlename'] ? substr($user['middlename'], 0,1) . '.' : '',
+                        $user['lastname']],
+                        ' '),
+                    'email'       => $user['email'],
                     'role'        => '',
                 );
             }

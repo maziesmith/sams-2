@@ -230,7 +230,7 @@ $route['messaging/inbox']['get'] = 'MessagesController/index';
 | ---------------
 | This should be commented out in production mode
 */
-// $route['migrate/(:num)'] = 'migrate/index/$1';
+$route['migrate/(:num)'] = 'migrate/index/$1';
 $route['migrate/(:any)'] = 'migrate/$1';
 
 /*

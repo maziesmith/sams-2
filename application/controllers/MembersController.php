@@ -70,7 +70,7 @@ class MembersController extends CI_Controller {
             $start_from   = ($page-1) * $limit;
             $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
-            $removed_only = null != $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
+            $removed_only = null !== $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
             $total        = $this->Member->get_all(0, 0, null, $removed_only)->num_rows();
 
             if( null != $wildcard ) {

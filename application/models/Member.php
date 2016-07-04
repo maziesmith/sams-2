@@ -91,15 +91,16 @@ class Member extends CI_Model {
             $first = $name[0];
             $last = $name[1];
         }
-        $this->db->where('firstname LIKE', '%'. $wildcard . '%')
-                ->or_where('middlename LIKE', '%'. $wildcard . '%')
-                ->or_where('lastname LIKE', '%'. $wildcard . '%')
+        $this->db->where('firstname LIKE ', '%'. $wildcard . '%')
+                ->or_where('middlename LIKE ', '%'. $wildcard . '%')
+                ->or_where('lastname LIKE ', '%'. $wildcard . '%')
 
-                ->or_where('middlename', $wildcard)
+                ->or_where('middlename', '%'. $wildcard)
 
-                ->or_where('id LIKE', $wildcard . '%')
-                ->or_where('level LIKE', $wildcard . '%')
-                ->or_where('type LIKE', $wildcard . '%')
+                ->or_where('id LIKE ', '%'. $wildcard . '%')
+                ->or_where('level LIKE ', '%'. $wildcard . '%')
+                ->or_where('type LIKE ', '%'. $wildcard . '%')
+
                 ->or_where('address_blockno LIKE', $wildcard . '%')
                 ->or_where('address_street LIKE', $wildcard . '%')
                 ->or_where('address_brgy LIKE', $wildcard . '%')
@@ -108,12 +109,12 @@ class Member extends CI_Model {
                 ->or_where('telephone LIKE', $wildcard . '%')
                 ->or_where('msisdn LIKE', $wildcard . '%')
                 ->or_where('email LIKE', $wildcard . '%')
-                ->or_where('group LIKE', $wildcard . '%')
+                ->or_where('groups LIKE', $wildcard . '%')
 
-                ->or_where('firstname', $first)
-                ->or_where('lastname', $last)
-                ->or_where('firstname', $last)
-                ->or_where('lastname', $first)
+                // ->or_where('firstname', $first)
+                // ->or_where('lastname', $last)
+                // ->or_where('firstname', $last)
+                // ->or_where('lastname', $first)
 
                 ->from($this->table)
                 ->select('*');

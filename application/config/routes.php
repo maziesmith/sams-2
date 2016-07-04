@@ -88,7 +88,7 @@ $route['users/export']['post']  = 'UsersController/export';
 | # Privileges Routes
 | -------------------
 */
-$route['users/privileges'] = 'PrivilegesController/index';
+$route['users/privileges']['get'] = 'PrivilegesController/index';
 
 /*
 | -----------------

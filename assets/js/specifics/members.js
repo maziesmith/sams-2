@@ -268,7 +268,7 @@ function init_table() {
             // To accumulate custom parameter with the request object
             // request.customPost = 'anything';
             // request.current = 2;
-            // console.log(request);
+            console.log(request);
             return request;
         },
         responseHandler: function (response)

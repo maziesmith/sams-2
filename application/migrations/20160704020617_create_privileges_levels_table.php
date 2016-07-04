@@ -15,6 +15,10 @@ class Migration_create_privileges_levels_table extends CI_Migration {
                 'type' => 'TEXT',
                 'constraint' => '255',
             ),
+            'code' => array(
+                'type' => 'TEXT',
+                'constraint' => '255',
+            ),
             'description' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',

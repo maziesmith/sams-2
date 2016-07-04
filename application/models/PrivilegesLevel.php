@@ -1,13 +1,14 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Privilege extends CI_Model {
+class PrivilegesLevel extends CI_Model {
 
-    private $table = 'privileges';
+    private $table = 'privileges_levels';
     private $column_id = 'id';
     public $validate = array(
-        array( 'field' => 'name', 'label' => 'Name', 'rules' => 'required|trim' ),
+        array( 'field' => 'name', 'label' => 'Level Name', 'rules' => 'required|trim' ),
         array( 'field' => 'code', 'label' => 'Code', 'rules' => 'trim' ),
+        array( 'field' => 'modules', 'label' => 'Modules', 'rules' => 'required' ),
     );
 
     function __construct()
@@ -27,14 +28,14 @@ class Privilege extends CI_Model {
         if($is_first_time)
         {
             $this->form_validation->set_message('is_unique', 'The %s is already in use');
-            $this->form_validation->set_rules( 'code', 'Code', 'is_unique[privileges.code]' );
+            $this->form_validation->set_rules( 'code', 'Code', 'is_unique[privileges_levels.code]' );
         }
         else
         {
             $original_value = $this->db->where('id', $id)->get($this->table)->row()->code;
             if( $value != $original_value ) {
                 $this->form_validation->set_message('is_unique', 'The %s is already in use');
-                $this->form_validation->set_rules( 'code', 'Code', 'is_unique[privileges.code]' );
+                $this->form_validation->set_rules( 'code', 'Code', 'is_unique[privileges_levels.code]' );
             }
         }
 
@@ -105,8 +106,7 @@ class Privilege extends CI_Model {
                 ->or_where('id LIKE', $wildcard . '%')
                 ->or_where('description LIKE', '%' . $wildcard . '%')
                 ->or_where('code LIKE', $wildcard . '%')
-                ->or_where('level LIKE', $wildcard . '%')
-                ->from( $this->table )
+                ->from($this->table)
                 ->select('*');
 
         if( null != $sort )

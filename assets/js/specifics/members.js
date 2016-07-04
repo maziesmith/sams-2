@@ -281,7 +281,7 @@ function init_table() {
             return response;
         },
         url: base_url('members/listing'),
-        rowCount: [5, 10, 20, 30, 50, 100, -1],
+        rowCount: [5, 10, 20, 30, 50, 100, 500, -1],
         keepSelection: true,
 
         selection: true,

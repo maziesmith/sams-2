@@ -24,4 +24,4 @@
 
 <?php
 $this->load->view('privileges/add');
-$this->load->view('privileges/edit'); ?>
+# $this->load->view('privileges/edit'); ?>

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <input type="hidden" id="privilege-add-table-command-list" value="<?php echo base_url('contacts/listing') ?>">
+            <input type="hidden" id="privilege-add-table-command-list" value="<?php echo base_url('users/privileges/listing') ?>">
 
             <?php echo form_open("privileges/add", array('id'=>'add-new-privilege-form', 'class'=>'m-t-25 card')); ?>
                 <div class="card-header bgm-green">

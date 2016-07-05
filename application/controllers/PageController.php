@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class PageController extends CI_Controller {
+    private $Data = array();
 
     public function __construct()
     {
@@ -25,6 +26,24 @@ class PageController extends CI_Controller {
     {
         // $this->session->set_flashdata('error', "");
         if(!$this->session->userdata('validated')) redirect('login');
+    }
+
+    public function debug()
+    {
+        $this->load->model('Auth', '', TRUE);
+        if( $this->Auth->can('members/update') ) {
+            echo "can";
+        } else {
+            $data = array(
+                'message' => 'Restricted access.',
+                'type' => 'warning',
+            );
+            $this->session->set_flashdata('message', $data);
+            $this->Data['Headers'] = get_page_headers();
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+        }
+        // if( $this->Auth->can() )
     }
 
     /**

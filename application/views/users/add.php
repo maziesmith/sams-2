@@ -77,24 +77,27 @@
                         </div>
                     </div>
 
-                    <hr class="m-b-10">
-
+                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Roles Details</strong></p>
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <!-- <p class="c-black f-500 m-b-10 m-t-25 text-uppercase"><strong>Privileges</strong></p> -->
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="pad-zero-right">
-                                            <div class="form-group fg-float form-group-validation">
-                                                <?php echo form_label('Privilege', 'privilege', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
-                                                <?php echo form_dropdown('privilege',
-                                                    $form['privileges_list'],
-                                                    set_value('privilege'), 'class="tag-select"'
-                                                ) ?>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-md-6 m-b-20">
+                            <div class="pad-zero-right">
+                                <div class="form-group fg-float form-group-validation">
+                                    <?php echo form_label('Privilege', 'privilege', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
+                                    <?php echo form_dropdown('privilege',
+                                        $form['privileges_list'],
+                                        set_value('privilege'), 'class="tag-select"'
+                                    ) ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 m-b-20">
+                            <div class="pad-zero-right">
+                                <div class="form-group fg-float form-group-validation">
+                                    <?php echo form_label('Privilege Level', 'level', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
+                                    <?php echo form_dropdown('level',
+                                        $form['privileges_levels_list'],
+                                        set_value('level'), 'class="tag-select"'
+                                    ) ?>
                                 </div>
                             </div>
                         </div>

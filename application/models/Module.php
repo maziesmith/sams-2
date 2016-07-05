@@ -1,14 +1,13 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class PrivilegesLevel extends CI_Model {
+class Module extends CI_Model {
 
-    private $table = 'privileges_levels';
+    private $table = 'modules';
     private $column_id = 'id';
     public $validate = array(
         array( 'field' => 'name', 'label' => 'Name', 'rules' => 'required|trim' ),
-        array( 'field' => 'code', 'label' => 'Code', 'rules' => 'trim' ),
-        array( 'field' => 'modules[]', 'label' => 'Modules', 'rules' => 'required' ),
+        array( 'field' => 'slug', 'label' => 'Slug', 'rules' => 'required|trim' ),
     );
 
     function __construct()
@@ -28,14 +27,14 @@ class PrivilegesLevel extends CI_Model {
         if($is_first_time)
         {
             $this->form_validation->set_message('is_unique', 'The %s is already in use');
-            $this->form_validation->set_rules( 'code', 'Code', 'is_unique[privileges_levels.code]' );
+            $this->form_validation->set_rules( 'slug', 'Slug', 'is_unique[modules.slug]' );
         }
         else
         {
-            $original_value = $this->db->where('id', $id)->get($this->table)->row()->code;
+            $original_value = $this->db->where('id', $id)->get($this->table)->row()->slug;
             if( $value != $original_value ) {
                 $this->form_validation->set_message('is_unique', 'The %s is already in use');
-                $this->form_validation->set_rules( 'code', 'Code', 'is_unique[privileges_levels.code]' );
+                $this->form_validation->set_rules( 'slug', 'Slug', 'is_unique[modules.slug]' );
             }
         }
 
@@ -105,8 +104,8 @@ class PrivilegesLevel extends CI_Model {
         $this->db->where('name LIKE', $wildcard . '%')
                 ->or_where('id LIKE', $wildcard . '%')
                 ->or_where('description LIKE', '%' . $wildcard . '%')
-                ->or_where('code LIKE', $wildcard . '%')
-                ->from($this->table)
+                ->or_where('slug LIKE', $wildcard . '%')
+                ->from( $this->table )
                 ->select('*');
 
         if( null != $sort )

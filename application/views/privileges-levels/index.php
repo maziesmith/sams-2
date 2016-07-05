@@ -3,7 +3,7 @@
         <div class="card"><?php
             echo breadcrumbs(); ?>
             <div class="table-responsive">
-                <table id="privilege-table-command" class="table table-condensed table-vmiddle table-hover">
+                <table id="privileges-levels-table" class="table table-condensed table-vmiddle table-hover">
                     <thead>
                         <tr>
                             <th data-column-id="count_id" data-visible="true" data-type="numeric" data-sortable="false">#</th>
@@ -19,10 +19,10 @@
             </div>
         </div>
     </div>
-    <button id="delete-privilege-btn" title="Delete all selected Privileges" class="btn btn-float bgm-red delete-all m-btn"><i class="zmdi zmdi zmdi-delete"></i></button>
-    <button id="add-new-privilege-btn" title="Add new Privilege" class="btn btn-float bgm-green add-new m-btn" data-toggle="modal" href="#add-privilege"><i class="zmdi zmdi-plus-square"></i></button>
+    <button id="delete-privileges-level-btn" title="Delete all selected Privileges" class="btn btn-float bgm-red delete-all m-btn"><i class="zmdi zmdi zmdi-delete"></i></button>
+    <button id="add-new-privileges-level-btn" title="Add new Privilege" class="btn btn-float bgm-green add-new m-btn" data-toggle="modal" href="#add-privileges-level"><i class="zmdi zmdi-plus-square"></i></button>
 </section>
 
 <?php
-$this->load->view('privileges/add');
-# $this->load->view('privileges/edit'); ?>
+$this->load->view('privileges-levels/add');
+$this->load->view('privileges-levels/edit'); ?>

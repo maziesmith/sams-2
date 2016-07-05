@@ -12,6 +12,7 @@ class UsersController extends CI_Controller {
 
         $this->load->model('User', '', TRUE);
         $this->load->model('Privilege', '', TRUE);
+        $this->load->model('PrivilegesLevel', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -43,6 +44,7 @@ class UsersController extends CI_Controller {
     {
         $this->Data['users'] = $this->User->all();
         $this->Data['form']['privileges_list'] = dropdown_list($this->Privilege->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
+        $this->Data['form']['privileges_levels_list'] = dropdown_list($this->PrivilegesLevel->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -85,7 +87,7 @@ class UsersController extends CI_Controller {
                         $user['lastname']],
                         ' '),
                     'email'       => $user['email'],
-                    'role'        => '',
+                    'privilege'        => $this->Privilege->find( $user['privilege'] )->name,
                 );
             }
             $data = array(

@@ -1,36 +1,36 @@
-<div class="modal fade" id="add-privilege" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="add-module" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <input type="hidden" id="privilege-add-table-command-list" value="<?php echo base_url('privileges/listing') ?>">
+            <input type="hidden" id="module-add-table-command-list" value="<?php echo base_url('contacts/listing') ?>">
 
-            <?php echo form_open("privileges/add", array('id'=>'add-new-privilege-form', 'class'=>'m-t-25 card')); ?>
+            <?php echo form_open("modules/add", array('id'=>'add-new-module-form', 'class'=>'m-t-25 card')); ?>
                 <div class="card-header bgm-green">
                     <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
-                    <h2>New Privilege</h2>
+                    <h2>New Module</h2>
                 </div>
                 <div class="modal-body">
-                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Privilege Details</strong></p>
+                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Module Details</strong></p>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="pad-zero-left">
-                                        <div class="form-group fg-float form-privilege-validation">
+                                        <div class="form-group fg-float form-group-validation">
                                             <div class="fg-line">
                                                 <?php echo form_input('name', set_value('name'), array('class'=>'form-control fg-input')) ?>
                                             </div>
-                                            <?php echo form_label('Privilege name', 'name', array('class'=>'fg-label')) ?>
+                                            <?php echo form_label('Module name', 'name', array('class'=>'fg-label')) ?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="pad-zero-right">
-                                        <div class="form-group fg-float form-privilege-validation">
+                                        <div class="form-group fg-float form-group-validation">
                                             <div class="fg-line">
-                                                <?php echo form_input('code', set_value('code'), array('class'=>'form-control fg-input')) ?>
+                                                <?php echo form_input('slug', set_value('slug'), array('class'=>'form-control fg-input')) ?>
                                             </div>
-                                            <?php echo form_label('Privilege code', 'code', array('class'=>'fg-label')) ?>
+                                            <?php echo form_label('Module slug', 'slug', array('class'=>'fg-label')) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -40,24 +40,30 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="pad-zero-right">
-                                <div class="form-group fg-float form-privilege-validation">
+                                <div class="form-group fg-float form-group-validation">
                                     <div class="fg-line">
                                         <?php echo form_textarea(['name'=>'description', 'rows'=>2], set_value('description'), array('class'=>'form-control auto-size')) ?>
                                     </div>
-                                    <?php echo form_label('Description', 'description', array('class'=>'fg-label')) ?>
+                                    <?php echo form_label('Module description', 'description', array('class'=>'fg-label')) ?>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Upload a Module</strong></p>
+                    <p class="text-muted">A module is a zip file containing a Controller, Model, Views, and (optionally) a migration file.</p>
                     <div class="row">
-                        <div class="col-md-6 m-b-20">
-                            <div class="pad-zero-right">
+                        <div class="col-sm-12">
+                            <div class="pad-zero-left">
                                 <div class="form-group fg-float form-group-validation">
-                                    <?php echo form_label('Privilege Level', 'level', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
-                                    <?php echo form_dropdown('level',
-                                        $form['privileges_levels_list'],
-                                        set_value('level'), 'class="tag-select"'
-                                    ) ?>
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <span class="btn btn-primary btn-file m-r-10">
+                                            <span class="fileinput-new">Select file</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input type="file" name="...">
+                                        </span>
+                                        <span class="fileinput-filename"></span>
+                                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput">&times;</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

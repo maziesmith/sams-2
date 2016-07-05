@@ -24,7 +24,8 @@ class Migration_create_privileges_levels_table extends CI_Migration {
                 'constraint' => '255',
             ),
             'modules' => array(
-                'type' => 'INT',
+                'type' => 'VARCHAR',
+                'constraint' => '255',
             )
         ));
 

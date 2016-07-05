@@ -49,7 +49,11 @@ class AuthController extends CI_Controller {
         // echo "</pre>";
 
         if( $this->Auth->check($username, $password, $remember_me) ) {
-            redirect('dashboard');
+            if( isset($_SESSION['redirect']) ) {
+                redirect($_SESSION['redirect']);
+            } else {
+                redirect('dashboard');
+            }
         }
 
         $this->session->set_flashdata('error', "Invalid credentials");

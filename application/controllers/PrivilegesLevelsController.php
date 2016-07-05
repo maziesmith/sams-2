@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PrivilegesController extends CI_Controller {
+class PrivilegesLevelsController extends CI_Controller {
     private $Data = array();
     private $user_id = 0;
 
@@ -10,8 +10,9 @@ class PrivilegesController extends CI_Controller {
         parent::__construct();
         $this->validated();
 
-        $this->load->model('Privilege', '', TRUE);
         $this->load->model('PrivilegesLevel', '', TRUE);
+        $this->load->model('Privilege', '', TRUE);
+        $this->load->model('Module', '', TRUE);
 
         $this->user_id = $this->session->userdata('id');
 
@@ -27,7 +28,7 @@ class PrivilegesController extends CI_Controller {
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
 
-        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/privileges.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/privilegesLevels.js').'"></script>';
     }
 
     public function validated()
@@ -44,13 +45,10 @@ class PrivilegesController extends CI_Controller {
     public function index()
     {
         # Override the default layout, which was `users/privileges` based on the route
-        $this->Data['Headers']->Page = "privileges/index";
-        $this->Data['privileges'] = $this->Privilege->all();
-        // $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], '', false);
-        $this->Data['form']['privileges_list'] = dropdown_list($this->Privilege->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
-        $this->Data['form']['privileges_levels_list'] = dropdown_list($this->PrivilegesLevel->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
-        // $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], '', false);
-        $this->Data['trash']['count'] = $this->Privilege->get_all(0, 0, null, true)->num_rows();
+        $this->Data['privilegesLevels'] = $this->PrivilegesLevel->all();
+        $this->Data['form']['privileges_list'] = dropdown_list($this->PrivilegesLevel->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
+        $this->Data['form']['modules_list'] = dropdown_list($this->Module->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
+        $this->Data['trash']['count'] = $this->PrivilegesLevel->get_all(0, 0, null, true)->num_rows();
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -69,23 +67,30 @@ class PrivilegesController extends CI_Controller {
             $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
             $removed_only = null != $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
-            $total        = $this->Privilege->get_all(0, 0, null, $removed_only)->num_rows();
+            $total        = $this->PrivilegesLevel->get_all(0, 0, null, $removed_only)->num_rows();
 
             if( null != $wildcard ) {
-                $privileges = $this->Privilege->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
-                $total   = $this->Privilege->like($wildcard, 0, 0, null, $removed_only)->num_rows();
+                $privileges = $this->PrivilegesLevel->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
+                $total   = $this->PrivilegesLevel->like($wildcard, 0, 0, null, $removed_only)->num_rows();
             } else {
-                $privileges = $this->Privilege->get_all($start_from, $limit, $sort, $removed_only)->result_array();
+                $privileges = $this->PrivilegesLevel->get_all($start_from, $limit, $sort, $removed_only)->result_array();
             }
 
             foreach ($privileges as $key => $privilege) {
+                $modules = [];
+                $privilege_modules = explodetoarray($privilege['modules']);
+                foreach ($privilege_modules as $module_id) {
+                    $module = $this->Module->find( $module_id );
+                    $modules[] = $module->name;
+                }
+
                 $bootgrid_arr[] = array(
                     'count_id'  => $key + 1 + $start_from,
                     'id'        => $privilege['id'],
                     'name'      => $privilege['name'],
                     'code'      => $privilege['code'],
                     'description' => $privilege['description'],
-                    'level'     => $privilege['level'],
+                    'modules'     => arraytoimplode($modules, ",<br>"),
                 );
             }
 
@@ -96,7 +101,7 @@ class PrivilegesController extends CI_Controller {
                 "total"         => intval( $total ),
                 "rows"          => $bootgrid_arr,
                 "trash"         => array(
-                    "count" => $this->Privilege->get_all(0, 0, null, true)->num_rows(),
+                    "count" => $this->PrivilegesLevel->get_all(0, 0, null, true)->num_rows(),
                 ),
             );
 
@@ -108,7 +113,7 @@ class PrivilegesController extends CI_Controller {
     public function add()
     {
         # Validation
-        if( $this->Privilege->validate(true) ) {
+        if( $this->PrivilegesLevel->validate(true) ) {
             // $data = array(
             //     'message'=> arraytoimplode($this->input->post('modules')),
             //     'type'=>'danger',
@@ -116,19 +121,19 @@ class PrivilegesController extends CI_Controller {
             // echo json_encode( $data ); exit();
 
             # Save
-            $privilege = array(
+            $privilegesLevel = array(
                 'name'    => $this->input->post('name'),
                 'code'   => $this->input->post('code'),
                 'description'     => $this->input->post('description'),
-                'level'        => $this->input->post('level'),
+                'modules'        => implode(",", $this->input->post('modules')),
                 'created_by'     => $this->user_id,
             );
 
-            $this->Privilege->insert($privilege);
+            $this->PrivilegesLevel->insert($privilegesLevel);
 
             # Response
             $data = array(
-                'message' => 'Privilege was successfully added',
+                'message' => 'Privileges Level was successfully added',
                 'type'    => 'success',
                 // 'debug'   => $this->input->post('groups'),
             );
@@ -146,7 +151,7 @@ class PrivilegesController extends CI_Controller {
             echo json_encode( $data ); exit();
         } else {
             $this->session->set_flashdata('message', $data);
-            redirect( base_url('privileges') );
+            redirect( base_url('privileges-levels') );
         }
     }
 }

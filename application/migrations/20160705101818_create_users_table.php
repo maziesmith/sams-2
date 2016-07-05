@@ -36,10 +36,13 @@ class Migration_create_users_table extends CI_Migration {
                 'constraint' => '255',
             ),
             'remember_token' => array(
-                'type' => 'INT'
+                'type' => 'INT',
             ),
             'privilege' => array(
-                'type' => 'INT'
+                'type' => 'INT',
+            ),
+            'privilege_level' => array(
+                'type' => 'INT',
             ),
         ));
 

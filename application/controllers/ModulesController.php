@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PrivilegesController extends CI_Controller {
+class ModulesController extends CI_Controller {
     private $Data = array();
     private $user_id = 0;
 
@@ -10,8 +10,7 @@ class PrivilegesController extends CI_Controller {
         parent::__construct();
         $this->validated();
 
-        $this->load->model('Privilege', '', TRUE);
-        $this->load->model('PrivilegesLevel', '', TRUE);
+        $this->load->model('Module', '', TRUE);
 
         $this->user_id = $this->session->userdata('id');
 
@@ -26,8 +25,9 @@ class PrivilegesController extends CI_Controller {
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/fileinput/fileinput.min.js').'"></script>';
 
-        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/privileges.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/modules.js').'"></script>';
     }
 
     public function validated()
@@ -43,14 +43,12 @@ class PrivilegesController extends CI_Controller {
      */
     public function index()
     {
-        # Override the default layout, which was `users/privileges` based on the route
-        $this->Data['Headers']->Page = "privileges/index";
-        $this->Data['privileges'] = $this->Privilege->all();
+        # Override the default layout, which was `users/modules` based on the route
+        $this->Data['modules'] = $this->Module->all();
         // $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], '', false);
-        $this->Data['form']['privileges_list'] = dropdown_list($this->Privilege->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
-        $this->Data['form']['privileges_levels_list'] = dropdown_list($this->PrivilegesLevel->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
+        $this->Data['form']['modules_list'] = dropdown_list($this->Module->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
         // $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], '', false);
-        $this->Data['trash']['count'] = $this->Privilege->get_all(0, 0, null, true)->num_rows();
+        $this->Data['trash']['count'] = $this->Module->get_all(0, 0, null, true)->num_rows();
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -69,23 +67,22 @@ class PrivilegesController extends CI_Controller {
             $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
             $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
             $removed_only = null != $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
-            $total        = $this->Privilege->get_all(0, 0, null, $removed_only)->num_rows();
+            $total        = $this->Module->get_all(0, 0, null, $removed_only)->num_rows();
 
             if( null != $wildcard ) {
-                $privileges = $this->Privilege->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
-                $total   = $this->Privilege->like($wildcard, 0, 0, null, $removed_only)->num_rows();
+                $modules = $this->Module->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
+                $total   = $this->Module->like($wildcard, 0, 0, null, $removed_only)->num_rows();
             } else {
-                $privileges = $this->Privilege->get_all($start_from, $limit, $sort, $removed_only)->result_array();
+                $modules = $this->Module->get_all($start_from, $limit, $sort, $removed_only)->result_array();
             }
 
-            foreach ($privileges as $key => $privilege) {
+            foreach ($modules as $key => $module) {
                 $bootgrid_arr[] = array(
                     'count_id'  => $key + 1 + $start_from,
-                    'id'        => $privilege['id'],
-                    'name'      => $privilege['name'],
-                    'code'      => $privilege['code'],
-                    'description' => $privilege['description'],
-                    'level'     => $privilege['level'],
+                    'id'        => $module['id'],
+                    'name'      => $module['name'],
+                    'slug'      => $module['slug'],
+                    'description' => $module['description'],
                 );
             }
 
@@ -96,7 +93,7 @@ class PrivilegesController extends CI_Controller {
                 "total"         => intval( $total ),
                 "rows"          => $bootgrid_arr,
                 "trash"         => array(
-                    "count" => $this->Privilege->get_all(0, 0, null, true)->num_rows(),
+                    "count" => $this->Module->get_all(0, 0, null, true)->num_rows(),
                 ),
             );
 
@@ -105,48 +102,37 @@ class PrivilegesController extends CI_Controller {
         }
     }
 
-    public function add()
+    public function seed()
     {
-        # Validation
-        if( $this->Privilege->validate(true) ) {
-            // $data = array(
-            //     'message'=> arraytoimplode($this->input->post('modules')),
-            //     'type'=>'danger',
-            // );
-            // echo json_encode( $data ); exit();
-
-            # Save
-            $privilege = array(
-                'name'    => $this->input->post('name'),
-                'code'   => $this->input->post('code'),
-                'description'     => $this->input->post('description'),
-                'level'        => $this->input->post('level'),
-                'created_by'     => $this->user_id,
-            );
-
-            $this->Privilege->insert($privilege);
-
-            # Response
-            $data = array(
-                'message' => 'Privilege was successfully added',
-                'type'    => 'success',
-                // 'debug'   => $this->input->post('groups'),
-            );
-
-        } else {
-
-            # Negative Response
-            $data = array(
-                'message'=>$this->form_validation->toArray(),
-                'type'=>'danger',
-            );
-        }
-
-        if( $this->input->is_ajax_request() ) {
-            echo json_encode( $data ); exit();
-        } else {
-            $this->session->set_flashdata('message', $data);
-            redirect( base_url('privileges') );
+        $modules = array(
+            '0' => array(
+                'name' => '[Members] Add',
+                'description' => 'Members add function',
+                'slug' => 'members/add',
+            ),
+            '1' => array(
+                'name' => '[Members] Edit',
+                'description' => 'Members edit function',
+                'slug' => 'members/edit',
+            ),
+            '2' => array(
+                'name' => '[Members] Remove',
+                'description' => 'Members remove function',
+                'slug' => 'members/remove',
+            ),
+            '3' => array(
+                'name' => '[Members] Restore',
+                'description' => 'Members restore function',
+                'slug' => 'members/restore',
+            ),
+        );
+        foreach ($modules as $module) {
+            if( $this->Module->validate(true) ) {
+                $this->Module->insert($module);
+                echo "success" . "<br>";
+            } else {
+                print_r( $this->form_validation->toArray() );
+            }
         }
     }
 }

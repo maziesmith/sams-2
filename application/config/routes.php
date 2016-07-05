@@ -66,8 +66,8 @@ $route['logout']['get'] = 'AuthController/logout';
 */
 $route['users']['get'] = 'UsersController/index';
 
-$route['users/listing']['post']  = 'UsersController/listing/';
-$route['users/listing']['get']  = 'UsersController/listing/';
+$route['users/listing']['post']  = 'UsersController/listing';
+$route['users/listing']['get']  = 'UsersController/listing';
 
 $route['users/delete/(:num)']['delete']  = 'UsersController/delete/$1';
 $route['users/delete']['post']  = 'UsersController/delete';
@@ -88,7 +88,64 @@ $route['users/export']['post']  = 'UsersController/export';
 | # Privileges Routes
 | -------------------
 */
-$route['users/privileges']['get'] = 'PrivilegesController/index';
+$route['privileges']['get'] = 'PrivilegesController/index';
+
+$route['privileges/listing']['post']  = 'PrivilegesController/listing';
+$route['privileges/listing']['get']  = 'PrivilegesController/listing';
+
+$route['privileges/delete/(:num)']['delete']  = 'UsersController/delete/$1';
+$route['privileges/delete']['post']  = 'UsersController/delete';
+
+$route['privileges/add']['post']  = 'PrivilegesController/add';
+
+$route['privileges/edit/(:num)']['post']  = 'PrivilegesController/edit/$1';
+$route['privileges/update/(:num)']['post']  = 'PrivilegesController/update/$1';
+
+/*
+|---------------------------
+| # Privileges Levels Routes
+|---------------------------
+*/
+$route['privileges-levels']['get'] = 'PrivilegesLevelsController/index';
+
+$route['privileges-levels/listing']['post']  = 'PrivilegesLevelsController/listing';
+$route['privileges-levels/listing']['get']  = 'PrivilegesLevelsController/listing';
+
+$route['privileges-levels/delete/(:num)']['delete']  = 'PrivilegesLevelsController/delete/$1';
+$route['privileges-levels/delete']['post']  = 'PrivilegesLevelsController/delete';
+
+$route['privileges-levels/add']['post']  = 'PrivilegesLevelsController/add';
+
+$route['privileges-levels/edit/(:num)']['post']  = 'PrivilegesLevelsController/edit/$1';
+$route['privileges-levels/update/(:num)']['post']  = 'PrivilegesLevelsController/update/$1';
+
+/*
+|------------------
+| # Modules Routes
+|------------------
+*/
+$route['modules']['get'] = 'ModulesController/index';
+$route['modules/listing']['post']  = 'ModulesController/listing';
+$route['modules/listing']['get']  = 'ModulesController/listing';
+
+$route['modules/trash']['get']  = 'ModulesController/trash';
+$route['modules/remove']['post']  = 'ModulesController/remove';
+$route['modules/remove/(:num)']['post']  = 'ModulesController/remove/$1';
+$route['modules/restore/(:num)']['post']  = 'ModulesController/restore/$1';
+
+$route['modules/delete']['post']  = 'ModulesController/delete';
+$route['modules/delete/(:num)']['delete']  = 'ModulesController/delete/$1';
+
+$route['modules/add']['post']  = 'ModulesController/add';
+
+$route['modules/edit/(:num)']['post']  = 'ModulesController/edit/$1';
+$route['modules/update/(:num)']['post']  = 'ModulesController/update/$1';
+
+$route['modules/import']['get']  = 'ModulesController/import';
+$route['modules/import']['post']  = 'ModulesController/import';
+
+$route['modules/export']['get']  = 'ModulesController/export';
+$route['modules/export']['post']  = 'ModulesController/export';
 
 /*
 | -----------------
@@ -246,8 +303,16 @@ $route['migrate/(:any)'] = 'migrate/$1';
 |----------------
 */
 $route['seed/users'] = 'UsersController/seed';
+$route['seed/modules'] = 'ModulesController/seed';
 
 // $route['(:any)'] = 'PageController/view/$1';
+
+/*
+|----------------
+| # Debugs
+|----------------
+*/
+$route['debug'] = 'PageController/debug';
 
 $route['default_controller'] = 'PageController/index';
 $route['404_override'] = 'Error404Controller';

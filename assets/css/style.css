@@ -299,7 +299,10 @@ ul.breadcrumb .active {
 		padding-right: 0;
 	}
 }
-@media (min-width: 1200px) {
+@media (min-width: 1199px) {
+	.no-sidebar + #footer {
+		padding-left: 0 !important;
+	}
 	.top-menu #toggle-width .toggle-switch input:checked + .ts-helper {
 		box-shadow: inset 0px 2px 1px rgba(0,0,0,0.2);
 	}

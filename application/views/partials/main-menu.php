@@ -3,6 +3,7 @@
         <?php echo anchor('', '<i class="zmdi zmdi-home"></i>Dashboard'); ?>
     </li>
     <li><hr></li>
+
     <li class="sub-menu <?php echo check_link(['members', 'members/trash', 'members/import', 'members/export']) ?>">
         <a role="button"><i class="zmdi zmdi-account-box"></i> Members</a>
         <ul>
@@ -12,6 +13,7 @@
             <li class="<?php echo check_link('members/trash') ?>"><?php echo anchor( base_url('members/trash'), 'Trashed Members' ); ?></li>
         </ul>
     </li>
+
     <!-- <li class="sub-menu <?php echo check_link(['contacts', 'contacts/trash', 'contacts/import', 'contacts/export']) ?>">
         <a role="button"><i class="zmdi zmdi-account-box"></i> Contacts</a>
         <ul>
@@ -21,6 +23,7 @@
             <li class="<?php echo check_link('contacts/trash') ?>"><?php echo anchor( base_url('contacts/trash'), 'Trashed Contacts' ); ?></li>
         </ul>
     </li> -->
+
     <li class="sub-menu <?php echo check_link(['groups', 'groups/import', 'groups/export', 'groups/trash']) ?>">
         <a role="button"><i class="zmdi zmdi-accounts"></i> Groups</a>
         <ul>
@@ -30,6 +33,7 @@
             <li class="<?php echo check_link('groups/trash') ?>" ><?php echo anchor( base_url('groups/trash'), 'Trashed Groups' ); ?></li>
         </ul>
     </li>
+
     <li class="sub-menu <?php echo check_link(['levels', 'levels/import', 'levels/export']) ?>">
         <a role="button"><i class="fa fa-signal"></i> Levels</a>
         <ul>
@@ -38,6 +42,7 @@
             <li class="<?php echo check_link('levels/import') ?>" ><?php echo anchor( base_url('levels/import'), 'Import Levels' ); ?></li>
         </ul>
     </li>
+
     <li class="sub-menu <?php echo check_link(['types', 'types/import', 'types/export']) ?>">
         <a role="button"><i class="zmdi zmdi-view-list"></i> Types</a>
         <ul>
@@ -47,6 +52,7 @@
         </ul>
     </li>
     <li><hr></li>
+
     <li class="sub-menu <?php echo check_link(['messaging/inbox', 'messaging/outbox', 'messaging/tracking', 'messaging/templates']) ?>">
         <a role="button"><i class="zmdi zmdi-email"></i> Messaging</a>
         <ul>
@@ -58,15 +64,24 @@
             <li class="<?php echo check_link('messaging/import') ?>" ><?php echo anchor( base_url('messaging/import'), 'Import Types' ); ?></li> -->
         </ul>
     </li>
+
     <li><hr></li>
-    <li class="sub-menu <?php echo check_link(['users', 'users/privileges', 'users/modules', 'users/import', 'users/export']) ?>">
+    <li class="sub-menu <?php echo check_link(['users', 'users/import', 'users/export']) ?>">
         <a role="button"><i class="zmdi zmdi-account"></i> Users</a>
         <ul>
             <li class="<?php echo check_link('users') ?>" ><?php echo anchor( base_url('users'), 'All Users' ); ?></li>
-            <li class="<?php echo check_link('users/privileges') ?>" ><?php echo anchor( base_url('users/privileges'), 'Privileges' ); ?></li>
-            <li class="<?php echo check_link('users/modules') ?>" ><?php echo anchor( base_url('users/modules'), 'Modules' ); ?></li>
             <li class="<?php echo check_link('users/export') ?>" ><?php echo anchor( base_url('users/export'), 'Export Users' ); ?></li>
             <li class="<?php echo check_link('users/import') ?>" ><?php echo anchor( base_url('users/import'), 'Import Users' ); ?></li>
         </ul>
     </li>
+
+    <li class="sub-menu <?php echo check_link(['privileges', 'users/privileges/levels', 'users/modules', 'users/import', 'users/export']) ?>">
+        <a role="button"><i class="fa fa-cogs"></i> Management</a>
+        <ul>
+            <li class="<?php echo check_link('privileges') ?>" ><?php echo anchor( base_url('privileges'), 'Privileges' ); ?></li>
+            <li class="<?php echo check_link('privileges-levels') ?>" ><?php echo anchor( base_url('privileges-levels'), 'Privileges Levels' ); ?></li>
+            <li class="<?php echo check_link('modules') ?>" ><?php echo anchor( base_url('modules'), 'Modules' ); ?></li>
+        </ul>
+    </li>
+
 </ul>

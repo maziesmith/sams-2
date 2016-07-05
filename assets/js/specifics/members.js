@@ -252,9 +252,7 @@ function init_table() {
         formatters: {
             commands: function (column, row) {
                 return  '<button role="button" class="wave-effect btn btn-icon command-edit"    data-row-id="' + row.id + '"><span class="zmdi zmdi-edit"></span></button> ' +
-                        '<!--<button type="button" class="wave-effect btn btn-icon command-refresh" data-row-id="' + row.id + '"><span class="zmdi zmdi-search-for"></span></button>-->' +
-                        '<button type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button> ' +
-                        '<!--<button type="button" class="wave-effect btn btn-icon command-print"   data-row-id="' + row.id + '"><span class="zmdi zmdi-print"></span></button>-->';
+                        '<button type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button> ';
             }
         },
 

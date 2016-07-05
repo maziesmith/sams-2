@@ -353,7 +353,7 @@ $(document).ready(function(){
     /*
      * Auto Hight Textarea
      */
-    if ($('.auto-size')[0]) {
+    if ($('.auto-size')[0] && typeof autosize == "function") {
 	   autosize($('.auto-size'));
     }
 

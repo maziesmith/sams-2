@@ -114,12 +114,6 @@ class PrivilegesLevelsController extends CI_Controller {
     {
         # Validation
         if( $this->PrivilegesLevel->validate(true) ) {
-            // $data = array(
-            //     'message'=> arraytoimplode($this->input->post('modules')),
-            //     'type'=>'danger',
-            // );
-            // echo json_encode( $data ); exit();
-
             # Save
             $privilegesLevel = array(
                 'name'    => $this->input->post('name'),
@@ -144,6 +138,59 @@ class PrivilegesLevelsController extends CI_Controller {
             $data = array(
                 'message'=>$this->form_validation->toArray(),
                 'type'=>'danger',
+            );
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data);
+            redirect( base_url('privileges-levels') );
+        }
+    }
+
+    /**
+     * Retrieve the resource for editing
+     * @param  int $id
+     * @return AJAX
+     */
+    public function edit($id)
+    {
+        $privilegesLevel = $this->PrivilegesLevel->find( $id );
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $privilegesLevel ); exit();
+        } else {
+            $this->Data['privilegesLevel'] = $privilegesLevel;
+            $this->load->view('layouts/main', $this->Data);
+        }
+    }
+
+    /**
+     * Updates the resource
+     *
+     * @param  INT $id
+     * @return JSON or Redirect
+     */
+    public function update($id)
+    {
+        # Validate
+        if( $this->PrivilegesLevel->validate(true) ) {
+            $this->PrivilegesLevel->insert( array(
+                'name' => $this->input->post('name', true),
+                'code' => $this->input->post('code', true),
+                'description' => $this->input->post('description', true),
+                'modules' => arraytoimplode( $this->input->post('modules', true) ),
+            ));
+
+            # Response
+            $data = array(
+                'message' => 'Privileges Levels was successfully updated',
+                'type' => 'success',
+            );
+        } else {
+            $data = array(
+                'message' => $this->form_validation->toArray(),
+                'type' => 'error',
             );
         }
 

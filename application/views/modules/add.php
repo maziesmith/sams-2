@@ -1,9 +1,7 @@
 <div class="modal fade" id="add-module" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
-            <input type="hidden" id="module-add-table-command-list" value="<?php echo base_url('contacts/listing') ?>">
-
+            <input type="hidden" id="module-add-table-command-list" value="<?php echo base_url('members/listing') ?>">
             <?php echo form_open("modules/add", array('id'=>'add-new-module-form', 'class'=>'m-t-25 card')); ?>
                 <div class="card-header bgm-green">
                     <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
@@ -14,7 +12,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-sm-7">
+                                <div class="col-sm-12">
                                     <div class="pad-zero-left">
                                         <div class="form-group fg-float form-group-validation">
                                             <div class="fg-line">
@@ -24,7 +22,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-12">
                                     <div class="pad-zero-right">
                                         <div class="form-group fg-float form-group-validation">
                                             <div class="fg-line">
@@ -45,25 +43,6 @@
                                         <?php echo form_textarea(['name'=>'description', 'rows'=>2], set_value('description'), array('class'=>'form-control auto-size')) ?>
                                     </div>
                                     <?php echo form_label('Module description', 'description', array('class'=>'fg-label')) ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Upload a Module</strong></p>
-                    <p class="text-muted">A module is a zip file containing a Controller, Model, Views, and (optionally) a migration file.</p>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="pad-zero-left">
-                                <div class="form-group fg-float form-group-validation">
-                                    <div class="fileinput fileinput-new" data-provides="fileinput">
-                                        <span class="btn btn-primary btn-file m-r-10">
-                                            <span class="fileinput-new">Select file</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="...">
-                                        </span>
-                                        <span class="fileinput-filename"></span>
-                                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput">&times;</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

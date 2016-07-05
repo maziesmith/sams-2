@@ -102,6 +102,107 @@ class ModulesController extends CI_Controller {
         }
     }
 
+    public function add()
+    {
+        # Validation
+        if( $this->Module->validate(true) ) {
+
+            # Save
+            $module = array(
+                'name'    => $this->input->post('name'),
+                'slug'   => $this->input->post('slug'),
+                'description'     => $this->input->post('description'),
+                'created_by'     => $this->user_id,
+            );
+
+            $this->Module->insert($module);
+
+            # Response
+            $data = array(
+                'message' => 'Module was successfully added',
+                'type'    => 'success',
+                // 'debug'   => $this->input->post('groups'),
+            );
+
+        } else {
+
+            # Negative Response
+            $data = array(
+                'message'=>$this->form_validation->toArray(),
+                'type'=>'danger',
+            );
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data);
+            redirect( base_url('modules') );
+        }
+    }
+
+    /**
+     * Retrieve the resource for editing
+     * @param  int $id
+     * @return AJAX
+     */
+    public function edit($id)
+    {
+        $module = $this->Module->find( $id );
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $module ); exit();
+        } else {
+            $this->Data['module'] = $module;
+            $this->load->view('layouts/main', $this->Data);
+        }
+    }
+
+    public function remove($id=null)
+    {
+        $remove_many = 0;
+        if( null === $id ) $remove_many = 1;
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->Module->remove($id) ) {
+            if( 1 == $remove_many ) {
+                $data['message'] = 'Modules were successfully removed';
+            } else {
+                $data['message'] = 'Module was successfully removed';
+            }
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while removing the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('modules');
+        }
+    }
+
+    public function restore($id=null)
+    {
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->Module->restore($id) ) {
+            $data['message'] = 'Module was successfully restored';
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while trying to restore the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('modules');
+        }
+    }
+
     public function seed()
     {
         $modules = array(

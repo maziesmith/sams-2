@@ -80,6 +80,73 @@ jQuery(document).ready(function (e) {
     });
 
     /*
+    | --------------------------------------------
+    | # Update
+    | --------------------------------------------
+    */
+    $('#edit-privileges-level-form').validate({
+        rules: {
+            name: 'required',
+            code: 'required',
+            modules: 'required',
+        },
+        messages: {
+            name: {
+                'required': "The First Name field is required"
+            },
+            code: {
+                'required': "The Last Name field is required"
+            },
+            modules: {
+                'required': "The Subdivision/Brgy field is required"
+            },
+        },
+        errorElement: 'small',
+        errorPlacement: function (error, element) {
+            $(error).addClass('help-block');
+            $(element).parents('.form-group-validation').addClass('has-warning').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').addClass('has-warning');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').removeClass('has-warning');
+            $(element).parents('.form-group-validation').find('.help-block').remove();
+        },
+        submitHandler: function (form) {
+            var id = $(form).find('[name=id]').val();
+            if( id === 'AJAX_CALL_ONLY' ) {
+                swal("Error", "The Privileges Level's ID is invalid. Please reload the page and try again.", 'error');
+                $('[name=close]').click();
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: $(form).attr('action') + '/' + id,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        resetWarningMessages('.form-group-validation');
+                        if( data.type != 'success' ) {
+                            var errors = data.message;
+                            $.each(errors, function (k, v) {
+                                $('#edit-privileges-level-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
+                            });
+                        } else {
+                            $('#edit-privileges-level-form').find('button[name=close]').delay(900).queue(function(next){ $(this).click(); next(); });
+                            notify(data.message, data.type, 9000);
+                            reload_table();
+                            $('#edit-privileges-level-form')[0].reset();
+                            reload_selectpickers();
+                        }
+                    },
+                });
+            }
+
+        }
+    });
+
+    /*
     | -------------------------------------
     | # Privileges Levels Code Suggestion
     | -------------------------------------
@@ -93,7 +160,7 @@ function reload_privileges_levels_table() {
     jQuery('#privileges-levels-table').bootgrid('reload');
 }
 function init_privileges_levels_table() {
-    jQuery('#privileges-levels-table').bootgrid({
+    var privilegesLevelTable =jQuery('#privileges-levels-table').bootgrid({
         labels: {
             loading: '<i class="zmdi zmdi-close zmdi-hc-spin"></i>',
             noResults: 'No Privileges Levels found',
@@ -133,5 +200,30 @@ function init_privileges_levels_table() {
         caseSensitive: false,
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
+
+        /*
+        | -----------------------------------------------------------
+        | # Edit
+        | -----------------------------------------------------------
+        */
+        privilegesLevelTable.find(".command-edit").on("click", function () {
+            var id = $(this).parents('tr').data('row-id');
+            $.ajax({
+                type: 'POST',
+                url: base_url('privileges-levels/edit/' + id),
+                data: {id: id},
+                success: function (data) {
+                    var privilege = $.parseJSON(data);
+                    $('#edit-privileges-level').modal("show");
+                    var _form = $('#edit-privileges-level-form');
+
+                    $.each(privilege, function (k, v) {
+                        _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
+                        if( k == "modules" ) reload_selectpickers_key(k+"[]", v);
+                        $('select').trigger("chosen:updated");
+                    });
+                }
+            });
+        });
     });
 }

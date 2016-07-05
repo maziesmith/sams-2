@@ -1,5 +1,6 @@
 <section id="content">
     <div class="container">
+        <?php $this->load->view('partials/messages') ?>
         <div class="card"><?php
             echo breadcrumbs(); ?>
             <div class="table-responsive">
@@ -24,4 +25,4 @@
 
 <?php
 $this->load->view('modules/add');
-# $this->load->view('modules/edit'); ?>
+$this->load->view('modules/edit'); ?>

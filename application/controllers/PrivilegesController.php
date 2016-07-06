@@ -43,8 +43,6 @@ class PrivilegesController extends CI_Controller {
      */
     public function index()
     {
-        # Override the default layout, which was `users/privileges` based on the route
-        $this->Data['Headers']->Page = "privileges/index";
         $this->Data['privileges'] = $this->Privilege->all();
         // $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], '', false);
         $this->Data['form']['privileges_list'] = dropdown_list($this->Privilege->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);

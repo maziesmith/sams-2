@@ -147,6 +147,37 @@ jQuery(document).ready(function (e) {
     });
 
     /*
+    | ---------------------------------------
+    | # Delete Many
+    | ---------------------------------------
+    */
+    $('body').on('click', '#delete-privileges-level-btn', function (e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure?",
+            text: "The selected Privileges will be deleted permanently from your record",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Delete",
+            closeOnConfirm: false,
+        }, function(){
+            $.ajax({
+                type: 'POST',
+                url: base_url('privileges-levels/remove'),
+                data: {'id[]': $('#privileges-level-table-command').bootgrid('getSelectedRows')},
+                success: function (data) {
+                    var data = $.parseJSON(data);
+                    reload_privileges_levels_table();
+                    swal("Deleted", data.message, data.type);
+                    $('#delete-privileges-level-btn').removeClass('show');
+                },
+            });
+        });
+
+    });
+
+    /*
     | -------------------------------------
     | # Privileges Levels Code Suggestion
     | -------------------------------------
@@ -198,6 +229,21 @@ function init_privileges_levels_table() {
         multiSelect: true,
         // rowSelect: true,
         caseSensitive: false,
+    }).on("selected.rs.jquery.bootgrid", function(e, rows) {
+        // console.log(rows);
+        console.log(privilegesLevelTable.bootgrid('getSelectedRows').length);
+        if ( privilegesLevelTable.bootgrid('getSelectedRows').length > 1 ) {
+            $('#delete-privileges-level-btn').addClass('show');
+        } else {
+            $('#delete-privileges-level-btn').removeClass('show');
+        }
+    }).on("deselected.rs.jquery.bootgrid", function(e, rows) {
+        // console.log(rows);
+        if ( privilegesLevelTable.bootgrid('getSelectedRows').length > 1 ) {
+            $('#delete-privileges-level-btn').addClass('show');
+        } else {
+            $('#delete-privileges-level-btn').removeClass('show');
+        }
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
 

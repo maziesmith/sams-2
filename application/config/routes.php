@@ -98,13 +98,13 @@ $route['privileges/remove']['post']  = 'PrivilegesController/remove';
 $route['privileges/remove/(:num)']['post']  = 'PrivilegesController/remove/$1';
 $route['privileges/restore/(:num)']['post']  = 'PrivilegesController/restore/$1';
 
-$route['privileges/delete/(:num)']['delete']  = 'UsersController/delete/$1';
-$route['privileges/delete']['post']  = 'UsersController/delete';
+$route['privileges/delete/(:num)']['delete']  = 'PrivilegesLevelsController/delete/$1';
+$route['privileges/delete']['post']  = 'PrivilegesController/delete';
 
 $route['privileges/add']['post']  = 'PrivilegesController/add';
 
-$route['privileges/edit/(:num)']['post']  = 'PrivilegesController/edit/$1';
-$route['privileges/update/(:num)']['post']  = 'PrivilegesController/update/$1';
+// $route['privileges/edit/(:num)']['post']  = 'PrivilegesController/edit/$1';
+// $route['privileges/update/(:num)']['post']  = 'PrivilegesController/update/$1';
 
 /*
 |---------------------------
@@ -116,13 +116,18 @@ $route['privileges-levels']['get'] = 'PrivilegesLevelsController/index';
 $route['privileges-levels/listing']['post']  = 'PrivilegesLevelsController/listing';
 $route['privileges-levels/listing']['get']  = 'PrivilegesLevelsController/listing';
 
+$route['privileges-levels/trash']['get']  = 'PrivilegesLevelsController/trash';
+$route['privileges-levels/remove']['post']  = 'PrivilegesLevelsController/remove';
+$route['privileges-levels/remove/(:num)']['post']  = 'PrivilegesLevelsController/remove/$1';
+$route['privileges-levels/restore/(:num)']['post']  = 'PrivilegesLevelsController/restore/$1';
+
 $route['privileges-levels/delete/(:num)']['delete']  = 'PrivilegesLevelsController/delete/$1';
 $route['privileges-levels/delete']['post']  = 'PrivilegesLevelsController/delete';
 
 $route['privileges-levels/add']['post']  = 'PrivilegesLevelsController/add';
 
-$route['privileges-levels/edit/(:num)']['post']  = 'PrivilegesLevelsController/edit/$1';
-$route['privileges-levels/update/(:num)']['post']  = 'PrivilegesLevelsController/update/$1';
+// $route['privileges-levels/edit/(:num)']['post']  = 'PrivilegesLevelsController/edit/$1';
+// $route['privileges-levels/update/(:num)']['post']  = 'PrivilegesLevelsController/update/$1';
 
 /*
 |------------------

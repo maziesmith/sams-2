@@ -49,12 +49,11 @@
                             </div>
                         </div>
                     </div>
-                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Modules Details</strong></p>
+                    <p class="c-black f-500 m-b-10 text-uppercase"><strong>Modules</strong></p>
                     <div class="row">
                         <div class="col-md-12 m-b-20">
                             <div class="pad-zero-right">
                                 <div class="form-group fg-float form-group-validation">
-                                    <?php echo form_label('Modules', 'modules[]', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
                                     <?php echo form_dropdown('modules[]',
                                         $form['modules_list'],
                                         set_value('modules'), 'class="tag-select" multiple'

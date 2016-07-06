@@ -173,24 +173,26 @@ class PrivilegesLevelsController extends CI_Controller {
      */
     public function update($id)
     {
-        # Validate
-        if( $this->PrivilegesLevel->validate(true) ) {
-            $this->PrivilegesLevel->insert( array(
-                'name' => $this->input->post('name', true),
-                'code' => $this->input->post('code', true),
-                'description' => $this->input->post('description', true),
-                'modules' => arraytoimplode( $this->input->post('modules', true) ),
-            ));
+        if( $this->PrivilegesLevel->validate(false, $id, $this->input->post('code')) ) {
+            # Update
+            $privilegeLevel = array(
+                'name' => $this->input->post('name'),
+                'code' => $this->input->post('code'),
+                'description' => $this->input->post('description'),
+                'module' => arraytoimplode( $this->input->post('module') ),
+                'updated_by' => $this->user_id,
+            );
+            $this->PrivilegesLevel->update($id, $privilegeLevel);
 
             # Response
             $data = array(
-                'message' => 'Privileges Levels was successfully updated',
+                'message' => 'Privileges Level was successfully updated',
                 'type' => 'success',
             );
         } else {
             $data = array(
-                'message' => $this->form_validation->toArray(),
-                'type' => 'error',
+                'message'=>$this->form_validation->toArray(),
+                'type'=>'error',
             );
         }
 
@@ -198,7 +200,70 @@ class PrivilegesLevelsController extends CI_Controller {
             echo json_encode( $data ); exit();
         } else {
             $this->session->set_flashdata('message', $data);
-            redirect( base_url('privileges-levels') );
+        }
+    }
+
+    public function trash()
+    {
+        $this->Data['privilegesLevels'] = $this->PrivilegesLevel->all(true);
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/privilegesLevelsTrash.js').'"></script>';
+        $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function remove($id=null)
+    {
+        // if( !$this->Auth->can() ) {
+        //     $this->Data['Headers']->Page = 'errors/403';
+        //     $this->load->view('layouts/errors', $this->Data);
+        //     echo json_encode( [
+        //         'title' => 'Access Denied',
+        //         'message' => "You don't have permission to Remove this resource",
+        //         'type' => 'error',
+        //     ] ); exit();
+        // }
+
+        $remove_many = 0;
+        if( null === $id ) $remove_many = 1;
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->PrivilegesLevel->remove($id) ) {
+            if( 1 == $remove_many ) {
+                $data['message'] = 'Privileges Levels were successfully removed';
+            } else {
+                $data['message'] = 'Privileges Level was successfully removed';
+            }
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while removing the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('privileges-levels');
+        }
+    }
+
+    public function restore($id=null)
+    {
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->PrivilegesLevel->restore($id) ) {
+            $data['message'] = 'Privileges Level was successfully restored';
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while trying to restore the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('privileges-levels');
         }
     }
 }

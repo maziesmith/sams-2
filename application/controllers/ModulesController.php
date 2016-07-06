@@ -226,6 +226,11 @@ class ModulesController extends CI_Controller {
                 'description' => 'Members restore function',
                 'slug' => 'members/restore',
             ),
+            '4' => array(
+                'name' => '[Members] Update',
+                'description' => 'Members update function',
+                'slug' => 'members/update',
+            ),
         );
         foreach ($modules as $module) {
             if( $this->Module->validate(true) ) {

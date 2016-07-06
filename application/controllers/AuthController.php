@@ -49,8 +49,8 @@ class AuthController extends CI_Controller {
         // echo "</pre>";
 
         if( $this->Auth->check($username, $password, $remember_me) ) {
-            if( isset($_SESSION['redirect']) ) {
-                redirect($_SESSION['redirect']);
+            if( null !== $this->session->userdata('referred_from') ) {
+                redirect($this->session->userdata('referred_from'), 'refresh');
             } else {
                 redirect('dashboard');
             }

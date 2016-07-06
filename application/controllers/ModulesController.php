@@ -205,40 +205,235 @@ class ModulesController extends CI_Controller {
 
     public function seed()
     {
-        $modules = array(
-            '0' => array(
-                'name' => '[Members] Add',
-                'description' => 'Members add function',
-                'slug' => 'members/add',
-            ),
-            '1' => array(
-                'name' => '[Members] Edit',
-                'description' => 'Members edit function',
-                'slug' => 'members/edit',
-            ),
-            '2' => array(
-                'name' => '[Members] Remove',
-                'description' => 'Members remove function',
-                'slug' => 'members/remove',
-            ),
-            '3' => array(
-                'name' => '[Members] Restore',
-                'description' => 'Members restore function',
-                'slug' => 'members/restore',
-            ),
-            '4' => array(
-                'name' => '[Members] Update',
-                'description' => 'Members update function',
-                'slug' => 'members/update',
-            ),
+        $modules = array();
+        $modules[] = array(
+            'name' => 'List Members',
+            'description' => 'Members list function',
+            'slug' => 'members/listing',
         );
+        $modules[] = array(
+            'name' => 'Add Members',
+            'description' => 'Members add function',
+            'slug' => 'members/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Members',
+            'description' => 'Members edit function',
+            'slug' => 'members/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Members',
+            'description' => 'Members update function',
+            'slug' => 'members/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Members',
+            'description' => 'Members remove function',
+            'slug' => 'members/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Members',
+            'description' => 'Members restore function',
+            'slug' => 'members/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Members',
+            'description' => 'Members export function',
+            'slug' => 'members/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Members',
+            'description' => 'Members import function',
+            'slug' => 'members/import',
+        );
+
+        /*
+        | -----------------
+        | # Groups
+        | -----------------
+        */
+        $modules[] = array(
+            'name' => 'List Groups',
+            'description' => 'Groups list function',
+            'slug' => 'groups/listing',
+        );
+        $modules[] = array(
+            'name' => 'Add Groups',
+            'description' => 'Groups add function',
+            'slug' => 'groups/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Groups',
+            'description' => 'Groups edit function',
+            'slug' => 'groups/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Groups',
+            'description' => 'Groups update function',
+            'slug' => 'groups/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Groups',
+            'description' => 'Groups remove function',
+            'slug' => 'groups/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Groups',
+            'description' => 'Groups restore function',
+            'slug' => 'groups/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Groups',
+            'description' => 'Groups export function',
+            'slug' => 'groups/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Groups',
+            'description' => 'Groups import function',
+            'slug' => 'groups/import',
+        );
+
+        /*
+        | -----------------
+        | # Types
+        | -----------------
+        */
+        $modules[] = array(
+            'name' => 'List Types',
+            'description' => 'Types list function',
+            'slug' => 'groups/listing',
+        );
+        $modules[] = array(
+            'name' => 'Add Types',
+            'description' => 'Types add function',
+            'slug' => 'types/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Types',
+            'description' => 'Types edit function',
+            'slug' => 'types/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Types',
+            'description' => 'Types update function',
+            'slug' => 'types/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Types',
+            'description' => 'Types remove function',
+            'slug' => 'types/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Types',
+            'description' => 'Types restore function',
+            'slug' => 'types/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Types',
+            'description' => 'Types export function',
+            'slug' => 'types/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Types',
+            'description' => 'Types import function',
+            'slug' => 'types/import',
+        );
+
+        /*
+        | -----------------
+        | # Levels
+        | -----------------
+        */
+        $modules[] = array(
+            'name' => 'List Levels',
+            'description' => 'Levels list function',
+            'slug' => 'levels/listing',
+        );
+        $modules[] = array(
+            'name' => 'Add Levels',
+            'description' => 'Levels add function',
+            'slug' => 'levels/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Levels',
+            'description' => 'Levels edit function',
+            'slug' => 'levels/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Levels',
+            'description' => 'Levels update function',
+            'slug' => 'levels/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Levels',
+            'description' => 'Levels remove function',
+            'slug' => 'levels/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Levels',
+            'description' => 'Levels restore function',
+            'slug' => 'levels/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Levels',
+            'description' => 'Levels export function',
+            'slug' => 'levels/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Levels',
+            'description' => 'Levels import function',
+            'slug' => 'levels/import',
+        );
+
+        /*
+        | -----------------
+        | # Messaging
+        | -----------------
+        */
+        $modules[] = array(
+            'name' => 'List Messaging',
+            'description' => 'Messaging list function',
+            'slug' => 'messaging/listing',
+        );
+        $modules[] = array(
+            'name' => 'Add Messaging',
+            'description' => 'Messaging add function',
+            'slug' => 'messaging/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Messaging',
+            'description' => 'Messaging edit function',
+            'slug' => 'messaging/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Messaging',
+            'description' => 'Messaging update function',
+            'slug' => 'messaging/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Messaging',
+            'description' => 'Messaging remove function',
+            'slug' => 'messaging/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Messaging',
+            'description' => 'Messaging restore function',
+            'slug' => 'messaging/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Messaging',
+            'description' => 'Messaging export function',
+            'slug' => 'messaging/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Messaging',
+            'description' => 'Messaging import function',
+            'slug' => 'messaging/import',
+        );
+
         foreach ($modules as $module) {
-            if( $this->Module->validate(true) ) {
-                $this->Module->insert($module);
-                echo "success" . "<br>";
-            } else {
-                print_r( $this->form_validation->toArray() );
-            }
+            $this->Module->insert($module);
+            echo "success" . "<br>";
         }
     }
 }

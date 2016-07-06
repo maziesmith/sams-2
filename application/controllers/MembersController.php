@@ -48,6 +48,11 @@ class MembersController extends CI_Controller {
      */
     public function index()
     {
+        if( !$this->Auth->can(['members/listing']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+        }
+
         $this->Data['members'] = $this->Member->all();
         $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], '', false);
         $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], '', false);
@@ -219,6 +224,16 @@ class MembersController extends CI_Controller {
      */
     public function edit($id)
     {
+        if( !$this->Auth->can() ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Edit this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
+
         $member = $this->Member->find( $id );
         if( $this->input->is_ajax_request() ) {
             echo json_encode( $member ); exit();
@@ -489,6 +504,16 @@ class MembersController extends CI_Controller {
 
     public function remove($id=null)
     {
+        if( !$this->Auth->can() ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Remove this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
+
         $remove_many = 0;
         if( null === $id ) $remove_many = 1;
         if( null === $id ) $id = $this->input->post('id');

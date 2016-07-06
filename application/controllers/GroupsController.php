@@ -11,11 +11,13 @@ class GroupsController extends CI_Controller {
         parent::__construct();
         $this->validated();
 
+
         $this->load->model('Group', '', TRUE);
         $this->load->model('Member', '', TRUE);
         $this->load->model('GroupMember', '', TRUE);
 
         $this->user_id = $this->session->userdata('id');
+        $this->session->set_userdata('referred_from', current_url());
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -46,8 +48,13 @@ class GroupsController extends CI_Controller {
      */
     public function index()
     {
-        $this->Data['groups'] = $this->Group->all();
-        $this->load->view('layouts/main', $this->Data);
+        if( $this->Auth->can(['groups', 'groups/listing']) ) {
+            $this->Data['groups'] = $this->Group->all();
+            $this->load->view('layouts/main', $this->Data);
+        } else {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+        }
     }
 
     public function listing()

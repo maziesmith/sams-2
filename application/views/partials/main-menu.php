@@ -75,10 +75,10 @@
         </ul>
     </li>
 
-    <li class="sub-menu <?php echo check_link(['privileges', 'users/privileges/levels', 'users/modules', 'users/import', 'users/export']) ?>">
+    <li class="sub-menu <?php echo check_link(['privileges', 'privileges/trash', 'privileges-levels', 'modules']) ?>">
         <a role="button"><i class="fa fa-cogs"></i> Management</a>
         <ul>
-            <li class="<?php echo check_link('privileges') ?>" ><?php echo anchor( base_url('privileges'), 'Privileges' ); ?></li>
+            <li class="<?php echo check_link(['privileges', 'privileges/trash']) ?>" ><?php echo anchor( base_url('privileges'), 'Privileges' ); ?></li>
             <li class="<?php echo check_link('privileges-levels') ?>" ><?php echo anchor( base_url('privileges-levels'), 'Privileges Levels' ); ?></li>
             <li class="<?php echo check_link('modules') ?>" ><?php echo anchor( base_url('modules'), 'Modules' ); ?></li>
         </ul>

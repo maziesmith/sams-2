@@ -340,7 +340,7 @@ function init_table() {
         | # Edit
         | -----------------------------------------------------------
         */
-        memberTable.find(".command-edit").on("click", function () {
+        memberTable.find(".command-edit").on("click", function (e) {
             var id = $(this).parents('tr').data('row-id'),
                 url = base_url('members/edit/' + id);
 
@@ -350,18 +350,22 @@ function init_table() {
                 data: {id: id},
                 success: function (data) {
                     var member = $.parseJSON(data);
-                    $('#edit-member').modal("show");
-                    var _form = $('#edit-member-form');
-                    _form[0].reset();
-                    reload_selectpickers();
-                    _form.find('[name=firstname]').focus();
+                    if( undefined !== member.type && member.type == 'error' ) {
+                        swal(member.title, member.message, member.type);
+                    } else {
+                        $('#edit-member').modal("show");
+                        var _form = $('#edit-member-form');
+                        _form[0].reset();
+                        reload_selectpickers();
+                        _form.find('[name=firstname]').focus();
 
-                    $.each(member, function (k, v) {
-                        _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        if( k == 'type' ) reload_selectpickers_key( k, v);
-                        if( k == 'groups' ) reload_selectpickers_key( k+"[]", v);
-                        if( k == 'level' ) reload_selectpickers_key( k, v);
-                    });
+                        $.each(member, function (k, v) {
+                            _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
+                            if( k == 'type' ) reload_selectpickers_key( k, v);
+                            if( k == 'groups' ) reload_selectpickers_key( k+"[]", v);
+                            if( k == 'level' ) reload_selectpickers_key( k, v);
+                        });
+                    }
                 }
             });
         });
@@ -391,9 +395,14 @@ function init_table() {
                     url: url,
                     success: function (data) {
                         var data = $.parseJSON(data);
-                        console.log(data);
-                        reload_table();
-                        swal("Removed", data.member.message, data.member.type);
+
+                        if( undefined !== data.type && data.type == 'error' ) {
+                            swal(data.title, data.message, data.type);
+                        } else {
+                            reload_table();
+                            swal("Removed", data.member.message, data.member.type);
+                        }
+
                     }
                 });
             });

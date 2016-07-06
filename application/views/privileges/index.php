@@ -1,5 +1,12 @@
 <section id="content">
     <div class="container">
+
+        <?php $this->load->view('partials/messages') ?>
+
+        <div class="toolbar-group text-right">
+            <a href="<?php echo base_url('privileges/trash'); ?>" class="btn btn-danger btn-link toolbar-item"><i class="fa fa-trash">&nbsp;</i>Trashed (<span class="trash-count"><?php echo $trash['count'] ?></span>)</a>
+        </div>
+
         <div class="card"><?php
             echo breadcrumbs(); ?>
             <div class="table-responsive">
@@ -11,7 +18,7 @@
                             <th data-column-id="name" data-css-class="name" data-order="asc">Name</th>
                             <th data-column-id="code" data-css-class="code" data-order="asc">Code</th>
                             <th data-column-id="description" data-css-class="description" data-order="asc">Description</th>
-                            <th data-column-id="modules" data-css-class="modules" data-order="asc">Modules</th>
+                            <th data-column-id="level" data-css-class="level" data-order="asc">Level</th>
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th>
                         </tr>
                     </thead>
@@ -25,4 +32,4 @@
 
 <?php
 $this->load->view('privileges/add');
-# $this->load->view('privileges/edit'); ?>
+$this->load->view('privileges/edit'); ?>

@@ -26,6 +26,7 @@ class Auth extends CI_Model {
                     'validated' => true,
                     'privilege' => $row->privilege,
                     'privilege_level' => $row->privilege_level,
+                    'isSuperAdmin' => false,
                 );
                 $this->session->set_userdata($data);
                 return true;
@@ -42,8 +43,10 @@ class Auth extends CI_Model {
         $this->load->model('PrivilegesLevel', '', TRUE);
         $this->load->model('Module', '', TRUE);
 
+        if( $this->session->isSuperAdmin ) return true;
+
         if( null == $id ) $id = $this->session->privilege_level;
-        if( null == $url ) $url = $this->uri->uri_string;
+        if( null == $url ) $url = preg_replace('/(\/[0-9]+)/', '', $this->uri->uri_string);
 
         $privilege = $this->PrivilegesLevel->find( $id );
         $modules_ids = explode(",", $privilege->modules);

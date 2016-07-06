@@ -17,6 +17,7 @@ if ( ! function_exists('get_page_headers'))
         $Headers->Page       = $CI->uri->segment(1) . "/" . (null !== $CI->uri->segment(2) ? $CI->uri->segment(2) : 'index');
         $Headers->CSS        = '';
         $Headers->JS         = '';
+        $Headers->SectionClass = '';
 
         return $Headers;
     }

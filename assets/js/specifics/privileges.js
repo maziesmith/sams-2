@@ -118,7 +118,7 @@ $(document).ready(function() {
                 $.ajax({
                     type: 'POST',
                     url: $(form).attr('action') + '/' + privileges_id,
-                    data: $(form).serialize() + "&privileges_contacts=" + $('#contacts-table-command-edit').bootgrid('getSelectedRows'),
+                    data: $(form).serialize(),
                     success: function (data) {
                         data = JSON.parse(data);
                         // console.log(data);
@@ -159,7 +159,7 @@ $(document).ready(function() {
         }, function(){
             $.ajax({
                 type: 'POST',
-                url: base_url('privileges/delete'),
+                url: base_url('privileges/remove'),
                 data: {'privileges_ids[]': $('#privilege-table-command').bootgrid('getSelectedRows')},
                 success: function (data) {
                     var data = $.parseJSON(data);
@@ -279,6 +279,7 @@ function init_privilege_table()
                 data: {privileges_id: privileges_id},
                 success: function (data) {
                     var privilege = $.parseJSON(data);
+                    console.log(privilege);
                     $('#edit-privilege').modal("show");
                     var _form = $('#edit-privilege-form');
 
@@ -300,7 +301,7 @@ function init_privilege_table()
         privilegeTable.find(".command-delete").on("click", function (e) {
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.privileges_name').text(),
-                url  = base_url('privileges/delete/') + '/' + id;
+                url  = base_url('privileges/remove') + '/' + id;
             e.preventDefault();
             swal({
                 title: "Are you sure?",
@@ -313,12 +314,12 @@ function init_privilege_table()
             }, function(){
                 // on deleting button
                 $.ajax({
-                    type: 'DELETE',
+                    type: 'POST',
                     url: url,
                     success: function (data) {
                         var data = $.parseJSON(data);
                         reload_privilege_table();
-                        swal("Deleted", data.message, data.type);
+                        swal(data.title, data.message, data.type);
                     }
                 });
             });

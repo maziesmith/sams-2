@@ -85,7 +85,7 @@ class PrivilegesController extends CI_Controller {
                     'name'      => $privilege['name'],
                     'code'      => $privilege['code'],
                     'description' => $privilege['description'],
-                    'level'     => $privilege['level'],
+                    'level'     => $this->PrivilegesLevel->find($privilege['level'])->name,
                 );
             }
 
@@ -147,6 +147,119 @@ class PrivilegesController extends CI_Controller {
         } else {
             $this->session->set_flashdata('message', $data);
             redirect( base_url('privileges') );
+        }
+    }
+
+    public function edit($id)
+    {
+        $privilege = $this->Privilege->find( $id );
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $privilege ); exit();
+        } else {
+            $this->Data['privilege'] = $privilege;
+            $this->load->view('layouts/main', $this->Data);
+        }
+    }
+
+    /**
+     * Updates the resource
+     *
+     * @param  INT $id
+     * @return JSON or Redirect
+     */
+    public function update($id)
+    {
+        if( $this->Privilege->validate(false, $id, $this->input->post('code')) ) {
+            # Update
+            $privilege = array(
+                'name' => $this->input->post('name'),
+                'code' => $this->input->post('code'),
+                'description' => $this->input->post('description'),
+                'level' => arraytoimplode( $this->input->post('level') ),
+                'updated_by' => $this->user_id,
+            );
+            $this->Privilege->update($id, $privilege);
+
+            # Response
+            $data = array(
+                'message' => 'Privilege was successfully updated',
+                'type' => 'success',
+            );
+        } else {
+            $data = array(
+                'message'=>$this->form_validation->toArray(),
+                'type'=>'error',
+            );
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data);
+        }
+    }
+
+    public function trash()
+    {
+        $this->Data['privileges'] = $this->Privilege->all(true);
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/privilegesTrash.js').'"></script>';
+        $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function remove($id=null)
+    {
+        if( !$this->Auth->can() ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Remove this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
+
+        $remove_many = 0;
+        if( null === $id ) $remove_many = 1;
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->Privilege->remove($id) ) {
+            if( 1 == $remove_many ) {
+                $data['message'] = 'Privileges were successfully removed';
+            } else {
+                $data['message'] = 'Privilege was successfully removed';
+            }
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while removing the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('privileges');
+        }
+    }
+
+    public function restore($id=null)
+    {
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->Privilege->restore($id) ) {
+            $data['message'] = 'Privilege was successfully restored';
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while trying to restore the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('privileges');
         }
     }
 }

@@ -93,6 +93,11 @@ $route['privileges']['get'] = 'PrivilegesController/index';
 $route['privileges/listing']['post']  = 'PrivilegesController/listing';
 $route['privileges/listing']['get']  = 'PrivilegesController/listing';
 
+$route['privileges/trash']['get']  = 'PrivilegesController/trash';
+$route['privileges/remove']['post']  = 'PrivilegesController/remove';
+$route['privileges/remove/(:num)']['post']  = 'PrivilegesController/remove/$1';
+$route['privileges/restore/(:num)']['post']  = 'PrivilegesController/restore/$1';
+
 $route['privileges/delete/(:num)']['delete']  = 'UsersController/delete/$1';
 $route['privileges/delete']['post']  = 'UsersController/delete';
 

@@ -5,6 +5,8 @@ class Privilege extends CI_Model {
 
     private $table = 'privileges';
     private $column_id = 'id';
+    private $column_softDelete = 'removed_at';
+    private $column_softDeletedBy = 'removed_by';
     public $validate = array(
         array( 'field' => 'name', 'label' => 'Name', 'rules' => 'required|trim' ),
         array( 'field' => 'code', 'label' => 'Code', 'rules' => 'trim' ),
@@ -60,13 +62,14 @@ class Privilege extends CI_Model {
         return $this->db;
     }
 
-    public function all()
+    public function all($removed_only=false)
     {
-        $query = $this->db->get($this->table);
+        if( $removed_only ) return $this->db->where($this->column_softDelete ." != ", NULL)->get($this->table)->result();
+        $query = $this->db->where($this->column_softDelete, NULL)->get($this->table);
         return $query->result();
     }
 
-    public function get_all($start_from=0, $limit=0, $sort=null)
+    public function get_all($start_from=0, $limit=0, $sort=null, $removed_only=false)
     {
         if( null != $sort )
         {
@@ -77,22 +80,19 @@ class Privilege extends CI_Model {
 
         $this->db->limit( $limit, $start_from );
 
-        return $this->db->get($this->table);
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " != ", NULL)->get($this->table);
+        return $this->db->where($this->column_softDelete, NULL)->get($this->table);
     }
 
     public function find($id)
     {
-        if( is_array($id) )
-        {
-          $query = $this->db->where_in($this->column_id, $id)->get($this->table);
-          return $query->result();
-        }
+        if( is_array($id) ) return $this->db->where_in($this->column_id, $id)->get($this->table);
 
         $query = $this->db->where($this->column_id, $id)->get($this->table);
         return $query->row();
     }
 
-    public function like($wildcard='', $start_from=0, $limit=0, $sort=null)
+    public function like($wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)
     {
         $first = ''; $last='';
         if(preg_match('/\s/', $wildcard))
@@ -118,7 +118,8 @@ class Privilege extends CI_Model {
 
         $this->db->limit( $limit, $start_from );
 
-        return $this->db->get();
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->get();
+        return $this->db->where($this->column_softDelete, NULL)->get();
     }
 
     public function dropdown_list($select)
@@ -137,6 +138,30 @@ class Privilege extends CI_Model {
     {
         $this->db->where($this->column_id, $id);
         $this->db->update($this->table, $data);
+        return true;
+    }
+
+    public function remove($id)
+    {
+        if( is_array($id) ) {
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
+            return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
+        return true;
+    }
+
+    public function restore($id)
+    {
+        if( is_array($id) ) {
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
+            return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
         return true;
     }
 

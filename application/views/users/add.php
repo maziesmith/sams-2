@@ -49,27 +49,27 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('users_firstname', set_value('users_firstname'), array('class'=>'form-control fg-input')) ?>
+                                            <?php echo form_input('firstname', set_value('firstname'), array('class'=>'form-control fg-input')) ?>
                                         </div>
-                                        <?php echo form_label('First name', 'users_firstname', array('class'=>'fg-label')) ?>
+                                        <?php echo form_label('First name', 'firstname', array('class'=>'fg-label')) ?>
                                     </div>
                                 </div>
 
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('users_middlename', set_value('users_middlename'), array('class'=>'form-control fg-input')) ?>
+                                            <?php echo form_input('middlename', set_value('middlename'), array('class'=>'form-control fg-input')) ?>
                                         </div>
-                                        <?php echo form_label('Middle name', 'users_middlename', array('class'=>'fg-label')) ?>
+                                        <?php echo form_label('Middle name', 'middlename', array('class'=>'fg-label')) ?>
                                     </div>
                                 </div>
 
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('users_lastname', set_value('users_lastname'), array('class'=>'form-control fg-input')) ?>
+                                            <?php echo form_input('lastname', set_value('lastname'), array('class'=>'form-control fg-input')) ?>
                                         </div>
-                                        <?php echo form_label('Last name', 'users_lastname', array('class'=>'fg-label')) ?>
+                                        <?php echo form_label('Last name', 'lastname', array('class'=>'fg-label')) ?>
                                     </div>
                                 </div>
 
@@ -105,8 +105,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <?php echo form_button(array('name'=>'users_submit', 'id'=>'users_submit', 'type'=>'submit'), 'Add', 'class="btn btn-link"') ?>
-                    <?php echo form_button('users_close', 'Close', 'class="btn btn-link" data-dismiss="modal"') ?>
+                    <?php echo form_button(array('name'=>'submit', 'id'=>'submit', 'type'=>'submit'), 'Add', 'class="btn btn-link"') ?>
+                    <?php echo form_button('close', 'Close', 'class="btn btn-link" data-dismiss="modal"') ?>
                 </div>
             <?php echo form_close() ?>
         </div>

@@ -79,7 +79,7 @@ class UsersController extends CI_Controller {
             foreach ($users as $key => $user) {
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
-                    'users_id'          => $user['id'],
+                    'id'          => $user['id'],
                     'username'        => $user['username'],
                     'fullname' => arraytostring([
                         $user['firstname'],
@@ -88,6 +88,7 @@ class UsersController extends CI_Controller {
                         ' '),
                     'email'       => $user['email'],
                     'privilege'        => $this->Privilege->find( $user['privilege'] )->name,
+                    'privilege_level' => $this->PrivilegesLevel->find( $user['privilege_level'] )->name,
                 );
             }
             $data = array(

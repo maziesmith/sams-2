@@ -264,9 +264,11 @@ function init_privileges_levels_table() {
                     var _form = $('#edit-privileges-level-form');
 
                     $.each(privilege, function (k, v) {
-                        _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        if( k == "modules" ) reload_selectpickers_key(k+"[]", v);
+                        _form.find('[name="' + k + '"]').val( v ).parent().addClass('fg-toggled');
+                        reload_selectpickers_key(k, v);
+                        console.log(k, v);
                         $('select').trigger("chosen:updated");
+                        if( k == "modules" ) reload_selectpickers_key(k+"[]", v);
                     });
                 }
             });

@@ -431,6 +431,52 @@ class ModulesController extends CI_Controller {
             'slug' => 'messaging/import',
         );
 
+        /*
+        | -----------------
+        | # Privileges
+        | -----------------
+        */
+        $modules[] = array(
+            'name' => 'List Privilege',
+            'description' => 'Privilege list function',
+            'slug' => 'privileges/listing',
+        );
+        $modules[] = array(
+            'name' => 'Add Privilege',
+            'description' => 'Privilege add function',
+            'slug' => 'privileges/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Privilege',
+            'description' => 'Privilege edit function',
+            'slug' => 'privileges/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Privilege',
+            'description' => 'Privilege update function',
+            'slug' => 'privileges/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Privilege',
+            'description' => 'Privilege remove function',
+            'slug' => 'privileges/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Privilege',
+            'description' => 'Privilege restore function',
+            'slug' => 'privileges/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Privilege',
+            'description' => 'Privilege export function',
+            'slug' => 'privileges/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Privilege',
+            'description' => 'Privilege import function',
+            'slug' => 'privileges/import',
+        );
+
         foreach ($modules as $module) {
             $this->Module->insert($module);
             echo "success" . "<br>";

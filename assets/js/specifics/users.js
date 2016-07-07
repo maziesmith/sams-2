@@ -198,7 +198,7 @@ $(document).ready(function(){
             $(element).parents('.form-group-validation').find('.help-block').remove();
         },
         submitHandler: function (form) {
-            var users_id = $(form).find('[name=users_id]').val();
+            var users_id = $(form).find('[name=id]').val();
             if( users_id === 'AJAX_CALL_ONLY' ) {
                 swal("Error", "The User's ID is invalid. Please reload the page and try again.", 'error');
                 $('[name=users_close]').click();
@@ -360,9 +360,7 @@ function init_table() {
 
                     $.each(user, function (k, v) {
                         _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        reload_selectpickers_key( (k == 'users_type') ? k : null, (k == 'users_type') ? v : null);
-                        reload_selectpickers_key( (k == 'users_group') ? k : null, (k == 'users_group') ? v : null);
-                        reload_selectpickers_key( (k == 'users_level') ? k : null, (k == 'users_level') ? v : null);
+                        reload_selectpickers_key( k, v);
                     });
                 }
             });

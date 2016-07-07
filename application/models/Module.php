@@ -122,7 +122,7 @@ class Module extends CI_Model {
 
     public function dropdown_list($select)
     {
-        $query = $this->db->select($select)->get($this->table);
+        $query = $this->db->select($select)->where($this->column_softDelete, NULL)->get($this->table);
         return $query;
     }
 

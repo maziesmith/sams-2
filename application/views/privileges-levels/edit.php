@@ -20,7 +20,7 @@
                                             <div class="fg-line">
                                                 <?php echo form_input('name', set_value('name'), array('class'=>'form-control fg-input')) ?>
                                             </div>
-                                            <?php echo form_label('Privileges Level name', 'name', array('class'=>'fg-label')) ?>
+                                            <?php echo form_label('Name', 'name', array('class'=>'fg-label')) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                             <div class="fg-line">
                                                 <?php echo form_input('code', set_value('code'), array('class'=>'form-control fg-input')) ?>
                                             </div>
-                                            <?php echo form_label('Privileges Level code', 'code', array('class'=>'fg-label')) ?>
+                                            <?php echo form_label('Code', 'code', array('class'=>'fg-label')) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -53,10 +53,10 @@
                         <div class="col-md-12 m-b-20">
                             <div class="pad-zero-right">
                                 <div class="form-group fg-float form-group-validation">
-                                    <?php echo form_label('Privileges Level Modules', 'modules[]', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
+                                    <?php echo form_label('Modules', 'modules[]', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
                                     <?php echo form_dropdown('modules[]',
-                                        $form['privileges-levels_levels_list'],
-                                        set_value('modules'), 'class="tag-select"'
+                                        $form['modules_list'],
+                                        set_value('modules'), 'class="tag-select" multiple'
                                     ) ?>
                                 </div>
                             </div>

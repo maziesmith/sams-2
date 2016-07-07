@@ -48,6 +48,7 @@ class PrivilegesLevelsController extends CI_Controller {
         $this->Data['privilegesLevels'] = $this->PrivilegesLevel->all();
         $this->Data['form']['privileges_list'] = dropdown_list($this->PrivilegesLevel->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
         $this->Data['form']['modules_list'] = dropdown_list($this->Module->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
+        $this->Data['form']['modules_list'] = dropdown_list($this->Module->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
         $this->Data['trash']['count'] = $this->PrivilegesLevel->get_all(0, 0, null, true)->num_rows();
         $this->load->view('layouts/main', $this->Data);
     }
@@ -179,7 +180,7 @@ class PrivilegesLevelsController extends CI_Controller {
                 'name' => $this->input->post('name'),
                 'code' => $this->input->post('code'),
                 'description' => $this->input->post('description'),
-                'module' => arraytoimplode( $this->input->post('module') ),
+                'modules' => arraytoimplode( $this->input->post('modules') ),
                 'updated_by' => $this->user_id,
             );
             $this->PrivilegesLevel->update($id, $privilegeLevel);

@@ -103,8 +103,8 @@ $route['privileges/delete']['post']  = 'PrivilegesController/delete';
 
 $route['privileges/add']['post']  = 'PrivilegesController/add';
 
-// $route['privileges/edit/(:num)']['post']  = 'PrivilegesController/edit/$1';
-// $route['privileges/update/(:num)']['post']  = 'PrivilegesController/update/$1';
+$route['privileges/edit/(:num)']['post']  = 'PrivilegesController/edit/$1';
+$route['privileges/update/(:num)']['post']  = 'PrivilegesController/update/$1';
 
 /*
 |---------------------------
@@ -126,8 +126,8 @@ $route['privileges-levels/delete']['post']  = 'PrivilegesLevelsController/delete
 
 $route['privileges-levels/add']['post']  = 'PrivilegesLevelsController/add';
 
-// $route['privileges-levels/edit/(:num)']['post']  = 'PrivilegesLevelsController/edit/$1';
-// $route['privileges-levels/update/(:num)']['post']  = 'PrivilegesLevelsController/update/$1';
+$route['privileges-levels/edit/(:num)']['post']  = 'PrivilegesLevelsController/edit/$1';
+$route['privileges-levels/update/(:num)']['post']  = 'PrivilegesLevelsController/update/$1';
 
 /*
 |------------------

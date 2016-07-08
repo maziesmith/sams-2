@@ -135,7 +135,7 @@ jQuery(document).ready(function (e) {
                         } else {
                             $('#edit-privileges-level-form').find('button[name=close]').delay(900).queue(function(next){ $(this).click(); next(); });
                             notify(data.message, data.type, 9000);
-                            reload_table();
+                            reload_privileges_levels_table();
                             $('#edit-privileges-level-form')[0].reset();
                             reload_selectpickers();
                         }

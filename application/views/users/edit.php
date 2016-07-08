@@ -27,7 +27,7 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('password', set_value('password'), array('class'=>'form-control fg-input')) ?>
+                                            <?php echo form_password('password', set_value('password'), array('class'=>'form-control fg-input')) ?>
                                         </div>
                                         <?php echo form_label('Password', 'password', array('class'=>'fg-label')) ?>
                                     </div>
@@ -36,7 +36,7 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('retype_password', set_value('retype_password'), array('class'=>'form-control fg-input')) ?>
+                                            <?php echo form_password('retype_password', set_value('retype_password'), array('class'=>'form-control fg-input')) ?>
                                         </div>
                                         <?php echo form_label('Retype Password', 'retype_password', array('class'=>'fg-label')) ?>
                                     </div>

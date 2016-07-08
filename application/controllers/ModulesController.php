@@ -104,6 +104,14 @@ class ModulesController extends CI_Controller {
 
     public function add()
     {
+        if( !$this->Auth->can('modules/add') ) {
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Add to this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
+
         # Validation
         if( $this->Module->validate(true) ) {
 
@@ -475,6 +483,52 @@ class ModulesController extends CI_Controller {
             'name' => 'Import Privilege',
             'description' => 'Privilege import function',
             'slug' => 'privileges/import',
+        );
+
+        /*
+        | -----------------
+        | # Privileges Levels
+        | -----------------
+        */
+        $modules[] = array(
+            'name' => 'List Privileges Level',
+            'description' => 'Privileges Level list function',
+            'slug' => 'privileges-levels/listing',
+        );
+        $modules[] = array(
+            'name' => 'Add Privileges Level',
+            'description' => 'Privileges Level add function',
+            'slug' => 'privileges-levels/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Privileges Level',
+            'description' => 'Privileges Level edit function',
+            'slug' => 'privileges-levels/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Privileges Level',
+            'description' => 'Privileges Level update function',
+            'slug' => 'privileges-levels/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Privileges Level',
+            'description' => 'Privileges Level remove function',
+            'slug' => 'privileges-levels/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Privileges Level',
+            'description' => 'Privileges Level restore function',
+            'slug' => 'privileges-levels/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Privileges Level',
+            'description' => 'Privileges Level export function',
+            'slug' => 'privileges-levels/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Privileges Level',
+            'description' => 'Privileges Level import function',
+            'slug' => 'privileges-levels/import',
         );
 
         foreach ($modules as $module) {

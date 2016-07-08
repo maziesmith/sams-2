@@ -10,7 +10,7 @@ class User extends CI_Model {
     private $column_softDeletedBy = 'removed_by';
     public $validate = array(
         array( 'field' => 'username', 'label' => 'Username', 'rules' => 'required|trim|is_unique[users.username]' ),
-        // array( 'field' => 'password', 'label' => 'Code', 'rules' => 'trim' ),
+        array( 'field' => 'email', 'label' => 'Email', 'rules' => 'required' ),
     );
 
     function __construct()
@@ -30,14 +30,15 @@ class User extends CI_Model {
         if($is_first_time)
         {
             $this->form_validation->set_message('is_unique', 'The %s is already in use');
-            $this->form_validation->set_rules( 'users_code', 'Code', 'is_unique[users.users_code]' );
+            $this->form_validation->set_rules( 'username', 'Username', 'is_unique[users.username]' );
+            $this->form_validation->set_rules( 'email', 'Email', 'is_unique[users.email]' );
         }
         else
         {
-            $original_value = $this->db->where($this->column_id, $id)->get($this->table)->row()->users_code;
+            $original_value = $this->db->where($this->column_id, $id)->get($this->table)->row()->username;
             if( $value != $original_value ) {
                 $this->form_validation->set_message('is_unique', 'The %s is already in use');
-                $this->form_validation->set_rules( 'users_code', 'Code', 'is_unique[users.users_code]' );
+                $this->form_validation->set_rules( 'username', 'Username', 'is_unique[users.username]' );
             }
         }
 

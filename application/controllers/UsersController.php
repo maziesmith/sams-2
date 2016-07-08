@@ -220,7 +220,7 @@ class UsersController extends CI_Controller {
             | # Validation
             | --------------------------------------
             */
-            if( $this->User->validate(false, $id, $this->input->post('users_code')) )
+            if( $this->User->validate(false, $id, $this->input->post('username')) )
             {
                 /*
                 | --------------------------------------
@@ -228,24 +228,17 @@ class UsersController extends CI_Controller {
                 | --------------------------------------
                 */
                 $user = array(
-                    'users_name'    => $this->input->post('users_name'),
-                    'users_description'   => $this->input->post('users_description'),
-                    'users_code'     => $this->input->post('users_code')
+                    'username'    => $this->input->post('username'),
+                    'password'   => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                    'email'     => $this->input->post('users_code'),
+                    'firstname' => $this->input->post('firstname'),
+                    'middlename' => $this->input->post('middlename'),
+                    'lastname' => $this->input->post('lastname'),
+                    'privilege' => $this->input->post('privilege'),
+                    'privilege_level' => $this->input->post('privilege_level'),
+                    'updated_by' => $this->user_id;
                 );
                 $this->User->update($id, $user);
-                /*
-                | --------------------------------------
-                | # Update the Contacts Users
-                | --------------------------------------
-                */
-                if( null !== $this->input->post('users_contacts') && $contacts_ids = $this->input->post('users_contacts') )
-                {
-                    $users_contacts = explode(",", $contacts_ids);
-
-                    foreach ($users_contacts as $contact_id) {
-                        $this->Contact->update($contact_id, array('contacts_user'=> $id));
-                    }
-                }
 
                 $data = array(
                     'message' => 'User was successfully updated',

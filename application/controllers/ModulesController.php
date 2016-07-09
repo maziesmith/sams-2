@@ -165,11 +165,56 @@ class ModulesController extends CI_Controller {
         }
     }
 
+    /**
+     * Updates the resource
+     *
+     * @param  INT $id
+     * @return JSON or Redirect
+     */
+    public function update($id)
+    {
+        if( $this->Module->validate(false, $id, $this->input->post('slug')) ) {
+            # Update
+            $module = array(
+                'name' => $this->input->post('name'),
+                'slug' => $this->input->post('slug'),
+                'description' => $this->input->post('description'),
+                'updated_by' => $this->user_id,
+            );
+            $this->Module->update($id, $module);
+
+            # Response
+            $data = array(
+                'message' => 'Module was successfully updated',
+                'type' => 'success',
+            );
+        } else {
+            $data = array(
+                'message'=>$this->form_validation->toArray(),
+                'type'=>'error',
+            );
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data);
+        }
+    }
+
+    public function trash()
+    {
+        $this->Data['modules'] = $this->Module->all(true);
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/modulesTrash.js').'"></script>';
+        $this->load->view('layouts/main', $this->Data);
+    }
+
     public function remove($id=null)
     {
         $remove_many = 0;
-        if( null === $id ) $remove_many = 1;
-        if( null === $id ) $id = $this->input->post('id');
+        if( null == $id ) $remove_many = 1;
+        if( null == $id ) $id = $this->input->post('id');
 
         if( $this->Module->remove($id) ) {
             if( 1 == $remove_many ) {
@@ -177,10 +222,13 @@ class ModulesController extends CI_Controller {
             } else {
                 $data['message'] = 'Module was successfully removed';
             }
+            $data['title'] = "Deleted";
             $data['type'] = 'success';
         } else {
+            $data['title'] = "Oops!";
             $data['message'] = 'An error occured while removing the resource';
             $data['type'] = 'error';
+            $data['debug'] = $id;
         }
 
         if( $this->input->is_ajax_request() ) {

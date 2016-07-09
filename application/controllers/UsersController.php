@@ -236,7 +236,7 @@ class UsersController extends CI_Controller {
                     'lastname' => $this->input->post('lastname'),
                     'privilege' => $this->input->post('privilege'),
                     'privilege_level' => $this->input->post('privilege_level'),
-                    'updated_by' => $this->user_id;
+                    'updated_by' => $this->user_id,
                 );
                 $this->User->update($id, $user);
 

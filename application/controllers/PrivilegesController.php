@@ -207,15 +207,15 @@ class PrivilegesController extends CI_Controller {
 
     public function remove($id=null)
     {
-        if( !$this->Auth->can() ) {
-            $this->Data['Headers']->Page = 'errors/403';
-            $this->load->view('layouts/errors', $this->Data);
-            echo json_encode( [
-                'title' => 'Access Denied',
-                'message' => "You don't have permission to Remove this resource",
-                'type' => 'error',
-            ] ); exit();
-        }
+        // if( !$this->Auth->can() ) {
+        //     $this->Data['Headers']->Page = 'errors/403';
+        //     $this->load->view('layouts/errors', $this->Data);
+        //     echo json_encode( [
+        //         'title' => 'Access Denied',
+        //         'message' => "You don't have permission to Remove this resource",
+        //         'type' => 'error',
+        //     ] ); exit();
+        // }
 
         $remove_many = 0;
         if( null === $id ) $remove_many = 1;
@@ -227,8 +227,10 @@ class PrivilegesController extends CI_Controller {
             } else {
                 $data['message'] = 'Privilege was successfully removed';
             }
+            $data['title'] = "Removed";
             $data['type'] = 'success';
         } else {
+            $data['title'] = "Error";
             $data['message'] = 'An error occured while removing the resource';
             $data['type'] = 'error';
         }

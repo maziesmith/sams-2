@@ -189,6 +189,7 @@ function reload_privilege_table () {
 
 function init_privilege_table()
 {
+    var trashCount = 0;
     var selectedPrivilegeRowCount = [];
     privilegeTable = $("#privilege-table-command").bootgrid({
         labels: {
@@ -219,6 +220,15 @@ function init_privilege_table()
             // To accumulate custom parameter with the request object
             // console.log(request);
             return request;
+        },
+        responseHandler: function (response)
+        {
+            // To accumulate custom parameter with the response object
+            // response.customPost = 'anything';
+            // response.current = 2;
+            trashCount = response.trash.count;
+            console.log(response);
+            return response;
         },
         url: base_url('privileges/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
@@ -266,6 +276,7 @@ function init_privilege_table()
         }
 
     }).on("loaded.rs.jquery.bootgrid", function (e) {
+        $('.trash-count').text(trashCount);
         /*
         | -----------------------------------------------------------
         | # Edit

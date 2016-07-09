@@ -234,8 +234,10 @@ class PrivilegesLevelsController extends CI_Controller {
             } else {
                 $data['message'] = 'Privileges Level was successfully removed';
             }
+            $data['title'] = "Removed";
             $data['type'] = 'success';
         } else {
+            $data['title'] = "Error";
             $data['message'] = 'An error occured while removing the resource';
             $data['type'] = 'error';
         }

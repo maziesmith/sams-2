@@ -11,6 +11,10 @@ jQuery(document).ready(function (e) {
     | # Add Privileges Levels
     |-------------------------------
     */
+   $('#add-new-privileges-level-btn').click(function (e) {
+       $('#add-new-privileges-level-form')[0].reset();
+       reload_selectpickers();
+   })
     $('#add-new-privileges-level-form').validate({
         rules: {
             name: 'required',
@@ -165,7 +169,7 @@ jQuery(document).ready(function (e) {
             $.ajax({
                 type: 'POST',
                 url: base_url('privileges-levels/remove'),
-                data: {'id[]': $('#privileges-level-table-command').bootgrid('getSelectedRows')},
+                data: {'id[]': $('#privileges-levels-table').bootgrid('getSelectedRows')},
                 success: function (data) {
                     var data = $.parseJSON(data);
                     reload_privileges_levels_table();
@@ -191,6 +195,7 @@ function reload_privileges_levels_table() {
     jQuery('#privileges-levels-table').bootgrid('reload');
 }
 function init_privileges_levels_table() {
+    var trashCount = 0;
     var privilegesLevelTable =jQuery('#privileges-levels-table').bootgrid({
         labels: {
             loading: '<i class="zmdi zmdi-close zmdi-hc-spin"></i>',
@@ -221,6 +226,15 @@ function init_privileges_levels_table() {
             // console.log(request);
             return request;
         },
+        responseHandler: function (response)
+        {
+            // To accumulate custom parameter with the response object
+            // response.customPost = 'anything';
+            // response.current = 2;
+            trashCount = response.trash.count;
+            console.log(response);
+            return response;
+        },
         url: base_url('privileges-levels/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: true,
@@ -246,6 +260,7 @@ function init_privileges_levels_table() {
         }
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
+        $('.trash-count').text(trashCount);
 
         /*
         | -----------------------------------------------------------
@@ -273,5 +288,38 @@ function init_privileges_levels_table() {
                 }
             });
         });
+
+        /*
+        | -----------------------------------------------------------
+        | # Delete
+        | -----------------------------------------------------------
+        */
+        privilegesLevelTable.find(".command-delete").on("click", function (e) {
+            var id   = $(this).parents('tr').data('row-id'),
+                name = $(this).parents('tr').find('td.name').text(),
+                url  = base_url('privileges-levels/remove') + '/' + id;
+            e.preventDefault();
+            swal({
+                title: "Are you sure?",
+                text: name + " will be deleted permanently from your Privileges Levels",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Delete",
+                closeOnConfirm: false
+            }, function(){
+                // on deleting button
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    success: function (data) {
+                        var data = $.parseJSON(data);
+                        reload_privileges_levels_table();
+                        swal(data.title, data.message, data.type);
+                    }
+                });
+            });
+        });
+
     });
 }

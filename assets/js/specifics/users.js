@@ -24,38 +24,30 @@ $(document).ready(function(){
     | # Validate | Submit
     */
     var $userForm = $('#add-new-user-form').validate({
-        rules: {
-            users_firstname: 'required',
-            users_lastname: 'required',
-            users_street: 'required',
-            users_brgy: 'required',
-            users_city: 'required',
-            users_mobile: 'required',
-            users_email: {
+       rules: {
+            privilege: 'required',
+            privilege_level: 'required',
+            username: 'required',
+            password: 'required',
+            email: {
                 'required': true,
-                'email': true
-            }
+                'email': true,
+            },
         },
         messages: {
-            users_firstname: {
-                'required': "The First Name field is required"
+            privilege: {
+                'required': "The Privilege field is required"
             },
-            users_lastname: {
-                'required': "The Last Name field is required"
+            privilege_level: {
+                'required': "The Privilege Level field is required"
             },
-            users_street: {
-                'required': "The Street field is required"
+            username: {
+                'required': "The Username is required"
             },
-            users_brgy: {
-                'required': "The Subdivision/Brgy field is required"
+            password: {
+                'required': "The Password field is required"
             },
-            users_city: {
-                'required': "The Town / City field is required"
-            },
-            users_mobile: {
-                'required': "The Mobile field is required"
-            },
-            users_email: {
+            email: {
                 'required': "The Email field is required",
                 'email': "The Email field must contain a valid email address"
             },
@@ -86,14 +78,14 @@ $(document).ready(function(){
 
                         $.each(errors, function (k, v) {
                             $('#add-new-user-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
-                            // console.log(k,v);
+                            reload_selectpickers();
                         });
                     }
                     else
                     {
                         notify(data.message, data.type, 9000);
                         $('#add-new-user-form')[0].reset();
-                        $('#add-new-user-form [name=users_firstname]').focus();
+                        $('#add-new-user-form [name=username]').focus();
                         reload_table();
                         reload_selectpickers();
                     }
@@ -150,37 +142,25 @@ $(document).ready(function(){
     */
     $('#edit-user-form').validate({
         rules: {
-            users_firstname: 'required',
-            users_lastname: 'required',
-            users_street: 'required',
-            users_brgy: 'required',
-            users_city: 'required',
-            users_mobile: 'required',
-            users_email: {
+            username: 'required',
+            privilege: 'required',
+            privilege_level: 'required',
+            email: {
                 'required': true,
                 'email': true
             }
         },
         messages: {
-            users_firstname: {
-                'required': "The First Name field is required"
+            username: {
+                'required': "The Username field is required"
             },
-            users_lastname: {
-                'required': "The Last Name field is required"
+            privilege: {
+                'required': "The Privilege field is required"
             },
-            users_street: {
-                'required': "The Street field is required"
+            privilege_level: {
+                'required': "The Privilege Level field is required"
             },
-            users_brgy: {
-                'required': "The Subdivision/Brgy field is required"
-            },
-            users_city: {
-                'required': "The Town / City field is required"
-            },
-            users_mobile: {
-                'required': "The Mobile field is required"
-            },
-            users_email: {
+            email: {
                 'required': "The Email field is required",
                 'email': "The Email field must contain a valid email address"
             },
@@ -201,7 +181,7 @@ $(document).ready(function(){
             var users_id = $(form).find('[name=id]').val();
             if( users_id === 'AJAX_CALL_ONLY' ) {
                 swal("Error", "The User's ID is invalid. Please reload the page and try again.", 'error');
-                $('[name=users_close]').click();
+                $('[name=close]').click();
             } else {
                 $.ajax({
                     type: 'POST',
@@ -211,16 +191,13 @@ $(document).ready(function(){
                         data = JSON.parse(data);
                         console.log(data);
                         resetWarningMessages('.form-group-validation');
-                        if( data.type != 'success' )
-                        {
+                        if( data.type != 'success' ) {
                             var errors = data.message;
-                            $.each(errors, function (k, v) {
+                            $.each(errors, function(k, v) {
                                 $('#edit-user-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
                             });
-                        }
-                        else
-                        {
-                            $('#edit-user-form').find('button[name=users_close]').delay(900).queue(function(next){ $(this).click(); next(); });
+                        } else {
+                            $('#edit-user-form').find('button[name=close]').delay(900).queue(function(next){ $(this).click(); next(); });
                             notify(data.message, data.type, 9000);
                             reload_table();
                             $('#edit-user-form')[0].reset();
@@ -241,6 +218,7 @@ function reload_table()
     $('#user-table-command').bootgrid('reload');
 }
 function init_table() {
+    var trashCount = 0;
     var selectedRowCount = [];
     userTable = $("#user-table-command").bootgrid({
         labels: {
@@ -281,6 +259,7 @@ function init_table() {
             // To accumulate custom parameter with the response object
             // response.customPost = 'anything';
             // response.current = 2;
+            trashCount = response.trash.count;
             console.log(response);
             return response;
         },
@@ -320,6 +299,7 @@ function init_table() {
 
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
+        $('.trash-count').text(trashCount);
         /*
         | ---------------------------------
         | # Checkbox

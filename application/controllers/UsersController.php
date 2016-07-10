@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class UsersController extends CI_Controller {
 
     private $Data = array();
+    private $user_id = 0;
 
     public function __construct()
     {
@@ -13,6 +14,8 @@ class UsersController extends CI_Controller {
         $this->load->model('User', '', TRUE);
         $this->load->model('Privilege', '', TRUE);
         $this->load->model('PrivilegesLevel', '', TRUE);
+
+        $this->user_id = $this->session->userdata('id');
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -43,8 +46,9 @@ class UsersController extends CI_Controller {
     public function index()
     {
         $this->Data['users'] = $this->User->all();
-        $this->Data['form']['privileges_list'] = dropdown_list($this->Privilege->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
-        $this->Data['form']['privileges_levels_list'] = dropdown_list($this->PrivilegesLevel->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
+        $this->Data['form']['privileges_list'] = dropdown_list($this->Privilege->dropdown_list('id, name')->result_array(), ['id', 'name'], 'Select One');
+        $this->Data['form']['privileges_levels_list'] = dropdown_list($this->PrivilegesLevel->dropdown_list('id, name')->result_array(), ['id', 'name'], 'Select One');
+        $this->Data['trash']['count'] = $this->Privilege->get_all(0, 0, null, true)->num_rows();
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -97,6 +101,9 @@ class UsersController extends CI_Controller {
                 "searchPhrase"  => $wildcard,
                 "total"         => intval( $total ),
                 "rows"          => $bootgrid_arr,
+                "trash"         => array(
+                    "count" => $this->Privilege->get_all(0, 0, null, true)->num_rows(),
+                ),
             );
             echo json_encode( $data );
             exit();
@@ -105,8 +112,7 @@ class UsersController extends CI_Controller {
 
     public function add()
     {
-        if( $this->input->is_ajax_request() )
-        {
+        if( $this->input->is_ajax_request() ) {
             /*
             | -------------------------------------
             | # Debug
@@ -122,48 +128,26 @@ class UsersController extends CI_Controller {
             */
             if( $this->User->validate(true) )
             {
+                if( $this->input->post('password') != $this->input->post('retype_password') ) {
+                    echo json_encode(['message'=>array('password'=>"Passwords did not match"), 'type'=>'danger']); exit();
+                }
                 /*
                 | --------------------------------------
                 | # Save
                 | --------------------------------------
                 */
                 $user = array(
-                    'users_name'    => $this->input->post('users_name'),
-                    'users_description' => $this->input->post('users_description'),
-                    'users_code'     => $this->input->post('users_code')
+                    'username'    => $this->input->post('username'),
+                    'password' => password_hash($this->input->post('password', TRUE), PASSWORD_BCRYPT),
+                    'email' => $this->input->post('email'),
+                    'firstname'     => $this->input->post('firstname'),
+                    'middlename' => $this->input->post('middlename'),
+                    'lastname' => $this->input->post('lastname'),
+                    'privilege' => $this->input->post('privilege'),
+                    'privilege_level' => $this->input->post('privilege_level'),
+                    'created_by' => $this->user_id,
                 );
                 $user_id = $this->User->insert($user);
-                /*
-                | --------------------------------------
-                | # Save the Contacts Users
-                | --------------------------------------
-                */
-                if( null !== $this->input->post('users_contacts') && $contacts_ids = $this->input->post('users_contacts') )
-                {
-                    $users_contacts = explode(",", $contacts_ids);
-                    foreach ($users_contacts as $contact_id) {
-                        $contact = $this->Contact->find($contact_id);
-                        $contact_user = explode( ",", $contact->contacts_user);
-
-                        # Check if the value is already in the resource,
-                        # add to array if not.
-                        if( !in_array($user_id, $contact_user) ) {
-                            $contact_user[] = $user_id;
-                        } else {
-                            $data = array(
-                                'message' => 'Contact is already in this user',
-                                'type' => 'danger',
-                                // 'debug' => $contact_user,
-                                // "input" => $this->input->post('value'),
-                            );
-                            echo json_encode( $data );
-                            exit();
-                        }
-
-                        $contact_user = arraytoimplode($contact_user);
-                        $this->Contact->update($contact_id, array('contacts_user'=> $contact_user));
-                    }
-                }
 
                 /*
                 | ----------------------------------------
@@ -175,9 +159,7 @@ class UsersController extends CI_Controller {
                     'type'    => 'success'
                 );
                 echo json_encode( $data ); exit();
-            }
-            else
-            {
+            } else {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
             }
 
@@ -220,8 +202,11 @@ class UsersController extends CI_Controller {
             | # Validation
             | --------------------------------------
             */
-            if( $this->User->validate(false, $id, $this->input->post('username')) )
+            if( $this->User->validate(false, $id, $this->input->post('username'), $this->input->post('email')) )
             {
+                if( $this->input->post('password') != $this->input->post('retype_password') ) {
+                    echo json_encode(['message'=>array('password'=>"Passwords did not match"), 'type'=>'danger']); exit();
+                }
                 /*
                 | --------------------------------------
                 | # Update
@@ -229,8 +214,7 @@ class UsersController extends CI_Controller {
                 */
                 $user = array(
                     'username'    => $this->input->post('username'),
-                    'password'   => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
-                    'email'     => $this->input->post('users_code'),
+                    'email'     => $this->input->post('email'),
                     'firstname' => $this->input->post('firstname'),
                     'middlename' => $this->input->post('middlename'),
                     'lastname' => $this->input->post('lastname'),
@@ -238,6 +222,10 @@ class UsersController extends CI_Controller {
                     'privilege_level' => $this->input->post('privilege_level'),
                     'updated_by' => $this->user_id,
                 );
+                if( null != $this->input->post('password') ) {
+                    $user['password'] = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
+                }
+
                 $this->User->update($id, $user);
 
                 $data = array(
@@ -251,6 +239,72 @@ class UsersController extends CI_Controller {
             {
                 echo json_encode(['message'=>$this->form_validation->toArray(), 'type'=>'danger']); exit();
             }
+        }
+    }
+
+    public function trash()
+    {
+        $this->Data['users'] = $this->User->all(true);
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/usersTrash.js').'"></script>';
+        $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function remove($id=null)
+    {
+        // if( !$this->Auth->can() ) {
+        //     $this->Data['Headers']->Page = 'errors/403';
+        //     $this->load->view('layouts/errors', $this->Data);
+        //     echo json_encode( [
+        //         'title' => 'Access Denied',
+        //         'message' => "You don't have permission to Remove this resource",
+        //         'type' => 'error',
+        //     ] ); exit();
+        // }
+
+        $remove_many = 0;
+        if( null === $id ) $remove_many = 1;
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->User->remove($id) ) {
+            if( 1 == $remove_many ) {
+                $data['message'] = 'Users were successfully removed';
+            } else {
+                $data['message'] = 'User was successfully removed';
+            }
+            $data['title'] = "Removed";
+            $data['type'] = 'success';
+        } else {
+            $data['title'] = "Error";
+            $data['message'] = 'An error occured while removing the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('users');
+        }
+    }
+
+    public function restore($id=null)
+    {
+        if( null === $id ) $id = $this->input->post('id');
+
+        if( $this->User->restore($id) ) {
+            $data['message'] = 'User was successfully restored';
+            $data['type'] = 'success';
+        } else {
+            $data['message'] = 'An error occured while trying to restore the resource';
+            $data['type'] = 'error';
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data );
+            redirect('users');
         }
     }
 

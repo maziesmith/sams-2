@@ -9,8 +9,10 @@ class User extends CI_Model {
     private $column_softDelete = 'removed_at';
     private $column_softDeletedBy = 'removed_by';
     public $validate = array(
-        array( 'field' => 'username', 'label' => 'Username', 'rules' => 'required|trim|is_unique[users.username]' ),
+        array( 'field' => 'username', 'label' => 'Username', 'rules' => 'required|trim' ),
         array( 'field' => 'email', 'label' => 'Email', 'rules' => 'required' ),
+        array( 'field' => 'privilege', 'label' => 'Privilege', 'rules' => 'required' ),
+        array( 'field' => 'privilege_level', 'label' => 'Privilege Level', 'rules' => 'required' ),
     );
 
     function __construct()
@@ -18,7 +20,7 @@ class User extends CI_Model {
         parent::__construct();
     }
 
-    public function validate($is_first_time=false, $id=null, $value=null)
+    public function validate($is_first_time=false, $id=null, $value=null, $email=null)
     {
         $this->load->library('form_validation');
 
@@ -36,9 +38,14 @@ class User extends CI_Model {
         else
         {
             $original_value = $this->db->where($this->column_id, $id)->get($this->table)->row()->username;
+            $original_email = $this->db->where($this->column_id, $id)->get($this->table)->row()->email;
             if( $value != $original_value ) {
                 $this->form_validation->set_message('is_unique', 'The %s is already in use');
                 $this->form_validation->set_rules( 'username', 'Username', 'is_unique[users.username]' );
+            }
+            if( $email != $original_email ) {
+                $this->form_validation->set_message('is_unique', 'The %s is already in use');
+                $this->form_validation->set_rules( 'email', 'Email', 'is_unique[users.email]' );
             }
         }
 
@@ -57,13 +64,14 @@ class User extends CI_Model {
         $this->db->insert($this->table, $data);
     }
 
-    public function all()
+    public function all($removed_only=false)
     {
-        $query = $this->db->get($this->table);
+        if( $removed_only ) return $this->db->where($this->column_softDelete ." != ", NULL)->get($this->table)->result();
+        $query = $this->db->where($this->column_softDelete, NULL)->get($this->table);
         return $query->result();
     }
 
-    public function get_all($start_from=0, $limit=0, $sort=null)
+    public function get_all($start_from=0, $limit=0, $sort=null, $removed_only=false)
     {
         if( null != $sort )
         {
@@ -74,7 +82,8 @@ class User extends CI_Model {
 
         $this->db->limit( $limit, $start_from );
 
-        return $this->db->get($this->table);
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " != ", NULL)->get($this->table);
+        return $this->db->where($this->column_softDelete, NULL)->get($this->table);
     }
 
     public function find($id)
@@ -117,6 +126,13 @@ class User extends CI_Model {
 
         if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->get();
         return $this->db->where($this->column_softDelete, NULL)->get();
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, $data);
+        return true;
     }
 
     public function fullname($id, $format=1)

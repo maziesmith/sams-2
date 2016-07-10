@@ -65,4 +65,43 @@ class AuthController extends CI_Controller {
         $this->session->sess_destroy();
         redirect('login');
     }
+
+    public function register()
+    {
+        if( $this->Auth->validate( $this->input->post('email') ) ) {
+            if( $this->input->post('password') != $this->input->post('retype_password') ) {
+                echo json_encode(['message'=>array('password'=>"Passwords did not match"), 'type'=>'danger']); exit();
+            }
+
+            $user = array(
+                'username' => $this->input->post('username'),
+                'password' => password_hash($this->input->post('password', TRUE), PASSWORD_BCRYPT),
+                'email' => $this->input->post('email'),
+                'privilege' => 1,
+                'privilege_level' => 1,
+                'created_by' => $this->user_id,
+            );
+
+            $this->User->insert($user);
+            $data = array(
+                'message' => 'User was successfully added',
+                'type'    => 'success'
+            );
+
+        } else {
+            # Negative Response
+            $data = array(
+                'title' => "Errors",
+                'message'=>$this->form_validation->toArray(),
+                'type'=>'danger',
+            );
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data);
+            redirect( base_url('login') );
+        }
+    }
 }

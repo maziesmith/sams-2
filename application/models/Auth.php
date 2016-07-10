@@ -5,10 +5,41 @@ class Auth extends CI_Model {
 
     private $table = 'users';
     private $column_id = 'id';
+    public $validations = array(
+        array( 'field' => 'username', 'label' => 'username', 'rules' => 'required|trim' ),
+        array( 'field' => 'password', 'label' => 'password', 'rules' => 'required|trim' ),
+        array( 'field' => 'email', 'label' => 'Email', 'rules' => 'trim|valid_email' ),
+    );
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function validate($value=null)
+    {
+        $this->load->library('form_validation');
+
+        foreach ($this->validations as $validation) {
+            $this->form_validation->set_rules( $validation['field'], $validation['label'], $validation['rules'] );
+        }
+
+        $original = $this->db->where('username', $value)->get($this->table)->row()->username;
+        /**
+         * Only reset the rules if the
+         * Original value is not equal to
+         * the current value
+         */
+        if( null != $original && ($value != $original) ) {
+            $this->form_validation->set_message('is_unique', 'The %s is already in use');
+            $this->form_validation->set_rules( 'email', 'Email', 'trim|valid_email|is_unique['.$this->table.'.email]' );
+        }
+
+        if ($this->form_validation->run() == FALSE) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public function check($username, $password, $remember_me=false)

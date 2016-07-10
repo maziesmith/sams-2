@@ -42,6 +42,15 @@
                                     </div>
                                 </div>
 
+                                <div class="pad-zero-right">
+                                    <div class="form-group fg-float form-group-validation">
+                                        <div class="fg-line">
+                                            <?php echo form_input('email', set_value('email'), array('class'=>'form-control fg-input')) ?>
+                                        </div>
+                                        <?php echo form_label('Email', 'email', array('class'=>'fg-label')) ?>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 

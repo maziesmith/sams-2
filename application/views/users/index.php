@@ -1,5 +1,11 @@
 <section id="content">
     <div class="container">
+        <?php $this->load->view('partials/messages') ?>
+
+        <div class="toolbar-group text-right">
+            <a href="<?php echo base_url('users/trash'); ?>" class="btn btn-danger btn-link toolbar-item"><i class="fa fa-trash">&nbsp;</i>Trashed (<span class="trash-count"><?php echo $trash['count'] ?></span>)</a>
+        </div>
+
         <div class="card"><?php
 
             echo breadcrumbs(); ?>

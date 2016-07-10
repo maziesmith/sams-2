@@ -24,7 +24,7 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('password', set_value('password'), array('class'=>'form-control fg-input')) ?>
+                                            <?php echo form_password('password', set_value('password'), array('class'=>'form-control fg-input')) ?>
                                         </div>
                                         <?php echo form_label('Password', 'password', array('class'=>'fg-label')) ?>
                                     </div>
@@ -33,9 +33,18 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('retype_password', set_value('retype_password'), array('class'=>'form-control fg-input')) ?>
+                                            <?php echo form_password('retype_password', set_value('retype_password'), array('class'=>'form-control fg-input')) ?>
                                         </div>
                                         <?php echo form_label('Retype Password', 'retype_password', array('class'=>'fg-label')) ?>
+                                    </div>
+                                </div>
+
+                                <div class="pad-zero-right">
+                                    <div class="form-group fg-float form-group-validation">
+                                        <div class="fg-line">
+                                            <?php echo form_input('email', set_value('email'), array('class'=>'form-control fg-input')) ?>
+                                        </div>
+                                        <?php echo form_label('Email', 'email', array('class'=>'fg-label')) ?>
                                     </div>
                                 </div>
 
@@ -93,10 +102,10 @@
                         <div class="col-md-6 m-b-20">
                             <div class="pad-zero-right">
                                 <div class="form-group fg-float form-group-validation">
-                                    <?php echo form_label('Privilege Level', 'level', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
-                                    <?php echo form_dropdown('level',
+                                    <?php echo form_label('Privilege Level', 'privilege_level', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
+                                    <?php echo form_dropdown('privilege_level',
                                         $form['privileges_levels_list'],
-                                        set_value('level'), 'class="tag-select"'
+                                        set_value('privilege_level'), 'class="tag-select"'
                                     ) ?>
                                 </div>
                             </div>

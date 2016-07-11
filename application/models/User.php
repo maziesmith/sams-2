@@ -62,6 +62,7 @@ class User extends CI_Model {
     public function insert($data)
     {
         $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
     }
 
     public function all($removed_only=false)

@@ -396,8 +396,6 @@ class UsersController extends CI_Controller {
 
     public function seed()
     {
-        // $this->load->library('PasswordHash', array(8, FALSE));
-        // $check = $this->PasswordHash->CheckPassword($password, $actualPassword);
         $data = array(
             'username'    => 'admin',
             'password'   => password_hash('admin', PASSWORD_BCRYPT),

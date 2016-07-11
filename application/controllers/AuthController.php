@@ -9,8 +9,8 @@ class AuthController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Contact', '', TRUE);
-        $this->load->model('Auth', '', TRUE);
+
+        $this->load->model('User', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -27,7 +27,7 @@ class AuthController extends CI_Controller {
      */
     public function index($message = null)
     {
-        $this->Data['message'] = $this->session->flashdata('error');
+        $this->Data['message'] = $this->session->flashdata('message');
         return $this->load->view('auth/login', $this->Data);
     }
 
@@ -68,31 +68,40 @@ class AuthController extends CI_Controller {
 
     public function register()
     {
-        if( $this->Auth->validate( $this->input->post('email') ) ) {
+        if( $this->Auth->validate( array( 'email' => $this->input->post('email'), 'username' => $this->input->post('username') ) )) {
+
             if( $this->input->post('password') != $this->input->post('retype_password') ) {
-                echo json_encode(['message'=>array('password'=>"Passwords did not match"), 'type'=>'danger']); exit();
+                echo json_encode(['message'=>array('retype_password'=>"Passwords did not match"), 'type'=>'danger']); exit();
             }
 
+            $username = $this->security->xss_clean($this->input->post('username'));
+            $password = $this->security->xss_clean($this->input->post('password'));
             $user = array(
-                'username' => $this->input->post('username'),
-                'password' => password_hash($this->input->post('password', TRUE), PASSWORD_BCRYPT),
+                'username' => $username,
+                'password' => password_hash( $password, PASSWORD_BCRYPT ),
                 'email' => $this->input->post('email'),
+                'firstname' => 'Edit',
+                'middlename' => 'your',
+                'lastname' => 'name',
                 'privilege' => 1,
                 'privilege_level' => 1,
-                'created_by' => $this->user_id,
+                'remember_token' => 0,
+                'created_by' => 0,
             );
 
             $this->User->insert($user);
+
             $data = array(
-                'message' => 'User was successfully added',
-                'type'    => 'success'
+                'title' => 'Success',
+                'message' => 'User was successfully Registered. Please Log in.',
+                'type'    => 'success',
             );
 
         } else {
             # Negative Response
             $data = array(
                 'title' => "Errors",
-                'message'=>$this->form_validation->toArray(),
+                'message' => $this->form_validation->toArray(),
                 'type'=>'danger',
             );
         }
@@ -100,6 +109,7 @@ class AuthController extends CI_Controller {
         if( $this->input->is_ajax_request() ) {
             echo json_encode( $data ); exit();
         } else {
+            $data['debug'] = 'l';
             $this->session->set_flashdata('message', $data);
             redirect( base_url('login') );
         }

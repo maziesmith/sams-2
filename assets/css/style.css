@@ -319,3 +319,8 @@ noscript {
 	background-color: rgba(255,0,0,0.3);
 	color: #ffffff;
 }
+
+.form-group-validation .m-b-20 ~ .help-block {
+    text-align: left;
+    margin-top: -15px;
+}

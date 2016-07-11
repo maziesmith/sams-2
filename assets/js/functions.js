@@ -941,7 +941,8 @@ function resetWarningMessages(toReset)
     $(toReset).each(function () {
         $(this).removeClass('has-warning');
         $(this).find('.help-block.error').remove();
-    })
+        $(this).find('.help-block').remove();
+    });
 }
 
 function slugify ($text) {

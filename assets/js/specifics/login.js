@@ -1,6 +1,5 @@
 jQuery(document).ready(function ($) {
     $('#register-form').submit(function (e) {
-        e.preventDefault();
         $.ajax({
             method: "POST",
             url: base_url('auth/register'),
@@ -17,10 +16,13 @@ jQuery(document).ready(function ($) {
                 } else {
                     // console.log(data);
                     notify(data.message, data.type, 9000);
+
                     $('#register-form')[0].reset();
                     $('#register-form [name=username]').focus();
                 }
+                console.log(data);
             }
         });
+        e.preventDefault();
     });
 })

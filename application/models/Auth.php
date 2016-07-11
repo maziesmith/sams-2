@@ -1,8 +1,7 @@
 <?php
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
-class Auth extends CI_Model {
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+class Auth extends CI_Model {
     private $table = 'users';
     private $column_id = 'id';
     public $validations = array(
@@ -24,16 +23,30 @@ class Auth extends CI_Model {
             $this->form_validation->set_rules( $validation['field'], $validation['label'], $validation['rules'] );
         }
 
-        $original = $this->db->where('username', $value)->get($this->table)->row()->username;
-        /**
-         * Only reset the rules if the
-         * Original value is not equal to
-         * the current value
-         */
-        if( null != $original && ($value != $original) ) {
-            $this->form_validation->set_message('is_unique', 'The %s is already in use');
-            $this->form_validation->set_rules( 'email', 'Email', 'trim|valid_email|is_unique['.$this->table.'.email]' );
-        }
+        $this->form_validation->set_message('is_unique', 'The %s is already in use');
+        $this->form_validation->set_rules( 'username', 'Username', 'is_unique[users.username]' );
+        $this->form_validation->set_message('is_unique', 'The %s is already in use');
+        $this->form_validation->set_rules( 'email', 'Email', 'valid_email|is_unique[users.email]' );
+
+        // if( is_array( $value ) ) {
+        //     $original_username = $this->db->where('username', $value['username'])->get($this->table)->row()->username;
+        //     if( null != $original_username && ($value['username'] != $original_username) ) {
+        //         $this->form_validation->set_message('is_unique', 'The %s is already in use');
+        //         $this->form_validation->set_rules( 'username', 'Username', 'trim|is_unique['.$this->table.'.username]' );
+        //     }
+        //     $original_email = $this->db->where('email', $value['email'])->get($this->table)->row()->email;
+        //     if( null != $original_email && ($value['email'] != $original_email) ) {
+        //         $this->form_validation->set_message('is_unique', 'The %s is already in use');
+        //         $this->form_validation->set_rules( 'email', 'Email', 'trim|is_unique['.$this->table.'.email]' );
+        //     }
+        // } else {
+        //     $original = $this->db->where('username', $value)->get($this->table)->row()->username;
+        //     if( null != $original && ($value != $original) ) {
+        //         $this->form_validation->set_message('is_unique', 'The %s is already in use');
+        //         $this->form_validation->set_rules('username', 'Username', 'trim|is_unique['.$this->table.'.username]');
+        //     }
+        // }
+
 
         if ($this->form_validation->run() == FALSE) {
             return false;
@@ -44,8 +57,8 @@ class Auth extends CI_Model {
 
     public function check($username, $password, $remember_me=false)
     {
-        $this->db->where('username', $username);
-        $query = $this->db->get('users');
+        $query = $this->db->where('username', $username)->get('users');
+        // $this->db;
         if($query->num_rows() == 1 && ($row = $query->row()) ) {
 
             if( password_verify($password, $row->password) ) {

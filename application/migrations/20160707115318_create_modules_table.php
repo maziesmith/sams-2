@@ -35,6 +35,8 @@ class Migration_create_modules_table extends CI_Migration {
 
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('modules');
+        $this->pdo = $this->load->database('pdo', true);
+        $this->db->query('ALTER TABLE `'.$this->pdo->dbprefix.'modules` ADD UNIQUE INDEX (`slug`)');
     }
 
     public function down()

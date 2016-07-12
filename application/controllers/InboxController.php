@@ -39,10 +39,13 @@ class InboxController extends CI_Controller {
     {
         $this->Data['Headers']->Page = 'inbox/index';
         // $inbox = $this->Inbox->all();
-        $inbox = $this->Inbox->messages('members.msisdn = inbox.msisdn', 'members', 'inbox.created_at, members.firstname, members.lastname, inbox.msisdn, inbox.body, inbox.smsc, members.groups, outbox.status');
+        $contacts = $this->Inbox->contacts();
+        $msisdn = "09235003433";
+        $inbox = $this->Inbox->messages($msisdn);
         // $this->Data['inbox'] = $inbox;
 
         $this->Data['inbox'] = $inbox;
+        $this->Data['contacts'] = $contacts;
         $this->load->view('layouts/main', $this->Data);
     }
 

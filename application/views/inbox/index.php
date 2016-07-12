@@ -9,36 +9,31 @@
             <div class="ms-menu">
                 <div class="ms-block">
                     <div class="ms-user">
-                        <img src="//placeimg.com/80/80/people" alt="">
+                        <!-- <img src="//placeimg.com/80/80/people" alt=""> -->
                         <div>Signed in as <br/> <?php echo get_fullname(); ?></div>
                     </div>
                 </div>
 
-                <!-- <div class="ms-block">
-                    <div class="dropdown">
-                        <a class="btn btn-primary btn-block" href="" data-toggle="dropdown">Messages <i class="caret m-l-5"></i></a>
-                        <ul class="dropdown-menu dm-icon w-100">
-                            <li><a href=""><i class="zmdi zmdi-email"></i> Messages</a></li>
-                            <li><a href=""><i class="zmdi zmdi-account"></i> Contacts</a></li>
-                            <li><a href=""><i class="zmdi zmdi-format-list-bulleted"> </i>Todo Lists</a></li>
-                        </ul>
+                <div class="ms-block">
+                    <div>
+                        <a href="#" class="btn btn-link active">Contacts</a>
+                        <a href="#" class="btn btn-link ">Groups</a>
                     </div>
                 </div>
- -->
                 <div class="listview lv-user m-t-20">
 
                     <!-- loop -->
                     <?php
-                    foreach ($inbox as $member) { ?>
-                        <a href="<?php echo $member->msisdn; ?>" class="lv-item media active">
+                    foreach ($contacts as $i => $contact) { ?>
+                        <a class="lv-item media active" href="#" data-href="<?php echo $contact->msisdn; ?>" >
                             <div class="lv-avatar pull-left">
                                 <div class="lv-avatar-inner">
-                                    <?php echo acronymify(array($member->firstname, $member->lastname)); ?>
+                                    <?php echo acronymify(array($contact->firstname, $contact->lastname)); ?>
                                 </div>
                             </div>
                             <div class="media-body">
-                                <div class="lv-title"><?php echo arraytostring([$member->firstname, $member->lastname], ' '); ?></div>
-                                <!-- <div class="lv-small">L</div> -->
+                                <div class="lv-title"><?php echo arraytostring([$contact->firstname, $contact->lastname], ' '); ?></div>
+                                <div class="lv-small"><?php echo $contact->msisdn; ?></div>
                             </div>
                         </a>
                     <?php } ?>
@@ -118,12 +113,7 @@
 
                     <div class="lv-body">
                         <?php foreach ($inbox as $i => $message) { ?>
-                            <div class="lv-item media">
-                                <div class="lv-avatar pull-<?php echo ($i%2==0) ? 'left' : 'right'; ?>">
-                                    <div class="lv-avatar-inner">
-                                        <?php echo acronymify(array($member->firstname, $member->lastname)); ?>
-                                    </div>
-                                </div>
+                            <div class="lv-item media <?php echo ("outbox" == $message->table_name) ? 'right' : ''; ?>">
                                 <div class="media-body">
                                     <div class="ms-item">
                                         <?php echo $message->body; ?>

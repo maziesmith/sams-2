@@ -53,9 +53,10 @@
     </li>
     <li><hr></li>
 
-    <li class="sub-menu <?php echo check_link(['messaging/inbox', 'messaging/outbox', 'messaging/tracking', 'messaging/templates']) ?>">
+    <li class="sub-menu <?php echo check_link(['messaging/new', 'messaging/inbox', 'messaging/outbox', 'messaging/tracking', 'messaging/templates']) ?>">
         <a role="button"><i class="zmdi zmdi-email"></i> Messaging</a>
         <ul>
+            <li class="<?php echo check_link('messaging/new') ?>" ><?php echo anchor( base_url('messaging/new'), 'New' ); ?></li>
             <li class="<?php echo check_link('messaging/inbox') ?>" ><?php echo anchor( base_url('messaging/inbox'), 'Inbox' ); ?></li>
             <li class="<?php echo check_link('messaging/outbox') ?>" ><?php echo anchor( base_url('messaging/outbox'), 'Outbox' ); ?></li>
             <li class="<?php echo check_link('messaging/tracking') ?>" ><?php echo anchor( base_url('messaging/tracking'), 'Tracking' ); ?></li>

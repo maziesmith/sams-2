@@ -298,6 +298,8 @@ $route['types/export']['get']  = 'TypesController/export';
 | # Messaging
 |----------------
 */
+$route['messaging/new']['get'] = 'MessagingController/index';
+$route['messaging/send']['post'] = 'MessagingController/send';
 $route['messaging/inbox']['get'] = 'InboxController/index';
 
 /*

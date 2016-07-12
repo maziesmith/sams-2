@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MessagesController extends CI_Controller {
+class MessagingController extends CI_Controller {
 
     private $Data = array();
 

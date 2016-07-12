@@ -129,7 +129,7 @@
                                         <?php echo $message->body; ?>
                                     </div>
                                     <small class="ms-date">
-                                        <i class="zmdi zmdi-time">&nbsp;</i><?php echo date('m/d/Y  h:i', strtotime($message->created_at)); ?>
+                                        <i class="zmdi zmdi-time">&nbsp;</i><?php echo date('m/d/Y \a\t h:i', strtotime($message->created_at)); ?>
                                     </small>
                                 </div>
                             </div>

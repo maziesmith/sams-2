@@ -40,7 +40,7 @@ class Inbox extends CI_Model {
         if( null == $table ) $table = $this->contacts_table;
         $query = $this->db->select($select);
         $query->join($table, $compare);
-        $query->join($this->outbox_table, 'outbox.msisdn = inbox.msisdn');
+        // $query->join($this->outbox_table, 'outbox.msisdn = inbox.msisdn');
         return $query->get( $this->table )->result();
     }
 }

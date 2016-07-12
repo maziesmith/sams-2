@@ -324,3 +324,7 @@ noscript {
     text-align: left;
     margin-top: -15px;
 }
+
+.lv-avatar-inner {
+	background-color: #454545;
+}

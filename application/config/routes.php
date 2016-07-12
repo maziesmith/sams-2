@@ -298,7 +298,7 @@ $route['types/export']['get']  = 'TypesController/export';
 | # Messaging
 |----------------
 */
-$route['messaging/inbox']['get'] = 'MessagesController/index';
+$route['messaging/inbox']['get'] = 'InboxController/index';
 
 /*
 | ---------------

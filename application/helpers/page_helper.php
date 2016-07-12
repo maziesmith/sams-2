@@ -153,7 +153,7 @@ if ( ! function_exists('explodetoarray'))
 {
     function explodetoarray($string, $delimeter=",")
     {
-        return  (is_string($string)) ? explode($delimeter, trim($string)) : $string;
+        return (is_string($string)) ? explode($delimeter, trim($string)) : $string;
     }
 }
 
@@ -165,5 +165,25 @@ if( !function_exists('get_fullname') ) {
         $lastname = $CI->session->lastname;
         if( $formal ) return $lastname . ", " . $firstname;
         return $firstname . " " . $lastname;
+    }
+}
+
+/*
+| -----------------------------------
+| # Acronymify
+| -----------------------------------
+*/
+if ( ! function_exists('acronymify'))
+{
+    function acronymify($array, $glue="")
+    {
+        $CI = get_instance();
+
+        $pieces = array();
+        foreach ($array as $string) {
+            $pieces[] = strtoupper($string[0]);
+        }
+
+        return implode($glue, $pieces);
     }
 }

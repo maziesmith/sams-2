@@ -37,23 +37,47 @@ class Inbox extends CI_Model {
 
     public function messages($msisdn, $order_by="ASC")
     {
-        $query  = "SELECT 'inbox' as table_name, id, body, msisdn, smsc, created_at "; # last space important
+        $query="";
+
+        $query .= " SELECT 'inbox' AS table_name, id, body, msisdn, smsc, created_at, NULL AS member_id "; # last space important
         $query .= " FROM " . $this->table;
-        $query .= " WHERE msisdn = " . $msisdn;
+        $query .= " WHERE msisdn IN (" . $msisdn . ") ";
+
         $query .= " UNION ";
-        $query .= " SELECT 'outbox' as table_name, id, (SELECT message FROM outbox INNER JOIN messages ON outbox.message_id = messages.id) AS body, msisdn, smsc, created_at ";
-        $query .= " FROM outbox ";
-        $query .= " WHERE msisdn = " . $msisdn;
+
+        $query .= " SELECT 'outbox' AS table_name, id, (SELECT message FROM messages WHERE outbox.message_id = messages.id) AS body, msisdn, smsc, (SELECT messages.created_at FROM messages WHERE outbox.message_id = messages.id) AS created_at, member_id ";
+        $query .= " FROM " . $this->outbox_table;
+        $query .= " WHERE msisdn IN (" . $msisdn . ")";
+        $query .= " GROUP BY message_id ";
+
         $query .= " ORDER BY created_at " . $order_by;
         return $this->db->query( $query )->result();
     }
 
-    public function contacts($compare='members.msisdn = inbox.msisdn', $table=null, $select="*")
+    public function contacts($order_by="ASC", $table=null)
     {
         if( null == $table ) $table = $this->contacts_table;
-        $query = $this->db->select($select);
-        $query->join($table, $compare);
-        $query->group_by('members.id');
-        return $query->get( $this->table )->result();
+        $query = "";
+
+        $query .= " SELECT 'inbox' as table_name, inbox.id, body, inbox.msisdn, smsc, inbox.created_at, concat(members.firstname, ' ', members.lastname) as fullname, members.firstname, members.lastname ";
+        $query .= " FROM " . $this->table;
+
+        $query .= " LEFT JOIN members ON inbox.msisdn = members.msisdn ";
+            // $query .= " (SELECT firstname FROM members WHERE members.msisdn = inbox.msisdn) AS firstname, ";
+            // $query .= " (SELECT lastname FROM members WHERE members.msisdn = inbox.msisdn) AS lastname ";
+
+        // $query .= " WHERE inbox.msisdn IN (SELECT msisdn FROM members)";
+
+        $query .= " GROUP BY members.id ";
+
+        $query .= " ORDER BY inbox.created_at " . $order_by;
+
+        $q = $this->db->query( $query )->result();
+        $contacts = [];
+        foreach ($q as $contact) {
+            $contacts[$contact->msisdn][] = $contact;
+        }
+
+        return $contacts;
     }
 }

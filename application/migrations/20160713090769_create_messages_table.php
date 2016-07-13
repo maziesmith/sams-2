@@ -27,6 +27,7 @@ class Migration_create_messages_table extends CI_Migration {
             ),
         ));
 
+        $this->dbforge->add_field('created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP');
         $this->dbforge->add_key('id', TRUE);
         $this->dbforge->create_table('messages');
     }

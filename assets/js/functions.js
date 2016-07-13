@@ -985,3 +985,10 @@ function reload_selectpickers_key($key, $values)
         $('select[name="'+$key+'"]').val( $values.split(",") ).trigger("chosen:updated");
     }
 }
+
+function truncate(string, limit){
+   if (string.length > limit)
+      return string.substring(0,limit)+'...';
+   else
+      return string;
+};

@@ -75,12 +75,23 @@ class Member extends CI_Model {
         return $this->db->where($this->column_softDelete, NULL)->get($this->table);
     }
 
-    public function find($id)
+    public function find($id, $column=null)
     {
-        if( is_array($id) ) return $this->db->where_in($this->column_id, $id)->get($this->table);
+        if (null != $column) {
+            $query = $this->db->where($column, $id)->get($this->table);
+            return $query->row();
+        }
+
+        if ( is_array($id) ) return $this->db->where_in($this->column_id, $id)->get($this->table);
 
         $query = $this->db->where($this->column_id, $id)->get($this->table);
         return $query->row();
+    }
+
+    public function find_member_via_msisdn($msisdn)
+    {
+        $query = $this->db->where('msisdn', $msisdn)->get($this->table);
+        return $query->result();
     }
 
     public function like($wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)

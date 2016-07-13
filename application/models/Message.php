@@ -1,11 +1,10 @@
 <?php
-<?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Inbox extends CI_Model {
-    private $table = 'inbox';
-    private $outbox_table = 'outbox';
+class Message extends CI_Model {
+    private $table = 'messages';
     private $contacts_table = 'members';
+    private $outbox_table = 'outbox';
     private $column_id = 'id';
     private $column_softDelete = 'removed_at';
     private $column_softDeletedBy = 'removed_by';
@@ -27,17 +26,14 @@ class Inbox extends CI_Model {
         return "http://localhost/MCS-SMS/cgi/dlr.php?type=%d&answer=%A";
     }
 
-    function send($id, $msisdn, $smsc, $body, $member_id, $group_id) {
-        $d = Array();
-        $d['message_id'] = $id;
-        $d['msisdn']     = $msisdn;
-        $d['member_id']  = $member_id;
-        $d['group_id']   = $group_id;
-        $d['smsc']       = ($smsc) ? $smsc : 'globe';
-        $d['created_on'] ="NOW()";
-        $d['status'] ='pending';
-        $id = $this->insert('outbox', $d);
+    public function insert($data)
+    {
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
+    }
 
+    public function send($id, $msisdn, $smsc, $body, $groups=null) {
+        #
         $dlr = self::DLR_URL() . '&outbox_id=' . $id;
         $smsc = ""; //DISABLE SMSC USE RAMDOM SENDING;
         $url = self::SEND_URL() . '&to=' . $msisdn . '&text=' . urlencode($body) . '&smsc=' . $smsc . '&dlr-url=' . urlencode($dlr);
@@ -48,7 +44,7 @@ class Inbox extends CI_Model {
         $str = ob_get_contents();
         ob_end_clean();
         curl_close ($ch);
-        $this->query("update outbox set extra = '$str' where id='$id'");
+        $this->query("UPDATE ".$this->outbox_table." SET extra = '$str' where id='$id'");
     }
 }
  ?>

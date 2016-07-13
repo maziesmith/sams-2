@@ -277,6 +277,13 @@ ul.breadcrumb .active {
 		padding-left: 0;
 	}
 }
+@media only screen and (max-width: 480px) {
+	.login-navigation li {
+		font-size: 8px !important;
+	    border-radius: 10px !important;
+	    padding: 0 5px !important;
+	}
+}
 /*
 | ----------------------------
 | # Media Queries
@@ -327,4 +334,28 @@ noscript {
 
 .lv-avatar-inner {
 	background-color: #454545;
+}
+.lv-message .lv-body {
+	min-height: 500px;
+}
+#inbox-conversation-viewer .lv-footer {
+	padding: 0;
+}
+#messages-main .ms-menu .lv-item.active {
+    background: #ffc107;
+	font-weight: bold;
+}
+#messages-main .ms-menu .lv-item.active .lv-small {
+	color: white;
+}
+#messages-main .ms-menu {
+	overflow: auto;
+}
+
+.bxsh-n {
+	box-shadow: none !important;
+}
+
+.ms-reply textarea {
+	line-height: 1.5;
 }

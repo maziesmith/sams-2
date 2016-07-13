@@ -11,6 +11,7 @@ class InboxController extends CI_Controller {
         $this->validated();
 
         $this->load->model('Inbox', '', TRUE);
+        $this->load->model('Member', '', TRUE);
 
         $this->user_id = $this->session->userdata('id');
 
@@ -35,17 +36,20 @@ class InboxController extends CI_Controller {
         if(!$this->session->userdata('validated')) redirect('login');
     }
 
-    public function index()
+    public function index($msisdn=null)
     {
-        $this->Data['Headers']->Page = 'inbox/index';
-        // $inbox = $this->Inbox->all();
+        $msisdn = $msisdn ? $msisdn : "09055420838";
         $contacts = $this->Inbox->contacts();
-        $msisdn = "09235003433";
+
         $inbox = $this->Inbox->messages($msisdn);
-        // $this->Data['inbox'] = $inbox;
+
+        if ($this->input->is_ajax_request()) {
+            echo json_encode( array('inbox'=>$inbox) ); exit();
+        }
 
         $this->Data['inbox'] = $inbox;
         $this->Data['contacts'] = $contacts;
+        $this->Data['Headers']->Page = 'inbox/index';
         $this->load->view('layouts/main', $this->Data);
     }
 

@@ -301,6 +301,7 @@ $route['types/export']['get']  = 'TypesController/export';
 $route['messaging/new']['get'] = 'MessagingController/index';
 $route['messaging/send']['post'] = 'MessagingController/send';
 $route['messaging/inbox']['get'] = 'InboxController/index';
+$route['messaging/inbox/(:any)']['post'] = 'InboxController/index/$1';
 
 /*
 | ---------------

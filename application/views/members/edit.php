@@ -161,7 +161,7 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
-                                            <?php echo form_input('msisdn', set_value('msisdn'), array('class'=>'bfh-phone form-control fg-input', 'data-format'=>'d(ddd) ddd-dddd')) ?>
+                                            <?php echo form_input('msisdn', set_value('msisdn'), array('class'=>'bfh-phone form-control fg-input', 'data-format'=>'ddddddddddd')) ?>
                                         </div>
                                         <?php echo form_label('Mobile No.', 'msisdn', array('class'=>'fg-label')) ?>
                                     </div>

@@ -1,15 +1,13 @@
 jQuery(document).ready(function ($) {
     $('#reply-box-form').submit(function (e) {
         e.preventDefault();
-        if( !document.getElementById('reply-box').disabled ) {
-            $.post(base_url('messaging/send'), $(this).serialize(),function (data) {
+        if( !document.getElementById('reply-box').disabled && $('#reply-box').val().length != 0 ) {
+            $.post($(this).attr('action'), $(this).serialize(),function (data) {
                 var data = $.parseJSON(data);
                 console.log(data);
-                if (data.type == "success") {
-                    message_sent_animation(data, '#display-messages');
-                    $('#messages-main a[data-msisdn="'+data.msisdn+'"]').click();
-                    $('#reply-box').val('');
-                }
+                message_sent_animation(data, '#display-messages');
+                $('#messages-main a[data-msisdn="'+data.msisdn+'"]').click();
+                $('#reply-box').val('');
             });
         }
     });

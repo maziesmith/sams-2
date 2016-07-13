@@ -14,6 +14,7 @@
         <script src="<?php echo base_url('assets/vendors/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/vendors/bootstrap-sweetalert/lib/sweet-alert.min.js') ?>"></script>
         <script src="<?php echo base_url('assets/vendors/Waves/dist/waves.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/vendors/autosize/dist/autosize.min.js') ?>"></script>
         <?php
         /*
         | -------------

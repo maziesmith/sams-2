@@ -45,7 +45,7 @@ class Inbox extends CI_Model {
 
         $query .= " UNION ";
 
-        $query .= " SELECT 'outbox' AS table_name, id, (SELECT message FROM messages WHERE outbox.message_id = messages.id) AS body, msisdn, smsc, (SELECT messages.created_at FROM messages WHERE outbox.message_id = messages.id) AS created_at, member_id ";
+        $query .= " SELECT 'outbox' AS table_name, id, (SELECT message FROM messages WHERE outbox.message_id = messages.id) AS body, msisdn, smsc, (SELECT outbox.created_at FROM messages WHERE outbox.message_id = messages.id) AS created_at, member_id ";
         $query .= " FROM " . $this->outbox_table;
         $query .= " WHERE msisdn IN (" . $msisdn . ")";
         $query .= " GROUP BY message_id ";

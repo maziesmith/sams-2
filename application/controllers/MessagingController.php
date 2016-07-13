@@ -79,7 +79,7 @@ class MessagingController extends CI_Controller {
 
         # This is the Kannel SHIT
         # This sends the shit of the messagfe to the kannel server
-        $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+        // $this->Message->send($outbox_id, $msisdn, 'auto', $body);
 
         $data = array(
             'type' => 'success',

@@ -10,7 +10,7 @@
                 <div class="ms-block">
                     <div class="ms-user">
                         <!-- <img src="//placeimg.com/80/80/people" alt=""> -->
-                        <div>Signed in as <br/> <?php echo get_fullname(); ?></div>
+                        <h4 class="h5">Signed in as <br/> <?php echo get_fullname(); ?></h4>
                     </div>
                 </div>
 
@@ -119,7 +119,7 @@
 
                     <form id="reply-box-form" action="<?php echo base_url('messaging/send'); ?>" class="lv-footer ms-reply" method="POST">
                         <input type="hidden" data-msisdn name="msisdn" value="INVALID">
-                        <textarea id="reply-box" name="body" disabled placeholder="Send SMS"></textarea>
+                        <textarea id="reply-box" name="body" disabled class="auto-size" placeholder="Send SMS"></textarea>
                         <button id="reply-box-submit-button" type="submit" role="button" class="btn bxsh-n"><i class="zmdi zmdi-mail-send"></i></button>
                     </form>
                 </div>

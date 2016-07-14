@@ -1,4 +1,10 @@
 /*
+|-------------------
+| # GLOBAL VARIABLES
+|-------------------
+*/
+var GLOBAL_PHONE_REGEX = /(0-9)+/;
+/*
 | -----------
 | # No Script
 | -----------
@@ -356,8 +362,6 @@ $(document).ready(function(){
     if ($('.auto-size')[0] && typeof autosize == "function") {
 	   autosize($('.auto-size'));
     }
-
-    $('.selectize').selectize();
 
     /*
      * Custom Scrollbars

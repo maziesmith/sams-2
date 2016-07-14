@@ -53,9 +53,9 @@ class Member extends CI_Model {
         }
     }
 
-    public function all($removed_only=false)
+    public function all($removed_only=false, $select="*")
     {
-        if( $removed_only ) return $this->db->where($this->column_softDelete ." != ", NULL)->get($this->table)->result();
+        if( $removed_only ) return $this->db->select($select)->where($this->column_softDelete ." != ", NULL)->get($this->table)->result();
         $query = $this->db->where($this->column_softDelete, NULL)->get($this->table);
         return $query->result();
     }
@@ -73,6 +73,12 @@ class Member extends CI_Model {
 
         if( $removed_only ) return $this->db->where($this->column_softDelete . " != ", NULL)->get($this->table);
         return $this->db->where($this->column_softDelete, NULL)->get($this->table);
+    }
+
+    public function dropdown_list($select)
+    {
+        $query = $this->db->select($select)->get($this->table);
+        return $query;
     }
 
     public function find($id, $column=null)

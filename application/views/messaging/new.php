@@ -3,24 +3,21 @@
         <div class="block-header">
             <h2>Create New Message</h2>
         </div>
-        <?php echo form_open("messaging/send", array('id'=>'add-new-member-form', 'class'=>'card wall-posting')); ?>
+        <?php echo form_open("messaging/bulk-send", array('id'=>'add-new-member-form', 'class'=>'card wall-posting')); ?>
             <div class="card-body card-padding">
                 <div class="pad-zero-right">
                     <div class="form-group">
                         <label for="msisdn-input">Mobile Phone</label>
-                        <select id="msisdn-input" class="input-selectize" name="msisdn" multiple>
-                            <option value="1">General Inquiry</option>
-                            <option value="2">Advertising</option>
-                            <option value="3">Press</option>
-                            <option value="5">Account Problems</option>
-                            <option value="4">Content Submission</option>
+                        <select id="msisdn-input" class="input-selectize" name="msisdn[]" multiple>
+                            <?php foreach ($form['contacts'] as $contact) {
+                                echo "<option value='$contact->id'><strong class='name'>$contact->msisdn</strong><div>$contact->fullname</div></option>";
+                            } ?>
                         </select>
                     </div>
                 </div>
             </div>
             <hr>
             <div class="card-body card-padding">
-
                 <textarea class="wp-text auto-size" name="body" data-auto-size placeholder="Write SMS..."></textarea>
             </div>
 

@@ -357,6 +357,8 @@ $(document).ready(function(){
 	   autosize($('.auto-size'));
     }
 
+    $('.selectize').selectize();
+
     /*
      * Custom Scrollbars
      */

@@ -59,7 +59,7 @@ class Inbox extends CI_Model {
         if( null == $table ) $table = $this->contacts_table;
         $query = "";
 
-        $query .= " SELECT 'inbox' as table_name, inbox.id, body, inbox.msisdn, smsc, inbox.created_at, concat(members.firstname, ' ', members.lastname) as fullname, members.firstname, members.lastname ";
+        $query .= " SELECT 'inbox' as table_name, inbox.id, body, inbox.msisdn, smsc, inbox.created_at, concat(members.firstname, ' ', members.lastname) as fullname, members.firstname, members.lastname, members.id ";
         $query .= " FROM " . $this->table;
 
         $query .= " LEFT JOIN members ON inbox.msisdn = members.msisdn ";

@@ -360,3 +360,24 @@ noscript {
 	line-height: 1.5;
 	padding: 10px 20px;
 }
+
+.dropdown-input {
+	position: relative;
+}
+.dropdown-input-menu {
+	display: none;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 0 10px;
+    z-index: 100;
+}
+.dropdown-input .dropdown-content {
+	box-shadow: 0 0px 2px rgba(0,0,0,0.1);
+}
+.dropdown-input-x input:focus + .dropdown-input-menu,
+.dropdown-input-x input:active + .dropdown-input-menu {
+	display: block;
+}

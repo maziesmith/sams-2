@@ -4,21 +4,24 @@
             <h2>Create New Message</h2>
         </div>
         <?php echo form_open("messaging/send", array('id'=>'add-new-member-form', 'class'=>'card wall-posting')); ?>
-            <div class="card-body card-padding bg-success">
+            <div class="card-body card-padding">
                 <div class="pad-zero-right">
-                    <div class="fg-float form-group-validation">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
-                            <div class="fg-line">
-                                <input type="text" class="form-control" placeholder="Mobile phone number">
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="msisdn-input">Mobile Phone</label>
+                        <select id="msisdn-input" class="input-selectize" name="msisdn" multiple>
+                            <option value="1">General Inquiry</option>
+                            <option value="2">Advertising</option>
+                            <option value="3">Press</option>
+                            <option value="5">Account Problems</option>
+                            <option value="4">Content Submission</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <!-- <hr> -->
+            <hr>
             <div class="card-body card-padding">
-                <textarea class="wp-text" data-auto-size placeholder="Write SMS..."></textarea>
+
+                <textarea class="wp-text auto-size" name="body" data-auto-size placeholder="Write SMS..."></textarea>
             </div>
 
             <ul class="list-unstyled clearfix wpb-actions">

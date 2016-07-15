@@ -56,7 +56,7 @@ class AuthController extends CI_Controller {
             }
         }
 
-        $this->session->set_flashdata('error', "Invalid credentials");
+        $this->session->set_flashdata('message', array('type'=>"danger", "message"=>"Invalid credentials"));
         redirect('login');
     }
 

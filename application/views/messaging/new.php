@@ -8,10 +8,18 @@
                 <div class="pad-zero-right">
                     <div id="phone-field-container" class="form-group form-group-validation">
                         <label for="msisdn-input">Mobile Phone</label>
-                        <select id="msisdn-input" class="input-selectize" name="msisdn[]" multiple>
+                        <select id="msisdn-input" class="input-selectize" name="msisdn[members][]" multiple>
                             <?php foreach ($form['contacts'] as $contact) {
                                 echo "<option value='$contact->id'><strong class='name'>$contact->msisdn</strong><div>$contact->fullname</div></option>";
                             } ?>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-validation">
+                        <label for="msisdn-group-input">Send to Group</label>
+                        <select id="msisdn-group-input" class="input-selectize" name="msisdn[groups][]" data-selectize-ajax="<?php echo base_url('messaging/groups'); ?>" multiple>
+                           <!--  <?php foreach ($form['contacts'] as $contact) {
+                                echo "<option value='$contact->id'><strong class='name'>$contact->msisdn</strong><div>$contact->fullname</div></option>";
+                            } ?> -->
                         </select>
                     </div>
                 </div>

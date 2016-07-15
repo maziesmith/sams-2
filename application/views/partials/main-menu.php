@@ -59,10 +59,6 @@
             <li class="<?php echo check_link('messaging/new') ?>" ><?php echo anchor( base_url('messaging/new'), 'New' ); ?></li>
             <li class="<?php echo check_link('messaging/inbox') ?>" ><?php echo anchor( base_url('messaging/inbox'), 'Inbox' ); ?></li>
             <li class="<?php echo check_link('messaging/outbox') ?>" ><?php echo anchor( base_url('messaging/outbox'), 'Outbox' ); ?></li>
-            <li class="<?php echo check_link('messaging/tracking') ?>" ><?php echo anchor( base_url('messaging/tracking'), 'Tracking' ); ?></li>
-            <li class="<?php echo check_link('messaging/templates') ?>" ><?php echo anchor( base_url('messaging/templates'), 'Templates' ); ?></li>
-            <!-- <li class="<?php echo check_link('messaging/export') ?>" ><?php echo anchor( base_url('messaging/export'), 'Export Types' ); ?></li>
-            <li class="<?php echo check_link('messaging/import') ?>" ><?php echo anchor( base_url('messaging/import'), 'Import Types' ); ?></li> -->
         </ul>
     </li>
 

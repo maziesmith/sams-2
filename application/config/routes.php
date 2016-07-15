@@ -299,13 +299,14 @@ $route['types/export']['get']  = 'TypesController/export';
 |----------------
 */
 $route['messaging/listing']['post'] = 'MessagingController/listing';
-$route['messaging/listing']['get'] = 'MessagingController/listing';
+// $route['messaging/listing']['get'] = 'MessagingController/listing';
 $route['messaging/new']['get'] = 'MessagingController/index';
 $route['messaging/send']['post'] = 'MessagingController/send';
 $route['messaging/bulk-send']['post'] = 'MessagingController/bulk_send';
 $route['messaging/inbox']['get'] = 'InboxController/index';
 $route['messaging/inbox/(:any)']['post'] = 'InboxController/index/$1';
 $route['messaging/outbox']['get'] = 'MessagingController/outbox';
+$route['messaging/groups']['get'] = 'MessagingController/groups';
 
 /*
 | ---------------
@@ -313,16 +314,22 @@ $route['messaging/outbox']['get'] = 'MessagingController/outbox';
 | ---------------
 | This should be commented out in production mode
 */
-$route['migrate/(:num)'] = 'migrate/index/$1';
-$route['migrate/(:any)'] = 'migrate/$1';
-
+// $route['migrate/(:num)'] = 'migrate/index/$1';
+// $route['migrate/(:any)'] = 'migrate/$1';
 /*
 |----------------
 | # Seeds
 |----------------
 */
-$route['seed/users'] = 'UsersController/seed';
-$route['seed/modules'] = 'ModulesController/seed';
+// $route['seed/users'] = 'UsersController/seed';
+// $route['seed/modules'] = 'ModulesController/seed';
+/*
+|----------
+| # Install
+|----------
+*/
+$route['install']['get'] = 'PageController/install';
+$route['seed']['get'] = 'PageController/seed';
 
 // $route['(:any)'] = 'PageController/view/$1';
 

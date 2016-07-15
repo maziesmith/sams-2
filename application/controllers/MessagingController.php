@@ -15,6 +15,8 @@ class MessagingController extends CI_Controller {
         $this->load->model('Message', '', TRUE);
         $this->load->model('Outbox', '', TRUE);
         $this->load->model('Member', '', TRUE);
+        $this->load->model('Group', '', TRUE);
+        $this->load->model('GroupMember', '', TRUE);
         $this->Data['Headers'] = get_page_headers();
 
         $this->Data['Headers']->JS  = '<script src="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.js').'"></script>';
@@ -22,7 +24,7 @@ class MessagingController extends CI_Controller {
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/moment/min/moment.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<link rel="stylesheet" href="'.base_url('assets/vendors/selectize.js/dist/css/selectize.bootstrap3.css').'">';
 
-        // $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/selectize.js/dist/js/standalone/selectize.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/selectize.js/dist/js/standalone/selectize.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/messaging.js').'"></script>';
@@ -64,7 +66,15 @@ class MessagingController extends CI_Controller {
         // $this->Data['contacts'] = $this->Contact->all();
         $this->Data['form']['contacts_list'] = dropdown_list($this->Member->dropdown_list('id, CONCAT(firstname, " ", lastname) AS fullname, msisdn')->result_array(), ['id', 'fullname'], 'No Contacts');
         $this->Data['form']['contacts_json'] = json_encode($this->Member->dropdown_list('id, CONCAT(firstname, " ", lastname) AS fullname, msisdn')->result_array());
+
+        $this->Data['form']['groups_json'] = json_encode($this->Group->dropdown_list('groups_id, groups_name')->result_array());
+
         $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function groups()
+    {
+        echo json_encode($this->Group->dropdown_list('groups_id AS msisdn, groups_name AS name')->result_array()); exit();
     }
 
     public function bulk_send()
@@ -72,46 +82,78 @@ class MessagingController extends CI_Controller {
         if (is_array($this->input->post('msisdn'))) {
             $body = $this->input->post('body');
             $msisdns = $this->input->post('msisdn');
-            foreach ($msisdns as $msisdn) {
+            if ( array_key_exists('members', $msisdns) ) {
+                foreach ($msisdns['members'] as $msisdn) {
 
-                $message = array(
-                    'message' => $body,
-                    'msisdn' => $msisdn,
-                    'by' => $this->user_id,
-                );
-                $message_id = $this->Message->insert( $message );
-                $members = $this->Member->find_member_via_msisdn($msisdn);
+                    $message = array(
+                        'message' => $body,
+                        'msisdn' => $msisdn,
+                        'by' => $this->user_id,
+                    );
+                    $message_id = $this->Message->insert( $message );
+                    $members = $this->Member->find_member_via_msisdn($msisdn);
 
-                $outbox_id = null;
-                if (null != $members) {
-                    foreach ($members as $member) {
+                    $outbox_id = null;
+                    if (null != $members) {
+                        foreach ($members as $member) {
+                            $outbox = array(
+                                'message_id' => $message_id,
+                                'msisdn' => $msisdn,
+                                'status' => 'pending',
+                                'member_id' => $member->id,
+                                'smsc' => 'auto',
+                                'created_by' => $this->user_id,
+                            );
+                            $outbox_id = $this->Outbox->insert( $outbox );
+                        }
+                    } else {
                         $outbox = array(
                             'message_id' => $message_id,
                             'msisdn' => $msisdn,
+                            'status' => 'pending',
+                            'member_id' => NULL,
+                            'smsc' => 'auto',
+                            'created_by' => $this->user_id,
+                        );
+                        $outbox_id = $this->Outbox->insert( $outbox );
+                    }
+
+                    # This is the Kannel SHIT
+                    # This sends the shit of the messagfe to the kannel server
+                    // $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+
+                } // endforeach
+            }
+            # Groups
+            if (array_key_exists('groups', $msisdns)) {
+                $group_members = [];
+                foreach ($msisdns['groups'] as $group_id) {
+                    $group_members = $this->GroupMember->lookup('group_id', $group_id)->result_array();
+                    foreach ($group_members as $member) {
+                        $member = $this->Member->find($member['member_id']);
+                        $message = array(
+                            'message' => $body,
+                            'msisdn' => $member->msisdn,
+                            'by' => $this->user_id,
+                        );
+                        $message_id = $this->Message->insert( $message );
+
+                        $outbox = array(
+                            'message_id' => $message_id,
+                            'msisdn' => $member->msisdn,
                             'status' => 'pending',
                             'member_id' => $member->id,
                             'smsc' => 'auto',
                             'created_by' => $this->user_id,
                         );
                         $outbox_id = $this->Outbox->insert( $outbox );
+
+                        # This is the Kannel SHIT
+                        # This sends the shit of the messagfe to the kannel server
+                        // $this->Message->send($outbox_id, $msisdn, 'auto', $body);
                     }
-                } else {
-                    $outbox = array(
-                        'message_id' => $message_id,
-                        'msisdn' => $msisdn,
-                        'status' => 'pending',
-                        'member_id' => NULL,
-                        'smsc' => 'auto',
-                        'created_by' => $this->user_id,
-                    );
-                    $outbox_id = $this->Outbox->insert( $outbox );
                 }
-
-                # This is the Kannel SHIT
-                # This sends the shit of the messagfe to the kannel server
-                // $this->Message->send($outbox_id, $msisdn, 'auto', $body);
-
-            } // endforeach
+            }
             $data = array(
                 'type' => 'success',
                 'message' => "Message successfully sent",
@@ -178,6 +220,7 @@ class MessagingController extends CI_Controller {
 
     public function outbox()
     {
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/outbox.js').'"></script>';
         $this->Data['trash']['count'] = $this->Outbox->get_all(0, 0, null, true)->num_rows();
         $this->load->view('layouts/main', $this->Data);
     }

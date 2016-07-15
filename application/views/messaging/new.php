@@ -3,10 +3,10 @@
         <div class="block-header">
             <h2>Create New Message</h2>
         </div>
-        <?php echo form_open("messaging/bulk-send", array('id'=>'add-new-member-form', 'class'=>'card wall-posting')); ?>
+        <?php echo form_open("messaging/bulk-send", array('id'=>'send-new-message-form', 'class'=>'card wall-posting')); ?>
             <div class="card-body card-padding">
                 <div class="pad-zero-right">
-                    <div class="form-group">
+                    <div id="phone-field-container" class="form-group form-group-validation">
                         <label for="msisdn-input">Mobile Phone</label>
                         <select id="msisdn-input" class="input-selectize" name="msisdn[]" multiple>
                             <?php foreach ($form['contacts'] as $contact) {
@@ -18,7 +18,9 @@
             </div>
             <hr>
             <div class="card-body card-padding">
-                <textarea class="wp-text auto-size" name="body" data-auto-size placeholder="Write SMS..."></textarea>
+                <div class="form-group-validation">
+                    <textarea class="wp-text auto-size" name="body" data-auto-size placeholder="Write SMS..."></textarea>
+                </div>
             </div>
 
             <ul class="list-unstyled clearfix wpb-actions">

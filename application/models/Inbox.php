@@ -59,18 +59,14 @@ class Inbox extends CI_Model {
         if( null == $table ) $table = $this->contacts_table;
         $query = "";
 
-        $query .= " SELECT 'inbox' as table_name, inbox.id, body, inbox.msisdn, smsc, inbox.created_at, concat(members.firstname, ' ', members.lastname) as fullname, members.firstname, members.lastname, members.id ";
-        $query .= " FROM " . $this->table;
+        $query .= " SELECT 'inbox' as table_name, inbox.id, body, inbox.msisdn, inbox.smsc, inbox.created_at, concat(members.firstname, ' ', members.lastname) as fullname, members.firstname, members.lastname, members.id AS member_id ";
+        // $query .= " SELECT * ";
+        $query .= " FROM " . $this->table . " ";
 
         $query .= " LEFT JOIN members ON inbox.msisdn = members.msisdn ";
-            // $query .= " (SELECT firstname FROM members WHERE members.msisdn = inbox.msisdn) AS firstname, ";
-            // $query .= " (SELECT lastname FROM members WHERE members.msisdn = inbox.msisdn) AS lastname ";
 
-        // $query .= " WHERE inbox.msisdn IN (SELECT msisdn FROM members)";
-
-        $query .= " GROUP BY members.id ";
-
-        $query .= " ORDER BY inbox.created_at " . $order_by;
+        $query .= " GROUP BY member_id ";
+        $query .= " ORDER BY created_at " . $order_by;
 
         $q = $this->db->query( $query )->result();
         $contacts = [];

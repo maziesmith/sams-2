@@ -32,6 +32,19 @@ class Message extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function find($id, $column=null)
+    {
+        if (null != $column) {
+            $query = $this->db->where($column, $id)->get($this->table);
+            return $query->row();
+        }
+
+        if ( is_array($id) ) return $this->db->where_in($this->column_id, $id)->get($this->table);
+
+        $query = $this->db->where($this->column_id, $id)->get($this->table);
+        return $query->row();
+    }
+
     public function send($id, $msisdn, $smsc, $body, $groups=null) {
         #
         $dlr = self::DLR_URL() . '&outbox_id=' . $id;

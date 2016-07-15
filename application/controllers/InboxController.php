@@ -49,7 +49,7 @@ class InboxController extends CI_Controller {
 
         $this->Data['inbox'] = $inbox;
         $this->Data['contacts'] = $contacts;
-        $this->Data['Headers']->Page = 'inbox/index';
+        $this->Data['Headers']->Page = 'messaging/inbox';
         $this->load->view('layouts/main', $this->Data);
     }
 

@@ -381,3 +381,28 @@ noscript {
 .dropdown-input-x input:active + .dropdown-input-menu {
 	display: block;
 }
+
+.selectize-input {
+	padding: 0 !important;
+    border: none !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    border-radius: 0 !important;
+}
+.selectize-input.focus {
+	outline: none !important;
+	box-shadow: none !important;
+	border-color: #2196f3 !important;
+	border-bottom: 2px solid #2196f3 !important;
+}
+.selectize-control.multi .selectize-input > div {
+	padding: 5px 15px !important;
+}
+.selectize-control.multi .selectize-input > div.active {
+	background: #2196f3 !important;
+}
+.selectize-control.multi .selectize-input > div > span {
+	padding-right: 5px !important;
+}
+.selectize-control.plugin-remove_button [data-value] .remove {
+	padding: 5px 0 !important;
+}

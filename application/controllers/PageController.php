@@ -13,6 +13,13 @@ class PageController extends CI_Controller {
         $this->load->model('PrivilegesLevel', '', TRUE);
         $this->load->model('Privilege', '', TRUE);
         $this->load->model('User', '', TRUE);
+
+        $this->Data['Headers'] = get_page_headers();
+        $this->Data['Headers']->CSS .= '<link rel="stylesheet" href="'.base_url('assets/vendors/ducksboard-gridster/dist/jquery.gridster.min.css').'">';
+        $this->Data['Headers']->JS  = '<script src="'.base_url('assets/vendors/ducksboard-gridster/dist/jquery.gridster.min.js').'"></script>';
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/dashboard.js').'"></script>';
+
     }
 
     /**
@@ -23,9 +30,8 @@ class PageController extends CI_Controller {
     public function index()
     {
         $this->validated();
-        $Data['Headers'] = get_page_headers();
-        $Data['Headers']->Page = "dashboard";
-        $this->load->view('layouts/main', $Data);
+        $this->Data['Headers']->Page = "dashboard";
+        $this->load->view('layouts/main', $this->Data);
     }
 
     public function validated()

@@ -20,6 +20,7 @@ class AuthController extends CI_Controller {
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/login.js').'"></script>';
         $this->Data['Headers']->bodyClass = 'login-content';
     }
+
     /**
      * GET Login controller.
      *
@@ -27,6 +28,8 @@ class AuthController extends CI_Controller {
      */
     public function index($message = null)
     {
+        if ($this->session->userdata('validated')) redirect('dashboard');
+
         $this->Data['message'] = $this->session->flashdata('message');
         return $this->load->view('auth/login', $this->Data);
     }

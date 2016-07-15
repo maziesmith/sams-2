@@ -406,3 +406,7 @@ noscript {
 .selectize-control.plugin-remove_button [data-value] .remove {
 	padding: 5px 0 !important;
 }
+
+.gs-w .blog-post .bp-header > img:hover {
+	cursor: move;
+}

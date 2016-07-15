@@ -194,6 +194,8 @@ $route['members/import']['post']  = 'MembersController/import';
 $route['members/export']['get']  = 'MembersController/export';
 $route['members/export']['post']  = 'MembersController/export';
 
+$route['members/check']['post']  = 'MembersController/check';
+
 /*
 |-----------------
 | # Group Members

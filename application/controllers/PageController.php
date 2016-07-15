@@ -141,42 +141,47 @@ class PageController extends CI_Controller {
     public function seed()
     {
         // $modules = array();
-        $modules[1] = array(
+        $modules[] = array(
+            'name' => 'Members',
+            'description' => 'Members list function',
+            'slug' => 'members',
+        );
+        $modules[] = array(
             'name' => 'List Members',
             'description' => 'Members list function',
             'slug' => 'members/listing',
         );
-        $modules[2] = array(
+        $modules[] = array(
             'name' => 'Add Members',
             'description' => 'Members add function',
             'slug' => 'members/add',
         );
-        $modules[3] = array(
+        $modules[] = array(
             'name' => 'Edit Members',
             'description' => 'Members edit function',
             'slug' => 'members/edit',
         );
-        $modules[4] = array(
+        $modules[] = array(
             'name' => 'Update Members',
             'description' => 'Members update function',
             'slug' => 'members/update',
         );
-        $modules[5] = array(
+        $modules[] = array(
             'name' => 'Remove Members',
             'description' => 'Members remove function',
             'slug' => 'members/remove',
         );
-        $modules[6] = array(
+        $modules[] = array(
             'name' => 'Restore Members',
             'description' => 'Members restore function',
             'slug' => 'members/restore',
         );
-        $modules[7] = array(
+        $modules[] = array(
             'name' => 'Export Members',
             'description' => 'Members export function',
             'slug' => 'members/export',
         );
-        $modules[8] = array(
+        $modules[] = array(
             'name' => 'Import Members',
             'description' => 'Members import function',
             'slug' => 'members/import',
@@ -187,42 +192,47 @@ class PageController extends CI_Controller {
         | # Groups
         | -----------------
         */
-        $modules[9] = array(
+        $modules[] = array(
+            'name' => 'Groups',
+            'description' => 'Groups list function',
+            'slug' => 'groups',
+        );
+        $modules[] = array(
             'name' => 'List Groups',
             'description' => 'Groups list function',
             'slug' => 'groups/listing',
         );
-        $modules[10] = array(
+        $modules[] = array(
             'name' => 'Add Groups',
             'description' => 'Groups add function',
             'slug' => 'groups/add',
         );
-        $modules[11] = array(
+        $modules[] = array(
             'name' => 'Edit Groups',
             'description' => 'Groups edit function',
             'slug' => 'groups/edit',
         );
-        $modules[12] = array(
+        $modules[] = array(
             'name' => 'Update Groups',
             'description' => 'Groups update function',
             'slug' => 'groups/update',
         );
-        $modules[13] = array(
+        $modules[] = array(
             'name' => 'Remove Groups',
             'description' => 'Groups remove function',
             'slug' => 'groups/remove',
         );
-        $modules[14] = array(
+        $modules[] = array(
             'name' => 'Restore Groups',
             'description' => 'Groups restore function',
             'slug' => 'groups/restore',
         );
-        $modules[15] = array(
+        $modules[] = array(
             'name' => 'Export Groups',
             'description' => 'Groups export function',
             'slug' => 'groups/export',
         );
-        $modules[16] = array(
+        $modules[] = array(
             'name' => 'Import Groups',
             'description' => 'Groups import function',
             'slug' => 'groups/import',
@@ -233,42 +243,47 @@ class PageController extends CI_Controller {
         | # Types
         | -----------------
         */
-        $modules[17] = array(
+        $modules[] = array(
+            'name' => 'Types',
+            'description' => 'Types list function',
+            'slug' => 'types',
+        );
+        $modules[] = array(
             'name' => 'List Types',
             'description' => 'Types list function',
             'slug' => 'types/listing',
         );
-        $modules[18] = array(
+        $modules[] = array(
             'name' => 'Add Types',
             'description' => 'Types add function',
             'slug' => 'types/add',
         );
-        $modules[19] = array(
+        $modules[] = array(
             'name' => 'Edit Types',
             'description' => 'Types edit function',
             'slug' => 'types/edit',
         );
-        $modules[20] = array(
+        $modules[] = array(
             'name' => 'Update Types',
             'description' => 'Types update function',
             'slug' => 'types/update',
         );
-        $modules[21] = array(
+        $modules[] = array(
             'name' => 'Remove Types',
             'description' => 'Types remove function',
             'slug' => 'types/remove',
         );
-        $modules[22] = array(
+        $modules[] = array(
             'name' => 'Restore Types',
             'description' => 'Types restore function',
             'slug' => 'types/restore',
         );
-        $modules[23] = array(
+        $modules[] = array(
             'name' => 'Export Types',
             'description' => 'Types export function',
             'slug' => 'types/export',
         );
-        $modules[24] = array(
+        $modules[] = array(
             'name' => 'Import Types',
             'description' => 'Types import function',
             'slug' => 'types/import',
@@ -279,42 +294,47 @@ class PageController extends CI_Controller {
         | # Levels
         | -----------------
         */
-        $modules[25] = array(
+        $modules[] = array(
+            'name' => 'Levels',
+            'description' => 'Levels list function',
+            'slug' => 'levels',
+        );
+        $modules[] = array(
             'name' => 'List Levels',
             'description' => 'Levels list function',
             'slug' => 'levels/listing',
         );
-        $modules[26] = array(
+        $modules[] = array(
             'name' => 'Add Levels',
             'description' => 'Levels add function',
             'slug' => 'levels/add',
         );
-        $modules[27] = array(
+        $modules[] = array(
             'name' => 'Edit Levels',
             'description' => 'Levels edit function',
             'slug' => 'levels/edit',
         );
-        $modules[28] = array(
+        $modules[] = array(
             'name' => 'Update Levels',
             'description' => 'Levels update function',
             'slug' => 'levels/update',
         );
-        $modules[29] = array(
+        $modules[] = array(
             'name' => 'Remove Levels',
             'description' => 'Levels remove function',
             'slug' => 'levels/remove',
         );
-        $modules[30] = array(
+        $modules[] = array(
             'name' => 'Restore Levels',
             'description' => 'Levels restore function',
             'slug' => 'levels/restore',
         );
-        $modules[31] = array(
+        $modules[] = array(
             'name' => 'Export Levels',
             'description' => 'Levels export function',
             'slug' => 'levels/export',
         );
-        $modules[32] = array(
+        $modules[] = array(
             'name' => 'Import Levels',
             'description' => 'Levels import function',
             'slug' => 'levels/import',
@@ -325,42 +345,47 @@ class PageController extends CI_Controller {
         | # Messaging
         | -----------------
         */
-        $modules[33] = array(
+        $modules[] = array(
+            'name' => 'Messaging',
+            'description' => 'Messaging list function',
+            'slug' => 'messaging',
+        );
+        $modules[] = array(
             'name' => 'List Messaging',
             'description' => 'Messaging list function',
             'slug' => 'messaging/listing',
         );
-        $modules[34] = array(
+        $modules[] = array(
             'name' => 'Add Messaging',
             'description' => 'Messaging add function',
             'slug' => 'messaging/add',
         );
-        $modules[35] = array(
+        $modules[] = array(
             'name' => 'Edit Messaging',
             'description' => 'Messaging edit function',
             'slug' => 'messaging/edit',
         );
-        $modules[36] = array(
+        $modules[] = array(
             'name' => 'Update Messaging',
             'description' => 'Messaging update function',
             'slug' => 'messaging/update',
         );
-        $modules[37] = array(
+        $modules[] = array(
             'name' => 'Remove Messaging',
             'description' => 'Messaging remove function',
             'slug' => 'messaging/remove',
         );
-        $modules[38] = array(
+        $modules[] = array(
             'name' => 'Restore Messaging',
             'description' => 'Messaging restore function',
             'slug' => 'messaging/restore',
         );
-        $modules[39] = array(
+        $modules[] = array(
             'name' => 'Export Messaging',
             'description' => 'Messaging export function',
             'slug' => 'messaging/export',
         );
-        $modules[40] = array(
+        $modules[] = array(
             'name' => 'Import Messaging',
             'description' => 'Messaging import function',
             'slug' => 'messaging/import',
@@ -371,42 +396,47 @@ class PageController extends CI_Controller {
         | # Privileges
         | -----------------
         */
-        $modules[41] = array(
+        $modules[] = array(
+            'name' => 'Privilege',
+            'description' => 'Privilege list function',
+            'slug' => 'privileges',
+        );
+        $modules[] = array(
             'name' => 'List Privilege',
             'description' => 'Privilege list function',
             'slug' => 'privileges/listing',
         );
-        $modules[42] = array(
+        $modules[] = array(
             'name' => 'Add Privilege',
             'description' => 'Privilege add function',
             'slug' => 'privileges/add',
         );
-        $modules[43] = array(
+        $modules[] = array(
             'name' => 'Edit Privilege',
             'description' => 'Privilege edit function',
             'slug' => 'privileges/edit',
         );
-        $modules[44] = array(
+        $modules[] = array(
             'name' => 'Update Privilege',
             'description' => 'Privilege update function',
             'slug' => 'privileges/update',
         );
-        $modules[45] = array(
+        $modules[] = array(
             'name' => 'Remove Privilege',
             'description' => 'Privilege remove function',
             'slug' => 'privileges/remove',
         );
-        $modules[46] = array(
+        $modules[] = array(
             'name' => 'Restore Privilege',
             'description' => 'Privilege restore function',
             'slug' => 'privileges/restore',
         );
-        $modules[47] = array(
+        $modules[] = array(
             'name' => 'Export Privilege',
             'description' => 'Privilege export function',
             'slug' => 'privileges/export',
         );
-        $modules[48] = array(
+        $modules[] = array(
             'name' => 'Import Privilege',
             'description' => 'Privilege import function',
             'slug' => 'privileges/import',
@@ -417,42 +447,47 @@ class PageController extends CI_Controller {
         | # Privileges Levels
         | -----------------
         */
-        $modules[49] = array(
+        $modules[] = array(
+            'name' => 'Privileges Level',
+            'description' => 'Privileges Level list function',
+            'slug' => 'privileges-levels',
+        );
+        $modules[] = array(
             'name' => 'List Privileges Level',
             'description' => 'Privileges Level list function',
             'slug' => 'privileges-levels/listing',
         );
-        $modules[50] = array(
+        $modules[] = array(
             'name' => 'Add Privileges Level',
             'description' => 'Privileges Level add function',
             'slug' => 'privileges-levels/add',
         );
-        $modules[51] = array(
+        $modules[] = array(
             'name' => 'Edit Privileges Level',
             'description' => 'Privileges Level edit function',
             'slug' => 'privileges-levels/edit',
         );
-        $modules[52] = array(
+        $modules[] = array(
             'name' => 'Update Privileges Level',
             'description' => 'Privileges Level update function',
             'slug' => 'privileges-levels/update',
         );
-        $modules[53] = array(
+        $modules[] = array(
             'name' => 'Remove Privileges Level',
             'description' => 'Privileges Level remove function',
             'slug' => 'privileges-levels/remove',
         );
-        $modules[54] = array(
+        $modules[] = array(
             'name' => 'Restore Privileges Level',
             'description' => 'Privileges Level restore function',
             'slug' => 'privileges-levels/restore',
         );
-        $modules[55] = array(
+        $modules[] = array(
             'name' => 'Export Privileges Level',
             'description' => 'Privileges Level export function',
             'slug' => 'privileges-levels/export',
         );
-        $modules[56] = array(
+        $modules[] = array(
             'name' => 'Import Privileges Level',
             'description' => 'Privileges Level import function',
             'slug' => 'privileges-levels/import',

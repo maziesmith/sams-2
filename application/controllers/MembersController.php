@@ -153,8 +153,33 @@ class MembersController extends CI_Controller {
         }
     }
 
+    public function check()
+    {
+        $can = $this->input->post('can');
+        if( !$this->Auth->can($can) ) {
+            if ($this->input->is_ajax_request()) {
+                echo json_encode( [
+                    'title' => 'Access Denied',
+                    'message' => "You don't have permission to Add to this resource",
+                    'type' => 'error',
+                ] ); exit();
+            }
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+        }
+    }
+
     public function add()
     {
+        if( !$this->Auth->can(['members/add']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Remove this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
         # Validation
         if( $this->Member->validate(true) ) {
 

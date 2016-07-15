@@ -16,9 +16,19 @@ $(document).ready(function(){
     | # Validate | Submit
     */
     $('#add-new-member-btn').on('click', function (e) {
-        $('#add-new-member-form')[0].reset();
-        reload_selectpickers();
-        $('#add-new-member-form [name=firstname]').focus();
+        $('#add-member').modal('hide');
+        $.post(base_url('members/check'), {"can":"members/add"}, function (data) {
+            var data = $.parseJSON(data);
+            if (data.type == "error") {
+                swal(data.title, data.message, data.type);
+                $('#add-member').modal('hide');
+            } else {
+                $('#add-member').modal('show');
+                $('#add-new-member-form')[0].reset();
+                reload_selectpickers();
+                $('#add-new-member-form [name=firstname]').focus();
+            }
+        });
     })
     var $memberForm = $('#add-new-member-form').validate({
         rules: {

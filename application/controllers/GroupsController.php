@@ -106,8 +106,36 @@ class GroupsController extends CI_Controller {
         }
     }
 
+    public function check($can=null)
+    {
+        $can = (null == $can) ? $this->input->post('can') : $can;
+        if( !$this->Auth->can($can) ) {
+            if ($this->input->is_ajax_request()) {
+                echo json_encode( [
+                    'title' => 'Access Denied',
+                    'message' => "You don't have permission to Add to this resource",
+                    'type' => 'error',
+                ] ); exit();
+            } else {
+                $this->Data['Headers']->Page = 'errors/403';
+                $this->load->view('layouts/errors', $this->Data);
+                return false;
+            }
+        }
+    }
+
     public function add()
     {
+        if( !$this->Auth->can(['groups/add']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Remove this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
+
         if( $this->input->is_ajax_request() ) {
             /*
             | --------------------------------------
@@ -195,8 +223,17 @@ class GroupsController extends CI_Controller {
      */
     public function edit($id)
     {
-        if( $this->input->is_ajax_request() )
-        {
+        if( !$this->Auth->can() ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Edit this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
+
+        if( $this->input->is_ajax_request() ) {
             $group = $this->Group->find( $id );
             echo json_encode( $group );
             exit();
@@ -284,6 +321,12 @@ class GroupsController extends CI_Controller {
 
     public function trash()
     {
+        if( !$this->Auth->can(['groups/trash']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
+
         $this->Data['members'] = $this->Group->all(true);
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/groupsTrash.js').'"></script>';
         $this->load->view('layouts/main', $this->Data);
@@ -291,6 +334,16 @@ class GroupsController extends CI_Controller {
 
     public function remove($id=null)
     {
+        if( !$this->Auth->can() ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode( [
+                'title' => 'Access Denied',
+                'message' => "You don't have permission to Remove this resource",
+                'type' => 'error',
+            ] ); exit();
+        }
+
         $remove_many = 0;
         if( null === $id ) $remove_many = 1;
         if( null === $id ) $id = $this->input->post('id');
@@ -409,6 +462,12 @@ class GroupsController extends CI_Controller {
      */
     public function import()
     {
+        if( !$this->Auth->can(['groups/import']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
+
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -418,6 +477,12 @@ class GroupsController extends CI_Controller {
      */
     public function export()
     {
+        if( !$this->Auth->can(['groups/export']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
+
         $this->load->view('layouts/main', $this->Data);
     }
 }

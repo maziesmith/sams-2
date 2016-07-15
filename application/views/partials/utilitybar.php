@@ -20,9 +20,9 @@
                             <label for="tw-switch" class="ts-helper"></label>
                         </div>
                     </li>
-                    <li id="top-search">
+                    <!-- <li id="top-search">
                         <a class="tm-search" href=""></a>
-                    </li>
+                    </li> -->
 
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="tm-settings" href=""></a>
@@ -33,9 +33,9 @@
                             <li>
                                 <a data-action="clear-localstorage" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                 </ul>

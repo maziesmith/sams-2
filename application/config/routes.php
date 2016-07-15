@@ -255,6 +255,8 @@ $route['groups/update/(:num)']['post']  = 'GroupsController/update/$1';
 $route['groups/import']['get']  = 'GroupsController/import';
 $route['groups/export']['get']  = 'GroupsController/export';
 
+$route['groups/check']['post']  = 'GroupsController/check';
+
 /*
 |-----------------
 | # Levels Route

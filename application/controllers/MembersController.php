@@ -153,9 +153,9 @@ class MembersController extends CI_Controller {
         }
     }
 
-    public function check()
+    public function check($can=null)
     {
-        $can = $this->input->post('can');
+        $can = (null == $can) ? $this->input->post('can') : $can;
         if( !$this->Auth->can($can) ) {
             if ($this->input->is_ajax_request()) {
                 echo json_encode( [
@@ -163,9 +163,11 @@ class MembersController extends CI_Controller {
                     'message' => "You don't have permission to Add to this resource",
                     'type' => 'error',
                 ] ); exit();
+            } else {
+                $this->Data['Headers']->Page = 'errors/403';
+                $this->load->view('layouts/errors', $this->Data);
+                return false;
             }
-            $this->Data['Headers']->Page = 'errors/403';
-            $this->load->view('layouts/errors', $this->Data);
         }
     }
 
@@ -521,6 +523,12 @@ class MembersController extends CI_Controller {
 
     public function trash()
     {
+        if( !$this->Auth->can(['members/export']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
+
         $this->Data['members'] = $this->Member->all(true);
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/membersTrash.js').'"></script>';
@@ -643,6 +651,11 @@ class MembersController extends CI_Controller {
      */
     public function import()
     {
+        if( !$this->Auth->can(['members/import']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
 
         if( $this->input->is_ajax_request() )
         {
@@ -700,6 +713,12 @@ class MembersController extends CI_Controller {
      */
     public function export()
     {
+        if( !$this->Auth->can(['members/export']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
+
         if( null != $this->input->post('export_start') )
         {
             $export = $this->Member->export( false, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') );

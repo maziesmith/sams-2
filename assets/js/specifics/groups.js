@@ -17,6 +17,19 @@ $(document).ready(function() {
     */
     $('#add-new-group-btn').click(function () {
        init_add_group_table();
+       $('#add-group').modal('hide');
+        $.post(base_url('groups/check'), {"can":"groups/add"}, function (data) {
+            var data = $.parseJSON(data);
+            if (data.type == "error") {
+                swal(data.title, data.message, data.type);
+                $('#add-group').modal('hide');
+            } else {
+                $('#add-group').modal('show');
+                $('#add-new-group-form')[0].reset();
+                reload_selectpickers();
+                $('#add-new-group-form [name=name]').focus();
+            }
+        });
     });
     var $groupForm = $('#add-new-group-form').validate({
         rules: {
@@ -162,7 +175,7 @@ $(document).ready(function() {
                 success: function (data) {
                     var data = $.parseJSON(data);
                     reload_group_table();
-                    swal("Removed", data.message, data.type);
+                    swal(data.title, data.message, data.type);
                     $('#delete-group-btn').removeClass('show');
                 },
             });
@@ -277,16 +290,21 @@ function init_group_table()
                 data: {groups_id: groups_id},
                 success: function (data) {
                     var group = $.parseJSON(data);
-                    $('#edit-group').modal("show");
-                    var _form = $('#edit-group-form');
+                    if( undefined !== group.type && group.type == 'error' ) {
+                        swal(group.title, group.message, group.type);
+                    } else {
+                        $('#edit-group').modal("show");
+                        var _form = $('#edit-group-form');
 
-                    $.each(group, function (k, v) {
-                        _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
-                        $('select').trigger("chosen:updated");
-                    });
 
-                    $('#members-table-command-edit tr td.select-cell input:checked').trigger('click.rs.jquery.bootgrid');
-                    init_edit_group_members_table();
+                        $.each(group, function (k, v) {
+                            _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
+                            $('select').trigger("chosen:updated");
+                        });
+
+                        $('#members-table-command-edit tr td.select-cell input:checked').trigger('click.rs.jquery.bootgrid');
+                        init_edit_group_members_table();
+                    }
                 }
             });
         });
@@ -317,7 +335,7 @@ function init_group_table()
                     success: function (data) {
                         var data = $.parseJSON(data);
                         reload_group_table();
-                        swal("Removed", data.message, data.type);
+                        swal(data.title, data.message, data.type);
                     }
                 });
             });

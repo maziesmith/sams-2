@@ -7,10 +7,10 @@
                         <div class="card blog-post">
                             <div class="bp-header">
                                 <img src="<?php echo base_url('assets/img/headers/1.png') ?>" class="img-wide">
-                                <a href="<?php echo base_url('members') ?>" class="bp-title bgm-orange">
+                                <div class="bp-title bgm-orange">
                                     <h2>Members Manager</h2>
                                     <small>Add, update, or remove Members</small>
-                                </a>
+                                </div>
                                 <div class="btn-group btn-group-justified">
                                     <a href="<?php echo base_url('members') ?>" class="btn btn-default">Manage</a>
                                     <a href="<?php echo base_url('members/import') ?>" class="btn btn-default">Import</a>

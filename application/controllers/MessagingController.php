@@ -107,7 +107,7 @@ class MessagingController extends CI_Controller {
                                 'msisdn' => $msisdn,
                                 'status' => 'pending',
                                 'member_id' => $member->id,
-                                'smsc' => 'auto',
+                                'smsc' => $this->Message->get_network($msisdn),
                                 'created_by' => $this->user_id,
                             );
                             $outbox_id = $this->Outbox->insert( $outbox );
@@ -118,7 +118,7 @@ class MessagingController extends CI_Controller {
                             'msisdn' => $msisdn,
                             'status' => 'pending',
                             'member_id' => NULL,
-                            'smsc' => 'auto',
+                            'smsc' => $this->Message->get_network($msisdn),
                             'created_by' => $this->user_id,
                         );
                         $outbox_id = $this->Outbox->insert( $outbox );
@@ -149,7 +149,7 @@ class MessagingController extends CI_Controller {
                             'msisdn' => $member->msisdn,
                             'status' => 'pending',
                             'member_id' => $member->id,
-                            'smsc' => 'auto',
+                            'smsc' => $this->Message->get_network($member->msisdn),
                             'created_by' => $this->user_id,
                         );
                         $outbox_id = $this->Outbox->insert( $outbox );
@@ -194,7 +194,7 @@ class MessagingController extends CI_Controller {
                     'msisdn' => $msisdn,
                     'status' => 'pending',
                     'member_id' => $member->id,
-                    'smsc' => 'auto',
+                    'smsc' => $this->Message->get_network($msisdn),
                     'created_by' => $this->user_id,
                 );
                 $outbox_id = $this->Outbox->insert( $outbox );
@@ -205,7 +205,7 @@ class MessagingController extends CI_Controller {
                 'msisdn' => $msisdn,
                 'status' => 'pending',
                 'member_id' => NULL,
-                'smsc' => 'auto',
+                'smsc' =>  $this->Message->get_network($msisdn),
                 'created_by' => $this->user_id,
             );
             $outbox_id = $this->Outbox->insert( $outbox );
@@ -281,72 +281,6 @@ class MessagingController extends CI_Controller {
 
             echo json_encode( $data );
             exit();
-        }
-    }
-
-    public function scheduler()
-    {
-        $msisdn = $this->input->post('msisdn');
-        $body = $this->input->post('body');
-        $date = str_replace('/', '-', $this->input->post('send_at_date'));
-        $time = $this->input->post('send_at_time');
-        $datetime = date("Y-m-d H:i:s", strtotime($date . " " . $time));
-
-        if (!$this->Scheduler->validate(true)) {
-            $data = array(
-                "title" => "Error",
-                'message'=>$this->form_validation->toArray(),
-                'type'=>'danger',
-            );
-            echo json_encode($data); exit();
-        }
-
-        // echo "<pre>";
-        //     var_dump( $datetime ); die();
-        // echo "</pre>";
-
-        if( $msisdn && array_key_exists("members", $msisdn) ) {
-            foreach ($msisdn["members"] as $number) {
-                $data = array(
-                    'message' => $body,
-                    'member_ids' => $number,
-                    'group_ids' => "",
-                    "smsc" => $this->Message->get_network($number)->network ? $this->Message->get_network($number)->network : "auto",
-                    "created_by" => $this->user_id,
-                    "status" => "pending",
-                    "interval" => "",
-                    "send_at" => $datetime,
-                );
-                $this->Scheduler->insert($data);
-            }
-        }
-        if( $msisdn && array_key_exists("groups", $msisdn) ) {
-            foreach ($msisdn["groups"] as $group_id) {
-                $group_members = $this->GroupMember->lookup('group_id', $group_id)->result_array();
-                foreach ($group_members as $member) {
-                    $member = $this->Member->find($member['member_id']);
-                    $data = array(
-                        'message' => $body,
-                        'member_ids' => $member->msisdn,
-                        'group_ids' => $group_id,
-                        "smsc" => count($this->Message->get_network($member->msisdn)) > 0 ? $this->Message->get_network($member->msisdn)->network : "auto",
-                        "created_by" => $this->user_id,
-                        "status" => "pending",
-                        "interval" => "",
-                        "send_at" => date("Y-m-d H:i:s", strtotime($datetime)),
-                    );
-                    $this->Scheduler->insert($data);
-                }
-
-            }
-        }
-        if ($this->input->is_ajax_request()) {
-            $data = array(
-                'title' => 'Success',
-                'type' => 'success',
-                'message' => 'Message successfully scheduled',
-            );
-            echo json_encode($data); exit();
         }
     }
 

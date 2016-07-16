@@ -70,7 +70,7 @@ class Message extends CI_Model {
     {
         #
         $dlr = self::DLR_URL() . '&outbox_id=' . $id;
-        $smsc = ""; //DISABLE SMSC USE RAMDOM SENDING;
+        $smsc = $this->get_network($msisdn);
         $url = self::SEND_URL() . '&to=' . $msisdn . '&text=' . urlencode($body) . '&smsc=' . $smsc . '&dlr-url=' . urlencode($dlr);
 
         $ch = curl_init ($url);
@@ -99,7 +99,8 @@ class Message extends CI_Model {
         $msisdn = $this->num_format($number);
         $prefix = str_split($msisdn,4);
         $sql = "SELECT network FROM prefixes where access LIKE '%{$prefix[0]}%'";
-        return $this->db->query($sql)->row();
+        $q = $this->db->query($sql)->row();
+        return count($q) !== 0 ? $q->network : 'auto';
     }
 }
  ?>

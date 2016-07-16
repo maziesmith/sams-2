@@ -31,6 +31,11 @@ class Migration_create_scheduler_table extends CI_Migration {
                 'constraint' => '255',
                 'null' => true,
             ),
+            'msisdn' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'null' => true,
+            ),
             'status' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',

@@ -100,5 +100,10 @@ class Scheduler extends CI_Model {
         return $this->db->where($this->column_softDelete, NULL)->get();
     }
 
+    public function send()
+    {
+        //
+    }
+
 }
  ?>

@@ -4,7 +4,7 @@ jQuery(document).ready(function ($) {
 
         var gridster = $(".gridster .cards").gridster({
             widget_selector: ".card-item",
-            widget_margins: [15, 5],
+            widget_margins: [10, 10],
             widget_base_dimensions: [320, 250],
         }).data('gridster');
         console.log(gridster.serialize());

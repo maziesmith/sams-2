@@ -49,6 +49,9 @@
         var base_url = function (segments) {
             return "<?php echo base_url(); ?>" + segments;
         }
+        var get_hash = function (url) {
+            return window.location.hash;
+        }
     </script>
 </head>
 <body class="<?php echo isset($Headers->bodyClass) ? $Headers->bodyClass : '' ?>">

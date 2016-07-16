@@ -15,16 +15,16 @@
                 </div>
 
                 <div class="ms-block">
-                    <div>
+                    <!-- <div>
                         <a href="#" class="btn btn-link active">Contacts</a>
                         <a href="#" class="btn btn-link ">Groups</a>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="listview lv-user m-t-20">
 
                     <!-- loop -->
                     <?php foreach ($contacts as $msisdn => $contacts_arr) { ?>
-                        <a data-contact class="lv-item media" href="#" data-msisdn="<?php echo $msisdn; ?>">
+                        <a data-contact class="lv-item media" href="#<?php echo $msisdn; ?>" data-msisdn="<?php echo $msisdn; ?>">
                             <div class="lv-avatar pull-left">
                                 <div class="lv-avatar-inner">
                                     <?php echo !empty(acronymify(array($contacts_arr[0]->firstname, $contacts_arr[0]->lastname))) ? acronymify(array($contacts_arr[0]->firstname, $contacts_arr[0]->lastname)) : '+'; ?>
@@ -61,7 +61,7 @@
                         </div>
 
                         <ul class="lv-actions actions">
-                            <li>
+                            <!-- <li>
                                 <a href="">
                                     <i class="zmdi zmdi-delete"></i>
                                 </a>
@@ -70,13 +70,13 @@
                                 <a href="">
                                     <i class="zmdi zmdi-check"></i>
                                 </a>
-                            </li>
-                            <li>
+                            </li> -->
+                            <!-- <li>
                                 <a href="">
                                     <i class="zmdi zmdi-time"></i>
                                 </a>
-                            </li>
-                            <li class="dropdown">
+                            </li> -->
+                            <!-- <li class="dropdown">
                                 <a href="" data-toggle="dropdown" aria-expanded="true">
                                     <i class="zmdi zmdi-sort"></i>
                                 </a>
@@ -89,7 +89,7 @@
                                         <a href="">Oldest</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li class="dropdown">
                                 <a href="" data-toggle="dropdown" aria-expanded="true">
                                     <i class="zmdi zmdi-more-vert"></i>
@@ -98,9 +98,6 @@
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
                                         <a href="">Refresh</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Message Settings</a>
                                     </li>
                                 </ul>
                             </li>

@@ -35,6 +35,12 @@ class Inbox extends CI_Model {
         return $query->result();
     }
 
+    public function get($limit="-1", $select="*")
+    {
+        $sql = "SELECT $select FROM $this->table LIMIT $limit";
+        return$this->db->query($sql)->result();
+    }
+
     public function messages($msisdn, $order_by="ASC")
     {
         $query="";

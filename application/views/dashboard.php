@@ -12,9 +12,9 @@
                                     <small>Add, update, or remove Members</small>
                                 </div>
                                 <div class="btn-group btn-group-justified">
-                                    <a href="<?php echo base_url('members') ?>" class="bgm-orange btn btn-default">Manage</a>
-                                    <a href="<?php echo base_url('members/import') ?>" class="bgm-orange btn btn-default">Import</a>
-                                    <a href="<?php echo base_url('members/export') ?>" class="bgm-orange btn btn-default">Export</a>
+                                    <a href="<?php echo base_url('members') ?>" class="btn btn-default">Manage</a>
+                                    <a href="<?php echo base_url('members/import') ?>" class="btn btn-default">Import</a>
+                                    <a href="<?php echo base_url('members/export') ?>" class="btn btn-default">Export</a>
                                 </div>
                             </div>
                         </div>
@@ -51,25 +51,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-item" data-row="2" data-col="1" data-sizex="1" data-sizey="1">
+
+                    <div class="card-item" data-row="2" data-col="1" data-sizex="2" data-sizey="2">
                         <div class="card blog-post">
-                            <div class="bp-header">
-                                <img src="<?php echo base_url('assets/img/headers/4.png') ?>" alt="">
-                                <a href="" class="bp-title bgm-pink">
-                                    <h2>Poll Manager</h2>
-                                    <small>Vivamus sagittis lacus vel augue laoreet rutrum</small>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-item" data-row="2" data-col="2" data-sizex="1" data-sizey="1">
-                        <div class="card blog-post">
-                            <div class="bp-header">
-                                <img src="<?php echo base_url('assets/img/headers/5.png') ?>" alt="">
-                                <a href="" class="bp-title bgm-purple">
-                                    <h2>Contact Manager</h2>
-                                    <small>Vivamus sagittis lacus vel augue laoreet rutrum</small>
-                                </a>
+                            <a href="<?php echo base_url('messaging/inbox'); ?>" class="bp-header">
+                                <div class="bp-title bgm-amber">
+                                    <h2>Inbox</h2>
+                                    <small>Last <?php echo $inbox_limit; ?> messages</small>
+                                </div>
+                            </a>
+                            <div class="bp-body">
+                                <div class="list-group">
+                                    <?php foreach ($inbox_list as $message) { ?>
+                                        <div class="list-group-item">
+                                            <?php echo $message->body; ?>
+                                            <em><?php echo $message->msisdn; ?></em>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@ if ( ! function_exists('get_page_headers'))
 */
 if ( ! function_exists('check_link'))
 {
-    function check_link($link, $class='active', $not_class='', $class_suffix=' ', $not_class_suffix=' ')
+    function check_link($link, $class='active', $not_class='', $class_suffix=' ', $not_class_suffix=' ', $fragment="")
     {
         $CI = get_instance();
 
@@ -39,7 +39,7 @@ if ( ! function_exists('check_link'))
             $is_active = $class . $class_suffix;
             foreach ($link as $key => $value) {
                 $link = ($CI->uri->uri_string() == $value) ? $class . $class_suffix : $not_class . $not_class_suffix;
-                if( $is_active == $link  )
+                if( $is_active == $link . $fragment  )
                 {
                     return $class . $class_suffix;
                 }
@@ -186,4 +186,11 @@ if ( ! function_exists('acronymify'))
 
         return implode($glue, $pieces);
     }
+}
+
+function get_url_fragment($fragment, $link=null)
+{
+    $CI = get_instance();
+    $frg = parse_url( null==$link ? $CI->uri->uri_string() : $link . "#" . $fragment );
+    return $frg['fragment'];
 }

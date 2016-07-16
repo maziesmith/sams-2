@@ -1,3 +1,6 @@
+#header {
+	z-index: 999;
+}
 #header,
 #top-search-wrap {
 	background: #5f5f5f;

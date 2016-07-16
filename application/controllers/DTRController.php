@@ -12,6 +12,7 @@ class DTRController extends CI_Controller {
 
         $this->load->model('DTRLog', '', TRUE);
         $this->load->model('Member', '', TRUE);
+        $this->load->model('Message', '', TRUE);
 
         $this->user_id = $this->session->userdata('id');
 
@@ -24,9 +25,19 @@ class DTRController extends CI_Controller {
         if(!$this->session->userdata('validated')) redirect('login');
     }
 
-    public function tap()
+    /**
+     * Execute
+     *
+     *
+     * @return [type] [description]
+     */
+    public function execute()
     {
-        //
+        $stud_no = $this->input->post('stud_no');
+        $e_date = $this->input->post('e_date');
+        $e_time = $this->input->post('e_time');
+
+        $this->Message->send()
     }
 
 }

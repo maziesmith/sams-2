@@ -1,7 +1,7 @@
 <div class="profile-menu">
     <a href="">
         <div class="profile-pic">
-            <img src="<?php echo base_url('assets/img/profile-pics/profile-pic-2.jpg') ?>" alt="">
+            <img src="<?php echo base_url('assets/img/profile-pics/2.jpg') ?>">
         </div>
         <div class="profile-info">
             <?php echo get_fullname(); ?>

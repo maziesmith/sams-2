@@ -29,8 +29,11 @@ class PageController extends CI_Controller {
      */
     public function index()
     {
+        $this->load->model('Inbox', '', TRUE);
         $this->validated();
         $this->Data['Headers']->Page = "dashboard";
+        $this->Data['inbox_limit'] = 5;
+        $this->Data['inbox_list'] = $this->Inbox->get($this->Data['inbox_limit']);
         $this->load->view('layouts/main', $this->Data);
     }
 

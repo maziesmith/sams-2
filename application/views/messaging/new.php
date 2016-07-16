@@ -34,9 +34,11 @@
             <ul class="list-unstyled clearfix wpb-actions">
                 <li class="pull-rsight">
                     <?php echo form_button(array('name'=>'submit', 'id'=>'submit', 'type'=>'submit'), 'Send', 'class="btn btn-primary btn-sm"') ?>
-                    <?php echo form_button('close', 'Send Later...', 'class="btn btn-default btn-sm" data-dismiss="modal"') ?>
+                    <button type="button" id="send-later-btn-trigger" title="Send this message later" class="btn btn-default" data-toggle="modal" href="#send-later-modal">Send Later...</button>
                 </li>
             </ul>
         <?php echo form_close(); ?>
     </div>
 </section>
+
+<?php $this->load->view('messaging/send-later'); ?>

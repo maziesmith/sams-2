@@ -45,7 +45,29 @@ class Message extends CI_Model {
         return $query->row();
     }
 
-    public function send($id, $msisdn, $smsc, $body, $groups=null) {
+    public function scheduler()
+    {
+        $message = $request->getParameter('message');
+        $cat = $request->getParameter('list_cat');
+        $smsc = $request->getParameter('smsc');
+        $listbox = $request->getParameter('ListBox2');
+        $smsc = ($smsc=='auto') ? false : $smsc;
+        $ids = implode(array_unique($listbox),',');
+
+        $dt['message']     = $message;
+        $dt['by']          = $auth['username'];
+        $dt['smsc']        = $smsc;
+        $dt['status']        = 'pending';
+        $dt['member_ids']  = ($cat == 'list_contacts') ? $ids : "";
+        $dt['group_ids']   = ($cat == 'list_groups') ? $ids : "";
+        $dt['send_on']     = date("Y-m-d H:i:s",strtotime($request->getParameter('send_date')));
+
+        $mid = $mm->insert('scheduler', $dt);
+        $controller->redirect('?module='.DEFAULT_MODULE.'&action=Messaging');
+    }
+
+    public function send($id, $msisdn, $smsc, $body, $groups=null)
+    {
         #
         $dlr = self::DLR_URL() . '&outbox_id=' . $id;
         $smsc = ""; //DISABLE SMSC USE RAMDOM SENDING;
@@ -57,7 +79,27 @@ class Message extends CI_Model {
         $str = ob_get_contents();
         ob_end_clean();
         curl_close ($ch);
-        $this->query("UPDATE ".$this->outbox_table." SET extra = '$str' where id='$id'");
+        $this->db->query("UPDATE ".$this->outbox_table." SET extra = '$str' where id='$id'");
+        if (empty($str)) $this->db->query("UPDATE ".$this->outbox_table." SET status = 'success' where id='$id'");
+    }
+
+    public function num_format($msisdn)
+    {
+        $pattern = array('/i/i','/l/i','/o/i','/[^\d]/','/^(\+63|63)/');
+        $replace = array(1,1,0,'','0');
+        $msisdn = preg_replace($pattern, $replace, trim($msisdn));
+        #if (preg_match("/^(\+63|63|0)([0-9]{1,12})/" , trim($msisdn), $matches))
+        #    return "0".$matches[2];
+        #else
+        return $msisdn;
+    }
+
+    public function get_network($number)
+    {
+        $msisdn = $this->num_format($number);
+        $prefix = str_split($msisdn,4);
+        $sql = "SELECT network FROM prefixes where access LIKE '%{$prefix[0]}%'";
+        return $this->db->query($sql)->row();
     }
 }
  ?>

@@ -26,6 +26,7 @@ jQuery(document).ready(function ($) {
             $(element).parents('.form-group-validation').find('.help-block').remove();
         },
         submitHandler: function (form) {
+            $(form).find('#submit').html('Sending...');
             var add = {
                 type: form.method,
                 url: form.action,
@@ -40,6 +41,8 @@ jQuery(document).ready(function ($) {
                             $('#send-new-message-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
                         });
                     } else {
+                        $(form).find('#submit').html('Send');
+                        reset_selectize();
                         notify(data.message, data.type, 9000);
                         $('#send-new-message-form')[0].reset();
                         $('#send-new-message-form [name=msisdn]').focus();
@@ -55,11 +58,12 @@ jQuery(document).ready(function ($) {
                 data: add.data,
                 success: add.success
             });
+            // $(form).find('#submit').html('Send');
         }
     });
     $('.input-selectize').each(function (e) {
         var Ds = $(this);
-        $(this).selectize({
+        var Ds_selectize = $(this).selectize({
             plugins: ['remove_button', 'restore_on_backspace'],
             delimiter: $(this).data('selectize-delimiter') ? $(this).data('selectize-delimiter') : ',',
             options: [],
@@ -95,7 +99,7 @@ jQuery(document).ready(function ($) {
                     var caption = item.name ? item.msisdn : null;
                     return '<div>' +
                         '<strong>' + escape(label) + '</strong>' +
-                        (caption ? '<div class="caption text-muted">' + escape(caption) + '</div>' : '') +
+                        (caption.length > 1 && caption ? '<div class="caption text-muted">' + escape(caption) + '</div>' : '') +
                     '</div>';
                 }
             },
@@ -117,5 +121,52 @@ jQuery(document).ready(function ($) {
         });
     });
 
+    $('#send-later-btn-trigger').on('click', function (e) {
+        e.preventDefault();
+        var _msisdn = $('[name="msisdn[members][]"]').val(),
+            _msisdn_g =  $('[name="msisdn[groups][]"] option:selected').text(),
+            _body = $('[name="body"]').val(),
 
+            _msisdn_input = $('[name="msisdn[]"]').val(),
+            _body_input = $('[name="body"]').val();
+
+        $('#send-later-modal #message-content').html(_body);
+        $('#send-later-modal #send-to-content').html((_msisdn ? _msisdn : "") + ",<br/>" + (_msisdn_g?_msisdn_g:""));
+
+    });
+    $('#send-later-form').submit(function (e) {
+        e.preventDefault();
+        $(this).find('#submit').html('Sending...');
+        $.post(base_url('messaging/bulk-send/later'), $(this).serialize() +"&"+ $('#send-new-message-form').serialize(), function (data) {
+            var data = $.parseJSON(data);
+            if (data.type == "success") {
+                notify(data.message, data.type, 9000);
+                $('#send-later-close-btn').click();
+                $('#send-new-message-form')[0].reset();
+                reset_selectize();
+                $(this).find('#submit').html('Mesasge Sent')
+                $(this).find('#submit').html('Send');
+            } else {
+                var errors = data.message;
+                $.each(errors, function (k, v) {
+                    $('#send-later-form').find('input[name="'+k+'"], select[name="'+k+'"], textarea[name="'+k+'"]').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
+                    // console.log(k,v);
+                });
+                $(this).find('#submit').html('Send');
+            }
+            console.log(data);
+        });
+    });
+    $('.date-picker')[0].CustomFormat = "MM-dd-yyyy";
 });
+
+function reset_selectize() {
+    $(document).find('.input-selectize .remove').click();
+    var $select = $('#msisdn-input').selectize();
+    var control = $select[0].selectize;
+    control.clear();
+
+    $select = $('#msisdn-group-input').selectize();
+    control = $select[0].selectize;
+    control.clear();
+}

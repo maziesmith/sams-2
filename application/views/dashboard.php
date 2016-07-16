@@ -12,9 +12,9 @@
                                     <small>Add, update, or remove Members</small>
                                 </div>
                                 <div class="btn-group btn-group-justified">
-                                    <a href="<?php echo base_url('members') ?>" class="btn btn-default">Manage</a>
-                                    <a href="<?php echo base_url('members/import') ?>" class="btn btn-default">Import</a>
-                                    <a href="<?php echo base_url('members/export') ?>" class="btn btn-default">Export</a>
+                                    <a href="<?php echo base_url('members') ?>" class="bgm-orange btn btn-default">Manage</a>
+                                    <a href="<?php echo base_url('members/import') ?>" class="bgm-orange btn btn-default">Import</a>
+                                    <a href="<?php echo base_url('members/export') ?>" class="bgm-orange btn btn-default">Export</a>
                                 </div>
                             </div>
                         </div>

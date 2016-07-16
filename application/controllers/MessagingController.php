@@ -17,12 +17,18 @@ class MessagingController extends CI_Controller {
         $this->load->model('Member', '', TRUE);
         $this->load->model('Group', '', TRUE);
         $this->load->model('GroupMember', '', TRUE);
+        $this->load->model('Scheduler', '', TRUE);
         $this->Data['Headers'] = get_page_headers();
 
+
+        $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
         $this->Data['Headers']->JS  = '<script src="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/bootstrap-growl/bootstrap-growl.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/moment/min/moment.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<link rel="stylesheet" href="'.base_url('assets/vendors/selectize.js/dist/css/selectize.bootstrap3.css').'">';
+
+        $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css').'">';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js').'"></script>';
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/selectize.js/dist/js/standalone/selectize.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
@@ -120,7 +126,7 @@ class MessagingController extends CI_Controller {
 
                     # This is the Kannel SHIT
                     # This sends the shit of the messagfe to the kannel server
-                    // $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+                    $this->Message->send($outbox_id, $msisdn, 'auto', $body);
 
                 } // endforeach
             }
@@ -150,7 +156,7 @@ class MessagingController extends CI_Controller {
 
                         # This is the Kannel SHIT
                         # This sends the shit of the messagfe to the kannel server
-                        // $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+                        $this->Message->send($outbox_id, $msisdn, 'auto', $body);
                     }
                 }
             }
@@ -207,7 +213,7 @@ class MessagingController extends CI_Controller {
 
         # This is the Kannel SHIT
         # This sends the shit of the messagfe to the kannel server
-        // $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+        $this->Message->send($outbox_id, $msisdn, 'auto', $body);
 
         $data = array(
             'type' => 'success',
@@ -231,7 +237,7 @@ class MessagingController extends CI_Controller {
          * AJAX List of Data
          * Here we load the list of data in a table
          */
-        // if( $this->input->is_ajax_request() ) {
+        if ( $this->input->is_ajax_request() ) {
             $bootgrid_arr = [];
             $current      = $this->input->post('current');
             $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
@@ -275,7 +281,73 @@ class MessagingController extends CI_Controller {
 
             echo json_encode( $data );
             exit();
-        // }
+        }
+    }
+
+    public function scheduler()
+    {
+        $msisdn = $this->input->post('msisdn');
+        $body = $this->input->post('body');
+        $date = str_replace('/', '-', $this->input->post('send_at_date'));
+        $time = $this->input->post('send_at_time');
+        $datetime = date("Y-m-d H:i:s", strtotime($date . " " . $time));
+
+        if (!$this->Scheduler->validate(true)) {
+            $data = array(
+                "title" => "Error",
+                'message'=>$this->form_validation->toArray(),
+                'type'=>'danger',
+            );
+            echo json_encode($data); exit();
+        }
+
+        // echo "<pre>";
+        //     var_dump( $datetime ); die();
+        // echo "</pre>";
+
+        if( $msisdn && array_key_exists("members", $msisdn) ) {
+            foreach ($msisdn["members"] as $number) {
+                $data = array(
+                    'message' => $body,
+                    'member_ids' => $number,
+                    'group_ids' => "",
+                    "smsc" => $this->Message->get_network($number)->network ? $this->Message->get_network($number)->network : "auto",
+                    "created_by" => $this->user_id,
+                    "status" => "pending",
+                    "interval" => "",
+                    "send_at" => $datetime,
+                );
+                $this->Scheduler->insert($data);
+            }
+        }
+        if( $msisdn && array_key_exists("groups", $msisdn) ) {
+            foreach ($msisdn["groups"] as $group_id) {
+                $group_members = $this->GroupMember->lookup('group_id', $group_id)->result_array();
+                foreach ($group_members as $member) {
+                    $member = $this->Member->find($member['member_id']);
+                    $data = array(
+                        'message' => $body,
+                        'member_ids' => $member->msisdn,
+                        'group_ids' => $group_id,
+                        "smsc" => count($this->Message->get_network($member->msisdn)) > 0 ? $this->Message->get_network($member->msisdn)->network : "auto",
+                        "created_by" => $this->user_id,
+                        "status" => "pending",
+                        "interval" => "",
+                        "send_at" => date("Y-m-d H:i:s", strtotime($datetime)),
+                    );
+                    $this->Scheduler->insert($data);
+                }
+
+            }
+        }
+        if ($this->input->is_ajax_request()) {
+            $data = array(
+                'title' => 'Success',
+                'type' => 'success',
+                'message' => 'Message successfully scheduled',
+            );
+            echo json_encode($data); exit();
+        }
     }
 
 }

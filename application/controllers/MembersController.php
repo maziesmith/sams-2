@@ -713,11 +713,11 @@ class MembersController extends CI_Controller {
      */
     public function export()
     {
-        // if( !$this->Auth->can(['members/export']) ) {
-        //     $this->Data['Headers']->Page = 'errors/403';
-        //     $this->load->view('layouts/errors', $this->Data);
-        //     return false;
-        // }
+        if( !$this->Auth->can(['members/export']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
 
         if( null != $this->input->post('export_start') )
         {

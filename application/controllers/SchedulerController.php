@@ -87,17 +87,17 @@ class SchedulerController extends CI_Controller {
     public function send()
     {
         $scheduled = $this->Scheduler->get_scheduled();
-        foreach ($scheduled as $message) {
-            $message = array(
-                'message' => $message->message,
-                'msisdn' => $message->msisdn,
+        foreach ($scheduled as $schedule) {
+            $schedule = array(
+                'message' => $schedule->message,
+                'msisdn' => $schedule->msisdn,
                 'by' => $this->user_id,
             );
-            $message_id = $this->Message->insert( $message );
+            $message_id = $this->Message->insert( $schedule );
 
             $outbox = array(
                 'message_id' => $message_id,
-                'msisdn' => $message->msisdn,
+                'msisdn' => $schedule->msisdn,
                 'status' => 'pending',
                 'member_id' => $member->id,
                 'smsc' => $this->Message->get_network($msisdn),
@@ -105,7 +105,9 @@ class SchedulerController extends CI_Controller {
             );
             $outbox_id = $this->Outbox->insert( $outbox );
 
-            // $this->Message->send()
+            # This is the Kannel SHIT
+            # This sends the shit out of the messagfe to the kannel server
+            $this->Message->send($outbox_id, $schedule->msisdn, $this->Message->get_network($schedule->msisdn), $body);
         }
     }
 

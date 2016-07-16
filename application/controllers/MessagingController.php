@@ -125,8 +125,8 @@ class MessagingController extends CI_Controller {
                     }
 
                     # This is the Kannel SHIT
-                    # This sends the shit of the messagfe to the kannel server
-                    $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+                    # This sends the shit out of the messagfe to the kannel server
+                    $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($msisdn), $body);
 
                 } // endforeach
             }
@@ -155,8 +155,8 @@ class MessagingController extends CI_Controller {
                         $outbox_id = $this->Outbox->insert( $outbox );
 
                         # This is the Kannel SHIT
-                        # This sends the shit of the messagfe to the kannel server
-                        $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+                        # This sends the shit out of the messagfe to the kannel server
+                        $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($member->msisdn), $body);
                     }
                 }
             }
@@ -212,8 +212,8 @@ class MessagingController extends CI_Controller {
         }
 
         # This is the Kannel SHIT
-        # This sends the shit of the messagfe to the kannel server
-        $this->Message->send($outbox_id, $msisdn, 'auto', $body);
+        # This sends the shit out of the messagfe to the kannel server
+        $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($msisdn), $body);
 
         $data = array(
             'type' => 'success',

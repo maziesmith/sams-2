@@ -74,35 +74,10 @@ class Scheduler extends CI_Model {
         return $query->row();
     }
 
-    public function like($wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)
+    public function get_scheduled()
     {
-        $this->db->where('message_id LIKE ', '%'. $wildcard . '%')
-                ->or_where('member_id LIKE ', '%'. $wildcard . '%')
-
-                ->or_where('group_id', '%'. $wildcard)
-
-                ->or_where('msisdn LIKE ', '%'. $wildcard . '%')
-                ->or_where('sms LIKE ', '%'. $wildcard . '%')
-                ->or_where('status LIKE ', '%'. $wildcard . '%')
-
-                ->from($this->table)
-                ->select('*');
-
-        if( null != $sort ) {
-            foreach ($sort as $field_name => $order) {
-                $this->db->order_by($field_name, $order);
-            }
-        }
-
-        $this->db->limit( $limit, $start_from );
-
-        if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->get();
-        return $this->db->where($this->column_softDelete, NULL)->get();
-    }
-
-    public function send()
-    {
-        //
+        $sql = "SELECT * FROM $this->table WHERE status='pending' AND send_at < NOW();";
+        return $this->db->query($sql)->result();
     }
 
 }

@@ -50,6 +50,19 @@ class SchedulerController extends CI_Controller {
                         );
                         $this->Scheduler->insert($data);
                     }
+                } else {
+                    $data = array(
+                        'message' => $body,
+                        'member_ids' => NULL,
+                        'msisdn' => $number,
+                        'group_ids' => NULL,
+                        "smsc" => $this->Message->get_network($number),
+                        "created_by" => $this->user_id,
+                        "status" => "pending",
+                        "interval" => "",
+                        "send_at" => $datetime,
+                    );
+                    $this->Scheduler->insert($data);
                 }
             }
         }
@@ -60,7 +73,7 @@ class SchedulerController extends CI_Controller {
                     $member = $this->Member->find($member['member_id']);
                     $data = array(
                         'message' => $body,
-                        'member_ids' => $member->msisdn,
+                        'member_ids' => $member->id,
                         'msisdn' => $member->msisdn,
                         'group_ids' => $group_id,
                         "smsc" => $this->Message->get_network($member->msisdn),
@@ -87,27 +100,51 @@ class SchedulerController extends CI_Controller {
     public function send()
     {
         $scheduled = $this->Scheduler->get_scheduled();
-        foreach ($scheduled as $schedule) {
-            $schedule = array(
-                'message' => $schedule->message,
-                'msisdn' => $schedule->msisdn,
-                'by' => $this->user_id,
-            );
-            $message_id = $this->Message->insert( $schedule );
 
-            $outbox = array(
-                'message_id' => $message_id,
-                'msisdn' => $schedule->msisdn,
-                'status' => 'pending',
-                'member_id' => $member->id,
-                'smsc' => $this->Message->get_network($msisdn),
-                'created_by' => $this->user_id,
-            );
-            $outbox_id = $this->Outbox->insert( $outbox );
+        if ( null !== $scheduled ) {
+            foreach ($scheduled as $schedule) {
 
-            # This is the Kannel SHIT
-            # This sends the shit out of the messagfe to the kannel server
-            $this->Message->send($outbox_id, $schedule->msisdn, $this->Message->get_network($schedule->msisdn), $body);
+                $schedule_d = array(
+                    'message' => $schedule->message,
+                    'msisdn' => $schedule->msisdn,
+                    'by' => $this->user_id,
+                );
+                $message_id = $this->Message->insert( $schedule_d );
+
+                $members = $this->Member->find_member_via_msisdn($schedule->msisdn);
+
+                if (null != $members) {
+                    foreach ($members as $member) {
+                        $outbox = array(
+                            'message_id' => $message_id,
+                            'msisdn' => $schedule->msisdn,
+                            'status' => 'pending',
+                            'member_id' => $member->id,
+                            'smsc' => $this->Message->get_network($schedule->msisdn),
+                            'created_by' => $this->user_id,
+                        );
+                        $outbox_id = $this->Outbox->insert( $outbox );
+                        $this->Message->send($outbox_id, $schedule->msisdn, $this->Message->get_network($schedule->msisdn), $schedule->message);
+                        $this->Scheduler->update($schedule->id, array("status"=>"sent"));
+                    }
+                } else {
+                    $outbox = array(
+                        'message_id' => $message_id,
+                        'msisdn' => $schedule->msisdn,
+                        'status' => 'pending',
+                        'member_id' => NULL,
+                        'smsc' =>  $this->Message->get_network($schedule->msisdn),
+                        'created_by' => $this->user_id,
+                    );
+                    $outbox_id = $this->Outbox->insert( $outbox );
+                    $this->Message->send($outbox_id, $schedule->msisdn, $this->Message->get_network($schedule->msisdn), $schedule->message);
+                    $this->Scheduler->update($schedule->id, array("status"=>"sent"));
+                }
+
+                # This is the Kannel SHIT
+                # This sends the shit out of the messagfe to the kannel server
+                // $this->Message->send($outbox_id, $schedule->msisdn, $this->Message->get_network($schedule->msisdn), $body);
+            }
         }
     }
 

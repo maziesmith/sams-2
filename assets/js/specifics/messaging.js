@@ -157,7 +157,6 @@ jQuery(document).ready(function ($) {
             console.log(data);
         });
     });
-    $('.date-picker')[0].CustomFormat = "MM-dd-yyyy";
 });
 
 function reset_selectize() {

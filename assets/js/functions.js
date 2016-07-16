@@ -5,6 +5,11 @@
 */
 var GLOBAL_PHONE_REGEX = /(0-9)+/;
 /*
+|----------
+| # Success
+|----------
+*/
+/*
 | -----------
 | # No Script
 | -----------
@@ -966,6 +971,7 @@ function reload_dom()
             liveSearch: true,
         });
     }
+    jQuery(document).find('td.status:contains("success")').parent().addClass('success');
 }
 function reload_selectpickers($values)
 {

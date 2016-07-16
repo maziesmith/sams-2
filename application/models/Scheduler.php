@@ -74,6 +74,42 @@ class Scheduler extends CI_Model {
         return $query->row();
     }
 
+    public function update($id, $data)
+    {
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, $data);
+        return true;
+    }
+
+    public function like($wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)
+    {
+        $first = ''; $last='';
+        if(preg_match('/\s/', $wildcard))
+        {
+            $name = explode(" ", $wildcard);
+            $first = $name[0];
+            $last = $name[1];
+        }
+        $this->db->where('message LIKE', '%' . $wildcard . '%')
+                ->or_where('id LIKE', $wildcard . '%')
+                // ->or_where('(SELECT firstname FROM members WHERE id = member_ids) AS member_ids LIKE', '%' . $wildcard . '%')
+                ->or_where('msisdn LIKE', '%' . $wildcard . '%')
+                ->from($this->table)
+                ->select('*');
+
+        if( null != $sort )
+        {
+            foreach ($sort as $field_name => $order) {
+                $this->db->order_by($field_name, $order);
+            }
+        }
+
+        $this->db->limit( $limit, $start_from );
+
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->get();
+        return $this->db->where($this->column_softDelete, NULL)->get();
+    }
+
     public function get_scheduled()
     {
         $sql = "SELECT * FROM $this->table WHERE status='pending' AND send_at < NOW();";

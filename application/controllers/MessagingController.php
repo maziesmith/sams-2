@@ -198,6 +198,7 @@ class MessagingController extends CI_Controller {
                     'created_by' => $this->user_id,
                 );
                 $outbox_id = $this->Outbox->insert( $outbox );
+                $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($msisdn), $body);
             }
         } else {
             $outbox = array(
@@ -209,11 +210,12 @@ class MessagingController extends CI_Controller {
                 'created_by' => $this->user_id,
             );
             $outbox_id = $this->Outbox->insert( $outbox );
+            $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($msisdn), $body);
         }
 
         # This is the Kannel SHIT
         # This sends the shit out of the messagfe to the kannel server
-        $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($msisdn), $body);
+        // $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($msisdn), $body);
 
         $data = array(
             'type' => 'success',
@@ -279,6 +281,70 @@ class MessagingController extends CI_Controller {
                 // "debug" => $outbox['type'],
             );
 
+            echo json_encode( $data );
+            exit();
+        }
+    }
+
+    public function tracking()
+    {
+        $this->Data['scheduled'] = $this->Scheduler->all();
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/messageTracking.js').'"></script>';
+        $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function tracking_listing()
+    {
+        /**
+         * AJAX List of Data
+         * Here we load the list of data in a table
+         */
+        if ( $this->input->is_ajax_request() ) {
+            $bootgrid_arr = [];
+            $current      = $this->input->post('current');
+            $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
+            $page         = $current !== null ? $current : 1;
+            $start_from   = ($page-1) * $limit;
+            $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
+            $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
+            $removed_only = null !== $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
+            $total        = $this->Scheduler->get_all(0, 0, null, $removed_only)->num_rows();
+
+            if( null != $wildcard ) {
+                $scheduled = $this->Scheduler->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
+                $total   = $this->Scheduler->like($wildcard, 0, 0, null, $removed_only)->num_rows();
+            } else {
+                $scheduled = $this->Scheduler->get_all($start_from, $limit, $sort, $removed_only)->result_array();
+            }
+
+            foreach ($scheduled as $key => $schedule) {
+
+                // $members = $this->Member->find()
+
+                $bootgrid_arr[] = array(
+                    'count_id'           => $key + 1 + $start_from,
+                    'id'        => $schedule['id'],
+                    'message' => $schedule['message'],
+                    'member_ids' => null != $this->Member->find($schedule['member_ids']) ? $this->Member->find($schedule['member_ids'], null, 'CONCAT(firstname, " ", lastname) as fullname')->fullname : "unregistered no.",
+                    // 'group_ids' => arraytostring($this->Group->find(explode(",", $schedule['group_ids'])), ", "),
+                    'smsc' => $schedule['smsc'],
+                    'msisdn' => $schedule['msisdn'],
+                    'status' => $schedule['status'],
+                    'send_at' => date("M d, Y \a\\t h:ia", strtotime($schedule['send_at'])),
+                );
+            }
+
+            $data = array(
+                "current"       => intval($current),
+                "rowCount"      => $limit,
+                "searchPhrase"  => $wildcard,
+                "total"         => intval( $total ),
+                "rows"          => $bootgrid_arr,
+                "trash"         => array(
+                    "count" => $this->Scheduler->get_all(0, 0, null, true)->num_rows(),
+                )
+                // "debug" => $outbox['type'],
+            );
             echo json_encode( $data );
             exit();
         }

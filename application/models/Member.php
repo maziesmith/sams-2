@@ -81,16 +81,16 @@ class Member extends CI_Model {
         return $query;
     }
 
-    public function find($id, $column=null)
+    public function find($id, $column=null, $select="*")
     {
         if (null != $column) {
-            $query = $this->db->where($column, $id)->get($this->table);
+            $query = $this->db->select($select)->where($column, $id)->get($this->table);
             return $query->row();
         }
 
         if ( is_array($id) ) return $this->db->where_in($this->column_id, $id)->get($this->table);
 
-        $query = $this->db->where($this->column_id, $id)->get($this->table);
+        $query = $this->db->select($select)->where($this->column_id, $id)->get($this->table);
         return $query->row();
     }
 

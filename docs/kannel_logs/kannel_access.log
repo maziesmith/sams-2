@@ -2,3 +2,5 @@
 2016-07-16 22:34:23 Log ends
 2016-07-16 22:34:45 Log begins
 2016-07-17 01:10:56 Log begins
+2016-07-17 03:55:33 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:12:Test Message] [udh:0:]
+2016-07-17 03:55:33 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]

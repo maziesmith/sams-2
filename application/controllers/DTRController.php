@@ -7,6 +7,7 @@ class DTRController extends CI_Controller {
 
     public function __construct()
     {
+	date_default_timezone_set('Asia/Singapore');
         parent::__construct();
         // $this->validated();
 
@@ -24,7 +25,31 @@ class DTRController extends CI_Controller {
         $this->session->set_flashdata('error', "You are not logged in");
         if(!$this->session->userdata('validated')) redirect('login');
     }
+    
+    public function dtr() {
+	echo "-- You have contacted us --------";
+	$stud_no = $this->input->get('stud_no');
+	$e_date = $this->input->get('e_date');
+	$e_time = $this->input->get('e_time');
+	$e_mode = $this->input->get('e_mode');
+	$timelog = date("Y-m-d H:i:s", strtotime($e_date . " " . $e_time));
+	//$timelog = $this->input-get('timelog');
+	$data = array(
+	   "member_id" => $stud_no,
+	   "timelog" => $timelog,
+	   "mode" => $e_mode,
+	);
 
+	$this->DTRLog->insert($data);
+
+	# DTR
+	// $dtr_data = 
+	$member_id = $stud_no;
+	$datein = date("Y-m-d", strtotime($e_date));
+	$timein = date("H:i:s", strtotime($e_time));
+	// $dateout = ;
+	// $timeout = ;
+    }
     /**
      * Execute
      *
@@ -37,7 +62,7 @@ class DTRController extends CI_Controller {
         $e_date = $this->input->post('e_date');
         $e_time = $this->input->post('e_time');
 
-        $this->Message->send()
+        $this->Message->send();
     }
 
 }

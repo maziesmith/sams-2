@@ -61,6 +61,7 @@ $route['auth/register']['post'] = 'AuthController/register';
 $route['auth/register']['get'] = 'AuthController/register';
 $route['logout']['get'] = 'AuthController/logout';
 
+$route['dtr'] = 'DTRController/dtr';
 /*
 |------------------
 | # Users Route

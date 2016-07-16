@@ -19,6 +19,9 @@ class Migration_create_dtr_log_table extends CI_Migration {
                 'type' => 'DATETIME',
                 'null' => TRUE,
             ),
+            'mode' => array(
+                'type' => 'INT',
+            ),
         ));
 
         $this->dbforge->add_field('created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP');

@@ -15,6 +15,18 @@
                                 <div class="pad-zero-right">
                                     <div class="form-group fg-float form-group-validation">
                                         <div class="fg-line">
+                                            <?php echo form_input('stud_no', set_value('stud_no'), array('class'=>'form-control fg-input')) ?>
+                                        </div>
+                                        <?php echo form_label('Student number', 'stud_no', array('class'=>'fg-label')) ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="pad-zero-right">
+                                    <div class="form-group fg-float form-group-validation">
+                                        <div class="fg-line">
                                             <?php echo form_input('firstname', set_value('firstname'), array('class'=>'form-control fg-input')) ?>
                                         </div>
                                         <?php echo form_label('First name', 'firstname', array('class'=>'fg-label')) ?>

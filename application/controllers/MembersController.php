@@ -187,6 +187,7 @@ class MembersController extends CI_Controller {
 
             # Save
             $member = array(
+                'stud_no' => $this->input->post('stud_no'),
                 'firstname'    => $this->input->post('firstname'),
                 'middlename'   => $this->input->post('middlename'),
                 'lastname'     => $this->input->post('lastname'),
@@ -471,6 +472,7 @@ class MembersController extends CI_Controller {
 
             # Update
             $member = array(
+                'stud_no' => $this->input->post('stud_no'),
                 'firstname' => $this->input->post('firstname'),
                 'middlename' => $this->input->post('middlename'),
                 'lastname' => $this->input->post('lastname'),

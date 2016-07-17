@@ -14207,3 +14207,1481 @@
 2016-07-17 12:34:21 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA69BC9E06D17
 2016-07-17 12:34:21 [2744] [6] DEBUG: AT2[smart]: --> ^Z
 2016-07-17 12:34:21 [2744] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 12:34:23 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:34:23 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:34:23 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:34:23 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:34:23 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:34:25 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:34:25 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=96^M
+2016-07-17 12:34:25 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:34:25 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:34:25 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819032053034F30000A75DCA3ABB15BBB5623650F659958286C82493084229DF6837081AAEB341CAB7BB3C7F816430982D468BA540CCA2910AA2228B2064F288044D87C8E793091A069BD0EA14540C4A995950900A8AC974331ABCED02
+2016-07-17 12:34:25 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:34:28 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:34:28 [2744] [6] DEBUG: AT2[smart]: <-- +CMGS: 149
+2016-07-17 12:34:28 [2744] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:34:28 [2744] [6] DEBUG: AT2[smart]: send command status: 0
+2016-07-17 12:34:28 [2744] [6] DEBUG: SMSC[smart]: creating DLR message
+2016-07-17 12:34:28 [2744] [6] DEBUG: SMSC[smart]: DLR = http://sjsp-sams.edu/cgi/dlr.php?type=%d&answer=%A&outbox_id=25
+2016-07-17 12:34:28 [2744] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 12:34:28 [2744] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 12:34:28 [2744] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 12:34:30 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:34:30 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:34:30 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:34:30 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:34:30 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA693E1E06D17
+2016-07-17 12:34:30 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:34:32 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:34:32 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:34:32 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:34:32 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:34:32 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: gwlist_len = 5
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43768 vs 0x8a43768)
+2016-07-17 12:34:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: handling message (0xb0a016a0 vs 0x8a43768)
+2016-07-17 12:34:46 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: handling message (0xb0a00dc8 vs 0xb0a00dc8)
+2016-07-17 12:34:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0xb0a00dc8)
+2016-07-17 12:34:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0xb0a00dc8)
+2016-07-17 12:34:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43768 vs 0xb0a00dc8)
+2016-07-17 12:34:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: handling message (0xb0a00dc8 vs 0xb0a00dc8)
+2016-07-17 12:34:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:34:46 [2744] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 12:34:48 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:34:48 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:34:48 [2744] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 12:34:48 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:34:48 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:34:48 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA69BCDE06D17
+2016-07-17 12:34:48 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:34:50 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:34:50 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:34:50 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:34:50 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:34:51 [2744] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 12:34:52 [2744] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:34:52 [2744] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:34:52 [2744] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: gwlist_len = 5
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0x8a0b6a0)
+2016-07-17 12:35:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0x8a0b6a0)
+2016-07-17 12:35:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0x8a43768 vs 0x8a0b6a0)
+2016-07-17 12:35:16 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0xb0a00dc8 vs 0xb0a00dc8)
+2016-07-17 12:35:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0aa70 vs 0xb0a00dc8)
+2016-07-17 12:35:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0xb0a00dc8)
+2016-07-17 12:35:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0xb0a00dc8)
+2016-07-17 12:35:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: handling message (0xb0a00dc8 vs 0xb0a00dc8)
+2016-07-17 12:35:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:16 [2744] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 12:35:18 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:35:18 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:35:18 [2744] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 12:35:18 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:35:18 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:35:18 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA693D9E06D17
+2016-07-17 12:35:18 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:35:20 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:35:20 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:35:20 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:35:20 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: gwlist_len = 5
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0aa70 vs 0x8a0aa70)
+2016-07-17 12:35:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0x8a0aa70)
+2016-07-17 12:35:46 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0x8a43618)
+2016-07-17 12:35:46 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: handling message (0xb0a00dc8 vs 0xb0a00dc8)
+2016-07-17 12:35:46 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0ffa8 vs 0x8a0ffa8)
+2016-07-17 12:35:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0aa70 vs 0x8a0ffa8)
+2016-07-17 12:35:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0ffa8 vs 0x8a0ffa8)
+2016-07-17 12:35:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:35:46 [2744] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 12:35:48 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:35:48 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:35:48 [2744] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 12:35:48 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:35:48 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:35:48 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA69BD1E06D17
+2016-07-17 12:35:48 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:35:51 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:35:51 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:35:51 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:35:51 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:35:53 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:35:53 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:35:53 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:35:53 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:35:53 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA69BC9E06D17
+2016-07-17 12:35:53 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:35:56 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:35:56 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:35:56 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:35:56 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:35:56 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:35:58 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:35:58 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:35:58 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:35:58 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:35:58 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA693E1E06D17
+2016-07-17 12:35:58 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:36:01 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:36:01 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:36:01 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:36:01 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:36:01 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: gwlist_len = 5
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0aa70 vs 0x8a0aa70)
+2016-07-17 12:36:16 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0ffa8 vs 0x8a0ffa8)
+2016-07-17 12:36:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0x8a0ffa8)
+2016-07-17 12:36:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: handling message (0x8a427d8 vs 0x8a0ffa8)
+2016-07-17 12:36:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: handling message (0x8a43768 vs 0x8a0ffa8)
+2016-07-17 12:36:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0ffa8 vs 0x8a0ffa8)
+2016-07-17 12:36:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:16 [2744] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 12:36:17 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:36:17 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:36:17 [2744] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 12:36:17 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:36:17 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:36:17 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA69BCDE06D17
+2016-07-17 12:36:17 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:36:19 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:36:19 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:36:19 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:36:19 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:36:21 [12007] [0] INFO: Added logfile `/home/awwits/Projects/sams/docs/kannel_logs/kannel_smsgateway.log' with level `0'.
+2016-07-17 12:36:21 [12007] [0] INFO: Started access logfile `/home/awwits/Projects/sams/docs/kannel_logs/kannel_access.log'.
+2016-07-17 12:36:21 [12007] [0] INFO: SSL not supported, no SSL initialization done.
+2016-07-17 12:36:21 [12007] [0] INFO: HTTP: Opening server at port 13000.
+2016-07-17 12:36:21 [12007] [0] ERROR: bind failed
+2016-07-17 12:36:21 [12007] [0] ERROR: System error 98: Address already in use
+2016-07-17 12:36:21 [12007] [0] DEBUG: Started thread 1 (gw/bb_http.c:httpadmin_run)
+2016-07-17 12:36:21 [12007] [1] DEBUG: Thread 1 (gw/bb_http.c:httpadmin_run) maps to pid 12007.
+2016-07-17 12:36:21 [12007] [0] DEBUG: starting smsbox connection module
+2016-07-17 12:36:21 [12007] [1] DEBUG: HTTP: No clients with requests, quitting.
+2016-07-17 12:36:21 [12007] [1] DEBUG: Thread 1 (gw/bb_http.c:httpadmin_run) terminates.
+2016-07-17 12:36:21 [12007] [0] INFO: BOXC: 'smsbox-max-pending' not set, using default (100).
+2016-07-17 12:36:21 [12007] [0] DEBUG: Started thread 2 (gw/bb_boxc.c:sms_to_smsboxes)
+2016-07-17 12:36:21 [12007] [2] DEBUG: Thread 2 (gw/bb_boxc.c:sms_to_smsboxes) maps to pid 12007.
+2016-07-17 12:36:21 [12007] [0] DEBUG: Started thread 3 (gw/bb_boxc.c:smsboxc_run)
+2016-07-17 12:36:21 [12007] [3] DEBUG: Thread 3 (gw/bb_boxc.c:smsboxc_run) maps to pid 12007.
+2016-07-17 12:36:21 [12007] [0] INFO: Set SMS resend frequency to 60 seconds.
+2016-07-17 12:36:21 [12007] [3] ERROR: bind failed
+2016-07-17 12:36:21 [12007] [3] ERROR: System error 98: Address already in use
+2016-07-17 12:36:21 [12007] [0] INFO: SMS resend retry set to unlimited.
+2016-07-17 12:36:21 [12007] [3] PANIC: Could not open smsbox port 13001
+2016-07-17 12:36:21 [12007] [0] DEBUG: smsbox MO concatenated message handling enabled
+2016-07-17 12:36:21 [12007] [0] INFO: DLR rerouting for smsc id <smart> disabled.
+2016-07-17 12:36:21 [12007] [3] PANIC: /usr/local/sbin/bearerbox(gw_panic+0xd9) [0x80b8e59]
+2016-07-17 12:36:21 [12007] [3] PANIC: /usr/local/sbin/bearerbox() [0x8058568]
+2016-07-17 12:36:21 [12007] [0] INFO: AT2[smart]: configuration shows modemtype <wavecom>
+2016-07-17 12:36:21 [12007] [0] DEBUG: AT2[smart]: Reading modem definitions from </etc/kannel.conf>
+2016-07-17 12:36:21 [12007] [3] PANIC: /usr/local/sbin/bearerbox() [0x80b5f8d]
+2016-07-17 12:36:21 [12007] [3] PANIC: /lib/i386-linux-gnu/libpthread.so.0(+0x62b5) [0xb76e12b5]
+2016-07-17 12:36:21 [12007] [3] PANIC: /lib/i386-linux-gnu/libc.so.6(clone+0x6e) [0xb704a16e]
+2016-07-17 12:36:23 [2744] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:36:23 [2744] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:36:23 [2744] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: gwlist_len = 5
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0x8a0b6a0)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a427d8 vs 0x8a0b6a0)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43768 vs 0x8a0b6a0)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0ffa8 vs 0x8a0b6a0)
+2016-07-17 12:36:46 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0x8a43618)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0x8a43618)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a427d8 vs 0x8a43618)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43768 vs 0x8a43618)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0x8a43618)
+2016-07-17 12:36:46 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:36:46 [2744] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 12:36:47 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:36:47 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:36:47 [2744] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 12:36:47 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:36:47 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:36:47 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA693D9E06D17
+2016-07-17 12:36:47 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:36:50 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:36:50 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:36:50 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:36:50 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: gwlist_len = 5
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: handling message (0x8a0b6a0 vs 0x8a0b6a0)
+2016-07-17 12:37:16 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: handling message (0x8a427d8 vs 0x8a427d8)
+2016-07-17 12:37:16 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: handling message (0x8a43768 vs 0x8a43768)
+2016-07-17 12:37:16 [2744] [7] DEBUG: Message routed successfully.
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0x8a43618)
+2016-07-17 12:37:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: handling message (0x8a429d8 vs 0x8a43618)
+2016-07-17 12:37:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: handling message (0x8a43618 vs 0x8a43618)
+2016-07-17 12:37:16 [2744] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 12:37:16 [2744] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 12:37:18 [2744] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 12:37:18 [2744] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 12:37:18 [2744] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 12:37:18 [2744] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 12:37:18 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:37:18 [2744] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A75ACA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C0562168D541015590421934724683A443E9F4CD030D88456A7A06250CACC828254504CA69BD1E06D17
+2016-07-17 12:37:18 [2744] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 12:37:18 [2744] [0] WARNING: SIGHUP received, catching and re-opening logs
+2016-07-17 12:37:18 [2744] [0] WARNING: Killing signal or HTTP admin command received, shutting down...
+2016-07-17 12:37:18 [2744] [0] DEBUG: Shutting down Kannel...
+2016-07-17 12:37:18 [2744] [0] DEBUG: shutting down smsc
+2016-07-17 12:37:18 [2744] [0] DEBUG: AT2[smart]: Shutting down SMSCConn, slow
+2016-07-17 12:37:18 [2744] [0] DEBUG: shutting down udp
+2016-07-17 12:37:18 [2744] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 12:37:18 [2744] [7] DEBUG: sms_router: handling message (0x8a429d8 vs 0x8a429d8)
+2016-07-17 12:37:18 [2744] [7] DEBUG: Routing failed, re-queued.
+2016-07-17 12:37:18 [2744] [7] DEBUG: Thread 7 (gw/bb_smscconn.c:sms_router) terminates.
+2016-07-17 12:37:18 [2744] [8] INFO: Connection closed by the box <127.0.0.1>
+2016-07-17 12:37:18 [2744] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 12:37:18 [2744] [9] DEBUG: Thread 9 (gw/bb_boxc.c:boxc_sender) terminates.
+2016-07-17 12:37:18 [2744] [8] DEBUG: Thread 8 (gw/bb_boxc.c:function) terminates.
+2016-07-17 12:37:20 [2744] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 12:37:20 [2744] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 12:37:20 [2744] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 12:37:20 [2744] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 12:37:20 [2744] [6] INFO: AT2[smart]: Closing device
+2016-07-17 12:37:21 [2744] [6] DEBUG: Thread 6 (gw/smsc/smsc_at.c:at2_device_thread) terminates.
+2016-07-17 12:37:21 [2744] [4] DEBUG: Thread 4 (gw/bb_boxc.c:sms_to_smsboxes) terminates.
+2016-07-17 12:37:21 [2744] [5] DEBUG: Thread 5 (gw/bb_boxc.c:smsboxc_run) terminates.
+2016-07-17 12:37:21 [2744] [0] INFO: All flow threads have died, killing core
+2016-07-17 12:37:21 [2744] [0] DEBUG: Waiting for 2 (gwlib/http.c:server_thread) to terminate
+2016-07-17 12:37:21 [2744] [3] DEBUG: HTTP: No clients with requests, quitting.
+2016-07-17 12:37:21 [2744] [3] DEBUG: Thread 3 (gw/bb_http.c:httpadmin_run) terminates.
+2016-07-17 12:37:21 [2744] [2] DEBUG: Thread 2 (gwlib/http.c:server_thread) terminates.
+2016-07-17 12:37:21 [2744] [1] DEBUG: Thread 1 (gwlib/fdset.c:poller) terminates.
+2016-07-17 12:37:21 [2744] [0] DEBUG: final clean-up for SMSCConn
+2016-07-17 12:37:21 [2744] [0] DEBUG: smsbox MO concatenated message handling cleaned up
+2016-07-17 12:37:21 [2744] [0] INFO: Total WDP messages: received 0, sent 0
+2016-07-17 12:37:21 [2744] [0] DEBUG: Remaining SMS: 0 incoming, 2 outgoing
+2016-07-17 12:37:21 [2744] [0] INFO: Total SMS messages: received 6, sent 4
+2016-07-17 12:37:21 [2744] [0] DEBUG: Immutable octet strings: 258.
+2016-07-17 12:38:26 [1810] [0] INFO: Added logfile `/home/awwits/Projects/sams/docs/kannel_logs/kannel_smsgateway.log' with level `0'.
+2016-07-17 12:38:26 [1810] [0] INFO: Started access logfile `/home/awwits/Projects/sams/docs/kannel_logs/kannel_access.log'.
+2016-07-17 12:38:26 [1810] [0] INFO: SSL not supported, no SSL initialization done.
+2016-07-17 12:38:26 [1810] [0] INFO: HTTP: Opening server at port 13000.
+2016-07-17 12:38:26 [1810] [0] DEBUG: Started thread 1 (gwlib/fdset.c:poller)
+2016-07-17 12:38:26 [1810] [1] DEBUG: Thread 1 (gwlib/fdset.c:poller) maps to pid 1810.
+2016-07-17 12:38:26 [1810] [0] DEBUG: Started thread 2 (gwlib/http.c:server_thread)
+2016-07-17 12:38:26 [1810] [2] DEBUG: Thread 2 (gwlib/http.c:server_thread) maps to pid 1810.
+2016-07-17 12:38:26 [1810] [0] DEBUG: Started thread 3 (gw/bb_http.c:httpadmin_run)
+2016-07-17 12:38:26 [1810] [3] DEBUG: Thread 3 (gw/bb_http.c:httpadmin_run) maps to pid 1810.
+2016-07-17 12:38:26 [1810] [0] DEBUG: starting smsbox connection module
+2016-07-17 12:38:26 [1810] [0] INFO: BOXC: 'smsbox-max-pending' not set, using default (100).
+2016-07-17 12:38:26 [1810] [0] DEBUG: Started thread 4 (gw/bb_boxc.c:sms_to_smsboxes)
+2016-07-17 12:38:26 [1810] [4] DEBUG: Thread 4 (gw/bb_boxc.c:sms_to_smsboxes) maps to pid 1810.
+2016-07-17 12:38:26 [1810] [0] DEBUG: Started thread 5 (gw/bb_boxc.c:smsboxc_run)
+2016-07-17 12:38:26 [1810] [5] DEBUG: Thread 5 (gw/bb_boxc.c:smsboxc_run) maps to pid 1810.
+2016-07-17 12:38:26 [1810] [0] INFO: Set SMS resend frequency to 60 seconds.
+2016-07-17 12:38:26 [1810] [0] INFO: SMS resend retry set to unlimited.
+2016-07-17 12:38:26 [1810] [0] DEBUG: smsbox MO concatenated message handling enabled
+2016-07-17 12:38:26 [1810] [0] INFO: DLR rerouting for smsc id <smart> disabled.
+2016-07-17 12:38:26 [1810] [0] INFO: AT2[smart]: configuration shows modemtype <wavecom>
+2016-07-17 12:38:26 [1810] [0] DEBUG: AT2[smart]: Reading modem definitions from </etc/kannel.conf>
+2016-07-17 12:38:26 [1810] [0] DEBUG: AT2[smart]: Found <5> modems in config
+2016-07-17 12:38:26 [1810] [0] INFO: AT2[smart]: read modem definition for <Wavecom>
+2016-07-17 12:38:26 [1810] [0] DEBUG: Started thread 6 (gw/smsc/smsc_at.c:at2_device_thread)
+2016-07-17 12:38:26 [1810] [6] DEBUG: Thread 6 (gw/smsc/smsc_at.c:at2_device_thread) maps to pid 1810.
+2016-07-17 12:38:26 [1810] [7] DEBUG: Thread 7 (gw/bb_smscconn.c:sms_router) maps to pid 1810.
+2016-07-17 12:38:26 [1810] [6] INFO: AT2[smart]: trying to use speed <115200> from modem definition
+2016-07-17 12:38:26 [1810] [0] DEBUG: Started thread 7 (gw/bb_smscconn.c:sms_router)
+2016-07-17 12:38:26 [1810] [6] INFO: AT2[smart]: opening device
+2016-07-17 12:38:26 [1810] [0] INFO: ----------------------------------------
+2016-07-17 12:38:26 [1810] [0] INFO: Kannel bearerbox II version 1.4.3 starting
+2016-07-17 12:38:26 [1810] [0] INFO: MAIN: Start-up done, entering mainloop
+2016-07-17 12:38:26 [1810] [0] DEBUG: AT2[smart]: start called
+2016-07-17 12:38:26 [1810] [6] DEBUG: AT2[smart]: device opened. Telnet mode = 0
+2016-07-17 12:38:26 [1810] [6] DEBUG: AT2[smart]: device opened
+2016-07-17 12:38:26 [1810] [6] INFO: AT2[smart]: speed set to 115200
+2016-07-17 12:38:26 [1810] [6] DEBUG: AT2[smart]: --> ^M
+2016-07-17 12:38:27 [1810] [5] INFO: Client connected from <127.0.0.1> 
+2016-07-17 12:38:27 [1810] [5] DEBUG: Started thread 8 (gw/bb_boxc.c:function)
+2016-07-17 12:38:27 [1810] [8] DEBUG: Thread 8 (gw/bb_boxc.c:function) maps to pid 1810.
+2016-07-17 12:38:27 [1810] [8] DEBUG: Started thread 9 (gw/bb_boxc.c:boxc_sender)
+2016-07-17 12:38:27 [1810] [9] DEBUG: Thread 9 (gw/bb_boxc.c:boxc_sender) maps to pid 1810.
+2016-07-17 12:38:28 [1810] [6] DEBUG: AT2[smart]: --> AT^M
+2016-07-17 12:38:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:28 [1810] [6] INFO: AT2[smart]: Closing device
+2016-07-17 12:38:28 [1810] [6] INFO: AT2[smart]: speed is 115200
+2016-07-17 12:38:28 [1810] [6] INFO: AT2[smart]: opening device
+2016-07-17 12:38:28 [1810] [6] DEBUG: AT2[smart]: device opened. Telnet mode = 0
+2016-07-17 12:38:28 [1810] [6] DEBUG: AT2[smart]: device opened
+2016-07-17 12:38:28 [1810] [6] INFO: AT2[smart]: Logging in
+2016-07-17 12:38:28 [1810] [6] INFO: AT2[smart]: init device
+2016-07-17 12:38:28 [1810] [6] INFO: AT2[smart]: speed set to 115200
+2016-07-17 12:38:28 [1810] [6] DEBUG: AT2[smart]: --> ATZ^M
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: --> AT^M
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: <-- AT
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: --> AT&F^M
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: <-- AT&F
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: --> ATE0^M
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: <-- ATE0
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:29 [1810] [6] DEBUG: AT2[smart]: --> AT+IFC=2,2^M
+2016-07-17 12:38:31 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:31 [1810] [6] DEBUG: AT2[smart]: --> AT+CPIN?^M
+2016-07-17 12:38:31 [1810] [6] DEBUG: AT2[smart]: <-- +CPIN: READY
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: --> AT+CSCA="+639180000101"^M
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGF=0^M
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: --> AT+CSMS=?^M
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: <-- +CSMS: (0,1)
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:42 [1810] [6] INFO: AT2[smart]: Phase 2+ is supported
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: --> AT+CSMS=1^M
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: <-- +CSMS: 1,1,1
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: --> AT+CNMI=2,2,0,1,0;+CMEE=1^M
+2016-07-17 12:38:42 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:42 [1810] [6] INFO: AT2[smart]: AT SMSC successfully opened.
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 23,0
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: <-- +CMT: ,23
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: <-- 0791361908005043040C9136995883224700006170712183242304E8321B0E
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: received message from SMSC: +639180000534
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: Numeric sender (international) <+639985382274>
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: User data length read as (4)
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: Udh decoding done len=4 udhi=0 udhlen=0 udh=''
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CNMA^M
+2016-07-17 12:38:44 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 12:38:44 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 12:38:44 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 12:38:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:38:57 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 12:40:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:40:16 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 12:40:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:40:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:40:16 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:40:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:41:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:41:48 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 19,0
+2016-07-17 12:41:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:41:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:41:48 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:41:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:43:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:43:20 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 12:43:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:43:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:43:20 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:43:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: <-- +CMT: ,23
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: <-- 0791361908005043040C9136995883224700006170712144532304E8321B0E
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: received message from SMSC: +639180000534
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: Numeric sender (international) <+639985382274>
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: User data length read as (4)
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: Udh decoding done len=4 udhi=0 udhlen=0 udh=''
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: --> AT+CNMA^M
+2016-07-17 12:44:37 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 12:44:37 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 12:44:37 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 12:44:37 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:44:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:44:52 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 19,0
+2016-07-17 12:44:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:44:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:44:52 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:44:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:44:57 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 12:46:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:46:24 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 12:46:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:46:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:46:24 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:46:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:47:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:47:56 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 23,0
+2016-07-17 12:47:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:47:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:47:56 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:47:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:49:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:49:28 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 22,0
+2016-07-17 12:49:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:49:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:49:28 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:49:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: <-- +CMT: ,23
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: <-- 0791361908005043040C9136995883224700006170712105432304E8321B0E
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: received message from SMSC: +639180000534
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: Numeric sender (international) <+639985382274>
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: User data length read as (4)
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: Udh decoding done len=4 udhi=0 udhlen=0 udh=''
+2016-07-17 12:50:36 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 12:50:36 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CNMA^M
+2016-07-17 12:50:36 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 12:50:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:50:57 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 12:51:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:51:00 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 12:51:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:51:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:51:00 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:51:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:52:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:52:32 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 12:52:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:52:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:52:32 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:52:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:54:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:54:04 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 22,0
+2016-07-17 12:54:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:54:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:54:04 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:54:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:55:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:55:36 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 12:55:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:55:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:55:36 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:55:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:57:08 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:57:08 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 12:57:08 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:57:08 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:57:08 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:57:08 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:58:40 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 12:58:40 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 12:58:40 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 12:58:40 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 12:58:40 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 12:58:40 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:00:12 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:00:12 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 13:00:12 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:00:12 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:00:12 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:00:12 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:01:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:01:44 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 13:01:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:01:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:01:44 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:01:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:03:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:03:16 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 22,0
+2016-07-17 13:03:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:03:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:03:16 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:03:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:04:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:04:48 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:04:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:04:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:04:48 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:04:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:06:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:06:20 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:06:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:06:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:06:20 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:06:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:07:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:07:52 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:07:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:07:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:07:52 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:07:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:09:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:09:24 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:09:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:09:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:09:24 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:09:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:10:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:10:56 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:10:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:10:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:10:56 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:10:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:12:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:12:28 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 13:12:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:12:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:12:28 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:12:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:14:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:14:00 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 22,0
+2016-07-17 13:14:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:14:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:14:00 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:14:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:15:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:15:32 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:15:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:15:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:15:32 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:15:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:17:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:17:04 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 22,0
+2016-07-17 13:17:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:17:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:17:04 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:17:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:18:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:18:36 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 19,0
+2016-07-17 13:18:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:18:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:18:36 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:18:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:20:08 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:20:08 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:20:08 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:20:08 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:20:08 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:20:08 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:21:40 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:21:40 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 13:21:40 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:21:40 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:21:40 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:21:40 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:23:12 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:23:12 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 13:23:12 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:23:12 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:23:12 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:23:12 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:24:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:24:44 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:24:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:24:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:24:44 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:24:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:26:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:26:16 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 19,0
+2016-07-17 13:26:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:26:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:26:16 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:26:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: <-- +CMT: ,25
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: <-- 0791361908005043040C9136995883224700006170713162222306F2B2F8FDA603
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: received message from SMSC: +639180000534
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: Numeric sender (international) <+639985382274>
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: User data length read as (6)
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: Udh decoding done len=6 udhi=0 udhlen=0 udh=''
+2016-07-17 13:26:24 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CNMA^M
+2016-07-17 13:26:24 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 13:26:24 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 13:26:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:26:29 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 13:27:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:27:48 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 17,0
+2016-07-17 13:27:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:27:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:27:48 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:27:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:29:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:29:20 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 16,0
+2016-07-17 13:29:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:29:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:29:20 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:29:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:30:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:30:52 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 18,0
+2016-07-17 13:30:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:30:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:30:52 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:30:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:32:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:32:24 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 16,0
+2016-07-17 13:32:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:32:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:32:24 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:32:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:33:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:33:56 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 15,0
+2016-07-17 13:33:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:33:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:33:56 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:33:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:35:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:35:28 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 16,0
+2016-07-17 13:35:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:35:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:35:28 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:35:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:37:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:37:00 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 16,0
+2016-07-17 13:37:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:37:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:37:00 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:37:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:38:24 [1810] [7] DEBUG: clear_old_concat_parts called
+2016-07-17 13:38:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:38:32 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 18,0
+2016-07-17 13:38:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:38:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:38:32 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:38:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:40:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:40:04 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 15,0
+2016-07-17 13:40:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:40:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:40:04 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:40:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:41:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:41:36 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 18,0
+2016-07-17 13:41:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:41:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:41:36 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:41:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:43:08 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:43:08 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 14,0
+2016-07-17 13:43:08 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:43:08 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:43:08 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:43:08 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:44:40 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:44:40 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 19,0
+2016-07-17 13:44:40 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:44:40 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:44:40 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:44:40 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:46:12 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:46:12 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:46:12 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:46:12 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:46:12 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:46:12 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:47:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:47:44 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:47:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:47:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:47:44 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:47:44 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:48:29 [1810] [2] DEBUG: HTTP: Creating HTTPClient for `192.168.1.101'.
+2016-07-17 13:48:29 [1810] [2] DEBUG: HTTP: Created HTTPClient area 0xb3700558.
+2016-07-17 13:48:29 [1810] [3] DEBUG: HTTP: Resetting HTTPClient for `192.168.1.101'.
+2016-07-17 13:48:33 [1810] [5] INFO: Client connected from <192.168.1.101> 
+2016-07-17 13:48:33 [1810] [5] DEBUG: Started thread 10 (gw/bb_boxc.c:function)
+2016-07-17 13:48:33 [1810] [10] DEBUG: Thread 10 (gw/bb_boxc.c:function) maps to pid 1810.
+2016-07-17 13:48:33 [1810] [10] DEBUG: Started thread 11 (gw/bb_boxc.c:boxc_sender)
+2016-07-17 13:48:33 [1810] [11] DEBUG: Thread 11 (gw/bb_boxc.c:boxc_sender) maps to pid 1810.
+2016-07-17 13:48:43 [1810] [10] INFO: Connection closed by the box <192.168.1.101>
+2016-07-17 13:48:43 [1810] [11] DEBUG: send_msg: sending msg to box: <192.168.1.101>
+2016-07-17 13:48:43 [1810] [11] DEBUG: Thread 11 (gw/bb_boxc.c:boxc_sender) terminates.
+2016-07-17 13:48:43 [1810] [10] DEBUG: Thread 10 (gw/bb_boxc.c:function) terminates.
+2016-07-17 13:49:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:49:16 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:49:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:49:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:49:16 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:49:16 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:49:29 [1810] [1] DEBUG: Timeout for fd:30 appeares.
+2016-07-17 13:49:29 [1810] [1] DEBUG: HTTP: Destroying HTTPClient area 0xb3700558.
+2016-07-17 13:49:29 [1810] [1] DEBUG: HTTP: Destroying HTTPClient for `192.168.1.101'.
+2016-07-17 13:50:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:50:48 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 17,0
+2016-07-17 13:50:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:50:48 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:50:48 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:50:48 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:52:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:52:20 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:52:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:52:20 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:52:20 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:52:20 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:53:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:53:52 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:53:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:53:52 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:53:52 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:53:52 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:55:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:55:24 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 18,0
+2016-07-17 13:55:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:55:24 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:55:24 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:55:24 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:56:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:56:56 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 13:56:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:56:56 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:56:56 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:56:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:58:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 13:58:28 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 13:58:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 13:58:28 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 13:58:28 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 13:58:28 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:00:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 14:00:00 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 19,0
+2016-07-17 14:00:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:00:00 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:00:00 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:00:00 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:01:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 14:01:32 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 14:01:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:01:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:01:32 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:01:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:03:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 14:03:04 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 14:03:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:03:04 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:03:04 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:03:04 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:04:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 14:04:36 [1810] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 14:04:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:04:36 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:04:36 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:04:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:04:53 [1810] [8] DEBUG: boxc_receiver: sms received
+2016-07-17 14:04:53 [1810] [8] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:04:54 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:04:54 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=93^M
+2016-07-17 14:04:54 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:04:54 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:04:54 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:04:54 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819032053034F30000A75ACA3ABB15BBB5623650F659958286C82493084229DF6837081AAEB341CAB7BB3C7F816430982D468BA5404527B5282D1241546411844C1E91A0E910F97C3241C360135A9D828254104CA683D1E06D17
+2016-07-17 14:04:54 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:04:56 [1810] [6] DEBUG: AT2[smart]: <-- +CMGS: 150
+2016-07-17 14:04:56 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:04:56 [1810] [6] DEBUG: AT2[smart]: send command status: 0
+2016-07-17 14:04:56 [1810] [6] DEBUG: SMSC[smart]: creating DLR message
+2016-07-17 14:04:56 [1810] [6] DEBUG: SMSC[smart]: DLR = http://sjsp-sams.edu/cgi/dlr.php?type=%d&answer=%A&outbox_id=26
+2016-07-17 14:04:56 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:04:56 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 14:04:56 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 14:05:01 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 14:05:09 [1810] [8] DEBUG: boxc_receiver: sms received
+2016-07-17 14:05:09 [1810] [8] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:05:10 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:05:10 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:05:10 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:05:10 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:05:10 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:05:10 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:05:10 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:05:12 [1810] [8] DEBUG: boxc_receiver: sms received
+2016-07-17 14:05:12 [1810] [8] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:05:12 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:05:12 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:05:12 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:05:12 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:05:12 [1810] [7] DEBUG: sms_router: handling message (0xb0900d80 vs 0xb0900d80)
+2016-07-17 14:05:12 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:05:12 [1810] [7] DEBUG: sms_router: handling message (0xb0900d80 vs 0xb0900d80)
+2016-07-17 14:05:12 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:05:12 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:05:12 [1810] [7] DEBUG: sms_router: gwlist_len = 1
+2016-07-17 14:05:12 [1810] [7] DEBUG: sms_router: handling message (0xb0900d80 vs 0xb0900d80)
+2016-07-17 14:05:12 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:05:12 [1810] [7] DEBUG: sms_router: handling message (0xb0900d80 vs 0xb0900d80)
+2016-07-17 14:05:12 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:05:12 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:05:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:05:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:05:14 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:05:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:05:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:05:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:05:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:05:16 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:05:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:05:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:05:16 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:05:42 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:05:42 [1810] [7] DEBUG: sms_router: handling message (0xb0900d80 vs 0xb0900d80)
+2016-07-17 14:05:42 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:05:42 [1810] [7] DEBUG: sms_router: handling message (0xb0900ed8 vs 0xb0900d80)
+2016-07-17 14:05:42 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:05:42 [1810] [7] DEBUG: sms_router: handling message (0xb0900d80 vs 0xb0900d80)
+2016-07-17 14:05:42 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:05:42 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:06:08 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:06:08 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:06:08 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:06:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:06:13 [1810] [7] DEBUG: sms_router: handling message (0xb0900ed8 vs 0xb0900ed8)
+2016-07-17 14:06:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:06:13 [1810] [7] DEBUG: sms_router: handling message (0xb0900d80 vs 0xb0900ed8)
+2016-07-17 14:06:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:06:13 [1810] [7] DEBUG: sms_router: handling message (0xb0900ed8 vs 0xb0900ed8)
+2016-07-17 14:06:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:06:13 [1810] [7] DEBUG: sms_router: handling message (0xb0900ed8 vs 0xb0900ed8)
+2016-07-17 14:06:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:06:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:06:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:06:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:06:14 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:06:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:06:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:06:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:06:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:06:16 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:06:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:06:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:06:16 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:06:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:06:43 [1810] [7] DEBUG: sms_router: handling message (0xb0900ed8 vs 0xb0900ed8)
+2016-07-17 14:06:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:06:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:06:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:06:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:06:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:06:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:06:44 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:06:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:06:44 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:06:44 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:06:44 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:06:44 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:06:44 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:06:46 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:06:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:06:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:06:46 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:07:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:07:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:07:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:07:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x910d768)
+2016-07-17 14:07:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:07:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:07:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:07:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:07:40 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:07:40 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:07:40 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:07:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:07:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:07:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:07:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x90d9fa8)
+2016-07-17 14:07:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:07:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:07:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:07:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:07:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:07:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:07:44 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:07:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:07:44 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:07:44 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:07:44 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:07:44 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:07:44 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:07:46 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:07:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:07:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:07:46 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:08:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:08:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:08:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:08:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:08:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:08:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:08:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:08:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:08:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:08:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:08:14 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:08:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:08:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:08:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:08:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:08:17 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:08:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:08:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:08:17 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:08:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:08:43 [1810] [7] DEBUG: clear_old_concat_parts called
+2016-07-17 14:08:43 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:08:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:08:43 [1810] [7] DEBUG: sms_router: handling message (0x90d5778 vs 0x910d608)
+2016-07-17 14:08:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:08:43 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:08:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:08:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:09:11 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:09:11 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:09:11 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:09:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:09:13 [1810] [7] DEBUG: sms_router: handling message (0x90d5778 vs 0x90d5778)
+2016-07-17 14:09:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:09:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x90d5778)
+2016-07-17 14:09:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:09:13 [1810] [7] DEBUG: sms_router: handling message (0x90d5778 vs 0x90d5778)
+2016-07-17 14:09:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:09:13 [1810] [7] DEBUG: sms_router: handling message (0x90d5778 vs 0x90d5778)
+2016-07-17 14:09:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:09:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:09:15 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:09:15 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:09:15 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:09:15 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:09:15 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:09:15 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:09:15 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:09:17 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:09:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:09:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:09:17 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:09:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:09:43 [1810] [7] DEBUG: sms_router: handling message (0x90d5778 vs 0x90d5778)
+2016-07-17 14:09:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:09:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:09:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:09:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:09:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:09:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:09:43 [1810] [8] DEBUG: boxc_receiver: sms received
+2016-07-17 14:09:43 [1810] [8] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:09:45 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:09:45 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=72^M
+2016-07-17 14:09:45 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:09:45 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:09:45 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:09:45 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819062600989F20000A742D4B7BB4C07E9522ED035CC0E83C2EB3788FD0E935DA06B384D07B1C3EE33081D7681A0E1FA3D0D728741F2B41BB40EB7D32E508B997EBBCB6936
+2016-07-17 14:09:45 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:09:47 [1810] [6] DEBUG: AT2[smart]: <-- +CMGS: 151
+2016-07-17 14:09:47 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:09:47 [1810] [6] DEBUG: AT2[smart]: send command status: 0
+2016-07-17 14:09:47 [1810] [6] DEBUG: SMSC[smart]: creating DLR message
+2016-07-17 14:09:47 [1810] [6] DEBUG: SMSC[smart]: DLR = http://sjsp-sams.edu/cgi/dlr.php?type=%d&answer=%A&outbox_id=29
+2016-07-17 14:09:47 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:09:47 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 14:09:47 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 14:09:49 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:09:49 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:09:49 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:09:49 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:09:49 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:09:49 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:09:52 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:09:52 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:09:52 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:09:52 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:09:52 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:10:01 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 14:10:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:10:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:10:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:10:13 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x90d9fa8)
+2016-07-17 14:10:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:10:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:10:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:10:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:10:42 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:10:42 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:10:42 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:10:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:10:43 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:10:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:10:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x910d530)
+2016-07-17 14:10:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:10:43 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:10:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:10:43 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:10:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:10:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:10:44 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:10:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:10:44 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:10:44 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:10:44 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:10:44 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:10:44 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:10:46 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:10:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:10:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:10:46 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:11:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:11:13 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:11:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:11:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:11:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:11:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:11:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:11:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:11:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:11:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:11:14 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:11:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:11:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:11:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:11:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:11:16 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:11:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:11:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:11:16 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:11:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:11:43 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:11:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:11:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d608)
+2016-07-17 14:11:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:11:43 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:11:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:11:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:12:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:12:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:12:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:12:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d768)
+2016-07-17 14:12:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:12:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:12:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:12:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:12:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:12:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:12:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:12:17 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:12:17 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:12:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:12:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:12:17 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:12:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:12:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:12:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:12:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:12:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:12:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:12:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:12:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:12:45 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:12:45 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:12:45 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:12:45 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:12:45 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:12:45 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:12:45 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:12:47 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:12:47 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:12:47 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:12:47 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:13:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:13:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:13:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:13:13 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x90d9fa8)
+2016-07-17 14:13:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:13:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:13:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:13:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:13:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:13:43 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:13:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:13:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x910d530)
+2016-07-17 14:13:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:13:43 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:13:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:13:43 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:13:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:13:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:13:45 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:13:48 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:13:48 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:13:48 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:13:48 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:13:48 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:14:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:14:13 [1810] [7] DEBUG: sms_router: handling message (0x910d530 vs 0x910d530)
+2016-07-17 14:14:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:14:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:14:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:14:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:14:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:14:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:14:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:14:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:14:14 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:14:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:14:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:14:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:14:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:14:16 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:14:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:14:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:14:16 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:14:33 [1810] [8] DEBUG: boxc_receiver: sms received
+2016-07-17 14:14:33 [1810] [8] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:14:34 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:14:34 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=23^M
+2016-07-17 14:14:34 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:14:34 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:14:34 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:14:34 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819050450238F80000A70ACF370BD42ECBDF6E17
+2016-07-17 14:14:34 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:14:36 [1810] [6] DEBUG: AT2[smart]: <-- +CMGS: 152
+2016-07-17 14:14:36 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:14:36 [1810] [6] DEBUG: AT2[smart]: send command status: 0
+2016-07-17 14:14:36 [1810] [6] DEBUG: SMSC[smart]: creating DLR message
+2016-07-17 14:14:36 [1810] [6] DEBUG: SMSC[smart]: DLR = http://sjsp-sams.edu/cgi/dlr.php?type=%d&answer=%A&outbox_id=30
+2016-07-17 14:14:36 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:14:36 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 14:14:36 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 14:14:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:14:43 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:14:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:14:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d608)
+2016-07-17 14:14:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:14:43 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d608)
+2016-07-17 14:14:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:14:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:15:01 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 14:15:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:15:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:15:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:15:13 [1810] [7] DEBUG: sms_router: handling message (0x910d608 vs 0x910d768)
+2016-07-17 14:15:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:15:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:15:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:15:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:15:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:15:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:15:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:15:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:15:14 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:15:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:15:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:15:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:15:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:15:16 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:15:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:15:16 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:15:16 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:15:18 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:15:18 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:15:18 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:15:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:15:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:15:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:15:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:15:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:15:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:15:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:15:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:15:44 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:15:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:15:44 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:15:44 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:15:44 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:15:44 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:15:44 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:15:46 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:15:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:15:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:15:46 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:16:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:16:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:16:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:16:13 [1810] [7] DEBUG: sms_router: handling message (0x90d56f8 vs 0x90d9fa8)
+2016-07-17 14:16:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:16:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:16:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:16:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:16:15 [1810] [8] DEBUG: boxc_receiver: sms received
+2016-07-17 14:16:15 [1810] [8] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:16:16 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:16:16 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=28^M
+2016-07-17 14:16:16 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:16:16 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:16:16 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:16:16 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819089352872F40000A7106C76FA3D27AB41EB77784E4EBFC3
+2016-07-17 14:16:16 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:16:18 [1810] [6] DEBUG: AT2[smart]: <-- +CMGS: 153
+2016-07-17 14:16:18 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:16:18 [1810] [6] DEBUG: AT2[smart]: send command status: 0
+2016-07-17 14:16:18 [1810] [6] DEBUG: SMSC[smart]: creating DLR message
+2016-07-17 14:16:18 [1810] [6] DEBUG: SMSC[smart]: DLR = http://sjsp-sams.edu/cgi/dlr.php?type=%d&answer=%A&outbox_id=31
+2016-07-17 14:16:18 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:16:18 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 14:16:18 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 14:16:31 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: <-- +CMT: ,23
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: <-- 0791361908005043040C913699588322470000617071416192230474F99C0E
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: received message from SMSC: +639180000534
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: Numeric sender (international) <+639985382274>
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: User data length read as (4)
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: Udh decoding done len=4 udhi=0 udhlen=0 udh=''
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: --> AT+CNMA^M
+2016-07-17 14:16:32 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:16:32 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 14:16:32 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 14:16:32 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:16:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:16:43 [1810] [7] DEBUG: sms_router: handling message (0x90d56f8 vs 0x90d56f8)
+2016-07-17 14:16:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:16:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d56f8)
+2016-07-17 14:16:43 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:16:43 [1810] [7] DEBUG: sms_router: handling message (0x90d56f8 vs 0x90d56f8)
+2016-07-17 14:16:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:16:43 [1810] [7] DEBUG: sms_router: handling message (0x90d56f8 vs 0x90d56f8)
+2016-07-17 14:16:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:16:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:16:44 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:16:44 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:16:44 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:16:44 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:16:44 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:16:44 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:16:44 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:16:46 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:16:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:16:46 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:16:46 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:16:50 [1810] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:16:50 [1810] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:16:50 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:17:01 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: <-- +CMT: ,23
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: <-- 0791361908005043040C9136995883224700006170714171802304E8321B0E
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: received message from SMSC: +639180000534
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: Numeric sender (international) <+639985382274>
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: User data length read as (4)
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: Udh decoding done len=4 udhi=0 udhlen=0 udh=''
+2016-07-17 14:17:10 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:17:10 [1810] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: --> AT+CNMA^M
+2016-07-17 14:17:10 [1810] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 14:17:10 [1810] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:17:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:17:13 [1810] [7] DEBUG: sms_router: handling message (0x90d56f8 vs 0x90d56f8)
+2016-07-17 14:17:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:17:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:17:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:17:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:17:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:17:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:17:14 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:17:14 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:17:14 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:17:14 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:17:14 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:17:14 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:17:14 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:17:17 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:17:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:17:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:17:17 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:17:31 [1810] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 14:17:43 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:17:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:17:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:17:43 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x910d768)
+2016-07-17 14:17:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:17:43 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x910d768)
+2016-07-17 14:17:43 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:17:43 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:18:13 [1810] [7] DEBUG: sms_router: gwlist_len = 2
+2016-07-17 14:18:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:18:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:18:13 [1810] [7] DEBUG: sms_router: handling message (0x910d768 vs 0x90d9fa8)
+2016-07-17 14:18:13 [1810] [7] DEBUG: Message routed successfully.
+2016-07-17 14:18:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:18:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:18:13 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:18:13 [1810] [7] DEBUG: re-queing SMS not-yet-to-be resent
+2016-07-17 14:18:13 [1810] [7] DEBUG: sms_router: time to sleep 30.00 secs.
+2016-07-17 14:18:14 [1810] [8] INFO: Connection closed by the box <127.0.0.1>
+2016-07-17 14:18:14 [1810] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:18:14 [1810] [9] DEBUG: Thread 9 (gw/bb_boxc.c:boxc_sender) terminates.
+2016-07-17 14:18:14 [1810] [8] DEBUG: Thread 8 (gw/bb_boxc.c:function) terminates.
+2016-07-17 14:18:14 [1810] [0] WARNING: Killing signal or HTTP admin command received, shutting down...
+2016-07-17 14:18:14 [1810] [0] DEBUG: Shutting down Kannel...
+2016-07-17 14:18:14 [1810] [0] DEBUG: shutting down smsc
+2016-07-17 14:18:14 [1810] [0] DEBUG: AT2[smart]: Shutting down SMSCConn, slow
+2016-07-17 14:18:14 [1810] [0] DEBUG: shutting down udp
+2016-07-17 14:18:14 [1810] [7] DEBUG: sms_router: gwlist_len = 1
+2016-07-17 14:18:14 [1810] [7] DEBUG: sms_router: handling message (0x90d9fa8 vs 0x90d9fa8)
+2016-07-17 14:18:14 [1810] [7] DEBUG: Routing failed, re-queued.
+2016-07-17 14:18:14 [1810] [7] DEBUG: Thread 7 (gw/bb_smscconn.c:sms_router) terminates.
+2016-07-17 14:18:15 [1810] [6] DEBUG: AT2[smart]: TP-Validity-Period: 24.0 hours
+2016-07-17 14:18:15 [1810] [6] DEBUG: AT2[smart]: --> AT+CMGS=91^M
+2016-07-17 14:18:15 [1810] [6] DEBUG: AT2[smart]: <-- 
+2016-07-17 14:18:15 [1810] [6] DEBUG: AT2[smart]: <-- >
+2016-07-17 14:18:15 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:18:15 [1810] [6] DEBUG: AT2[smart]: --> 0011000B819078563412F20000A757CA3ABB15BBB5623650F659958286C82493084249DFE2B29C0E82B2C36EFA0B2483C16C31DA2C052A3AA945699108A2228B2064F288044D87C8E793091A069BD0EA1414A48260321DAC066FBB00
+2016-07-17 14:18:15 [1810] [6] DEBUG: AT2[smart]: --> ^Z
+2016-07-17 14:18:17 [1810] [6] DEBUG: AT2[smart]: <-- +CMS ERROR: 38
+2016-07-17 14:18:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: +CMS ERROR: 38
+2016-07-17 14:18:17 [1810] [6] ERROR: AT2[smart]: CMS ERROR: Network out of order (38)
+2016-07-17 14:18:17 [1810] [6] DEBUG: AT2[smart]: send command status: 1
+2016-07-17 14:18:17 [1810] [6] INFO: AT2[smart]: Closing device
+2016-07-17 14:18:18 [1810] [6] DEBUG: Thread 6 (gw/smsc/smsc_at.c:at2_device_thread) terminates.
+2016-07-17 14:18:18 [1810] [4] DEBUG: Thread 4 (gw/bb_boxc.c:sms_to_smsboxes) terminates.
+2016-07-17 14:18:18 [1810] [5] DEBUG: Thread 5 (gw/bb_boxc.c:smsboxc_run) terminates.
+2016-07-17 14:18:18 [1810] [0] INFO: All flow threads have died, killing core
+2016-07-17 14:18:18 [1810] [0] DEBUG: Waiting for 2 (gwlib/http.c:server_thread) to terminate
+2016-07-17 14:18:18 [1810] [3] DEBUG: HTTP: No clients with requests, quitting.
+2016-07-17 14:18:18 [1810] [3] DEBUG: Thread 3 (gw/bb_http.c:httpadmin_run) terminates.
+2016-07-17 14:18:18 [1810] [2] DEBUG: Thread 2 (gwlib/http.c:server_thread) terminates.
+2016-07-17 14:18:18 [1810] [1] DEBUG: Thread 1 (gwlib/fdset.c:poller) terminates.
+2016-07-17 14:18:18 [1810] [0] DEBUG: final clean-up for SMSCConn
+2016-07-17 14:18:18 [1810] [0] DEBUG: smsbox MO concatenated message handling cleaned up
+2016-07-17 14:18:18 [1810] [0] INFO: Total WDP messages: received 0, sent 0
+2016-07-17 14:18:18 [1810] [0] DEBUG: Remaining SMS: 0 incoming, 1 outgoing
+2016-07-17 14:18:18 [1810] [0] INFO: Total SMS messages: received 10, sent 4
+2016-07-17 14:18:18 [1810] [0] DEBUG: Immutable octet strings: 262.
+2016-07-17 14:18:24 [3232] [0] INFO: Added logfile `/home/awwits/Projects/sams/docs/kannel_logs/kannel_smsgateway.log' with level `0'.
+2016-07-17 14:18:24 [3232] [0] INFO: Started access logfile `/home/awwits/Projects/sams/docs/kannel_logs/kannel_access.log'.
+2016-07-17 14:18:24 [3232] [0] INFO: SSL not supported, no SSL initialization done.
+2016-07-17 14:18:24 [3232] [0] INFO: HTTP: Opening server at port 13000.
+2016-07-17 14:18:24 [3232] [0] DEBUG: Started thread 1 (gwlib/fdset.c:poller)
+2016-07-17 14:18:24 [3232] [1] DEBUG: Thread 1 (gwlib/fdset.c:poller) maps to pid 3232.
+2016-07-17 14:18:24 [3232] [0] DEBUG: Started thread 2 (gwlib/http.c:server_thread)
+2016-07-17 14:18:24 [3232] [2] DEBUG: Thread 2 (gwlib/http.c:server_thread) maps to pid 3232.
+2016-07-17 14:18:24 [3232] [0] DEBUG: Started thread 3 (gw/bb_http.c:httpadmin_run)
+2016-07-17 14:18:24 [3232] [3] DEBUG: Thread 3 (gw/bb_http.c:httpadmin_run) maps to pid 3232.
+2016-07-17 14:18:24 [3232] [0] DEBUG: starting smsbox connection module
+2016-07-17 14:18:24 [3232] [0] INFO: BOXC: 'smsbox-max-pending' not set, using default (100).
+2016-07-17 14:18:24 [3232] [0] DEBUG: Started thread 4 (gw/bb_boxc.c:sms_to_smsboxes)
+2016-07-17 14:18:24 [3232] [4] DEBUG: Thread 4 (gw/bb_boxc.c:sms_to_smsboxes) maps to pid 3232.
+2016-07-17 14:18:24 [3232] [0] DEBUG: Started thread 5 (gw/bb_boxc.c:smsboxc_run)
+2016-07-17 14:18:24 [3232] [5] DEBUG: Thread 5 (gw/bb_boxc.c:smsboxc_run) maps to pid 3232.
+2016-07-17 14:18:24 [3232] [0] INFO: Set SMS resend frequency to 60 seconds.
+2016-07-17 14:18:24 [3232] [0] INFO: SMS resend retry set to unlimited.
+2016-07-17 14:18:24 [3232] [0] DEBUG: smsbox MO concatenated message handling enabled
+2016-07-17 14:18:24 [3232] [0] INFO: DLR rerouting for smsc id <smart> disabled.
+2016-07-17 14:18:24 [3232] [0] INFO: AT2[smart]: configuration shows modemtype <wavecom>
+2016-07-17 14:18:24 [3232] [0] DEBUG: AT2[smart]: Reading modem definitions from </etc/kannel.conf>
+2016-07-17 14:18:24 [3232] [0] DEBUG: AT2[smart]: Found <5> modems in config
+2016-07-17 14:18:24 [3232] [0] INFO: AT2[smart]: read modem definition for <Wavecom>
+2016-07-17 14:18:24 [3232] [0] DEBUG: Started thread 6 (gw/smsc/smsc_at.c:at2_device_thread)
+2016-07-17 14:18:24 [3232] [6] DEBUG: Thread 6 (gw/smsc/smsc_at.c:at2_device_thread) maps to pid 3232.
+2016-07-17 14:18:24 [3232] [0] DEBUG: Started thread 7 (gw/bb_smscconn.c:sms_router)
+2016-07-17 14:18:24 [3232] [6] INFO: AT2[smart]: trying to use speed <115200> from modem definition
+2016-07-17 14:18:24 [3232] [6] INFO: AT2[smart]: opening device
+2016-07-17 14:18:24 [3232] [0] INFO: ----------------------------------------
+2016-07-17 14:18:24 [3232] [0] INFO: Kannel bearerbox II version 1.4.3 starting
+2016-07-17 14:18:24 [3232] [0] INFO: MAIN: Start-up done, entering mainloop
+2016-07-17 14:18:24 [3232] [0] DEBUG: AT2[smart]: start called
+2016-07-17 14:18:24 [3232] [7] DEBUG: Thread 7 (gw/bb_smscconn.c:sms_router) maps to pid 3232.
+2016-07-17 14:18:24 [3232] [6] DEBUG: AT2[smart]: device opened. Telnet mode = 0
+2016-07-17 14:18:24 [3232] [6] DEBUG: AT2[smart]: device opened
+2016-07-17 14:18:24 [3232] [6] INFO: AT2[smart]: speed set to 115200
+2016-07-17 14:18:24 [3232] [6] DEBUG: AT2[smart]: --> ^M
+2016-07-17 14:18:25 [3232] [5] INFO: Client connected from <127.0.0.1> 
+2016-07-17 14:18:25 [3232] [5] DEBUG: Started thread 8 (gw/bb_boxc.c:function)
+2016-07-17 14:18:25 [3232] [8] DEBUG: Thread 8 (gw/bb_boxc.c:function) maps to pid 3232.
+2016-07-17 14:18:25 [3232] [8] DEBUG: Started thread 9 (gw/bb_boxc.c:boxc_sender)
+2016-07-17 14:18:25 [3232] [9] DEBUG: Thread 9 (gw/bb_boxc.c:boxc_sender) maps to pid 3232.
+2016-07-17 14:18:26 [3232] [6] DEBUG: AT2[smart]: --> AT^M
+2016-07-17 14:18:26 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:26 [3232] [6] INFO: AT2[smart]: Closing device
+2016-07-17 14:18:26 [3232] [6] INFO: AT2[smart]: speed is 115200
+2016-07-17 14:18:26 [3232] [6] INFO: AT2[smart]: opening device
+2016-07-17 14:18:26 [3232] [6] DEBUG: AT2[smart]: device opened. Telnet mode = 0
+2016-07-17 14:18:26 [3232] [6] DEBUG: AT2[smart]: device opened
+2016-07-17 14:18:26 [3232] [6] INFO: AT2[smart]: Logging in
+2016-07-17 14:18:26 [3232] [6] INFO: AT2[smart]: init device
+2016-07-17 14:18:26 [3232] [6] INFO: AT2[smart]: speed set to 115200
+2016-07-17 14:18:26 [3232] [6] DEBUG: AT2[smart]: --> ATZ^M
+2016-07-17 14:18:26 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:26 [3232] [6] DEBUG: AT2[smart]: --> AT^M
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- AT
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: --> AT&F^M
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- AT&F
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: --> ATE0^M
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- ATE0
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: --> AT+IFC=2,2^M
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: --> AT+CPIN?^M
+2016-07-17 14:18:27 [3232] [6] DEBUG: AT2[smart]: <-- +CPIN: READY
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: --> AT+CSCA="+639180000101"^M
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: --> AT+CMGF=0^M
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: --> AT+CSMS=?^M
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: <-- +CSMS: (0,1)
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:38 [3232] [6] INFO: AT2[smart]: Phase 2+ is supported
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: --> AT+CSMS=1^M
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: <-- +CSMS: 1,1,1
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: --> AT+CNMI=2,2,0,1,0;+CMEE=1^M
+2016-07-17 14:18:38 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:38 [3232] [6] INFO: AT2[smart]: AT SMSC successfully opened.
+2016-07-17 14:18:40 [3232] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 14:18:40 [3232] [6] DEBUG: AT2[smart]: <-- +CSQ: 21,0
+2016-07-17 14:18:40 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:40 [3232] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:18:40 [3232] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:18:40 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: <-- +CMT: ,23
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: <-- 0791361908005043040C9136995883224700006170714181242304E8321B0E
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: received message from SMSC: +639180000534
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: Numeric sender (international) <+639985382274>
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: User data length read as (4)
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: Udh decoding done len=4 udhi=0 udhlen=0 udh=''
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: --> AT+CNMA^M
+2016-07-17 14:18:44 [3232] [9] DEBUG: send_msg: sending msg to box: <127.0.0.1>
+2016-07-17 14:18:44 [3232] [9] DEBUG: boxc_sender: sent message to <127.0.0.1>
+2016-07-17 14:18:44 [3232] [8] DEBUG: boxc_receiver: got ack
+2016-07-17 14:18:44 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:18:55 [3232] [8] DEBUG: boxc_receiver: heartbeat with load value 0 received
+2016-07-17 14:20:12 [3232] [6] DEBUG: AT2[smart]: --> AT+CSQ^M
+2016-07-17 14:20:12 [3232] [6] DEBUG: AT2[smart]: <-- +CSQ: 20,0
+2016-07-17 14:20:12 [3232] [6] DEBUG: AT2[smart]: <-- OK
+2016-07-17 14:20:12 [3232] [6] DEBUG: AT2[smart]: --> AT+CPMS?^M
+2016-07-17 14:20:12 [3232] [6] DEBUG: AT2[smart]: <-- +CPMS: "SM",0,35,"SM",0,35,"SM",0,35
+2016-07-17 14:20:12 [3232] [6] DEBUG: AT2[smart]: <-- OK

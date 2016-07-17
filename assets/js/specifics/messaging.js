@@ -144,15 +144,17 @@ jQuery(document).ready(function ($) {
                 $('#send-later-close-btn').click();
                 $('#send-new-message-form')[0].reset();
                 reset_selectize();
-                $(this).find('#submit').html('Mesasge Sent')
+                $(this).find('#submit').html('Message Sent')
                 $(this).find('#submit').html('Send');
             } else {
                 var errors = data.message;
                 $.each(errors, function (k, v) {
                     $('#send-later-form').find('input[name="'+k+'"], select[name="'+k+'"], textarea[name="'+k+'"]').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
                     // console.log(k,v);
+                    $('#send-new-message-form').find('input[name="'+k+'"], select[name="'+k+'"], textarea[name="'+k+'"]').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
                 });
                 $(this).find('#submit').html('Send');
+		$("#send-later-form").find('[name=submit]').html("Send");
             }
             console.log(data);
         });

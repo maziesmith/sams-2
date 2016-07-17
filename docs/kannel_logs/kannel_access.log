@@ -41,3 +41,20 @@
 2016-07-17 11:15:53 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09055420838] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
 2016-07-17 11:28:00 Log ends
 2016-07-17 11:28:12 Log begins
+2016-07-17 11:32:46 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09985382274] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:6:  help] [udh:0:]
+2016-07-17 11:46:18 Log ends
+2016-07-17 11:46:18 Log begins
+2016-07-17 11:46:20 Log ends
+2016-07-17 11:57:49 Log begins
+2016-07-17 12:18:07 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09985382274] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:4:help] [udh:0:]
+2016-07-17 12:31:16 Log begins
+2016-07-17 12:31:22 Log begins
+2016-07-17 12:31:36 Log begins
+2016-07-17 12:32:59 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09235003433] [flags:-1:0:-1:-1:24] [msg:93:Jul-17-16 YOUR CHILD (John Paul Jones/ 2006141) LEFT THE HIGH SCHOOL CAMPUS EARLY AT 12:32pm.] [udh:0:]
+2016-07-17 12:32:59 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09235003433] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-17 12:33:08 Log begins
+2016-07-17 12:33:23 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09055420838] [flags:-1:0:-1:-1:24] [msg:99:Jul-17-16 YOUR CHILD (John Lioneil Dionisio/ 2006142) LEFT THE HIGH SCHOOL CAMPUS EARLY AT 12:33pm.] [udh:0:]
+2016-07-17 12:33:23 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09055420838] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-17 12:33:30 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09235003433] [flags:-1:0:-1:-1:24] [msg:93:Jul-17-16 YOUR CHILD (John Paul Jones/ 2006141) LEFT THE HIGH SCHOOL CAMPUS EARLY AT 12:33pm.] [udh:0:]
+2016-07-17 12:33:30 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09235003433] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-17 12:33:54 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09985382274] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:4:help] [udh:0:]

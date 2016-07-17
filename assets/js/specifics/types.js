@@ -363,7 +363,7 @@ function init_add_type_table () {
             console.log(response);
             return response;
         },
-        url: base_url('contacts/listing'),
+        url: base_url('members/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: false,
 
@@ -410,7 +410,7 @@ function init_edit_type_contacts_table()
             // To accumulate custom parameter with the request object
             return request;
         },
-        url: base_url( 'contacts/listing' ),
+        url: base_url( 'members/listing' ),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
 
         caseSensitive: false,
@@ -425,7 +425,7 @@ function init_edit_type_contacts_table()
             e.preventDefault();
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.contacts_name').text(),
-                url  = base_url('contacts/update/' + id),
+                url  = base_url('members/update/' + id),
                 value= $('#edit-type-form').find('[name=types_id]').val();
             $(this).prop('disabled', 'disabled');
             $.ajax({
@@ -461,7 +461,7 @@ function init_edit_type_contacts_table()
             e.preventDefault();
             var id   = $(this).parents('tr').data('row-id'),
                 name = $(this).parents('tr').find('td.contacts_name').text(),
-                url  = base_url('contacts/update/' + id),
+                url  = base_url('members/update/' + id),
                 value= $('#edit-type-form').find('[name=types_id]').val();
             $(this).prop('disabled', 'disabled');
             $.ajax({

@@ -18,10 +18,10 @@ class DTRLog extends CI_Model {
         // $json   = new Services_JSON();
         $d = date("Y-m-d");
         $q = $this->db->query("SELECT MAX(timelog) AS timelog FROM $this->table WHERE timelog LIKE '{$d}%';")->row();
-        var_dump($q);
+        // var_dump($q);
         $config['date'] = (null != $q) ? date("Ymd", strtotime($q->timelog)) : date("Ymd");
         $config['time'] = (null != $q) ? date("His", strtotime($q->timelog)) : "030000";
-        var_dump($config);exit();
+        // var_dump($config);exit();
         return json_encode($config);
     }
    

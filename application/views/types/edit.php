@@ -52,8 +52,8 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
+                <!--<hr>-->
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <div class="modal-body">
                             <p class="c-black f-500 m-b-10 text-uppercase"><strong>Type Contacts List</strong></p>
@@ -66,10 +66,9 @@
                                         <thead>
                                             <tr>
                                                 <th data-column-id="count_id" data-sortable="false" data-type="numeric">#</th>
-                                                <th data-column-id="contacts_id" data-identifier="true" data-order="asc" data-visible="false">Contacts ID</th>
-                                                <th data-column-id="contacts_firstname">Name</th>
-                                                <th data-column-id="contacts_type" data-visible="false">Type</th>
-                                                <th data-column-id="contacts_type" data-css-class="type">Current Type</th>
+                                                <th data-column-id="id" data-identifier="true" data-order="asc" data-visible="false">Contacts ID</th>
+                                                <th data-column-id="fullname">Name</th>
+                                                <th data-column-id="type" data-visible="false">Type</th>
                                                 <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th>
                                             </tr>
                                         </thead>
@@ -81,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="modal-footer">
                     <button type="submit" name="types_submit" class="btn btn-link">Update</button>

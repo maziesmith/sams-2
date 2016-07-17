@@ -75,7 +75,12 @@ class Migration_create_members_table extends CI_Migration {
                 'type' => 'TEXT',
                 'constraint' => '255',
                 'null' => TRUE,
-            )
+            ),
+	   'avatar' => array(
+		'type' => 'TEXT',
+		'constraint' => '255',
+		'null' => TRUE,
+	    ),
         ));
 
         $this->dbforge->add_field('created_by INT');

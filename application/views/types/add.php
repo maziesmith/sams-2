@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-body">
+                <!-- <div class="modal-body">
                     <p class="c-black f-500 m-b-10 text-uppercase"><strong>Type Contacts</strong></p>
                 </div>
                 <div class="row">
@@ -60,10 +60,10 @@
                                 <thead>
                                     <tr>
                                         <th data-column-id="count_id" data-type="numeric" data-sortable="false">#</th>
-                                        <th data-column-id="contacts_id" data-order="asc" data-identifier="true" data-visible="false">Contacts ID</th>
-                                        <th data-column-id="contacts_firstname">Name</th>
-                                        <th data-column-id="contacts_type" data-visible="false">Type</th>
-                                        <th data-column-id="contacts_type">Current Type</th>
+                                        <th data-column-id="id" data-order="asc" data-identifier="true" data-visible="false">Members ID</th>
+                                        <th data-column-id="fullname">Name</th>
+                                        <th data-column-id="type" data-visible="false">Type</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,7 +72,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-link">Add</button>
                     <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>

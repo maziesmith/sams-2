@@ -23,7 +23,14 @@ class Message extends CI_Model {
 
     private static function DLR_URL()
     {
-        return "http://localhost/MCS-SMS/cgi/dlr.php?type=%d&answer=%A";
+        return "http://sjsp-sams.edu/cgi/dlr.php?type=%d&answer=%A";
+    }
+
+    public function detokenize($template, $data)
+    {
+	$pattern = array('/<date>/i', '/<stud_name>/i', '/<stud_no>/i', '/<time>/i');
+	$replace = array($data['date'], $data['stud_name'], $data['stud_no'], $data['time']);
+	return preg_replace($pattern, $replace, $template);
     }
 
     public function insert($data)
@@ -80,7 +87,7 @@ class Message extends CI_Model {
         ob_end_clean();
         curl_close ($ch);
         $this->db->query("UPDATE ".$this->outbox_table." SET extra = '$str' where id='$id'");
-        if (empty($str)) $this->db->query("UPDATE ".$this->outbox_table." SET status = 'success' where id='$id'");
+        # if (empty($str)) $this->db->query("UPDATE ".$this->outbox_table." SET status = 'success' where id='$id'");
     }
 
     public function num_format($msisdn)

@@ -10,6 +10,19 @@
                     <div class="form-group">
                         <p class="c-black f-500 m-b-10 text-uppercase"><strong>Personal Details</strong></p>
                         <!-- <hr class="m-t-10 m-b-15"/> -->
+			<div class="row">
+			    <div class="col-lg-4">
+				<div class="pad-zero-right">
+				    <div class="form-group fg-float form-group-validation">
+					<div class="fg-line">
+					    <?php echo form_input('stud_no', set_value('stud_no'), array('class'=>'form-control fg-input')) ?>
+					</div>
+					<?php echo form_label('Student No.', 'stud_no', array('class'=>'fg-label')); ?>
+					<?php echo form_error('stud_no', '<p class="error">', '</p>'); ?>
+				    </div>
+				</div>
+			    </div>
+			</div>
                         <div class="row">
                             <div class="col-lg-4 col-md-12">
                                 <div class="pad-zero-right">

@@ -62,6 +62,9 @@ $route['auth/register']['get'] = 'AuthController/register';
 $route['logout']['get'] = 'AuthController/logout';
 
 $route['dtr'] = 'DTRController/dtr';
+$route['get-dtr'] = 'DTRController/get_dtr';
+$route['cgi/(:any)'] = 'PageController/view';
+$route['execute'] = 'DTRController/execute';
 /*
 |------------------
 | # Users Route
@@ -310,7 +313,7 @@ $route['messaging/send']['post'] = 'MessagingController/send';
 $route['messaging/bulk-send']['post'] = 'MessagingController/bulk_send';
 $route['messaging/bulk-send/later']['post'] = 'SchedulerController/schedule';
 $route['messaging/bulk-send/later']['get'] = 'SchedulerController/schedule';
-$route['messaging/send-scheduled-messages']['post'] = 'SchedulerController/send';
+$route['messaging/send-scheduled-messages']['get'] = 'SchedulerController/send';
 $route['messaging/tracking']['get'] = 'MessagingController/tracking';
 $route['messages/tracking-listing']['post'] = 'MessagingController/tracking_listing';
 // $route['messaging/bulk-send']['get'] = 'MessagingController/bulk_send';

@@ -122,6 +122,7 @@ class MembersController extends CI_Controller {
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
                     'id'        => $member['id'],
+		    'stud_no'   => $member['stud_no'],
                     'fullname' => arraytostring([$member['firstname'], $member['middlename'] ? substr($member['middlename'], 0,1) . '.' : '', $member['lastname']], ' '),
                     'level'     => $levels_name_arr ? arraytostring($levels_name_arr, ", ") : '',
                     'levels_id'          => $levels_id_arr ? $levels_id_arr : '',

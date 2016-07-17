@@ -24,11 +24,12 @@ $d['msisdn'] = $db->num_format(urldecode($argv[1]));
 $smsc = urldecode($argv[3]);
 $d['smsc']    = ($smsc=='auto') ? false : $smsc;
 $d['charset'] = urldecode($argv[2]);
-$d['created_on']= "NOW()";
+//$d['created_at']= "NOW()";
 $num=$d['msisdn'];
 if ($num=="7210"){
   exit();
 }else{
+
 $db->save_messages($d);
 
 $data = $db->get_member($d['msisdn']);

@@ -1,6 +1,5 @@
 <?php
 $outbox_id = $_REQUEST['outbox_id'];
-
 if (!$outbox_id) exit();
 
 require_once('config.inc.php');
@@ -24,5 +23,6 @@ $type = ($status[$type]) ? $status[$type] : $type;
 
 $d['status'] = $type; 
 //$d['modified_date'] = "NOW()"; 
+
 $db->update('outbox', $d, "id=$outbox_id");
 ?>

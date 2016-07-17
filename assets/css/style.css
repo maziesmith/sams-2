@@ -127,6 +127,9 @@ ul.breadcrumb .active {
 .chosen-container .chosen-results > li.active-result.highlighted {
 	background: #e4e4e4 !important;
 }
+.wpb-actions {
+	padding-left: 30px !important;
+}
 /*
 | -----------------
 | # App 2 Overrides
@@ -319,6 +322,10 @@ ul.breadcrumb .active {
 	.sw-toggled  .top-menu #toggle-width .toggle-switch input:checked + .ts-helper {
         background: #a7e7a0;
 	}
+}
+
+.actions.btn-group {
+	box-shadow: none;
 }
 
 noscript {

@@ -364,7 +364,7 @@ function init_add_level_table () {
             console.log(response);
             return response;
         },
-        url: base_url('contacts/listing'),
+        url: base_url('members/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: false,
 

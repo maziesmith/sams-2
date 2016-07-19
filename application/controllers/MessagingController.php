@@ -156,7 +156,7 @@ class MessagingController extends CI_Controller {
 
                         # This is the Kannel SHIT
                         # This sends the shit out of the messagfe to the kannel server
-                        $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($member->msisdn), $body);
+                        $this->Message->send($outbox_id, $member->msisdn, $this->Message->get_network($member->msisdn), $body);
                     }
                 }
             }
@@ -166,9 +166,10 @@ class MessagingController extends CI_Controller {
                 'msisdns' => $msisdns,
             );
             echo json_encode($data); exit();
-        } else {
-            $this->send();
         }
+        // else {
+        //     $this->send();
+        // }
     }
 
     public function send()

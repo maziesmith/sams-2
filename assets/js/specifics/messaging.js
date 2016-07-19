@@ -32,8 +32,8 @@ jQuery(document).ready(function ($) {
                 url: form.action,
                 data: $(form).serialize(),
                 success: function (data) {
-                    var data = JSON.parse(data);
                     console.log("PARSED JSON", data);
+                    var data = JSON.parse(data);
                     resetWarningMessages('.form-group-validation');
                     if( data.type !== 'success' ) {
                         var errors = data.message;

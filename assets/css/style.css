@@ -127,9 +127,6 @@ ul.breadcrumb .active {
 .chosen-container .chosen-results > li.active-result.highlighted {
 	background: #e4e4e4 !important;
 }
-.wpb-actions {
-	padding-left: 30px !important;
-}
 /*
 | -----------------
 | # App 2 Overrides
@@ -324,10 +321,6 @@ ul.breadcrumb .active {
 	}
 }
 
-.actions.btn-group {
-	box-shadow: none;
-}
-
 noscript {
 	padding: 20px;
 	text-align: center;
@@ -419,4 +412,20 @@ noscript {
 
 .gs-w .blog-post .bp-header > img:hover {
 	cursor: move;
+}
+
+
+/*
+| ----------------------------
+| # Monitor
+| ----------------------------
+*/
+.i-logo {
+	width: 120px;
+}
+.d-btn {
+	z-index: 1;
+    bottom: 100px;
+    right: 40px;
+    position: fixed!important;
 }

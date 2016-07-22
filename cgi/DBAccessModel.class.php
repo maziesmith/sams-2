@@ -100,7 +100,7 @@ class DBAccess extends BaseModel
         $d['member_id'] = $memid;
         $d['msisdn']     = $msisdn;
         $d['smsc']       = ($smsc) ? $smsc : 'globe';
-        $d['created_on'] ="NOW()";
+    //    $d['created_on'] ="NOW()";
         $d['status'] ='pending';
         $id = $this->insert('outbox', $d);
 

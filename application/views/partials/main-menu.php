@@ -64,6 +64,14 @@
     </li>
 
     <li><hr></li>
+    <li class="sub-menu <?php echo check_link(['monitor/dtr', 'monitor/generate']) ?>">
+        <a role="button"><i class="zmdi zmdi-tv"></i> Monitor</a>
+        <ul>
+            <li class="<?php echo check_link('monitor/dtr') ?>" ><?php echo anchor( base_url('monitor/dtr'), 'DTR' ); ?></li>
+        </ul>
+    </li>
+
+    <li><hr></li>
     <li class="sub-menu <?php echo check_link(['users', 'users/import', 'users/export']) ?>">
         <a role="button"><i class="zmdi zmdi-account"></i> Users</a>
         <ul>

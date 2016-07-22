@@ -185,7 +185,11 @@ class MembersController extends CI_Controller {
         }
         # Validation
         if( $this->Member->validate(true) ) {
-
+            // $this->load->library('upload', ['upload_path'=>'./uploads/', 'allowed_types'=>'jpg,png,gif']);
+            // if (!$this->upload->do_upload('avatar')) {
+            //     echo json_encode(["message"=>'errors']);
+            //     exit();
+            // }
             # Save
             $member = array(
                 'stud_no' => $this->input->post('stud_no'),
@@ -203,6 +207,7 @@ class MembersController extends CI_Controller {
                 'msisdn'       => $this->input->post('msisdn'),
                 'email'        => $this->input->post('email'),
                 'groups'        => arraytoimplode($this->input->post('groups')),
+                'avatar'    => $this->input->post('avatar'),
                 'created_by'            => $this->user_id,
             );
 

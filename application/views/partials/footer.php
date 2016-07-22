@@ -4,8 +4,8 @@
 
         <ul class="f-menu">
             <li><a href="<?php echo base_url('dashboard') ?>">Dashboard</a></li>
-            <li><a href="http://support.the-company.com" target="_blank">Support</a></li>
-            <li><a href="mailto:support@the-company.com">Contact</a></li>
+            <li><a href="http://www.awwits.info" target="_blank">Support</a></li>
+            <li><a href="mailto:info@awwits.info">Contact</a></li>
         </ul>
 
         <!-- Global JS Files -->

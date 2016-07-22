@@ -310,11 +310,10 @@ $route['messaging/listing']['post'] = 'MessagingController/listing';
 // $route['messaging/listing']['get'] = 'MessagingController/listing';
 $route['messaging/new']['get'] = 'MessagingController/index';
 $route['messaging/send']['post'] = 'MessagingController/send';
-$route['messaging/bulk-send']['get'] = 'MessagingController/bulk_send';
 $route['messaging/bulk-send']['post'] = 'MessagingController/bulk_send';
 $route['messaging/bulk-send/later']['post'] = 'SchedulerController/schedule';
 $route['messaging/bulk-send/later']['get'] = 'SchedulerController/schedule';
-$route['messaging/send-scheduled-messages']['get'] = 'SchedulerController/send';
+$route['messaging/send-scheduled-messages']['post'] = 'SchedulerController/send';
 $route['messaging/tracking']['get'] = 'MessagingController/tracking';
 $route['messages/tracking-listing']['post'] = 'MessagingController/tracking_listing';
 // $route['messaging/bulk-send']['get'] = 'MessagingController/bulk_send';
@@ -345,6 +344,9 @@ $route['messaging/groups']['get'] = 'MessagingController/groups';
 */
 $route['install']['get'] = 'PageController/install';
 $route['seed']['get'] = 'PageController/seed';
+
+$route['monitor/(:any)']= 'MonitorController/$1';
+
 
 // $route['(:any)'] = 'PageController/view/$1';
 

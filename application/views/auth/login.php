@@ -38,10 +38,10 @@ $this->load->view('partials/header'); ?>
         <button type="submit" class="btn btn-login btn-success btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
     </form>
 
-    <ul class="login-navigation">
+    <!--<ul class="login-navigation">
         <li data-block="#l-register" class="bgm-red">Register</li>
         <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
-    </ul>
+    </ul> -->
 </div>
 
 <!-- Register -->

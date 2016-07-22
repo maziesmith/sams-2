@@ -4,7 +4,7 @@
 // MySQL config parameters
 $config['mysql_host'] = 'localhost';
 $config['mysql_user'] = 'root';
-$config['mysql_pass'] = 'root';
+$config['mysql_pass'] = 'ytrewq54321';
 //$config['mysql_db'] = 'sams';
 $config['mysql_db'] = 'sams_db';
 $config['enrollment_db'] = 'mcsv3';

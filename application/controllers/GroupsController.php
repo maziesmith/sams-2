@@ -468,6 +468,40 @@ class GroupsController extends CI_Controller {
             return false;
         }
 
+        if( $this->input->is_ajax_request() )
+        {
+            $this->load->library('upload', ['upload_path'=>'./uploads/', 'allowed_types'=>'csv']);
+
+            if ( !$this->upload->do_upload('file'))
+            {
+                $data = array('message' => $this->upload->display_errors(), 'type'=>'error');
+            }
+            else
+            {
+                # Import
+                $full_path = $this->upload->data();
+                if( $this->Group->import( $this->upload->data()['full_path'] ) )
+                {
+                    # Delete uploaded file
+                    clean_upload_folder( $full_path['full_path'] );
+
+                    # Response
+                    $data = array('message' => 'Groups successfully imported.', 'type'=>'success');
+
+                } else {
+                    $data = array('message' => 'Something went wrong importing the file', 'type'=>'error');
+                }
+
+            }
+            echo json_encode( $data );
+            exit();
+
+        }
+
+        $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/dropzone/dropzone.css').'"></link>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/dropzone/dropzone.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/groupsImport.js').'"></script>';
+
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -483,6 +517,51 @@ class GroupsController extends CI_Controller {
             return false;
         }
 
+        if( null != $this->input->post('export_start') )
+        {
+            $export = $this->Group->export( false, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') );
+            /*
+            | ---------------------------------------------
+            | # Validation
+            | ---------------------------------------------
+            */
+            $result = $this->Group->export( false, date('Y-m-d', strtotime($this->input->post('export_start'))), date('Y-m-d', strtotime($this->input->post('export_end') . ' +1 day')), $this->input->post('export_level') )->result();
+            if( empty( $result ) ) {
+                $this->Data['messages']['error'] = 'No Record was found in the Dates specified';
+            } else
+            {
+                # Export
+                #// Load the DB Utility
+                $this->load->dbutil();
+                switch ( $this->input->post('export_format') ) {
+                    case 'CSV':
+                        $CSV =  $this->dbutil->csv_from_result( $export );
+                        $csv_name = 'Groups_' . date('Y-m-d-H-i') . '.export.csv';
+                        force_download($csv_name, $CSV);
+                        // $data = array('message' => 'Export was successful', 'type'=>'success');
+                        break;
+
+                    case 'SQL':
+                        $SQL = $this->dbutil->backup(['tables'=>'{PRE}members']);
+                        $sql_name = 'Groups_' . date('Y-m-d-H-i') . '.export.zip';
+                        force_download($sql_name, $SQL);
+                        break;
+
+                    case 'PDF':
+                        die('PDF is not available on your user level');
+                        break;
+                    default:
+                        break;
+                }
+
+
+                # Response
+                # -- No response yet --
+                $this->session->set_flashdata('message', array('type'=>'success', 'message'=>"Export completed"));
+            }
+        }
+
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/groupsExport.js').'"></script>';
         $this->load->view('layouts/main', $this->Data);
     }
 }

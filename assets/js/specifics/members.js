@@ -2,34 +2,68 @@ var memberTable;
 var G_selectedRows = [];
 $(document).ready(function(){
     /*
+    |---------------------------------------------
+    | # Upload
+    |---------------------------------------------
+    */
+    if ($('#dropzoneMember').length != 0) {
+        window.Dropzone.options.dropzoneMember = {
+            maxFiles: 1,
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            init: function () {
+                this.on("maxfilesexceeded", function(file){
+
+                });
+                this.on("addedfile", function (file) {
+                    // console.log('file added...');
+                });
+
+                this.on("success", function (file, response) {
+                    if( 'error' === response.type ) {
+                        swal('Error', response.message, response.type);
+                        this.removeFile(file);
+                    } else {
+                        var response = $.parseJSON(response);
+                        notify(response.message, response.type, 9000);
+                        // this.removeFile(file);
+                    }
+                });
+
+            },
+            error: function(file, response) {
+                notify(response, 'danger', 0);
+                this.removeFile(file);
+            }
+        };
+    }
+    /*
     | --------------------------------------------
     | # Listing
     | --------------------------------------------
     */
     init_table();
-
-
     /*
     | --------------------------------------------
     | # Add
     | --------------------------------------------
     | # Validate | Submit
     */
-    $('#add-new-member-btn').on('click', function (e) {
-        $('#add-member').modal('hide');
-        $.post(base_url('members/check'), {"can":"members/add"}, function (data) {
-            var data = $.parseJSON(data);
-            if (data.type == "error") {
-                swal(data.title, data.message, data.type);
-                $('#add-member').modal('hide');
-            } else {
-                $('#add-member').modal('show');
-                $('#add-new-member-form')[0].reset();
-                reload_selectpickers();
-                $('#add-new-member-form [name=firstname]').focus();
-            }
-        });
-    })
+    // $('#add-new-member-btn').on('click', function (e) {
+    //     // $('#add-member').modal('hide');
+    //     // $.post(base_url('members/check'), {"can":"members/add"}, function (data) {
+    //     //     var data = $.parseJSON(data);
+    //     //     if (data.type == "error") {
+    //     //         swal(data.title, data.message, data.type);
+    //     //         $('#add-member').modal('hide');
+    //     //     } else {
+    //     //         $('#add-member').modal('show');
+    //     //         $('#add-new-member-form')[0].reset();
+    //     //         reload_selectpickers();
+    //     //         $('#add-new-member-form [name=firstname]').focus();
+    //     //     }
+    //     // });
+    // })
     var $memberForm = $('#add-new-member-form').validate({
         rules: {
             firstname: 'required',
@@ -104,6 +138,8 @@ $(document).ready(function(){
                         $('#add-new-member-form [name=firstname]').focus();
                         reload_table();
                         reload_selectpickers();
+                        // window.Dropzone.options.dropzoneMember.removeFile();
+                        $(document).find('.dz-remove').click();
                     }
                     console.log(data);
                 },
@@ -113,7 +149,7 @@ $(document).ready(function(){
                 type: add.type,
                 url: add.url,
                 data: add.data,
-                success: add.success
+                success: add.success,
             });
         }
     })

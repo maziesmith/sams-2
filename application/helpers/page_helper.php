@@ -194,3 +194,55 @@ function get_url_fragment($fragment, $link=null)
     $frg = parse_url( null==$link ? $CI->uri->uri_string() : $link . "#" . $fragment );
     return $frg['fragment'];
 }
+
+function slugify($string, $case='lower', $replacements=[], $delimiter="-", $space=" ")
+{
+    $slug = "";
+    # Add more here
+    $defaults = array(
+        '.' => '',
+        ',' => '',
+        '!' => '',
+        '#' => '',
+        '?' => '',
+        '+' => '',
+        '_' => '',
+        ')' => '',
+        '(' => '',
+        '*' => '',
+        '&' => '',
+        '@' => '-at-',
+        '/' => '',
+        '\\' => '',
+        ':' => '',
+        '*' => '',
+        '?' => '',
+        '"' => '',
+        '<' => '',
+        '>' => '',
+        '\'' => '',
+        '|' => '',
+        '&nbsp;-&nbsp;' => '-',
+    );
+    # Combine $replacements array with $defaults array
+    # Substitute the speicifed chars in $string
+    $string = strtr( $string, array_merge($defaults, $replacements) );
+    switch ($case) {
+        case 'lower':
+            $slug = strtolower( implode($delimiter, explode($space, $string ) ) );
+            break;
+        case 'upper':
+            $slug = strtoupper( implode($delimiter, explode($space, $string ) ) );
+            break;
+        case 'title':
+            $slug = ucwords( implode($delimiter, explode($space, $string ) ) );
+            break;
+        case 'none':
+        case '':
+        case 'default':
+        default:
+            $slug = implode($delimiter, explode($space, $string ) );
+            break;
+    }
+    return trim( $slug );
+}

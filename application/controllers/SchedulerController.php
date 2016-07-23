@@ -31,14 +31,14 @@ class SchedulerController extends CI_Controller {
         $date = str_replace('/', '-', $this->input->post('send_at_date'));
         $time = $this->input->post('send_at_time');
         $datetime = date("Y-m-d H:i:s", strtotime($date . " " . $time));
-	
-	if (!$this->Scheduler->validate(true)) {
-	    echo json_encode(array(
-		'type' => 'danger',
-		'message' => $this->form_validation->toArray(),
-		'title' => 'Error',
-	    )); exit();
-	}	
+
+    	if (!$this->Scheduler->validate(true)) {
+    	    echo json_encode(array(
+    		'type' => 'danger',
+    		'message' => $this->form_validation->toArray(),
+    		'title' => 'Error',
+    	    )); exit();
+    	}
 
         if( $msisdn && array_key_exists("members", $msisdn) ) {
             foreach ($msisdn["members"] as $number) {

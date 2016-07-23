@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
 });
 
 function reload_tracking_table() {
-    $("#messaging-tracking-table").bootgrid('reload');
+    $("#messaging-tracking-table").bootgrid('reload', $("#messaging-tracking-table").bootgrid("getCurrentPage"));
 }
 function init_table () {
     /*
@@ -17,6 +17,7 @@ function init_table () {
     | # Add
     | ------------------------------------
     */
+    var currentPage = 1;
     $("#messaging-tracking-table").bootgrid({
         labels: {
             noResults: 'No Message found',
@@ -46,6 +47,7 @@ function init_table () {
         },
         responseHandler: function (response) {
             console.log(response);
+            // response.current = currentPage;
             return response;
         },
         url: base_url('messages/tracking-listing'),
@@ -57,5 +59,6 @@ function init_table () {
         caseSensitive: false,
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
+        currentPage = $("#messaging-tracking-table").bootgrid("getCurrentPage");
     });
 }

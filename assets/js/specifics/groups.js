@@ -383,7 +383,7 @@ function init_add_group_table () {
         },
         url: base_url('members/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
-        keepSelection: false,
+        keepSelection: true,
 
         selection: true,
         multiSelect: true,

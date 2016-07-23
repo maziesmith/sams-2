@@ -8,6 +8,7 @@ class Group extends CI_Model {
     private $column_id = 'groups_id';
     private $column_softDelete = 'removed_at';
     private $column_softDeletedBy = 'removed_by';
+    private $time_limit = 600;
 
     public $validate = array(
         array( 'field' => 'groups_name', 'label' => 'Group Name', 'rules' => 'required|trim' ),
@@ -181,6 +182,31 @@ class Group extends CI_Model {
         $this->db->where($this->column_id, $id);
         $this->db->delete($this->table);
         return $this->db->affected_rows() > 0;
+    }
+
+    public function export($all=false, $start_date=null, $end_date=null, $level=null)
+    {
+        if ($all) return $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'")->get($this->table);
+        $this->db->select('*')->where("created_at BETWEEN '$start_date' AND '$end_date'");
+        $this->db->where($this->column_softDelete, NULL);
+        return $this->db->get($this->table);
+    }
+
+    public function import($file=null, $truncate=false)
+    {
+        $this->pdo = $this->load->database('pdo', true);
+        $this->pdo->query( "SET NAMES 'utf8'" );
+
+        if(!file_exists($file) || !is_readable($file)) return false;
+
+        # Load the data to database
+        set_time_limit($this->time_limit); // for longer execution time if needed
+
+        if( $truncate ) $this->db->truncate($this->table); // truncate the table if all is good
+
+        $query = "LOAD DATA local INFILE '".addslashes($file)."' INTO TABLE ".$this->pdo->dbprefix.$this->table." CHARACTER SET ".$this->pdo->char_set." FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES ( groups_id, groups_name, groups_description, groups_code, created_by, updated_by, removed_by, created_at, updated_at, @removed_at) SET removed_at = nullif(@removed_at,'')";
+
+        return $this->pdo->query($query);
     }
 
 }

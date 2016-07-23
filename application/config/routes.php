@@ -188,6 +188,7 @@ $route['members/delete']['post']  = 'MembersController/delete';
 $route['members/delete/(:num)']['delete']  = 'MembersController/delete/$1';
 
 $route['members/add']['post']  = 'MembersController/add';
+$route['members/add']['get']  = 'MembersController/add';
 
 $route['members/edit/(:num)']['post']  = 'MembersController/edit/$1';
 $route['members/update/(:num)']['post']  = 'MembersController/update/$1';
@@ -199,6 +200,8 @@ $route['members/export']['get']  = 'MembersController/export';
 $route['members/export']['post']  = 'MembersController/export';
 
 $route['members/check']['post']  = 'MembersController/check';
+
+$route['members/upload_photo']['post']  = 'MembersController/upload_photo';
 
 /*
 |-----------------
@@ -258,6 +261,8 @@ $route['groups/update/(:num)']['post']  = 'GroupsController/update/$1';
 
 $route['groups/import']['get']  = 'GroupsController/import';
 $route['groups/export']['get']  = 'GroupsController/export';
+$route['groups/import']['post']  = 'GroupsController/import';
+$route['groups/export']['post']  = 'GroupsController/export';
 
 $route['groups/check']['post']  = 'GroupsController/check';
 
@@ -355,7 +360,8 @@ $route['monitor/(:any)']= 'MonitorController/$1';
 | # Debugs
 |----------------
 */
-$route['debug'] = 'PageController/debug';
+$route['debug'] = 'PageController/debug_view';
+$route['debug-action'] = 'PageController/debug';
 
 $route['default_controller'] = 'PageController/index';
 $route['404_override'] = 'Error404Controller';

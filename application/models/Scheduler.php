@@ -92,6 +92,8 @@ class Scheduler extends CI_Model {
         }
         $this->db->where('message LIKE', '%' . $wildcard . '%')
                 ->or_where('id LIKE', $wildcard . '%')
+                ->or_where('send_at LIKE', "%".date("Y-m-d", strtotime($wildcard)) . '%')
+                ->or_where('status LIKE',$wildcard . '%')
                 // ->or_where('(SELECT firstname FROM members WHERE id = member_ids) AS member_ids LIKE', '%' . $wildcard . '%')
                 ->or_where('msisdn LIKE', '%' . $wildcard . '%')
                 ->from($this->table)

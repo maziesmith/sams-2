@@ -5,6 +5,7 @@ class MembersController extends CI_Controller {
 
     private $Data = array();
     private $user_id = 0;
+    private $member_photo_url = "";
 
     public function __construct()
     {
@@ -18,6 +19,7 @@ class MembersController extends CI_Controller {
         $this->load->model('Type', '', TRUE);
 
         $this->user_id = $this->session->userdata('id');
+        // $this->member_photo_url = "";
 
         $this->Data['Headers'] = get_page_headers();
 
@@ -31,6 +33,9 @@ class MembersController extends CI_Controller {
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
+
+        $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/dropzone/dropzone.css').'"></link>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/dropzone/dropzone.min.js').'"></script>';
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/members.js').'"></script>';
     }
@@ -58,6 +63,7 @@ class MembersController extends CI_Controller {
         $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], '', false);
         $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], '', false);
         $this->Data['trash']['count'] = $this->Member->get_all(0, 0, null, true)->num_rows();
+
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -97,6 +103,7 @@ class MembersController extends CI_Controller {
                     }
                 }
 
+                $level='';
                 if( null !== $member['level'] ) $level = $this->Level->find( explodetoarray($member['level']) );
                 $levels_name_arr = [];
                 $levels_id_arr = [];
@@ -108,6 +115,7 @@ class MembersController extends CI_Controller {
                     }
                 }
 
+                $type ='';
                 if( null !== $member['type'] ) $type = $this->Type->find( explodetoarray($member['type']) );
                 $types_name_arr = [];
                 $types_id_arr = [];
@@ -122,6 +130,7 @@ class MembersController extends CI_Controller {
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
                     'id'        => $member['id'],
+                    'avatar' => '<img src=\''.$member['avatar'].'\' />',
 		    'stud_no'   => $member['stud_no'],
                     'fullname' => arraytostring([$member['firstname'], $member['middlename'] ? substr($member['middlename'], 0,1) . '.' : '', $member['lastname']], ' '),
                     'level'     => $levels_name_arr ? arraytostring($levels_name_arr, ", ") : '',
@@ -185,11 +194,7 @@ class MembersController extends CI_Controller {
         }
         # Validation
         if( $this->Member->validate(true) ) {
-            // $this->load->library('upload', ['upload_path'=>'./uploads/', 'allowed_types'=>'jpg,png,gif']);
-            // if (!$this->upload->do_upload('avatar')) {
-            //     echo json_encode(["message"=>'errors']);
-            //     exit();
-            // }
+            $avatar = $this->session->members_photo ? $this->session->members_photo : "";
             # Save
             $member = array(
                 'stud_no' => $this->input->post('stud_no'),
@@ -207,7 +212,7 @@ class MembersController extends CI_Controller {
                 'msisdn'       => $this->input->post('msisdn'),
                 'email'        => $this->input->post('email'),
                 'groups'        => arraytoimplode($this->input->post('groups')),
-                'avatar'    => $this->input->post('avatar'),
+                'avatar'    => $avatar,//$this->input->post('avatar'),
                 'created_by'            => $this->user_id,
             );
 
@@ -238,8 +243,9 @@ class MembersController extends CI_Controller {
 
             # Negative Response
             $data = array(
+                'title' => 'Error',
                 'message'=>$this->form_validation->toArray(),
-                'type'=>'danger',
+                'type'=>'error',
             );
         }
 
@@ -248,6 +254,37 @@ class MembersController extends CI_Controller {
         } else {
             $this->session->set_flashdata('message', $data);
             redirect( base_url('members') );
+        }
+    }
+
+    public function upload_photo()
+    {
+        $config['upload_path'] = "./uploads/";
+        $config['allowed_types'] = "gif|jpg|jpeg|png|tiff";
+        $config['file_name'] = $this->input->post('stud_no') ? $this->input->post('stud_no') : slugify($_FILES["file"]['name']);
+
+        $this->load->library('upload', $config);
+        $avatar = "";
+        if (!$this->upload->do_upload('file')) {
+            echo json_encode([
+                'title' => 'Errors',
+                'message' => $this->upload->display_errors(),
+                'type' => 'errors',
+            ]); exit();
+        } else {
+            // echo "<pre>";
+            //     var_dump( $this->upload->data() ); die();
+            // echo "</pre>";
+            $ud = $this->upload->data();
+            $this->member_photo_url = base_url() .'uploads/'. $ud['file_name'];
+            $this->session->set_userdata('members_photo', $this->member_photo_url);
+            $this->session->set_userdata('members_photo_dirpath', $ud['full_path']);
+            // move_uploaded_file($this->member_photo_url, "./uploads/images/");
+            echo json_encode([
+                'title' => 'Success',
+                'message' => "Uploaded to " . $this->member_photo_url,
+                'type' => 'success',
+            ]); exit();
         }
     }
 
@@ -475,7 +512,11 @@ class MembersController extends CI_Controller {
         }
 
         if( $this->Member->validate(false, $id, $this->input->post('email')) ) {
+            $avatar = $this->session->members_photo ? $this->session->members_photo : "";
 
+            if(!empty($avatar)) {
+                unlink( $this->Member->find($id)->avatar );
+            }
             # Update
             $member = array(
                 'stud_no' => $this->input->post('stud_no'),
@@ -494,6 +535,7 @@ class MembersController extends CI_Controller {
                 'email' => $this->input->post('email'),
                 'groups' => arraytoimplode( $this->input->post('groups') ),
                 'updated_by' => $this->user_id,
+                'avatar'    => $avatar,//$this->input->post('avatar'),
             );
             $this->Member->update($id, $member);
 
@@ -681,6 +723,7 @@ class MembersController extends CI_Controller {
                 {
                     # Delete uploaded file
                     clean_upload_folder( $full_path );
+                    clean_upload_folder( $full_path );
 
                     # Response
                     $data = array('message' => 'Members successfully imported.', 'type'=>'success');
@@ -692,8 +735,10 @@ class MembersController extends CI_Controller {
                         $group_ids = explodetoarray($member->groups);
                         $members_groups = $this->GroupMember->lookup('member_id', $member->id)->result_array();
                         $this->GroupMember->delete_member($member->id);
-                        foreach ($group_ids as $group_id) {
-                            $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $member->id ) );
+                        if($group_ids) {
+                            foreach ($group_ids as $group_id) {
+                                $this->GroupMember->insert( array('group_id' => $group_id, 'member_id' => $member->id ) );
+                            }
                         }
                     }
 
@@ -707,8 +752,8 @@ class MembersController extends CI_Controller {
 
         }
 
-        $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/dropzone/dropzone.css').'"></link>';
-        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/dropzone/dropzone.min.js').'"></script>';
+        // $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/dropzone/dropzone.css').'"></link>';
+        // $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/dropzone/dropzone.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/membersImport.js').'"></script>';
 
         $this->load->view('layouts/main', $this->Data);

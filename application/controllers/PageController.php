@@ -43,22 +43,43 @@ class PageController extends CI_Controller {
         if(!$this->session->userdata('validated')) redirect('login');
     }
 
+    public function debug_view()
+    {
+        $this->Data['Headers']->Page = "debug/index";
+        $this->load->view('layouts/main', $this->Data);
+    }
+
     public function debug()
     {
-        $this->validated();
-        $this->load->model('Auth', '', TRUE);
-        if( $this->Auth->can('members/update') ) {
-            echo "can";
+
+
+        $this->load->library('upload', ['upload_path'=>'./uploads/', 'allowed_types'=>'gif|jpg|jpeg|png']);
+        echo "<pre>";
+            var_dump( $this->input->post() );
+            var_dump($_FILES);
+        echo "</pre>";
+
+        if (!$this->upload->do_upload('avatar')) {
+            echo json_encode(array('message' => $this->upload->display_errors(), 'type'=>'error'));
         } else {
-            $data = array(
-                'message' => 'Restricted access.',
-                'type' => 'warning',
-            );
-            $this->session->set_flashdata('message', $data);
-            $this->Data['Headers'] = get_page_headers();
-            $this->Data['Headers']->Page = 'errors/403';
-            $this->load->view('layouts/errors', $this->Data);
+            echo json_encode($this->upload->data()['full_path']);
         }
+
+        die();
+        // $this->validated();
+        // $this->load->model('Auth', '', TRUE);
+        // if( $this->Auth->can('members/update') ) {
+        //     echo "can";
+        // } else {
+        //     $data = array(
+        //         'message' => 'Restricted access.',
+        //         'type' => 'warning',
+        //     );
+        //     $this->session->set_flashdata('message', $data);
+        //     $this->Data['Headers'] = get_page_headers();
+        //     $this->Data['Headers']->Page = 'errors/403';
+        //     $this->load->view('layouts/errors', $this->Data);
+        // }
         // if( $this->Auth->can() )
     }
 

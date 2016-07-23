@@ -1462,9 +1462,10 @@
      * @method reload
      * @chainable
      **/
-    Grid.prototype.reload = function()
+    Grid.prototype.reload = function(current)
     {
-        this.current = 1; // reset
+        // this.current = 1; // reset
+        this.current = (current !== 'undefined') ? current : 1;
         loadData.call(this);
 
         return this;

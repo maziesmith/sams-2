@@ -47,16 +47,20 @@ jQuery(document).ready(function (e) {
                 url: form.action,
                 data: $(form).serialize(),
                 success: function (data) {
-                    data = $.parseJSON(data);
+                    var data = $.parseJSON(data);
                     resetWarningMessages('.form-group-validation');
                     if( data.type !== 'success' )
                     {
+			console.log("ERROR", data);
                         var errors = data.message;
-
-                        $.each(errors, function (k, v) {
-                            $('#add-new-module-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
-                            // console.log(k,v);
-                        });
+			if (typeof errors == "string") {
+			    swal("Error", data.message, data.type);
+			} else {
+                            $.each(errors, function (k, v) {
+                                $('#add-new-module-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
+                                // console.log(k,v);
+                            });
+ 			}
                     }
                     else
                     {
@@ -119,7 +123,7 @@ jQuery(document).ready(function (e) {
                     url: $(form).attr('action') + '/' + modules_id,
                     data: $(form).serialize(),
                     success: function (data) {
-                        data = JSON.parse(data);
+                        var data = $.parseJSON(data);
                         console.log(data);
                         resetWarningMessages('.form-group-validation');
                         if( data.type != 'success' )

@@ -350,11 +350,6 @@ $route['messaging/groups']['get'] = 'MessagingController/groups';
 $route['install']['get'] = 'PageController/install';
 $route['seed']['get'] = 'PageController/seed';
 
-/*
-|----------
-| # Monitor
-|----------
-*/
 $route['monitor/(:any)']= 'MonitorController/$1';
 
 

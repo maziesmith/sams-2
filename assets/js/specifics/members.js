@@ -252,7 +252,7 @@ $(document).ready(function(){
                     url: $(form).attr('action') + '/' + id,
                     data: $(form).serialize(),
                     success: function (data) {
-                        data = JSON.parse(data);
+                        var data = $.parseJSON(data);
                         console.log(data);
                         resetWarningMessages('.form-group-validation');
                         if( data.type != 'success' ) {

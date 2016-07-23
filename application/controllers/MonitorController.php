@@ -9,7 +9,7 @@ class MonitorController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        //$this->validated();
+        $this->validated();
 
         $this->load->model('Monitor', '', TRUE);
 
@@ -72,14 +72,14 @@ class MonitorController extends CI_Controller {
     public function fetch_csv($generate = null)
     {   
         $this->load->helper('download');
-        $row  = $this->Monitor->generate_csv($_GET['datefrom'],$_GET['dateto'],$_GET['category'],$_GET['category_level']);
+        $row  = $this->Monitor->generate_csv($_GET['date_from'],$_GET['date_to'],$_GET['category'],$_GET['category_level'],$_GET['type'],$_GET['type_order'],$_GET['time_from'],$_GET['time_to']);
         $filename = strtotime("now").'.csv';
         force_download($filename,$row);
     }
 
     public function generate($generate = null)
     {   
-        $this->Data['results'] = $this->Monitor->generate_dtr($_GET['datefrom'],$_GET['dateto'],$_GET['category'],$_GET['category_level']);
+        $this->Data['results'] = $this->Monitor->generate_dtr($_GET['date_from'],$_GET['date_to'],$_GET['category'],$_GET['category_level'],$_GET['type'],$_GET['type_order'],$_GET['time_from'],$_GET['time_to']);
         $this->load->view('layouts/main', $this->Data);
     }
 }   

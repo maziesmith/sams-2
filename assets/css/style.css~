@@ -421,14 +421,16 @@ noscript {
 | ----------------------------
 */
 .i-logo {
-	width: 100px;
-}
-table .text-muted {
-	margin-bottom: 9px;
+	width: 120px;
 }
 .d-btn {
 	z-index: 1;
     bottom: 100px;
     right: 40px;
     position: fixed!important;
+}
+
+td > img {
+	max-width: 50px;
+	max-height: 50px;
 }

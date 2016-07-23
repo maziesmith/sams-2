@@ -421,33 +421,6 @@ class PageController extends CI_Controller {
             'slug' => 'messaging/import',
         );
 
-	/*
-        | -----------------
-        | # Monitor
-        | -----------------
-        */
-        $modules[] = array(
-            'name' => 'Monitor',
-            'description' => 'Monitor function',
-            'slug' => 'monitor',
-        );
-
-        $modules[] = array(
-            'name' => 'Daily Time Report',
-            'description' => 'Monitor DTR function',
-            'slug' => 'monitor/dtr',
-        );
-        $modules[] = array(
-            'name' => 'Splash Page',
-            'description' => 'Monitor splash page function',
-            'slug' => 'monitor/splash',
-        );
-
-        foreach ($modules as $module) {
-            $this->Module->insert($module);
-            echo "success" . "<br>";
-        }
-
         /*
         | -----------------
         | # Privileges

@@ -83,3 +83,40 @@
 2016-07-20 20:44:25 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09351050172] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:4:Help] [udh:0:]
 2016-07-20 20:44:30 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:243] [from:09088911449] [to:09351050172] [flags:-1:0:-1:-1:31] [msg:98:to register txt REG,EMPNO,FIRSTNAME,LASTNAME,MIDDLENAME,GROUP....NOTE GROUPCODE: PSEMP,GSEMP,HSEMP] [udh:0:]
 2016-07-20 20:44:30 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:243] [from:09088911449] [to:09351050172] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 16:33:24 Log begins
+2016-07-23 16:33:32 Log ends
+2016-07-23 16:33:34 Log begins
+2016-07-23 16:37:07 Log ends
+2016-07-23 16:37:08 Log begins
+2016-07-23 16:37:17 Log ends
+2016-07-23 16:37:21 Log begins
+2016-07-23 16:45:18 Log ends
+2016-07-23 16:45:23 Log begins
+2016-07-23 16:45:41 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09985382274] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:4:help] [udh:0:]
+2016-07-23 16:45:41 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09985382274] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:4:help] [udh:0:]
+2016-07-23 16:46:11 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:10:Test Again] [udh:0:]
+2016-07-23 16:46:11 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 16:47:40 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09985382274] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:4:help] [udh:0:]
+2016-07-23 16:50:44 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:18:Test Group Message] [udh:0:]
+2016-07-23 16:50:44 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 16:51:19 Receive SMS [SMSC:smart] [SVC:] [ACT:] [BINF:] [FID:] [from:09985382274] [to:09088911449] [flags:-1:0:-1:0:-1] [msg:4:help] [udh:0:]
+2016-07-23 16:51:23 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:248] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:31] [msg:98:to register txt REG,EMPNO,FIRSTNAME,LASTNAME,MIDDLENAME,GROUP....NOTE GROUPCODE: PSEMP,GSEMP,HSEMP] [udh:0:]
+2016-07-23 16:51:23 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:248] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 16:51:44 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09055420838] [flags:-1:0:-1:-1:24] [msg:18:Test Group Message] [udh:0:]
+2016-07-23 16:51:44 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09055420838] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:01:53 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:05pm.] [udh:0:]
+2016-07-23 17:01:53 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:05:31 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:08pm.] [udh:0:]
+2016-07-23 17:05:31 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:05:56 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:09pm.] [udh:0:]
+2016-07-23 17:05:56 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:06:02 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:09pm.] [udh:0:]
+2016-07-23 17:06:02 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:06:32 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:08pm.] [udh:0:]
+2016-07-23 17:06:32 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:07:00 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:10pm.] [udh:0:]
+2016-07-23 17:07:00 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:07:07 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:10pm.] [udh:0:]
+2016-07-23 17:07:07 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]
+2016-07-23 17:07:12 Sent SMS [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:0:-1:-1:24] [msg:90:Jul-23-16 YOUR CHILD (Ferdie Santiago/ 2006141) ENTERED THE HIGH SCHOOL CAMPUS AT 05:10pm.] [udh:0:]
+2016-07-23 17:07:12 Receive DLR [SMSC:smart] [SVC:foo] [ACT:] [BINF:] [FID:] [from:09088911449] [to:09985382274] [flags:-1:-1:-1:-1:8] [msg:4:ACK/] [udh:0:]

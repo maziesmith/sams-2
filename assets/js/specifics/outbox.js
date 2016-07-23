@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
 function reload_outbox_table()
 {
     console.log("refresh");
-    $('#outbox-table').bootgrid('reload');
+    $('#outbox-table').bootgrid('reload', $('#outbox-table').bootgrid('getCurrentPage'));
 }
 function init_outbox_table() {
     var trashCount = 0;

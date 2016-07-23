@@ -35,25 +35,30 @@
 
                                 <div class="col-xs-6">
                                     <div class="text-right">
-                                        <p class="c-gray">Date from</p>
+                                        <p class="c-gray">Start Date &amp; Time</p>
                                         
-                                        <h4 id="datefrom_val">
+                                        <h4>
                                             <?php 
-                                            $str = str_replace('/', '-', $_GET['datefrom']);
-                                            echo date("Y-m-d", strtotime($str)); 
-                                            ?>                                            
+                                            $str = str_replace('/', '-', $_GET['date_from']);
+                                            ?>
+                                            <span id="datefrom_val"><?php echo date("Y-m-d", strtotime($str)); ?></span>
+                                             (<span id="timefrom_val"><?php echo $_GET['time_from']; ?></span>)                                      
                                         </h4>
+
                                     </div>
                                 </div>
                                 
                                 <div class="col-xs-6">
                                     <div class="i-to">
-                                        <p class="c-gray">Date to</p>                                        
+                                        <p class="c-gray">End Date &amp; Time</p>                                        
                                         <h4 id="dateto_val">
                                             <?php 
-                                            $str = str_replace('/', '-', $_GET['dateto']);
-                                            echo date("Y-m-d", strtotime($str)); 
+                                            $str = str_replace('/', '-', $_GET['date_to']);                                           
                                             ?>
+                                            <span id="dateto_val"><?php echo date("Y-m-d", strtotime($str)); ?></span>
+                                             (<span id="timeto_val"><?php echo $_GET['time_to']; ?></span>)
+                                            <span id="type_val" class="hidden"><?php echo $_GET['type']; ?></span>
+                                            <span id="typeorder_val" class="hidden"><?php echo $_GET['type_order']; ?></span>
                                         </h4>
                                     </div>
                                 </div>
@@ -63,133 +68,232 @@
                             <div class="clearfix"></div>
                             
                             
-                            
-                            <table class="table i-table m-t-25 m-b-25 table-bordered">
-                                <thead class="t-uppercase">   
-                                    <th class="c-gray">DATE</th>
-                                    <th class="c-gray">FULLNAME</th> 
-                                    <th><span class="c-gray">TIMED IN </span><strong>(AM)</strong></th>
-                                    <th><span class="c-gray">TIMED OUT </span><strong>(AM)</strong></th>
-                                    <th><span class="c-gray">TIMED IN </span><strong>(PM)</strong></th>
-                                    <th><span class="c-gray">TIMED OUT </span><strong>(PM)</strong></th>
-                                    <th class="highlight">TOTAL TIME</th>
-                                </thead>
-                                
-                                <tbody>
-                                    <thead>
+                            <?php 
+                                if(isset($_GET['type']) &&($_GET['type']=="Summary")):
+                            ?>
+                                <table class="table i-table m-t-25 m-b-25">
+                                    <thead class="t-uppercase">   
+                                        <th class="highlight">DATE</th>
+                                        <th class="c-gray">FULLNAME</th> 
+                                        <th class="highlight"><span class="c-gray">TIMED IN </span><strong>(AM)</strong></th>
+                                        <th><span class="c-gray">TIMED OUT </span><strong>(AM)</strong></th>
+                                        <th class="highlight"><span class="c-gray">TIMED IN </span><strong>(PM)</strong></th>
+                                        <th><span class="c-gray">TIMED OUT </span><strong>(PM)</strong></th>
+                                        <th class="highlight">TOTAL TIME</th>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <thead>
 
-                                        <?php
-                                            foreach ($results as $row) { 
+                                            <?php
+                                                foreach ($results as $row) { 
 
-                                                $date_from = str_replace('/', '-', $_GET['datefrom']);
-                                                $date_from = strtotime($date_from);
-                                                $date_to = str_replace('/', '-', $_GET['dateto']);
-                                                $date_to = strtotime($date_to);
-                                                $totaltime = 0;
-                                                for ($i=$date_from; $i<=$date_to; $i+=86400) {
-                                        ?>
-                                            <tr>
-                                                <td>
-                                                    <h5>
-                                                        <strong>
-                                                            <?php echo date("Y-m-d", $i); ?>
-                                                        </strong> 
-                                                        
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5 class="t-uppercase f-400">
-                                                        <?php echo $this->Monitor->get_fullname($row->id); ?>
-                                                    </h5>
-                                                    <p class="text-muted">
-                                                        <?php echo $this->Monitor->get_levels($row->id); ?>
-                                                    </p>
-                                                </td>
-                                                
-                                                <td>
-                                                    <h5>
-                                                        <strong>
-                                                            <?php echo $am_in = $this->Monitor->get_dtrlog_am_in($row->stud_no,date("Y-m-d", $i)); ?>     
-                                                        </strong> 
-                                                        
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5>
-                                                        <strong>
-                                                            <?php echo $am_out = $this->Monitor->get_dtrlog_am_out($row->stud_no,date("Y-m-d", $i)); ?>     
-                                                        </strong>                                            
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5>
-                                                        <strong>
-                                                            <?php echo $pm_in = $this->Monitor->get_dtrlog_pm_in($row->stud_no,date("Y-m-d", $i)); ?>     
-                                                        </strong> 
-                                                        
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <h5>
-                                                        <strong>
-                                                            <?php echo $pm_out = $this->Monitor->get_dtrlog_pm_out($row->stud_no,date("Y-m-d", $i)); ?>     
-                                                        </strong>                                            
-                                                    </h5>
-                                                </td>
-                                                <td class="highlight">  
-                                                    <h5>
-                                                    <?php
-                                                        $time_diff = ((strtotime($am_out) - strtotime($am_in)) + (strtotime($pm_out) - strtotime($pm_in)));
-                                                        
-                                                        $totaltime = $totaltime + $time_diff;  
-                                                        $hours = 0;
-                                                        while(intval($time_diff)>=60){
-                                                            $hours++;
-                                                            $time_diff = $time_diff - 60; 
-                                                        }
-                                                        echo intval($hours>=60) ? intval($hours>=120) ? intval($hours/60).'hrs ' : intval($hours/60).'hr ' : ''; 
-                                                        echo intval($time_diff>0) ? intval($time_diff==1) ? intval($time_diff).'min ' : intval($time_diff).'mins ' : '0min';
-                                                    ?>
-                                                    </h5> 
-                                                </td>
-                                            </tr>
-                                        <?php        
-                                            }
-                                        ?> 
-                                            <tr>
-                                                <td></td>
-                                                <td></td>                                                
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <h5>
-                                                        <strong>
-                                                            TOTAL COMPUTED TIME    
-                                                        </strong>                                            
-                                                    </h5>
-                                                </td>
-                                                <td class="highlight">  
-                                                    <h5>
-                                                    <?php
-                                                        $totalhours = 0;                                                        
-                                                        while(intval($totaltime)>=60){
-                                                            $totalhours++;
-                                                            $totaltime = $totaltime - 60; 
-                                                        }
-                                                        echo intval($totalhours>=60) ? intval($totalhours>=120) ? intval($totalhours/60).'hrs ' : intval($totalhours/60).'hr ' : ''; 
-                                                        echo intval($totaltime>0) ? intval($totaltime==1) ? intval($totaltime).'min ' : intval($totaltime).'mins ' : '0min';
-                                                    ?>
-                                                    </h5> 
-                                                </td>
-                                            </tr>
-                                        <?php    
-                                            }
-                                        ?>                                
-                                    </thead> 
-                                </tbody>
-                            </table>
-                            
+                                                    $date_from = str_replace('/', '-', $_GET['date_from']);
+                                                    $date_from = strtotime($date_from);
+                                                    $date_to = str_replace('/', '-', $_GET['date_to']);
+                                                    $date_to = strtotime($date_to);
+                                                    $time_from = strtotime($_GET['time_from']);
+                                                    $time_to = strtotime($_GET['time_to']);
+                                                    $totaltime = 0;
+                                                    for ($i=$date_from; $i<=$date_to; $i+=86400) {
+                                            ?>
+                                                <tr>
+                                                    <td class="highlight">
+                                                        <h5>
+                                                            <strong>
+                                                                <?php echo date("Y-m-d", $i); ?>
+                                                            </strong> 
+                                                            
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="t-uppercase f-400">
+                                                            <?php echo $this->Monitor->get_fullname($row->id); ?>
+                                                        </h5>
+                                                        <p class="text-muted">
+                                                            <?php echo $this->Monitor->get_levels($row->id); ?>
+                                                        </p>
+                                                    </td>
+                                                    
+                                                    <td  class="highlight">
+                                                        <h5>
+                                                            <strong>
+                                                                <?php echo $am_in = $this->Monitor->get_dtrlog_am_in($row->stud_no,date("Y-m-d", $i),date("H:i:s", $time_from),date("H:i:s", $time_to)); ?>     
+                                                            </strong> 
+                                                            
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            <strong>
+                                                                <?php echo $am_out = $this->Monitor->get_dtrlog_am_out($row->stud_no,date("Y-m-d", $i),date("H:i:s", $time_from),date("H:i:s", $time_to)); ?>      
+                                                            </strong>                                            
+                                                        </h5>
+                                                    </td>
+                                                    <td class="highlight">
+                                                        <h5>
+                                                            <strong>
+                                                                <?php echo $pm_in = $this->Monitor->get_dtrlog_pm_in($row->stud_no,date("Y-m-d", $i),date("H:i:s", $time_from),date("H:i:s", $time_to)); ?>    
+                                                            </strong> 
+                                                            
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            <strong>
+                                                                <?php echo $pm_out = $this->Monitor->get_dtrlog_pm_out($row->stud_no,date("Y-m-d", $i),date("H:i:s", $time_from),date("H:i:s", $time_to)); ?>     
+                                                            </strong>                                            
+                                                        </h5>
+                                                    </td>
+                                                    <td class="highlight">  
+                                                        <h5>
+                                                        <?php
+
+                                                            if(($am_in=="" || $am_out=="") && $pm_in!="" && $pm_out!="") {
+
+                                                                $p_in = ((Date("H",strtotime($pm_in))*60) + Date("i",strtotime($pm_in)));
+                                                                $p_out = ((Date("H",strtotime($pm_out))*60) + Date("i",strtotime($pm_out)));
+                                                                
+                                                                $minutes = ($p_out - $p_in);                                                            
+                                                                $totaltime = $totaltime + $minutes;  
+                                                                $hours = 0;   
+
+                                                                while($minutes>=60){                                                                
+                                                                    $minutes -= 60; 
+                                                                    $hours++;
+                                                                }
+                                                                echo ($hours>=1) ? ($hours>1) ? $hours."hrs" : $hours."hr" : "";
+                                                                echo " ";
+                                                                echo ($minutes>=1) ? ($minutes>1) ? $minutes."mins" : $minutes."min" : "0min";
+                                                            
+                                                            } else if ($am_in!="" && $am_out!="" && ($pm_in=="" || $pm_out=="")) {
+                                                               
+                                                                $a_in = ((Date("H",strtotime($am_in))*60) + Date("i",strtotime($am_in)));
+                                                                $a_out = ((Date("H",strtotime($am_out))*60) + Date("i",strtotime($am_out)));
+                                                                
+                                                                $minutes = ($a_out - $a_in);                                                            
+                                                                $totaltime = $totaltime + $minutes;  
+                                                                $hours = 0;   
+
+                                                                while($minutes>=60){                                                                
+                                                                    $minutes -= 60; 
+                                                                    $hours++;
+                                                                }
+                                                                echo ($hours>=1) ? ($hours>1) ? $hours."hrs" : $hours."hr" : "";
+                                                                echo " ";
+                                                                echo ($minutes>=1) ? ($minutes>1) ? $minutes."mins" : $minutes."min" : "0min";
+                                                            } 
+                                                            else  {
+
+                                                                $a_in = ((Date("H",strtotime($am_in))*60) + Date("i",strtotime($am_in)));
+                                                                $a_out = ((Date("H",strtotime($am_out))*60) + Date("i",strtotime($am_out)));
+                                                                $p_in = ((Date("H",strtotime($pm_in))*60) + Date("i",strtotime($pm_in)));
+                                                                $p_out = ((Date("H",strtotime($pm_out))*60) + Date("i",strtotime($pm_out)));
+                                                                
+                                                                $minutes = ($a_out - $a_in) + ($p_out - $p_in);                                                            
+                                                                $totaltime = $totaltime + $minutes;  
+                                                                $hours = 0;   
+
+                                                                while($minutes>=60){                                                                
+                                                                    $minutes -= 60; 
+                                                                    $hours++;
+                                                                }
+                                                                echo ($hours>=1) ? ($hours>1) ? $hours."hrs" : $hours."hr" : "";
+                                                                echo " ";
+                                                                echo ($minutes>=1) ? ($minutes>1) ? $minutes."mins" : $minutes."min" : "0min";
+
+                                                            }
+
+                                                            
+                                                        ?>
+                                                        </h5> 
+                                                    </td>
+                                                </tr>
+                                            <?php        
+                                                }
+                                            ?> 
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>                                                
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <h5>
+                                                            <strong>
+                                                                TOTAL COMPUTED TIME    
+                                                            </strong>                                            
+                                                        </h5>
+                                                    </td>
+                                                    <td class="highlight">  
+                                                        <h5>
+                                                        <?php
+                                                            $totalhours = 0;                                                        
+                                                            while($totaltime>=60){
+                                                                $totalhours++;
+                                                                $totaltime -= 60; 
+                                                            }
+                                                            echo ($totalhours>=1) ? ($totalhours>1) ? $totalhours."hrs" : $totalhours."hr" : "";
+                                                            echo " ";
+                                                            echo ($totaltime>=1) ? ($totaltime>1) ? $totaltime."mins" : $totaltime."min" : "0min";
+                                                        ?>
+                                                        </h5> 
+                                                    </td>
+                                                </tr>
+                                            <?php    
+                                                }
+                                            ?>                                
+                                        </thead> 
+                                    </tbody>
+                                </table>
+
+                            <?php else: ?>
+                                <table class="table i-table m-t-25 m-b-25">
+                                    <thead class="t-uppercase">   
+                                        <th class="highlight">DATE</th>
+                                        <th class="c-gray">FULLNAME</th> 
+                                        <th class="highlight">TIMELOGS</th>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <thead>
+
+                                            <?php
+                                                foreach ($results as $row) {                                                   
+                                            ?>
+                                                <tr>
+                                                    <td class="highlight">
+                                                        <h5>
+                                                            <strong>
+                                                                <?php echo Date("Y-m-d",strtotime($row->timelog)); ?>
+                                                            </strong> 
+                                                            
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="t-uppercase f-400">
+                                                            <?php echo $this->Monitor->get_fullname($row->id); ?>
+                                                        </h5>
+                                                        <p class="text-muted">
+                                                            <?php echo $this->Monitor->get_levels($row->id); ?>
+                                                        </p>
+                                                    </td>
+                                                    
+                                                    <td  class="highlight">
+                                                        <h5>
+                                                            <strong>
+                                                                <?php echo Date("H:i:s",strtotime($row->timelog)); ?>     
+                                                            </strong> 
+                                                            
+                                                        </h5>
+                                                    </td>
+                                            <?php        
+                                                }
+                                            ?>                               
+                                        </thead> 
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
                             <div class="clearfix"></div>
                             
                             

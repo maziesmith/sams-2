@@ -38,8 +38,8 @@
         <a role="button"><i class="fa fa-signal"></i> Levels</a>
         <ul>
             <li class="<?php echo check_link('levels') ?>" ><?php echo anchor( base_url('levels'), 'All Levels' ); ?></li>
-            <li class="<?php echo check_link('levels/export') ?>" ><?php echo anchor( base_url('levels/export'), 'Export Levels' ); ?></li>
-            <li class="<?php echo check_link('levels/import') ?>" ><?php echo anchor( base_url('levels/import'), 'Import Levels' ); ?></li>
+           <!-- <li class="<?php echo check_link('levels/export') ?>" ><?php echo anchor( base_url('levels/export'), 'Export Levels' ); ?></li> -->
+           <!-- <li class="<?php echo check_link('levels/import') ?>" ><?php echo anchor( base_url('levels/import'), 'Import Levels' ); ?></li> -->
         </ul>
     </li>
 
@@ -47,8 +47,8 @@
         <a role="button"><i class="zmdi zmdi-view-list"></i> Types</a>
         <ul>
             <li class="<?php echo check_link('types') ?>" ><?php echo anchor( base_url('types'), 'All Types' ); ?></li>
-            <li class="<?php echo check_link('types/export') ?>" ><?php echo anchor( base_url('types/export'), 'Export Types' ); ?></li>
-            <li class="<?php echo check_link('types/import') ?>" ><?php echo anchor( base_url('types/import'), 'Import Types' ); ?></li>
+            <!--<li class="<?php echo check_link('types/export') ?>" ><?php echo anchor( base_url('types/export'), 'Export Types' ); ?></li>
+            <li class="<?php echo check_link('types/import') ?>" ><?php echo anchor( base_url('types/import'), 'Import Types' ); ?></li>-->
         </ul>
     </li>
     <li><hr></li>

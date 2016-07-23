@@ -20,7 +20,7 @@
                         <tr>
                             <th data-column-id="count_id"           data-visible="true" data-type="numeric" data-sortable="false">#</th>
                             <th data-column-id="id"        data-css-class="id" data-order="asc" data-visible="false" data-identifier="true">ID</th>
-                            <th data-column-id="avatar"        data-css-class="avatar" data-order="asc" data-visible="true" data-identifier="true">Member ID</th>
+                            <th data-column-id="avatar"        data-css-class="avatar" data-order="asc" data-visible="true" data-identifier="true">Photo</th>
                             <th data-column-id="stud_no" data-css-class="stud_no" data-order="asc" data-visible="true">Student No.</th>
 			    <th data-column-id="fullname" data-css-class="fullname" data-order="asc">Name</th>
                             <th data-column-id="level"     data-css-class="level" data-order="asc">Level</th>

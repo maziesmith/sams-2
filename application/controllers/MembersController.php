@@ -797,7 +797,7 @@ class MembersController extends CI_Controller {
                         break;
 
                     case 'SQL':
-                        $SQL = $this->dbutil->backup(['tables'=>'{PRE}members']);
+                        $SQL = $this->dbutil->backup(['tables'=>'members']);
                         $sql_name = 'Members_' . date('Y-m-d-H-i') . '.export.zip';
                         force_download($sql_name, $SQL);
                         break;

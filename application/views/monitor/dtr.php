@@ -15,23 +15,38 @@
 
                     <div class="row">
                         <div class="col-sm-6">
-                            <p class="c-black f-500 m-b-20">Date From</p>
+                            <p class="c-black f-500 m-b-20">Date Start</p>
                             <div class="dtp-container fg-line">
-                            <input type='text' id="date-from" class="form-control date-picker" placeholder="Click here...">
+                            <input type='text' id="date_from" class="form-control date-picker" placeholder="Click here...">
                             </div>                              
                         </div> 
 
                         <div class="col-sm-6 m-b-25">
-                            <p class="c-black f-500 m-b-20">Date To</p>
+                            <p class="c-black f-500 m-b-20">Date End</p>
                             <div class="dtp-container fg-line">
-                            <input type='text' id="date-to" class="form-control date-picker" placeholder="Click here...">
+                            <input type='text' id="date_to" class="form-control date-picker" placeholder="Click here...">
                             </div>
                         </div> 
                         <div class="clearfix"></div>
 
-                        <div class="col-sm-6 m-b-15">
+                        <div class="col-sm-6">
+                            <p class="c-black f-500 m-b-20">Time Start</p>
+                            <div class="dtp-container fg-line">
+                                <input type='text' id="time_from" class="form-control time-picker" placeholder="Click here...">
+                            </div>                              
+                        </div> 
+
+                        <div class="col-sm-6 m-b-25">
+                            <p class="c-black f-500 m-b-20">Time End</p>
+                            <div class="dtp-container fg-line">
+                                <input type='text' id="time_to" class="form-control time-picker" placeholder="Click here...">
+                            </div>
+                        </div> 
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-6 m-b-25">
                             <p class="f-500 c-black m-b-25">Select Category</p>
-                            <select id="category" class="tag-select" style="display: none;">
+                            <select id="category" class="tag-select">
                                 <option value="">Select</option>
                                 <option value="All">All</option>
                                 <option value="Contact">Contact</option>
@@ -41,7 +56,25 @@
                         </div>
                         <div class="col-sm-6">
                             <p class="f-500 c-black m-b-25">Select Category Level</p>
-                            <select id="category_level" class="tag-select" style="display: none;">                      
+                            <select id="category_level" class="tag-select">                      
+                            </select>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="col-sm-6 m-b-15">
+                            <p class="f-500 c-black m-b-25">Select Report Type</p>
+                            <select id="type" class="tag-select">
+                                <option value="">Select</option>
+                                <option value="Detailed">Detailed</option>
+                                <option value="Summary">Summary</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 m-b-15">
+                            <p class="f-500 c-black m-b-25">Select Order Type</p>
+                            <select id="type_order" class="tag-select" style="display:none">
+                                <option value="">Select</option>
+                                <option value="ASC">A-z</option>
+                                <option value="DESC">z-A</option>
                             </select>
                         </div>
                         <div class="clearfix"></div>

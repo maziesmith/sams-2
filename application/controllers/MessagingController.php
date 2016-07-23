@@ -290,6 +290,12 @@ class MessagingController extends CI_Controller {
     public function tracking()
     {
         $this->Data['scheduled'] = $this->Scheduler->all();
+        $this->Data['pending'] = count($this->Scheduler->get("status", "pending")->result_array());
+        $this->Data['failed'] = count($this->Scheduler->get("status", "failed")->result_array());
+        $this->Data['success'] = count($this->Scheduler->get("status", "success")->result_array());
+        $this->Data['rejected'] = count($this->Scheduler->get("status", "rejected")->result_array());
+        $this->Data['buffered'] = count($this->Scheduler->get("status", "buffered")->result_array());
+
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/messageTracking.js').'"></script>';
         $this->load->view('layouts/main', $this->Data);
     }
@@ -335,6 +341,12 @@ class MessagingController extends CI_Controller {
                 );
             }
 
+            $pending = count($this->Scheduler->get("status", "pending")->result_array());
+            $failed = count($this->Scheduler->get("status", "failed")->result_array());
+            $success = count($this->Scheduler->get("status", "success")->result_array());
+            $rejected = count($this->Scheduler->get("status", "rejected")->result_array());
+            $buffered = count($this->Scheduler->get("status", "buffered")->result_array());
+
             $data = array(
                 "current"       => intval($current),
                 "rowCount"      => $limit,
@@ -343,7 +355,13 @@ class MessagingController extends CI_Controller {
                 "rows"          => $bootgrid_arr,
                 "trash"         => array(
                     "count" => $this->Scheduler->get_all(0, 0, null, true)->num_rows(),
-                )
+                ),
+                "scheduled" => count($this->Scheduler->all()),
+                "pending" => $pending,
+                "failed" => $failed,
+                "success" => $success,
+                "rejected" => $rejected,
+                "buffered" => $buffered,
                 // "debug" => $outbox['type'],
             );
             echo json_encode( $data );

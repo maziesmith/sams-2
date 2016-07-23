@@ -6,6 +6,18 @@
         <div class="card"><?php
             echo breadcrumbs('', 'Messages Tracking'); ?>
             <div class="table-responsive">
+                <table id="table-track-text" class="table table-vmiddle table-condensed">
+                    <tbody>
+                        <tr>
+                            <td id="td-scheduled" style="padding-top:20px">Messages: <span><?php echo count($scheduled) ?></span></td>
+                            <td id="td-pending" style="padding-top:20px">Pending: <span><?php echo @$pending; ?></span></td>
+                            <td id="td-failed" style="padding-top:20px">Failed: <span><?php echo @$failed; ?></span></td>
+                            <td id="td-success" style="padding-top:20px">Success: <span><?php echo @$success; ?></span></td>
+                            <td id="td-rejected" style="padding-top:20px">Rejected: <span><?php echo @$rejected; ?></span></td>
+                            <td id="td-buffered" style="padding-top:20px">Buffered: <span><?php echo @$buffered; ?></span></td>
+                        </tr>
+                    </tbody>
+                </table><hr class="m-t-0">
                 <table id="messaging-tracking-table" class="table table-condensed table-vmiddle table-hover">
                     <thead>
                         <tr>

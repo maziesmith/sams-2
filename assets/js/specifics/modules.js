@@ -47,7 +47,7 @@ jQuery(document).ready(function (e) {
                 url: form.action,
                 data: $(form).serialize(),
                 success: function (data) {
-                    data = JSON.parse(data);
+                    data = $.parseJSON(data);
                     resetWarningMessages('.form-group-validation');
                     if( data.type !== 'success' )
                     {

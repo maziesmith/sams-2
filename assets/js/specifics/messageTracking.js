@@ -47,6 +47,11 @@ function init_table () {
         },
         responseHandler: function (response) {
             console.log(response);
+            $('#table-track-text').find('#td-scheduled span').text(response.scheduled);
+            $('#table-track-text').find('#td-pending span').text(response.pending);
+            $('#table-track-text').find('#td-failed span').text(response.failed);
+            $('#table-track-text').find('#td-success span').text(response.success);
+            $('#table-track-text').find('#td-buffered span').text(response.buffered);
             // response.current = currentPage;
             return response;
         },

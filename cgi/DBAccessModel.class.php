@@ -119,8 +119,8 @@ class DBAccess extends BaseModel
     function group_members($group){
         $sql = "SELECT m.msisdn,m.id
                 FROM `groups` g
-                JOIN group_members gm ON g.id = gm.group_id
-                JOIN members m ON m.id = gm.member_id WHERE g.description='$group' GROUP BY m.msisdn";
+                JOIN group_members gm ON g.groups_id = gm.group_id
+                JOIN members m ON m.id = gm.member_id WHERE g.groups_code='$group' GROUP BY m.msisdn";
         return $this->select_all($sql);
     }
 
@@ -142,7 +142,8 @@ class DBAccess extends BaseModel
     }
 
     function get_member($msisdn){
-        $sql = "SELECT type FROM `members` WHERE `msisdn` = '$msisdn' AND msisdn != '';";
+//        $sql = "SELECT typ.types_code FROM `members` mem JOIN types typ WHERE mem.`msisdn` = '$msisdn' AND mem.`msisdn` != '';";
+	$sql ="SELECT typ.types_code FROM `members` mem JOIN types typ ON typ.types_id = mem.type WHERE mem.`msisdn` = '$msisdn' AND mem.`msisdn` != ''";
         return $this->select_one($sql);
     }
     function get_poll_details($pcode, $pocode){
@@ -164,24 +165,24 @@ class DBAccess extends BaseModel
     }
 
     function get_group_id($code){
-        $sql = "SELECT g.id FROM `groups` g where g.name = '$code'";
+        $sql = "SELECT g.groups_id FROM `groups` g where g.groups_code = '$code'";
         $res = $this->return_one($sql);
         return $res;
     }
     function get_group_name($id){
-        $sql = "SELECT g.name FROM `groups` g where g.id = '$id'";
+        $sql = "SELECT g.groups_name FROM `groups` g where g.groups_id = '$id'";
         $res = $this->return_one($sql);
         return $res;
     }
     function get_group_code($id){
-        $sql = "SELECT g.description FROM `groups` g where g.id = '$id'";
+        $sql = "SELECT g.groups_name FROM `groups` g where g.groups_id = '$id'";
         $res = $this->return_one($sql);
         return $res;
     }
     function get_members_group($memid){
-        $sql = "SELECT g.name FROM `members` mem 
+        $sql = "SELECT g.groups_name FROM `members` mem 
                 JOIN `group_members` gm ON gm.member_id = mem.id 
-                LEFT JOIN `groups` g ON g.id = gm.group_id where mem.id = '$memid'";
+                LEFT JOIN `groups` g ON g.groups_id = gm.groups_id where mem.id = '$memid'";
         $res = $this->return_one($sql);
         return $res;
     }

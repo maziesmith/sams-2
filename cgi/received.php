@@ -81,7 +81,7 @@ switch ($command)
     case 'grpmsg':
         if (!$data) exit();
         # only employee can send group message
-        if ($data['0'] == 'EMPLOYEE') $controller->group_message($d);
+        if ($data['0'] == 'employee') $controller->group_message($d);
     break;
     
     case 'balance':

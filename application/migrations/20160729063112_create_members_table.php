@@ -32,6 +32,7 @@ class Migration_create_members_table extends CI_Migration {
             'nick' => array(
                 'type' => 'TEXT',
                 'constraint' => '255',
+                'null' => true,
             ),
             'level' => array(
                 'type' => 'TEXT',

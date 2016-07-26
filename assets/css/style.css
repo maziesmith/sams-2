@@ -60,7 +60,7 @@
 	transition: .2s all ease-in-out;
 }
 .modal .modal-body {
-	padding-top: 20px;
+	padding-top: 20px !important;
 }
 .modal-header {
 	background: #f1f1f1;
@@ -132,6 +132,9 @@ ul.breadcrumb .active {
 | # App 2 Overrides
 | -----------------
 */
+.actions.btn-group {
+	box-shadow: none;
+}
 @media only screen and (max-width: 480px) {
 	.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
 		width: 100%;
@@ -295,6 +298,10 @@ ul.breadcrumb .active {
 @media (min-width: 768px) {
 	.modal-fluid {
 		width: 95%;
+	}
+	.modal-lg {
+		width: 80%;
+		max-width: 1200px;
 	}
   	.modal-xl {
     	width: 90%;

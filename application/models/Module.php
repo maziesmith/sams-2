@@ -176,5 +176,10 @@ class Module extends CI_Model {
         return $this->db->affected_rows() > 0;
     }
 
+    public function exists($value, $column="slug")
+    {
+        return $this->db->where($column, $value)->get($this->table)->num_rows() > 0;
+    }
+
 }
  ?>

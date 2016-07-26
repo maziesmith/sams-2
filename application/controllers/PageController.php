@@ -170,10 +170,10 @@ class PageController extends CI_Controller {
 
     public function seed()
     {
-        // $modules = array();
+        $modules = null;
         $modules[] = array(
-            'name' => 'Members',
-            'description' => 'Members list function',
+            'name' => 'Members Index',
+            'description' => 'Members index',
             'slug' => 'members',
         );
         $modules[] = array(
@@ -443,11 +443,6 @@ class PageController extends CI_Controller {
             'slug' => 'monitor/splash',
         );
 
-        foreach ($modules as $module) {
-            $this->Module->insert($module);
-            echo "success" . "<br>";
-        }
-
         /*
         | -----------------
         | # Privileges
@@ -551,8 +546,10 @@ class PageController extends CI_Controller {
         );
 
         foreach ($modules as $module) {
-            $this->Module->insert($module);
-            echo "success" . "<br>";
+            if (!$this->Module->exists($module['slug'], "slug")) {
+                $this->Module->insert($module);
+                echo "success" . "<br>";
+            }
         }
 
 

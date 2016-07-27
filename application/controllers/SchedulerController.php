@@ -79,18 +79,20 @@ class SchedulerController extends CI_Controller {
                 $group_members = $this->GroupMember->lookup('group_id', $group_id)->result_array();
                 foreach ($group_members as $member) {
                     $member = $this->Member->find($member['member_id']);
-                    $data = array(
-                        'message' => $body,
-                        'member_ids' => $member->id,
-                        'msisdn' => $member->msisdn,
-                        'group_ids' => $group_id,
-                        "smsc" => $this->Message->get_network($member->msisdn),
-                        "created_by" => $this->user_id,
-                        "status" => "pending",
-                        "interval" => "",
-                        "send_at" => $datetime,
-                    );
-                    $this->Scheduler->insert($data);
+                    if (null != $member) {
+                        $data = array(
+                            'message' => $body,
+                            'member_ids' => $member->id,
+                            'msisdn' => $member->msisdn,
+                            'group_ids' => $group_id,
+                            "smsc" => $this->Message->get_network($member->msisdn),
+                            "created_by" => $this->user_id,
+                            "status" => "pending",
+                            "interval" => "",
+                            "send_at" => $datetime,
+                        );
+                        $this->Scheduler->insert($data);
+                    }
                 }
 
             }
@@ -153,6 +155,14 @@ class SchedulerController extends CI_Controller {
                 # This sends the shit out of the messagfe to the kannel server
                 // $this->Message->send($outbox_id, $schedule->msisdn, $this->Message->get_network($schedule->msisdn), $body);
             }
+        }
+
+        if ($this->input->is_ajax_request()) {
+            echo json_encode([
+                "title" => "Sending",
+                "message" => "Pending messages are sending...",
+                "type" => "inverse",
+            ]); exit();
         }
     }
 

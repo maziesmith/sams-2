@@ -28,8 +28,8 @@
         <a role="button"><i class="zmdi zmdi-accounts"></i> Groups</a>
         <ul>
             <li class="<?php echo check_link('groups') ?>" ><?php echo anchor( base_url('groups'), 'All Groups' ); ?></li>
-            <!-- <li class="<?php echo check_link('groups/export') ?>" ><?php echo anchor( base_url('groups/export'), 'Export Groups' ); ?></li> -->
-            <!-- <li class="<?php echo check_link('groups/import') ?>" ><?php echo anchor( base_url('groups/import'), 'Import Groups' ); ?></li> -->
+            <li class="<?php echo check_link('groups/export') ?>" ><?php echo anchor( base_url('groups/export'), 'Export Groups' ); ?></li>
+            <li class="<?php echo check_link('groups/import') ?>" ><?php echo anchor( base_url('groups/import'), 'Import Groups' ); ?></li>
             <li class="<?php echo check_link('groups/trash') ?>" ><?php echo anchor( base_url('groups/trash'), 'Trashed Groups' ); ?></li>
         </ul>
     </li>

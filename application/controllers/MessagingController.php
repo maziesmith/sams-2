@@ -300,6 +300,72 @@ class MessagingController extends CI_Controller {
         $this->load->view('layouts/main', $this->Data);
     }
 
+    public function tracking_listing_grouped()
+    {
+        $bootgrid_arr = [];
+        $group_by     = 'message';
+        $current      = $this->input->post('current');
+        $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
+        $page         = $current !== null ? $current : 1;
+        $start_from   = ($page-1) * $limit;
+        $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
+        $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
+        $removed_only = null !== $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
+        $total        = $this->Scheduler->get_all_grouped($group_by, 0, 0, null, $removed_only)->num_rows();
+
+        if( null != $wildcard ) {
+            $scheduled = $this->Scheduler->like_grouped($group_by, $wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
+            $total   = $this->Scheduler->like_grouped($group_by, $wildcard, 0, 0, null, $removed_only)->num_rows();
+
+            $scheduled_full = $this->Scheduler->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
+        } else {
+            $scheduled = $this->Scheduler->get_all_grouped($group_by, $start_from, $limit, $sort, $removed_only)->result_array();
+
+            $scheduled_full = $this->Scheduler->get_all($start_from, $limit, $sort, $removed_only)->result_array();
+        }
+
+        foreach ($scheduled as $key => $schedule) {
+
+            $bootgrid_arr[] = array(
+                'count_id'           => $key + 1 + $start_from,
+                'id'        => $schedule['id'],
+                'message' => $schedule['message'],
+                'member_ids' => $schedule['member_ids'],
+                // 'group_ids' => arraytostring($this->Group->find(explode(",", $schedule['group_ids'])), ", "),
+                'smsc' => $schedule['smsc'],
+                'msisdn' => $schedule['msisdn'],
+                'status' => $schedule['status'],
+                'send_at' => date("M d, Y \a\\t h:ia", strtotime($schedule['send_at'])),
+            );
+        }
+
+        $pending = count($this->Scheduler->get("status", "pending")->result_array());
+        $failed = count($this->Scheduler->get("status", "failed")->result_array());
+        $success = count($this->Scheduler->get("status", "success")->result_array());
+        $rejected = count($this->Scheduler->get("status", "rejected")->result_array());
+        $buffered = count($this->Scheduler->get("status", "buffered")->result_array());
+
+        $data = array(
+            "current"       => intval($current),
+            "rowCount"      => $limit,
+            "searchPhrase"  => $wildcard,
+            "total"         => intval( $total ),
+            "rows"          => $bootgrid_arr,
+            "trash"         => array(
+                "count" => $this->Scheduler->get_all(0, 0, null, true)->num_rows(),
+            ),
+            "scheduled" => count($this->Scheduler->all()),
+            "pending" => $pending,
+            "failed" => $failed,
+            "success" => $success,
+            "rejected" => $rejected,
+            "buffered" => $buffered,
+            // "debug" => $outbox['type'],
+        );
+        echo json_encode( $data );
+        exit();
+    }
+
     public function tracking_listing()
     {
         /**

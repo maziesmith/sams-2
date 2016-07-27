@@ -61,6 +61,21 @@ class Scheduler extends CI_Model {
         return $this->db->where($this->column_softDelete, NULL)->get($this->table);
     }
 
+    public function get_all_grouped($group_by='message', $start_from=0, $limit=0, $sort=null, $removed_only=false)
+    {
+        if( null != $sort )
+        {
+            foreach ($sort as $field_name => $order) {
+                $this->db->order_by($field_name, $order);
+            }
+        }
+
+        $this->db->limit( $limit, $start_from );
+
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " != ", NULL)->group_by($group_by)->get($this->table);
+        return $this->db->where($this->column_softDelete, NULL)->group_by($group_by)->get($this->table);
+    }
+
     public function find($id, $column=null)
     {
         if (null != $column) {
@@ -110,6 +125,37 @@ class Scheduler extends CI_Model {
 
         if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->get();
         return $this->db->where($this->column_softDelete, NULL)->get();
+    }
+
+    public function like_grouped($group_by, $wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)
+    {
+        $first = ''; $last='';
+        if(preg_match('/\s/', $wildcard))
+        {
+            $name = explode(" ", $wildcard);
+            $first = $name[0];
+            $last = $name[1];
+        }
+        $this->db->where('message LIKE', '%' . $wildcard . '%')
+                ->or_where('id LIKE', $wildcard . '%')
+                ->or_where('send_at LIKE', "%".date("Y-m-d", strtotime($wildcard)) . '%')
+                ->or_where('status LIKE',$wildcard . '%')
+                // ->or_where('(SELECT firstname FROM members WHERE id = member_ids) AS member_ids LIKE', '%' . $wildcard . '%')
+                ->or_where('msisdn LIKE', '%' . $wildcard . '%')
+                ->from($this->table)
+                ->select('*');
+
+        if( null != $sort )
+        {
+            foreach ($sort as $field_name => $order) {
+                $this->db->order_by($field_name, $order);
+            }
+        }
+
+        $this->db->limit( $limit, $start_from );
+
+        if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->group_by($group_by)->get();
+        return $this->db->where($this->column_softDelete, NULL)->group_by($group_by)->get();
     }
 
     public function get($column, $where)

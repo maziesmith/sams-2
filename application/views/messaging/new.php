@@ -27,12 +27,12 @@
             <hr>
             <div class="card-body card-padding">
                 <div class="form-group-validation">
-                    <textarea class="wp-text auto-size" name="body" data-auto-size placeholder="Write SMS..."></textarea>
+                    <textarea id="new-sms-textarea" class="wp-text auto-size" name="body" data-auto-size placeholder="Write SMS..."></textarea>
                 </div>
             </div>
 
             <ul class="list-unstyled clearfix wpb-actions">
-                <li class="pull-rsight">
+                <li class="pull-right">
                     <?php echo form_button(array('name'=>'submit', 'id'=>'submit', 'type'=>'submit'), 'Send', 'class="btn btn-primary btn-sm"') ?>
                     <button type="button" id="send-later-btn-trigger" title="Send this message later" class="btn btn-default" data-toggle="modal" href="#send-later-modal">Send Later...</button>
                 </li>

@@ -1,4 +1,7 @@
 jQuery(document).ready(function ($) {
+    $('#new-sms-textarea').on('inputchange', function (e) {
+        console.log("asd");
+    })
     $('#send-new-message-form').validate({
         ignore: [],
         rules: {

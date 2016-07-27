@@ -3,7 +3,7 @@
 | # GLOBAL VARIABLES
 |-------------------
 */
-var GLOBAL_PHONE_REGEX = /(0-9)+/;
+// var GLOBAL_PHONE_REGEX = /(0-9)+/;
 /*
 |----------
 | # Success
@@ -999,8 +999,9 @@ function reload_selectpickers_key($key, $values)
 }
 
 function truncate(string, limit){
-   if (string.length > limit)
-      return string.substring(0,limit)+'...';
-   else
-      return string;
-};
+    if (string.length > limit) {
+        return string.substring(0,limit)+'...';
+    } else {
+        return string;
+    }
+}

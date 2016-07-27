@@ -321,6 +321,7 @@ $route['messaging/bulk-send/later']['get'] = 'SchedulerController/schedule';
 $route['messaging/send-scheduled-messages']['post'] = 'SchedulerController/send';
 $route['messaging/tracking']['get'] = 'MessagingController/tracking';
 $route['messages/tracking-listing']['post'] = 'MessagingController/tracking_listing';
+$route['messages/tracking-listing_grouped']['post'] = 'MessagingController/tracking_listing_grouped';
 // $route['messaging/bulk-send']['get'] = 'MessagingController/bulk_send';
 $route['messaging/inbox']['get'] = 'InboxController/index';
 $route['messaging/inbox/(:any)']['post'] = 'InboxController/index/$1';

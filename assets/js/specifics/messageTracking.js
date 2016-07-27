@@ -29,6 +29,12 @@ function init_table () {
             iconRefresh: 'zmdi-refresh',
             iconUp: 'zmdi-caret-up',
         },
+        formatters: {
+            commands: function (column, row) {
+                return  '<button title="Send now" role="button" class="wave-effect btn btn-icon command-resend"    data-row-id="' + row.id + '"><span class="fa fa-paper-plane"></span></button> ' +
+                        '<button title="Cancel Sending" type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button> ';
+            }
+        },
 
         ajax: true,
         ajaxSettings: {
@@ -55,7 +61,7 @@ function init_table () {
             // response.current = currentPage;
             return response;
         },
-        url: base_url('messages/tracking-listing'),
+        url: base_url('messages/tracking-listing_grouped'),
         rowCount: [5, 10, 20, 30, 50, 100, -1],
         keepSelection: true,
 
@@ -65,5 +71,28 @@ function init_table () {
     }).on("loaded.rs.jquery.bootgrid", function (e) {
         reload_dom();
         currentPage = $("#messaging-tracking-table").bootgrid("getCurrentPage");
+
+        $("#messaging-tracking-table .command-resend").on('click', function function_name(argument) {
+            $.post(base_url('messaging/send-scheduled-messages'), function (data) {
+                console.log(data);
+                var data = $.parseJSON(data);
+                swal({
+                    title: "Confirmation",
+                    text: "You are about to resend the pending messages.",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Resend Now",
+                    closeOnConfirm: true
+                }, function(){
+                    // on deleting button
+                    $.post(base_url('messaging/send-scheduled-messages'), function (data) {
+                        var data = $.parseJSON(data);
+                        console.log(data);
+                        notify(data.message, data.type, 9000);
+                    })
+                });
+            })
+        })
     });
 }

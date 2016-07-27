@@ -998,9 +998,9 @@ function reload_selectpickers_key($key, $values)
     }
 }
 
-function truncate(string, limit){
-   if (string.length > limit)
-      return string.substring(0,limit)+'...';
-   else
-      return string;
-};
+//function truncate(string, limit){
+//   if (string.length > limit)
+//      return string.substring(0,limit)+'...';
+//   else
+//      return string;
+//};

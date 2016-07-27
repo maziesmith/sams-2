@@ -3,7 +3,7 @@
 }
 #header,
 #top-search-wrap {
-	background: #4285F4;//#5f5f5f;
+	background: #5f5f5f;
 }
 .card .card-header {
 	background-color: #f7f7f7;
@@ -428,9 +428,4 @@ noscript {
     bottom: 100px;
     right: 40px;
     position: fixed!important;
-}
-
-td > img {
-	max-width: 50px;
-	max-height: 50px;
 }

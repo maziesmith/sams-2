@@ -122,6 +122,15 @@ class GroupsController extends CI_Controller {
                 return false;
             }
         }
+        if ($this->input->is_ajax_request()) {
+            echo json_encode( [
+                'title' => 'Access Granted',
+                'message' => "Please proceed",
+                'type' => 'success',
+            ] ); exit();
+        } else {
+            return false;
+        }
     }
 
     public function add()

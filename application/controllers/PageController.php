@@ -267,6 +267,16 @@ class PageController extends CI_Controller {
             'description' => 'Groups import function',
             'slug' => 'groups/import',
         );
+        $modules[] = array(
+            'name' => 'Trash Groups',
+            'description' => 'Groups trash function',
+            'slug' => 'groups/trash',
+        );
+        $modules[] = array(
+            'name' => 'Restore Groups',
+            'description' => 'Groups restore function',
+            'slug' => 'groups/restore',
+        );
 
         /*
         | -----------------

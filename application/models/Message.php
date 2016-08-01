@@ -28,9 +28,9 @@ class Message extends CI_Model {
 
     public function detokenize($template, $data)
     {
-	$pattern = array('/<date>/i', '/<stud_name>/i', '/<stud_no>/i', '/<time>/i');
-	$replace = array($data['date'], $data['stud_name'], $data['stud_no'], $data['time']);
-	return preg_replace($pattern, $replace, $template);
+    	$pattern = array('/<date>/i', '/<stud_name>/i', '/<stud_no>/i', '/<time>/i');
+    	$replace = array($data['date'], $data['stud_name'], $data['stud_no'], $data['time']);
+    	return preg_replace($pattern, $replace, $template);
     }
 
     public function insert($data)

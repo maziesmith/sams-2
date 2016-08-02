@@ -109,6 +109,7 @@ class Member extends CI_Model {
             $last = $name[1];
         }
         $this->db->where('firstname LIKE ', '%'. $wildcard . '%')
+                ->or_where('stud_no LIKE', '%'. $wildcard . '%')
                 ->or_where('middlename LIKE ', '%'. $wildcard . '%')
                 ->or_where('lastname LIKE ', '%'. $wildcard . '%')
 

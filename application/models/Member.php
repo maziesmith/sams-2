@@ -96,7 +96,7 @@ class Member extends CI_Model {
 
     public function find_member_via_msisdn($msisdn)
     {
-        $query = $this->db->where('msisdn', $msisdn)->get($this->table);
+        $query = $this->db->where('msisdn', $msisdn)->where($this->column_softDelete, NULL)->get($this->table);
         return $query->result();
     }
 

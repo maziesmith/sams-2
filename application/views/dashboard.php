@@ -1,9 +1,9 @@
 <section id="content" class="clearfix">
     <div class="col-sm-12">
         <div class="row">
-            <div class="gridster">
+            <div class="gridster-disabled">
                 <div class="cards">
-                    <div class="card-item" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <div class="card-item col-sm-4" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
                         <div class="card blog-post">
                             <div class="bp-header">
                                 <img src="<?php echo base_url('assets/img/headers/1.png') ?>" class="img-wide">
@@ -19,7 +19,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-item" data-row="1" data-col="2" data-sizex="1" data-sizey="1">
+                    <div class="card-item col-sm-4" data-row="1" data-col="2" data-sizex="1" data-sizey="1">
                         <div class="card blog-post">
                             <div class="bp-header">
                                 <img src="<?php echo base_url('assets/img/headers/2.png') ?>" alt="">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-item" data-row="1" data-col="3" data-sizex="1" data-sizey="1">
+                    <div class="card-item col-sm-4" data-row="1" data-col="3" data-sizex="1" data-sizey="1">
                         <div class="card blog-post">
                             <div class="bp-header">
                                 <img src="<?php echo base_url('assets/img/headers/sm/messaging.jpg') ?>">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="card-item" data-row="2" data-col="1" data-sizex="2" data-sizey="2">
+                    <div class="card-item col-sm-4" data-row="2" data-col="1" data-sizex="2" data-sizey="2">
                         <div class="card blog-post">
                             <a href="<?php echo base_url('messaging/inbox'); ?>" class="bp-header">
                                 <div class="bp-title bgm-amber">

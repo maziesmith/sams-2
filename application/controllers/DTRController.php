@@ -39,17 +39,8 @@ class DTRController extends CI_Controller {
 		else { echo "-- STUDENT IS REGISTERED --"; }
 
 
-		//$cu = curl_init();
-		//curl_setopt($cu, CURLOPT_URL, "http://www.monitor-dtr.edu.ph/read?stud_no=$stud_no&e_date=$e_date&e_time=$e_time&e_mode=$e_mode");
-		//curl_setopt($cu, CURLOPT_URL, "http://www.monitor-dtr.edu.ph/read?stud_no=$stud_no&e_date=$e_date&e_time=$e_time&e_mode=$e_mode");
-		//curl_setopt($cu, CURLOPT_HEADER, 0);
-		//curl_exec($cu);
-		//curl_close($cu);
 		echo $this->curl_to_monitor("http://www.monitor-dtr.edu.ph/read?stud_no=$stud_no&e_date=$e_date&e_time=$e_time&e_mode=$e_mode");
 
-		//curl_setopt($cu, CURLOPT_HEADER, 0);
-
-		//$timelog = $this->input-get('timelog');
 		$data = array(
 		   "member_id" => $stud_no,
 		   "timelog" => $timelog,
@@ -59,17 +50,15 @@ class DTRController extends CI_Controller {
 		$this->DTRLog->insert($data);
 
 		# DTR
-		$message_template=0;
 		$dtr_data = $this->DTR->find($stud_no, "member_id");
+		$is_timein=false;
 		if ($dtr_data) {
 		    $dateout = date("Y-m-d", strtotime($e_date));
 		    $timeout = date("H:i:s", strtotime($e_time));
 		    $this->DTR->update($dtr_data->id, array('dateout'=>$dateout, 'timeout'=>$timeout));
-
-		    //if ($dateout)
-
 		} else {
-		    // $dtr_data =
+			$is_timein = true;
+
 		    $member_id = $stud_no;
 		    $datein = date("Y-m-d", strtotime($e_date));
 		    $timein = date("H:i:s", strtotime($e_time));
@@ -87,8 +76,9 @@ class DTRController extends CI_Controller {
 		    "stud_name" => $this->Member->find($stud_no, "stud_no", "CONCAT(firstname, ' ', lastname) AS fullname")->fullname,
 		    "mode" => $e_mode,
 		    "date" => date("M-d-y", strtotime($e_date)),
-		    "time" => date("h:ia", strtotime($e_time)),
+		    "time" => date("H:i:s", strtotime($e_time)),
 		    "msisdn" => $this->Member->find($stud_no, "stud_no", "msisdn")->msisdn,
+		    "is_timein" => $is_timein,
 		);
 		echo $this->execute($send_data);
     }
@@ -101,7 +91,6 @@ class DTRController extends CI_Controller {
 		    fclose($sock);
 		    return $str;
 		}
-		// return;
 
 		$ch = curl_init($url);
 		ob_start();
@@ -127,34 +116,84 @@ class DTRController extends CI_Controller {
     {
 		$e_time = $data['time'];
 		$e_mode = $data['mode'];
-	        $times = $this->db->query("SELECT * FROM dtr_time_settings WHERE '$e_time' BETWEEN time_from AND time_to")->row();
+
+	    $times = $this->db->query("SELECT * FROM dtr_time_settings WHERE '$e_time' BETWEEN time_from AND time_to")->row();
+
+	    // exit();
 		$template = $this->db->query("SELECT * FROM preset_messages WHERE id='$times->presetmsg_id'")->row();
 		$detokenized = $this->Message->detokenize($template->name, $data);
 
 		$body = $detokenized;
 		$msisdn = $data['msisdn'];
-		$message = array(
-		    "message" => $body,
-		    "msisdn" => $msisdn,
-		    "by" => $this->user_id,
-		);
-		$message_id = $this->Message->insert($message);
 
-		$members = $this->Member->find_member_via_msisdn($msisdn);
+		# Check table str_sending_config which config is enabled
+		# for sending
+		$sending = $this->db->select('config')->where('enabled', 1)->limit(1)->get('dtr_sending_config')->row();
 
-		$outbox_id = null;
-		foreach ($members as $member) {
-		    $outbox = array(
-		    	'message_id' => $message_id,
-			'msisdn' => $msisdn,
-			'status' => 'pending',
-			'member_id' => $member->id,
-			'smsc' => $smsc = $this->Message->get_network($msisdn),
-			'created_by' => $this->user_id,
-	   	    );
-		    $outbox_id = $this->Outbox->insert($outbox);
-		    $this->Message->send($outbox_id, $msisdn, $smsc, $body);
-		    echo "Message sent to $msisdn upon tapping of Card.";
+		echo "$sending->config | $times->name | $body";
+		$message_id = null;
+
+		if ($sending && !empty($sending->config)) {
+			# Compose message
+			$message = array(
+			    "message" => $body,
+			    "msisdn" => $msisdn,
+			    "by" => $this->user_id,
+			);
+			switch ($sending->config) {
+				case 'A':
+					// if ($is_timein) {
+						$message_id = $this->Message->insert($message);
+						echo "MODE A | A message will be sent";
+					// }
+
+					break;
+
+				case 'B':
+					$today_is_a_weekend = in_array(date('D'), array('Sat', 'Sun')) ? 1 : 0;
+					$time_inLate_or_outEarly = in_array($times->name, array('LATE_IN', 'LATE_OUT', 'EARLY_OUT')) ? 1 : 0;
+					if (1 == $today_is_a_weekend || 1 == $time_inLate_or_outEarly) {
+						$message_id = $this->Message->insert($message);
+						echo "MODE B was used. A message will be sent...";
+					} else {
+						echo "MODE B | NORMAL_IN/OUT so we did not send any messages";
+					}
+					break;
+
+				case 'C':
+					echo "Mode C | All card tap are sent.";
+					$message_id = $this->Message->insert($message);
+					break;
+
+				# default here is actually useless & just for completion
+				# since we've checked that $sending->config
+				# should not be empty.
+				default:
+					echo "No Mode";
+					exit();
+					break;
+			}
+		} else {
+			echo "No Mode/config was found/specified. No messages will be sent upon tapping card.";
+			exit();
+		}
+
+		# Send to $msisdn if we have a message
+		if (null != $message_id) {
+			$members = $this->Member->find_member_via_msisdn($msisdn);
+			foreach ($members as $member) {
+			    $outbox = array(
+			    	'message_id' => $message_id,
+					'msisdn' => $msisdn,
+					'status' => 'pending',
+					'member_id' => $member->id,
+					'smsc' => $smsc = $this->Message->get_network($msisdn),
+					'created_by' => $this->user_id,
+		   	    );
+			    $outbox_id = $this->Outbox->insert($outbox);
+			    $this->Message->send($outbox_id, $msisdn, $smsc, $body);
+			    echo "Message was sent to $msisdn";
+			}
 		}
 
     }

@@ -52,10 +52,12 @@ class DTRController extends CI_Controller {
 		# DTR
 		$dtr_data = $this->DTR->find($stud_no, "member_id");
 		$is_timein=false;
+		$is_timeout=false;
 		if ($dtr_data) {
 		    $dateout = date("Y-m-d", strtotime($e_date));
 		    $timeout = date("H:i:s", strtotime($e_time));
 		    $this->DTR->update($dtr_data->id, array('dateout'=>$dateout, 'timeout'=>$timeout));
+		    $is_timeout = true;
 		} else {
 			$is_timein = true;
 
@@ -79,6 +81,8 @@ class DTRController extends CI_Controller {
 		    "time" => date("H:i:s", strtotime($e_time)),
 		    "msisdn" => $this->Member->find($stud_no, "stud_no", "msisdn")->msisdn,
 		    "is_timein" => $is_timein,
+		    "is_timeout" => $is_timeout,
+		    "schedule_id" => $this->Member->find($stud_no, "stud_no", "schedule_id")->schedule_id,
 		);
 		echo $this->execute($send_data);
     }
@@ -116,11 +120,22 @@ class DTRController extends CI_Controller {
     {
 		$e_time = $data['time'];
 		$e_mode = $data['mode'];
+		$schedule_id = (null != $data['schedule_id'] && 0 != $data['schedule_id']) ? $data['schedule_id'] : 1;
 
-	    $times = $this->db->query("SELECT * FROM dtr_time_settings WHERE '$e_time' BETWEEN time_from AND time_to")->row();
+		if ($data['is_timeout']) {
+		    $times = $this->db->query("SELECT * FROM dtr_time_settings WHERE name LIKE '%OUT%' AND schedule_id = $schedule_id AND '$e_time' BETWEEN time_from AND time_to")->row();
+		} elseif ($data['is_timein']) {
+			$times = $this->db->query("SELECT * FROM dtr_time_settings WHERE name LIKE '%IN%' AND schedule_id = $schedule_id AND '$e_time' BETWEEN time_from AND time_to")->row();
+		} else {
+			$times = $this->db->query("SELECT * FROM dtr_time_settings WHERE schedule_id = $schedule_id AND '$e_time' BETWEEN time_from AND time_to")->row();
+		}
 
-	    // exit();
+		if (empty($times)) {
+			echo "WARNING | Out too Early | Must have been a double tap. No Message will be sent."; exit();
+		}
+
 		$template = $this->db->query("SELECT * FROM preset_messages WHERE id='$times->presetmsg_id'")->row();
+
 		$detokenized = $this->Message->detokenize($template->name, $data);
 
 		$body = $detokenized;
@@ -142,11 +157,8 @@ class DTRController extends CI_Controller {
 			);
 			switch ($sending->config) {
 				case 'A':
-					// if ($is_timein) {
-						$message_id = $this->Message->insert($message);
-						echo "MODE A | A message will be sent";
-					// }
-
+					$message_id = $this->Message->insert($message);
+					echo "MODE A | A message will be sent";
 					break;
 
 				case 'B':

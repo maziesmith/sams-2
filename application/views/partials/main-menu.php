@@ -51,6 +51,17 @@
             <li class="<?php echo check_link('types/import') ?>" ><?php echo anchor( base_url('types/import'), 'Import Types' ); ?></li>
         </ul>
     </li>
+
+    <li class="sub-menu <?php echo check_link(['schedules', 'schedules/import', 'schedules/export', 'schedules/trash']) ?>">
+        <a role="button"><i class="zmdi zmdi-chart"></i> Schedules</a>
+        <ul>
+            <li class="<?php echo check_link('schedules') ?>" ><?php echo anchor( base_url('schedules'), 'All Schedules' ); ?></li>
+            <!-- <li class="<?php echo check_link('schedules/export') ?>" ><?php echo anchor( base_url('schedules/export'), 'Export Groups' ); ?></li>
+            <li class="<?php echo check_link('schedules/import') ?>" ><?php echo anchor( base_url('schedules/import'), 'Import Groups' ); ?></li>
+            <li class="<?php echo check_link('schedules/trash') ?>" ><?php echo anchor( base_url('schedules/trash'), 'Trashed Groups' ); ?></li> -->
+        </ul>
+    </li>
+
     <li><hr></li>
 
     <li class="sub-menu <?php echo check_link(['messaging/new', 'messaging/inbox', 'messaging/outbox', 'messaging/tracking', 'messaging/templates']) ?>">
@@ -68,7 +79,7 @@
         <a role="button"><i class="zmdi zmdi-tv"></i> Monitor</a>
         <ul>
             <li class="<?php echo check_link('monitor/dtr') ?>" ><?php echo anchor( base_url('monitor/dtr'), 'DTR' ); ?></li>
-	    <li class="<?php echo check_link('monitor/splash') ?>" ><?php echo anchor( base_url('monitor/splash'), 'Splash Page' ); ?></li>
+	    <!-- <li class="<?php echo check_link('monitor/splash') ?>" ><?php echo anchor( base_url('monitor/splash'), 'Splash Page' ); ?></li> -->
         </ul>
     </li>
 

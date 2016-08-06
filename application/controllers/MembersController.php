@@ -17,6 +17,7 @@ class MembersController extends CI_Controller {
         $this->load->model('GroupMember', '', TRUE);
         $this->load->model('Level', '', TRUE);
         $this->load->model('Type', '', TRUE);
+        $this->load->model('Schedule', '', TRUE);
 
         $this->user_id = $this->session->userdata('id');
         // $this->member_photo_url = "";
@@ -63,6 +64,7 @@ class MembersController extends CI_Controller {
         $this->Data['form']['levels_list'] = dropdown_list($this->Level->dropdown_list('levels_id, levels_name')->result_array(), ['levels_id', 'levels_name'], '', false);
         $this->Data['form']['types_list']  = dropdown_list($this->Type->dropdown_list('types_id, types_name')->result_array(), ['types_id', 'types_name'], '', false);
         $this->Data['trash']['count'] = $this->Member->get_all(0, 0, null, true)->num_rows();
+        $this->Data['form']['schedules_list'] = dropdown_list($this->Schedule->dropdown_list('id, name')->result_array(), ['id', 'name'], '', false);
 
         $this->load->view('layouts/main', $this->Data);
     }
@@ -128,21 +130,21 @@ class MembersController extends CI_Controller {
                 }
 
                 $bootgrid_arr[] = array(
-                    'count_id'           => $key + 1 + $start_from,
+                    'count_id'  => $key + 1 + $start_from,
                     'id'        => $member['id'],
-                    'avatar' => '<img src=\''.$member['avatar'].'\' />',
-		    'stud_no'   => $member['stud_no'],
-                    'fullname' => arraytostring([$member['firstname'], $member['middlename'] ? substr($member['middlename'], 0,1) . '.' : '', $member['lastname']], ' '),
+                    'avatar'    => '<img src=\''.$member['avatar'].'\' />',
+        		    'stud_no'   => $member['stud_no'],
+                    'fullname'  => arraytostring([$member['firstname'], $member['middlename'] ? substr($member['middlename'], 0,1) . '.' : '', $member['lastname']], ' '),
                     'level'     => $levels_name_arr ? arraytostring($levels_name_arr, ", ") : '',
-                    'levels_id'          => $levels_id_arr ? $levels_id_arr : '',
+                    'levels_id' => $levels_id_arr ? $levels_id_arr : '',
                     'type'      => $types_name_arr ? arraytostring($types_name_arr, ", ") : '',
-                    'types_id'          => $types_id_arr ? $types_id_arr : '',
+                    'types_id'  => $types_id_arr ? $types_id_arr : '',
                     'address'   => arraytostring([$member['address_blockno'], $member['address_street'], $member['address_brgy'], $member['address_city'], $member['address_zip']]),
                     'telephone' => $member['telephone'],
                     'msisdn'    => $member['msisdn'],
                     'email'     => $member['email'],
                     'groups'    => $groups_name_arr ? arraytostring($groups_name_arr, ", ") : '', //isset($group->groups_name) ? $group->groups_name : '',
-                    'groups_id'          => $groups_id_arr ? $groups_id_arr : '',//isset($group->groups_id) ? $group->groups_id : '',
+                    'groups_id' => $groups_id_arr ? $groups_id_arr : '',//isset($group->groups_id) ? $group->groups_id : '',
                 );
             }
 
@@ -213,6 +215,7 @@ class MembersController extends CI_Controller {
                 'email'        => $this->input->post('email'),
                 'groups'        => arraytoimplode($this->input->post('groups')),
                 'avatar'    => $avatar,//$this->input->post('avatar'),
+                'schedule_id' => $this->input->post('schedule_id'),
                 'created_by'            => $this->user_id,
             );
 
@@ -536,6 +539,7 @@ class MembersController extends CI_Controller {
                 'groups' => arraytoimplode( $this->input->post('groups') ),
                 'updated_by' => $this->user_id,
                 'avatar'    => $avatar,//$this->input->post('avatar'),
+                'schedule_id' => $this->input->post('schedule_id'),
             );
             $this->Member->update($id, $member);
 

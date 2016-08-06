@@ -106,6 +106,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Schedules -->
+                                <div class="col-md-12 m-b-20">
+                                    <div class="pad-zero-right">
+                                        <div class="form-group fg-float form-group-validation">
+                                            <?php echo form_label('Schedule', 'schedule_id', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
+                                            <?php echo form_dropdown('schedule_id',
+                                                $form['schedules_list'],
+                                                set_value('schedule_id'), 'class="tag-select"'
+                                            ) ?>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>

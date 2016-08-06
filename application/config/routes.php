@@ -330,6 +330,24 @@ $route['messaging/groups']['get'] = 'MessagingController/groups';
 
 /*
 | ---------------
+| # Schedules
+| ---------------
+*/
+$route['schedules']['get'] = 'SchedulesController/index';
+$route['schedules/listing']['post'] = 'SchedulesController/listing';
+$route['schedules/listing']['get'] = 'SchedulesController/listing';
+$route['schedules/add']['post'] = 'SchedulesController/add';
+$route['schedules/edit/(:num)']['post'] = 'SchedulesController/edit/$1';
+$route['schedules/update/(:num)']['post']  = 'SchedulesController/update/$1';
+// $route['schedules/update/(:num)']['get']  = 'SchedulesController/update/$1';
+
+$route['schedules/trash']['get']  = 'SchedulesController/trash';
+$route['schedules/remove']['post']  = 'SchedulesController/remove';
+$route['schedules/remove/(:num)']['post']  = 'SchedulesController/remove/$1';
+$route['schedules/restore/(:num)']['post']  = 'SchedulesController/restore/$1';
+
+/*
+| ---------------
 | # Migration
 | ---------------
 | This should be commented out in production mode

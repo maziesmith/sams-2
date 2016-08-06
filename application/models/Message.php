@@ -29,7 +29,7 @@ class Message extends CI_Model {
     public function detokenize($template, $data)
     {
     	$pattern = array('/<date>/i', '/<stud_name>/i', '/<stud_no>/i', '/<time>/i');
-    	$replace = array($data['date'], $data['stud_name'], $data['stud_no'], $data['time']);
+    	$replace = array($data['date'], $data['stud_name'], $data['stud_no'], date('h:ia', strtotime($data['time'])));
     	return preg_replace($pattern, $replace, $template);
     }
 

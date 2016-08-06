@@ -409,6 +409,7 @@ function init_table() {
                         $.each(member, function (k, v) {
                             _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
                             if( k == 'type' ) reload_selectpickers_key( k, v);
+                            if( k == 'schedule_id' ) reload_selectpickers_key( k, v);
                             if( k == 'groups' ) reload_selectpickers_key( k+"[]", v);
                             if( k == 'level' ) reload_selectpickers_key( k, v);
                         });

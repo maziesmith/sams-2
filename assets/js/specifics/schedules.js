@@ -136,8 +136,8 @@ jQuery(document).ready(function ($) {
         url: base_url('schedules/listing'),
         rowCount: [5, 10, 20, 30, 50, 100, 500, -1],
         keepSelection: true,
-        selection: true,
-        multiSelect: true,
+        // selection: true,
+        // multiSelect: true,
 	}).on("loaded.rs.jquery.bootgrid", function (e) {
         $('.trash-count').text(trashCount);
         /*

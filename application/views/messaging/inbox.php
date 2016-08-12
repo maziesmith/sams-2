@@ -27,7 +27,7 @@
                         <a data-contact class="lv-item media" href="#<?php echo $msisdn; ?>" data-msisdn="<?php echo $msisdn; ?>">
                             <div class="lv-avatar pull-left">
                                 <div class="lv-avatar-inner">
-                                    <?php echo !empty(acronymify(array($contacts_arr[0]->firstname, $contacts_arr[0]->lastname))) ? acronymify(array($contacts_arr[0]->firstname, $contacts_arr[0]->lastname)) : '+'; ?>
+                                    <?php echo @!empty(acronymify(array($contacts_arr[0]->firstname, $contacts_arr[0]->lastname))) ? acronymify(array($contacts_arr[0]->firstname, $contacts_arr[0]->lastname ? $contacts_arr[0]->lastname : '')) : '+'; ?>
                                 </div>
                             </div>
                             <div class="media-body">

@@ -181,7 +181,7 @@ if ( ! function_exists('acronymify'))
 
         $pieces = array();
         foreach ($array as $string) {
-            $pieces[] = strtoupper($string[0]);
+            $pieces[] = !empty($string[0]) ? strtoupper($string[0]) : ' ';
         }
 
         return implode($glue, $pieces);

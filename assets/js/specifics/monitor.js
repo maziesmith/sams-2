@@ -1,3 +1,6 @@
+var announcementTable, splashTable;
+var G_selectedRows = [];
+
 jQuery(document).ready(function ($) {
     $('#generate-report').on('click', function (e) {
         e.preventDefault();
@@ -111,4 +114,537 @@ jQuery(document).ready(function ($) {
             $('#category_level').trigger("chosen:updated");
         }
     });
+
+    init_table();
+
+
+    var $userForm = $('#add-new-announcement-form').validate({
+        rules: {
+            announcement_name: 'required',
+            announcement_text: 'required'
+        },
+        messages: {
+            announcement_name: {
+                'required': "The Announcement Name field is required"
+            },
+            announcement_text: {
+                'required': "The Announcement Description field is required"
+            }
+        },
+        errorElement: 'small',
+        errorPlacement: function (error, element) {
+            $(error).addClass('help-block');
+            $(element).parents('.form-group-validation').addClass('has-warning').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').addClass('has-warning');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').removeClass('has-warning');
+            $(element).parents('.form-group-validation').find('.help-block').remove();
+        },
+        submitHandler: function (form) {
+            var add = {
+                type: form.method,
+                url: form.action,
+                data: $(form).serialize(),
+                success: function (data) {
+                    data = JSON.parse(data);
+                    resetWarningMessages('.form-group-validation');
+                    if( data.type !== 'success' )
+                    {
+                        var errors = data.message;
+
+                        $.each(errors, function (k, v) {
+                            $('#add-new-announcement-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
+                            reload_selectpickers();
+                        });
+                    }
+                    else
+                    {
+                        notify(data.message, data.type, 9000);
+                        $('#add-new-announcement-form')[0].reset();
+                        $('#add-new-announcement-form [name=announcement_name]').focus();
+                        reload_announcement_table();
+                        reload_selectpickers();
+                    }
+                    console.log(data);
+                },
+                dataType: 'html',
+            };
+            $.ajax({
+                type: add.type,
+                url: add.url,
+                data: add.data,
+                success: add.success
+            });
+        }
+    });
+
+
+
+    $('#edit-announcement-form').validate({
+        rules: {
+            announcement_name: 'required',
+            announcement_text: 'required'
+        },
+        messages: {
+            announcement_name: {
+                'required': "The Announcement Name field is required"
+            },
+            announcement_text: {
+                'required': "The Announcement Description field is required"
+            }
+        },
+        errorElement: 'small',
+        errorPlacement: function (error, element) {
+            $(error).addClass('help-block');
+            $(element).parents('.form-group-validation').addClass('has-warning').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').addClass('has-warning');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').removeClass('has-warning');
+            $(element).parents('.form-group-validation').find('.help-block').remove();
+        },
+        submitHandler: function (form) {
+            var announcement_id = $(form).find('[name=announcement_id]').val();
+            if( announcement_id === 'AJAX_CALL_ONLY' ) {
+                swal("Error", "The Announcment ID is invalid. Please reload the page and try again.", 'error');
+                $('[name=close]').click();
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: $(form).attr('action') + '/' + announcement_id,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        console.log(data);
+                        resetWarningMessages('.form-group-validation');
+                        if( data.type != 'success' ) {
+                            var errors = data.message;
+                            $.each(errors, function(k, v) {
+                                $('#edit-announcement-form').find('input[name='+k+'], select[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
+                            });
+                        } else {
+                            $('#edit-announcement-form').find('button[name=close]').delay(900).queue(function(next){ $(this).click(); next(); });
+                            notify(data.message, data.type, 9000);
+                            reload_announcement_table();
+                            $('#edit-announcement-form')[0].reset();
+
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(xhr.responseText);
+                        console.log(thrownError);
+                    }
+                });
+            }
+
+        }
+    });
+
+    var files;    
+    $('input[type=file]').on('change', prepareUpload);    
+    function prepareUpload(event)
+    {
+      files = event.target.files;
+    }
+
+    $("#splash-source").change(function(){
+
+        if($(this).val()!=""){
+
+            var data = new FormData();
+            $.each(files, function(key, value)
+            {
+                data.append(key, value);
+            });
+
+            $.ajax({
+                url: 'http://www.sams.dev/monitor/add_splash_source?files',
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                
+                success: function(data, textStatus, jqXHR)
+                {
+                    
+                    if(data==1){ 
+                         console.log('SUCCESS: ' + data);
+                    }
+                    else
+                    {
+                        console.log('ERRORS: ' + data);
+                    }
+
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    console.log('ERRORS: ' + textStatus);
+                }
+            });
+
+            return false;   
+
+        } 
+
+    });
+
+    $("#add-new-splash-form").submit(function( e ) {
+        e.preventDefault();
+
+        if($('input[type=file]').val()){
+
+            var data = new FormData();
+            $.each(files, function(key, value)
+            {
+                data.append(key, value);
+
+            });
+
+
+            $.ajax({
+                url: 'http://www.sams.dev/monitor/add_splash_source?files',
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false, // Don't process the files
+                contentType: false,
+                success: function(data, textStatus, jqXHR)
+                {
+                    if(typeof data.error === 'undefined')
+                    {
+                        console.log('SUCCESS: ' + data);
+                    }
+                    else
+                    {
+                        console.log('ERRORS: ' + data.error);
+                    }
+                    console.log("http://www.sams.dev/monitor/add_splash_source?files");
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                    // Handle errors here
+                    console.log('ERRORS: ' + textStatus);
+                    // STOP LOADING SPINNER
+                }
+            });
+
+            return false;
+        }
+    });
+
+
+    
+    
+    var trashCount = 0;
+    var selectedRowCountz = [];
+    splashTable = $("#splash-table-command").bootgrid({
+        labels: {
+            loading: '<i class="zmdi zmdi-close zmdi-hc-spin"></i>',
+            noResults: 'No Splash Page found',
+        },
+        css: {
+            icon: 'zmdi icon',
+            iconColumns: 'zmdi-view-module',
+            iconDown: 'zmdi-caret-down',
+            iconRefresh: 'zmdi-refresh',
+            iconUp: 'zmdi-caret-up',
+        },
+        formatters: {
+            commands: function (column, row) {
+                return  '<button role="button" class="wave-effect btn btn-icon command-edit"    data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-edit"></span></button> ' +
+                        '<!--<button type="button" class="wave-effect btn btn-icon command-refresh" data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-search-for"></span></button>-->' +
+                        '<button type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-delete"></span></button> ' +
+                        '<!--<button type="button" class="wave-effect btn btn-icon command-print"   data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-print"></span></button>-->';
+            }
+        },
+
+        ajax: true,
+        ajaxSettings: {
+            method: "POST",
+            cache: false
+        },         
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
+            console.log(thrownError);
+        },
+
+        requestHandler: function (request)
+        {
+            // To accumulate custom parameter with the request object
+            // request.customPost = 'anything';
+            // request.current = 2;
+             console.log(request);
+            return request;
+        },
+        responseHandler: function (response)
+        {
+            // To accumulate custom parameter with the response object
+            // response.customPost = 'anything';
+            // response.current = 2;
+            ///trashCount = response.trash.count;
+            console.log(response);
+            return response;
+        },
+        url: base_url('monitor/splash_listing'),
+        rowCount: [5, 10, 20, 30, 50, 100, -1],
+        keepSelection: true,
+
+        selection: true,
+        multiSelect: true,
+
+        caseSensitive: false,
+    }).on('appended.rs.jquery.bootgrid', function (e, arr) {
+         console.log(arr);
+    }).on("selected.rs.jquery.bootgrid", function(e, rows)
+    {
+        selectedRowCount.push(rows);
+        G_selectedRows.push(rows[0].announcement_id);
+        // console.log(selectedRowCount);
+        if( selectedRowCount.length >= 2 )
+        {
+            $('#delete-user-btn').addClass('show');
+        } else {
+            $('#delete-user-btn').removeClass('show');
+        }
+    }).on("deselected.rs.jquery.bootgrid", function(e, rows)
+    {
+        selectedRowCount.splice(-1, 1);
+        G_selectedRows.splice(-1, 1);
+
+        // console.log(selectedRowCount);
+        if( selectedRowCount.length >= 2 )
+        {
+            $('#delete-user-btn').addClass('show');
+        } else {
+            $('#delete-user-btn').removeClass('show');
+        }
+
+    }).on("loaded.rs.jquery.bootgrid", function (e) {
+        reload_dom();
+        $('.trash-count').text(trashCount);
+        /*
+        | ---------------------------------
+        | # Checkbox
+        | ---------------------------------
+        */
+        $('.select-box[value="all"]').click(function(){
+            var select_all = $('.select-box[value="all"]:checked').length;
+            if( select_all > 0 )
+            {
+                selectedRowCount.push(1);
+                if( selectedRowCount.length >= 2 )
+                {
+                    $('#delete-user-btn').addClass('show');
+                } else {
+                    $('#delete-user-btn').removeClass('show');
+                }
+            } else {
+                selectedRowCount.splice(-1, selectedRowCount.length-1);
+            }
+        });
+        
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
+
+function reload_splash_table()
+{
+    $('#splash-table-command').bootgrid('reload');
+}
+
+function reload_announcement_table()
+{
+    $('#announcement-table-command').bootgrid('reload');
+}
+function init_table() {
+    var trashCount = 0;
+    var selectedRowCount = [];
+    announcementTable = $("#announcement-table-command").bootgrid({
+        labels: {
+            loading: '<i class="zmdi zmdi-close zmdi-hc-spin"></i>',
+            noResults: 'No Announcement found',
+        },
+        css: {
+            icon: 'zmdi icon',
+            iconColumns: 'zmdi-view-module',
+            iconDown: 'zmdi-caret-down',
+            iconRefresh: 'zmdi-refresh',
+            iconUp: 'zmdi-caret-up',
+        },
+        formatters: {
+            commands: function (column, row) {
+                return  '<button role="button" class="wave-effect btn btn-icon command-edit"    data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-edit"></span></button> ' +
+                        '<!--<button type="button" class="wave-effect btn btn-icon command-refresh" data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-search-for"></span></button>-->' +
+                        '<button type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-delete"></span></button> ' +
+                        '<!--<button type="button" class="wave-effect btn btn-icon command-print"   data-row-id="' + row.announcement_id + '"><span class="zmdi zmdi-print"></span></button>-->';
+            },
+            announcement: function (column, row) {
+                if(row.announcement_text.length > 175){
+                    return row.announcement_text.substr(0, 175)+"...";
+                } else {
+                    return row.announcement_text.substr(0, 175);
+                } 
+            }
+        },
+
+        ajax: true,
+        ajaxSettings: {
+            method: "POST",
+            cache: false
+        },
+        requestHandler: function (request)
+        {
+            // To accumulate custom parameter with the request object
+            // request.customPost = 'anything';
+            // request.current = 2;
+             console.log(request);
+            return request;
+        },
+        responseHandler: function (response)
+        {
+            // To accumulate custom parameter with the response object
+            // response.customPost = 'anything';
+            // response.current = 2;
+            ///trashCount = response.trash.count;
+            console.log(response);
+            return response;
+        },
+        url: base_url('monitor/announcement_listing'),
+        rowCount: [5, 10, 20, 30, 50, 100, -1],
+        keepSelection: true,
+
+        selection: true,
+        multiSelect: true,
+
+        caseSensitive: false,
+    }).on('appended.rs.jquery.bootgrid', function (e, arr) {
+         console.log(arr);
+    }).on("selected.rs.jquery.bootgrid", function(e, rows)
+    {
+        selectedRowCount.push(rows);
+        G_selectedRows.push(rows[0].announcement_id);
+        // console.log(selectedRowCount);
+        if( selectedRowCount.length >= 2 )
+        {
+            $('#delete-user-btn').addClass('show');
+        } else {
+            $('#delete-user-btn').removeClass('show');
+        }
+    }).on("deselected.rs.jquery.bootgrid", function(e, rows)
+    {
+        selectedRowCount.splice(-1, 1);
+        G_selectedRows.splice(-1, 1);
+
+        // console.log(selectedRowCount);
+        if( selectedRowCount.length >= 2 )
+        {
+            $('#delete-user-btn').addClass('show');
+        } else {
+            $('#delete-user-btn').removeClass('show');
+        }
+
+    }).on("loaded.rs.jquery.bootgrid", function (e) {
+        reload_dom();
+        $('.trash-count').text(trashCount);
+        /*
+        | ---------------------------------
+        | # Checkbox
+        | ---------------------------------
+        */
+        $('.select-box[value="all"]').click(function(){
+            var select_all = $('.select-box[value="all"]:checked').length;
+            if( select_all > 0 )
+            {
+                selectedRowCount.push(1);
+                if( selectedRowCount.length >= 2 )
+                {
+                    $('#delete-user-btn').addClass('show');
+                } else {
+                    $('#delete-user-btn').removeClass('show');
+                }
+            } else {
+                selectedRowCount.splice(-1, selectedRowCount.length-1);
+            }
+        });
+        /*
+        | -----------------------------------------------------------
+        | # Edit
+        | -----------------------------------------------------------
+        */
+        announcementTable.find(".command-edit").on("click", function () {
+            var id = $(this).parents('tr').data('row-id'),
+                url = base_url('monitor/edit_announcement/' + id);
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {announcement_id: id},
+                success: function (data) {
+                    var announcement = $.parseJSON(data);
+                    $('#edit-announcement').modal("show");
+                    var _form = $('#edit-announcement-form');
+
+                    $.each(announcement, function (k, v) {
+                        _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
+                        reload_selectpickers_key( k, v);
+                    });
+                }
+            });
+        });
+
+        /*
+        | -----------------------------------------------------------
+        | # Delete
+        | -----------------------------------------------------------
+        */
+        announcementTable.find(".command-delete").on("click", function (e) {
+            var id   = $(this).parents('tr').data('row-id')
+                url  = base_url('monitor/del_announcement/' + id);
+            e.preventDefault();
+            swal({
+                title: "Are you sure?",
+                text: id + " will be deleted permanently from your users",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Delete",
+                closeOnConfirm: false
+            }, function(){
+                // on deleting button
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                        var data = $.parseJSON(data);
+                        reload_announcement_table();
+                        swal("Deleted", data.message, data.type);
+                    }
+                });
+            });
+        });
+
+    });
+}

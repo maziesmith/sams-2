@@ -75,11 +75,12 @@
     </li>
 
     <li><hr></li>
-    <li class="sub-menu <?php echo check_link(['monitor/dtr', 'monitor/generate', 'monitor/splash']) ?>">
-        <a role="button"><i class="zmdi zmdi-tv"></i> Monitor</a>
+    <li class="sub-menu <?php echo check_link(['monitor', 'monitor/dtr', 'monitor/splash', 'monitor/announcement']) ?>">
+        <a role="button"><i class="zmdi zmdi-account"></i> Monitor</a>
         <ul>
-            <li class="<?php echo check_link('monitor/dtr') ?>" ><?php echo anchor( base_url('monitor/dtr'), 'DTR' ); ?></li>
-	    <!-- <li class="<?php echo check_link('monitor/splash') ?>" ><?php echo anchor( base_url('monitor/splash'), 'Splash Page' ); ?></li> -->
+            <li class="<?php echo check_link('monitor/dtr') ?>" ><?php echo anchor( base_url('monitor/dtr'), 'Daily Time Record' ); ?></li>
+            <li class="<?php echo check_link('monitor/splash') ?>" ><?php echo anchor( base_url('monitor/splash'), 'Splash Page' ); ?></li>
+            <li class="<?php echo check_link('monitor/announcement') ?>" ><?php echo anchor( base_url('monitor/announcement'), 'Announcement' ); ?></li>
         </ul>
     </li>
 

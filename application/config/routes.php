@@ -375,6 +375,18 @@ $route['seed']['get'] = 'PageController/seed';
 |----------
 */
 $route['monitor/(:any)']= 'MonitorController/$1';
+$route['monitor/announcement_listing']['post']  = 'MonitorController/announcement_listing';
+$route['monitor/add_announcement']['post'] = 'MonitorController/add_announcement';
+$route['monitor/del_announcement/(:num)']  = 'MonitorController/del_announcement/$1';
+$route['monitor/edit_announcement/(:num)']['post']  = 'MonitorController/edit_announcement/$1';
+$route['monitor/update_announcement/(:num)']['post']  = 'MonitorController/update_announcement/$1';
+
+$route['monitor/splash_listing']['post']  = 'MonitorController/splash_listing';
+$route['monitor/add_splash']['post'] = 'MonitorController/add_splash';
+$route['monitor/add_splash_source'] = 'MonitorController/add_splash_source';
+$route['monitor/del_splash/(:num)']  = 'MonitorController/del_splash/$1';
+$route['monitor/edit_splash/(:num)']['post']  = 'MonitorController/edit_splash/$1';
+$route['monitor/update_splash/(:num)']['post']  = 'MonitorController/update_splash/$1';
 
 
 // $route['(:any)'] = 'PageController/view/$1';

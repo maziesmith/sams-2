@@ -594,7 +594,7 @@ $(document).ready(function(){
     if ($('.time-picker')[0]) {
     	$('.time-picker').datetimepicker({
     	    // format: 'LT',
-            format: 'HH:mm:ss A',
+            format: 'HH:mm:ss',
     	});
     }
 

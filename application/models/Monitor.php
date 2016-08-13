@@ -6,6 +6,8 @@ class Monitor extends CI_Model {
     private $groups_table = 'groups';
     private $levels_table = 'levels';
     private $dtr_table = 'dtr_log';
+    private $announcement_table = 'announcement';
+    private $splash_table = 'uploads';
 
     function __construct()
     {
@@ -250,6 +252,7 @@ class Monitor extends CI_Model {
                 $this->db->like('dtr.timelog',$date_from);
                 $this->db->where('dtr.timelog >=',$date_from.' '.$g);
                 $this->db->where('dtr.timelog <=',$date_from.' '.$h);
+		//$this->db->where('dtr.timelog BETWEEN "'.$date_from.' '.$g .'" AND "'. $date_from.' '.$h.'"');
                 $this->db->where('mem.id',$d);
                 $this->db->order_by('mem.firstname', $f);
                 $this->db->order_by('dtr.id', $f);
@@ -264,6 +267,7 @@ class Monitor extends CI_Model {
                 $this->db->like('dtr.timelog',$date_from);
                 $this->db->where('dtr.timelog >=',$date_from.' '.$g);
                 $this->db->where('dtr.timelog <=',$date_from.' '.$h);
+		//$this->db->where('dtr.timelog BETWEEN "'.$date_from.' '.$g .'" AND "'. $date_from.' '.$h.'"');
                 $this->db->order_by('mem.firstname', $f);
                 $query = $this->db->get();
                 return $query->result();
@@ -277,6 +281,7 @@ class Monitor extends CI_Model {
                 $this->db->like('dtr.timelog',$date_from);
                 $this->db->where('dtr.timelog >=',$date_from.' '.$g);
                 $this->db->where('dtr.timelog <=',$date_from.' '.$h);
+		//$this->db->where('dtr.timelog BETWEEN "'.$date_from.' '.$g .'" AND "'. $date_from.' '.$h.'"');
                 $this->db->order_by('mem.firstname', $f);
                 $query = $this->db->get();
                 return $query->result();  
@@ -284,13 +289,130 @@ class Monitor extends CI_Model {
                 $this->db->select('*');
                 $this->db->from('dtr_log as dtr');
                 $this->db->join('members as mem', 'dtr.member_id = mem.stud_no');
-                $this->db->like('dtr.timelog',$date_from);
-                $this->db->where('dtr.timelog >=',$date_from.' '.$g);
-                $this->db->where('dtr.timelog <=',$date_from.' '.$h);
+                //$this->db->like('dtr.timelog',$date_from);
+                //$this->db->where('dtr.timelog >=',$date_from.' '.$g);
+                //$this->db->where('dtr.timelog <=',$date_from.' '.$h);
+		$this->db->where('dtr.timelog BETWEEN "'.$date_from.' '.$g .'" AND "'. $date_from.' '.$h.'"');
                 $this->db->order_by('mem.firstname', $f);
                 $query = $this->db->get();
+		//var_dump($this->db->last_query());
                 return $query->result();   
             endif;
         endif;
-    }    
+    } 
+
+
+
+    
+    public function all_announcements(){
+        $query = $this->db->get($this->announcement_table);
+        return $query->result();
+    }
+
+    public function get_all($start_from=0, $limit=0)
+    {
+        $query = $this->db->limit( $limit, $start_from )->get($this->announcement_table);
+        return $query;
+    }
+    public function get_alls()
+    {
+        $query = $this->db->get($this->announcement_table);
+        return $query;
+    }
+
+    
+    public function like($wildcard='', $start_from=0, $limit=0)
+    {
+        $this->db->where('announcement_id LIKE', '%'. $wildcard . '%')
+                ->or_where('announcement_name LIKE', '%'. $wildcard . '%')
+                ->or_where('announcement_text LIKE', '%'. $wildcard . '%')
+                ->from($this->announcement_table)
+                ->select('*')
+                ->limit( $limit, $start_from );
+        return $this->db->get();
+    }
+
+    public function likes($wildcard='')
+    {
+        $this->db->where('announcement_id LIKE', '%'. $wildcard . '%')
+                ->or_where('announcement_name LIKE', '%'. $wildcard . '%')
+                ->or_where('announcement_text LIKE', '%'. $wildcard . '%')
+                ->from($this->announcement_table)
+                ->select('*');
+        return $this->db->get();
+    }
+
+    public function insert_announcement($data)
+    {
+        $this->db->insert($this->announcement_table, $data);
+        return $this->db->insert_id();
+    }
+    public function del_announcement($data)
+    {
+        $this->db->where('announcement_id',$data);
+        return $this->db->delete($this->announcement_table); 
+    }
+
+    public function find($id)
+    {
+        $this->db->select('*');
+        if( is_array($id) ) return $this->db->where_in('announcement_id', $id)->get($this->announcement_table);
+
+        $query = $this->db->where('announcement_id', $id)->get($this->announcement_table);
+        return $query->row();
+    }
+
+    public function update_announcement($id, $data)
+    {
+        $this->db->where('announcement_id', $id);
+        $this->db->update('announcement', $data);
+        return true;
+    }
+
+
+
+    public function all_splashs(){
+        $query = $this->db->get($this->splash_table);
+        return $query->result();
+    }
+
+    public function get_all_splash($start_from=0, $limit=0)
+    {
+        $query = $this->db->limit( $limit, $start_from )->get($this->splash_table);
+        return $query;
+    }
+    public function get_alls_splash()
+    {
+        $query = $this->db->get($this->splash_table);
+        return $query;
+    }
+
+    
+    public function like_splash($wildcard='', $start_from=0, $limit=0)
+    {
+        $this->db->where('id LIKE', '%'. $wildcard . '%')
+                ->or_where('video_source LIKE', '%'. $wildcard . '%')
+                ->or_where('video_title LIKE', '%'. $wildcard . '%')
+                ->from($this->splash_table)
+                ->select('*')
+                ->limit( $limit, $start_from );
+        return $this->db->get();
+    }
+
+    public function likes_splash($wildcard='')
+    {
+        $this->db->where('id LIKE', '%'. $wildcard . '%')
+                ->or_where('video_source LIKE', '%'. $wildcard . '%')
+                ->or_where('video_title LIKE', '%'. $wildcard . '%')
+                ->from($this->splash_table)
+                ->select('*');
+        return $this->db->get();
+    }
+
+    public function insert_splash($data)
+    {
+        $this->db->insert($this->splash_table, $data);
+        return $this->db->insert_id();
+    }
+
 }

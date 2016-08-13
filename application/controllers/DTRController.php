@@ -39,7 +39,7 @@ class DTRController extends CI_Controller {
 		else { echo "-- STUDENT IS REGISTERED --"; }
 
 
-		echo $this->curl_to_monitor("http://www.monitor-dtr.edu.ph/read?stud_no=$stud_no&e_date=$e_date&e_time=$e_time&e_mode=$e_mode");
+		$this->curl_to_monitor("http://www.monitor-dtr.edu.ph/read?stud_no=$stud_no&e_date=$e_date&e_time=$e_time&e_mode=$e_mode");
 
 		$data = array(
 		   "member_id" => $stud_no,

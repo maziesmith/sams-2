@@ -18,10 +18,12 @@ class MessageTemplatesController extends CI_Controller {
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
         $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css').'">';
 
+        $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/chosen/chosen.min.css').'">';
+
         $this->Data['Headers']->JS  = '<script src="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.js').'"></script>';
-        // $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/moment/min/moment.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/bootstrap-growl/bootstrap-growl.min.js').'"></script>';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/autosize/dist/autosize.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
@@ -70,7 +72,7 @@ class MessageTemplatesController extends CI_Controller {
                 $templates = $this->MessageTemplate->like($wildcard, $start_from, $limit, $sort, $removed_only)->result_array();
                 $total  = $this->MessageTemplate->like($wildcard, 0, 0, null, $removed_only)->num_rows();
             } else {
-                $templates = $this->MessageTemplate->get_all($start_from, $limit, $sort)->result_array();
+                $templates = $this->MessageTemplate->get_all($start_from, $limit, $sort, $removed_only)->result_array();
             }
 
             foreach ($templates as $key => $template) {
@@ -79,6 +81,7 @@ class MessageTemplatesController extends CI_Controller {
                     'id'          => $template['id'],
                     'name'        => $template['name'],
                     'code'        => $template['code'],
+                    'type'        => $template['type'],
                 );
             }
             $data = array(
@@ -112,6 +115,7 @@ class MessageTemplatesController extends CI_Controller {
             $template = array(
                 'name'    => $this->input->post('name'),
                 'code'     => $this->input->post('code'),
+                'type' => $this->input->post('type'),
                 'created_by' => $this->user_id,
             );
             $template_id = $this->MessageTemplate->insert($template);
@@ -165,6 +169,7 @@ class MessageTemplatesController extends CI_Controller {
                 $template = array(
                     'name'    => $this->input->post('name'),
                     'code'     => $this->input->post('code'),
+                    'type' => $this->input->post('type'),
                     'modified_by' => $this->user_id,
                 );
                 $this->MessageTemplate->update($id, $template);
@@ -218,8 +223,10 @@ class MessageTemplatesController extends CI_Controller {
             } else {
                 $data['message'] = 'Message Template was successfully removed';
             }
+            $data['title'] = 'Success';
             $data['type'] = 'success';
         } else {
+            $data['title'] = 'Error';
             $data['message'] = 'An error occured while removing the resource';
             $data['type'] = 'error';
         }

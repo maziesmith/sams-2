@@ -29,10 +29,29 @@
                         <div class="col-sm-5">
                             <div class="pad-zero-right">
                                 <div class="form-message-template fg-float form-message-template-validation">
+                                    <?php echo form_label('Code', 'code', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
                                     <div class="fg-line">
                                         <?php echo form_input('code', set_value('code'), array('class'=>'form-control fg-input')) ?>
                                     </div>
-                                    <?php echo form_label('Code', 'code', array('class'=>'fg-label')) ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="pad-zero-right">
+                                <div class="form-group fg-float form-group-validation">
+                                    <?php echo form_label('Type', 'type', array('class'=>'c-black f-500 text-uppercase m-b-5')) ?>
+                                    <?php echo form_dropdown('type',
+                                        array(
+                                            'DEFAULT' => 'Default',
+                                            'NORMAL_IN' => 'NORMAL IN',
+                                            'NORMAL_OUT' => 'NORMAL OUT',
+                                            "LATE_IN" => 'LATE IN',
+                                            'LATE_OUT' => 'LATE OUT',
+                                            'EARLY_IN' => 'EARLY IN',
+                                            'EARLY_OUT' => 'EARLY OUT',
+                                        ),
+                                        set_value('type'), 'class="form-control tag-select"'
+                                    ) ?>
                                 </div>
                             </div>
                         </div>

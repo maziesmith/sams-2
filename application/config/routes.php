@@ -364,6 +364,15 @@ $route['schedules/remove']['post']  = 'SchedulesController/remove';
 $route['schedules/remove/(:num)']['post']  = 'SchedulesController/remove/$1';
 $route['schedules/restore/(:num)']['post']  = 'SchedulesController/restore/$1';
 
+$route['schedules/preset-messages']['get'] = 'PresetMessagesController/index';
+$route['schedules/preset-messages/listing']['post'] = 'PresetMessagesController/listing';
+$route['schedules/preset-messages/add']['post'] = 'PresetMessagesController/add';
+$route['schedules/preset-messages/edit/(:num)']['post'] = 'PresetMessagesController/edit/$1';
+$route['schedules/preset-messages/update/(:num)']['posy'] = 'PresetMessagesController/edit/$1';
+$route['schedules/preset-messages/trash']['get'] = 'PresetMessagesController/trash';
+$route['schedules/preset-messages/remove/(:num)']['post'] = 'PresetMessagesController/remove/$1';
+$route['schedules/preset-messages/restore/(:num)']['post'] = 'PresetMessagesController/restore/$1';
+
 /*
 | ---------------
 | # Migration

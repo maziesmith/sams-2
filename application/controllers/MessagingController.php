@@ -25,7 +25,7 @@ class MessagingController extends CI_Controller {
         $this->Data['Headers']->JS  = '<script src="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/bootstrap-growl/bootstrap-growl.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/moment/min/moment.min.js').'"></script>';
-        $this->Data['Headers']->JS .= '<link rel="stylesheet" href="'.base_url('assets/vendors/selectize.js/dist/css/selectize.bootstrap3.css').'">';
+        $this->Data['Headers']->CSS .= '<link rel="stylesheet" href="'.base_url('assets/vendors/selectize.js/dist/css/selectize.bootstrap3.css').'">';
 
         $this->Data['Headers']->CSS.= '<link rel="stylesheet" href="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css').'">';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js').'"></script>';
@@ -74,6 +74,8 @@ class MessagingController extends CI_Controller {
         $this->Data['form']['contacts_json'] = json_encode($this->Member->dropdown_list('id, CONCAT(firstname, " ", lastname) AS fullname, msisdn')->result_array());
 
         $this->Data['form']['groups_json'] = json_encode($this->Group->dropdown_list('groups_id, groups_name')->result_array());
+
+        $this->Data['form']['templates'] = $this->db->query('SELECT * FROM message_templates')->result();
 
         $this->load->view('layouts/main', $this->Data);
     }

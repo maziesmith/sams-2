@@ -7,19 +7,11 @@ jQuery(document).ready(function ($) {
             options: [],
             persist: false,
             maxItems: null,
-            create: function(input) {
-                console.log(input);
-                resetWarningMessages('.form-group-validation');
-                if (null !== input.match(/\d/g) && input.match(/\d/g).length === 11) {
-                    return {
-                        value: input,
-                        name: input,
-                        msisdn: input
-                    }
-                }
-                $('form').find('#phone-field-container').addClass('has-warning').append('<small class="error help-block">Phone is not valid</small>');
-                return false;
-            },
+            // create: function(input) {
+            //     console.log(input);
+            //     // $('form').find('#phone-field-container').addClass('has-warning').append('<small class="error help-block">Phone is not valid</small>');
+            //     return false;
+            // },
 
             valueField: 'name',
             labelField: 'code',
@@ -28,13 +20,13 @@ jQuery(document).ready(function ($) {
             render: {
                 item: function(item, escape) {
                     console.log(item);
-                    var caption = item.name ? item.name : item.msisdn;
+                    var caption = item.name ? item.name : item.code;
                     return '<div><span class="name">' + escape(caption) + '</span></div>';
                 },
                 option: function(item, escape) {
                     console.log(item);
-                    var label = item.name || item.msisdn;
-                    var caption = item.name ? item.msisdn : null;
+                    var label = item.name || item.code;
+                    var caption = item.name ? item.code : null;
                     return '<div>' +
                         '<strong>' + escape(label) + '</strong>' +
                         (caption.length > 1 && caption ? '<div class="caption text-muted">' + escape(caption) + '</div>' : '') +
@@ -226,6 +218,7 @@ jQuery(document).ready(function ($) {
 
                         $.each(schedule, function (k, v) {
                             _form.find('[name=' + k + ']').val( v ).parent().addClass('fg-toggled');
+                            if (_form.find('select[name='+k+']').val(v));
                         });
                     }
                 }

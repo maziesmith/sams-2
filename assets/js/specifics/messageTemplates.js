@@ -38,7 +38,7 @@ function remove_many() {
             $.ajax({
                 type: 'POST',
                 url: base_url('messaging/templates/remove'),
-                data: {'ids[]': $('#message-templates-command').bootgrid('getSelectedRows')},
+                data: {'ids[]': $('#preset-message-table-command').bootgrid('getSelectedRows')},
                 success: function (data) {
                     var data = $.parseJSON(data);
                     reload_table();
@@ -178,7 +178,7 @@ function add_resource() {
 }
 
 function reload_table() {
-	$('#message-templates-command').bootgrid('reload');
+	$('#preset-message-table-command').bootgrid('reload');
 }
 
 function init_bootgrid() {

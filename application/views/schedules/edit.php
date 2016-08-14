@@ -69,6 +69,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-type form-group-validation">
+                                                    <div class="fg-line">
+                                                        <label for="normal_in_from">Normal In Preset Msg</label>
+                                                        <?php echo form_dropdown('preset_message_normal_in_id',
+                                                            $form['preset_message'],
+                                                            set_value('preset_message_id'), 'class="tag-select"'
+                                                        ) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -90,6 +103,19 @@
                                                     <div class="fg-line">
                                                         <label for="normal_out_to">To</label>
                                                         <?php echo form_input('normal_out_to', set_value('normal_out_to'), array('class'=>'form-control fg-input time-picker')) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-type form-group-validation">
+                                                    <div class="fg-line">
+                                                        <label for="normal_in_from">Normal Out Preset Msg</label>
+                                                        <?php echo form_dropdown('preset_message_normal_out_id',
+                                                            $form['preset_message'],
+                                                            set_value('preset_message_id'), 'class="tag-select"'
+                                                        ) ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,6 +148,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-type form-group-validation">
+                                                    <div class="fg-line">
+                                                        <label for="normal_in_from">Late In Preset Msg</label>
+                                                        <?php echo form_dropdown('preset_message_late_in_id',
+                                                            $form['preset_message'],
+                                                            set_value('preset_message_id'), 'class="tag-select"'
+                                                        ) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -143,6 +182,19 @@
                                                     <div class="fg-line">
                                                         <label for="late_out_to">To</label>
                                                         <?php echo form_input('late_out_to', set_value('late_out_to'), array('class'=>'form-control fg-input time-picker')) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-type form-group-validation">
+                                                    <div class="fg-line">
+                                                        <label for="normal_in_from">Normal In Preset Msg</label>
+                                                        <?php echo form_dropdown('preset_message_late_out_id',
+                                                            $form['preset_message'],
+                                                            set_value('preset_message_id'), 'class="tag-select"'
+                                                        ) ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,6 +227,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-type form-group-validation">
+                                                    <div class="fg-line">
+                                                        <label for="normal_in_from">Early In Preset Msg</label>
+                                                        <?php echo form_dropdown('preset_message_early_in_id',
+                                                            $form['preset_message'],
+                                                            set_value('preset_message_id'), 'class="tag-select"'
+                                                        ) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -196,6 +261,19 @@
                                                     <div class="fg-line">
                                                         <label for="early_out_to">To</label>
                                                         <?php echo form_input('early_out_to', set_value('early_out_to'), array('class'=>'form-control fg-input time-picker')) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-type form-group-validation">
+                                                    <div class="fg-line">
+                                                        <label for="normal_in_from">Early Out Preset Msg</label>
+                                                        <?php echo form_dropdown('preset_message_early_out_id',
+                                                            $form['preset_message'],
+                                                            set_value('preset_message_id'), 'class="tag-select"'
+                                                        ) ?>
                                                     </div>
                                                 </div>
                                             </div>

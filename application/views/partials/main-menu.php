@@ -56,6 +56,7 @@
         <a role="button"><i class="zmdi zmdi-chart"></i> Schedules</a>
         <ul>
             <li class="<?php echo check_link('schedules') ?>" ><?php echo anchor( base_url('schedules'), 'All Schedules' ); ?></li>
+            <li class="<?php echo check_link('schedules/preset-messages') ?>" ><?php echo anchor( base_url('schedules/preset-messages'), 'Preset Messages' ); ?></li>
             <!-- <li class="<?php echo check_link('schedules/export') ?>" ><?php echo anchor( base_url('schedules/export'), 'Export Groups' ); ?></li>
             <li class="<?php echo check_link('schedules/import') ?>" ><?php echo anchor( base_url('schedules/import'), 'Import Groups' ); ?></li>
             <li class="<?php echo check_link('schedules/trash') ?>" ><?php echo anchor( base_url('schedules/trash'), 'Trashed Groups' ); ?></li> -->

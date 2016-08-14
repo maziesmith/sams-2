@@ -23,6 +23,7 @@
                             <th data-column-id="id" data-css-class="id" data-order="asc" data-visible="false" data-identifier="true">Template ID</th>
                             <th data-column-id="name" data-css-class="name" data-order="asc">Name</th>
                             <th data-column-id="code" data-css-class="code" data-order="asc">Code</th>
+                            <th data-column-id="type" data-css-class="type" data-order="asc" data-visible="false">Type</th>
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false">Actions</th>
                         </tr>
                     </thead>

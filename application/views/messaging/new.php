@@ -35,6 +35,9 @@
                 <li class="pull-left">
                     <small class="btn btn-link" id="textarea-count">320</small>
                 </li>
+                <li>
+                    <button id="insert-template-message" type="button" class="btn btn-link" data-toggle="modal" href="#send-templates-modal">Templates...</button>
+                </li>
                 <li class="pull-right">
                     <?php echo form_button(array('name'=>'submit', 'id'=>'submit', 'type'=>'submit'), 'Send', 'class="btn btn-primary btn-sm"') ?>
                     <button type="button" id="send-later-btn-trigger" title="Send this message later" class="btn btn-default" data-toggle="modal" href="#send-later-modal">Send Later...</button>
@@ -43,5 +46,5 @@
         <?php echo form_close(); ?>
     </div>
 </section>
-
+<?php $this->load->view('messaging/send-templates'); ?>
 <?php $this->load->view('messaging/send-later'); ?>

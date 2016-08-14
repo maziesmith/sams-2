@@ -20,18 +20,6 @@ class Migration_create_preset_messages_table extends CI_Migration {
                 'type' => 'INT',
                 'null' => TRUE,
             ),
-            'time_to' => array(
-                'type' => 'TIME',
-                'null' => TRUE,
-            ),
-            'presetmsg_id' => array(
-                'type' => 'INT',
-                'null' => TRUE,
-            ),
-            'schedule_id' => array(
-                'type' => 'INT',
-                'null' => TRUE
-            ),
         ));
 
         $this->dbforge->add_field('created_by VARCHAR(50)');

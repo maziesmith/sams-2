@@ -440,7 +440,9 @@ small.btn {
 .member-photo-upload .dz-message {
 	background-image: none !important;
 }
-
+.m-t-6, .tag-select.m-t-6 + div {
+	margin-top: 6px !important;
+}
 
 /*
 | ----------------------------

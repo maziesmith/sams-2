@@ -21,6 +21,11 @@ class Migration_create_message_templates_table extends CI_Migration {
                 'constraint' => 255,
                 'null' => TRUE,
             ),
+            'type' => array(
+                'type' => 'TEXT',
+                'constraint' => 255,
+                'null' => TRUE,
+            ),
         ));
 
         $this->dbforge->add_field('active BIGINT DEFAULT 1');

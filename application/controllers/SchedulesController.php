@@ -27,13 +27,26 @@ class SchedulesController extends CI_Controller {
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/jquery.validate/dist/jquery.validate.min.js').'"></script>';
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/chosen/chosen.jquery.min.js').'"></script>';
 
+        $this->Data['Headers']->CSS .= '<link rel="stylesheet" href="'.base_url('assets/vendors/selectize.js/dist/css/selectize.bootstrap3.css').'">';
+        $this->Data['Headers']->JS .= '<script src="'.base_url('assets/vendors/selectize.js/dist/js/standalone/selectize.min.js').'"></script>';
+
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/schedules.js').'"></script>';
     }
 
     public function index()
     {
         $this->Data['trash']['count'] = $this->Schedule->get_all(0, 0, null, true)->num_rows();
-        $this->Data['form']['message_templates'] = dropdown_list($this->MessageTemplate->dropdown_list('id, name, code')->result_array(), ['id', 'name'], '', false);
+
+        $this->Data['form']['preset_message'] = dropdown_list($this->db->query('SELECT id, name FROM preset_messages WHERE active = 1')->result_array(), ['id', 'name'], '', false);
+
+        // $this->Data['form']['message_template_normal_out'] = dropdown_list($this->MessageTemplate->dropdown_list('id, name, code', 'type', 'NORMAL_OUT')->result_array(), ['id', 'code'], '', false);
+
+        // $this->Data['form']['message_template_early_in'] = dropdown_list($this->MessageTemplate->dropdown_list('id, name, code', 'type', 'EARLY_IN')->result_array(), ['id', 'code'], '', false);
+        // $this->Data['form']['message_template_early_out'] = dropdown_list($this->MessageTemplate->dropdown_list('id, name, code', 'type', 'EARLY_OUT')->result_array(), ['id', 'code'], '', false);
+
+        // $this->Data['form']['message_template_late_in'] = dropdown_list($this->MessageTemplate->dropdown_list('id, name, code', 'type', 'LATE_IN')->result_array(), ['id', 'code'], '', false);
+        // $this->Data['form']['message_template_late_out'] = dropdown_list($this->MessageTemplate->dropdown_list('id, name, code', 'type', 'LATE_OUT')->result_array(), ['id', 'code'], '', false);
+
         $this->load->view('layouts/main', $this->Data);
     }
 
@@ -97,7 +110,7 @@ class SchedulesController extends CI_Controller {
                 'name' => 'LATE_IN',
                 'time_from' => date("H:i:s", strtotime($this->input->post('late_in_from'))),
                 'time_to' => date("H:i:s", strtotime($this->input->post('late_in_to'))),
-                'presetmsg_id' => 1,
+                'presetmsg_id' => $this->input->post('preset_message_late_in_id') ? $this->input->post('preset_message_late_in_id') : 1,
                 'schedule_id' => $schedule_id,
             );
             $this->db->insert('dtr_time_settings', $data);
@@ -106,7 +119,7 @@ class SchedulesController extends CI_Controller {
                 'name' => 'LATE_OUT',
                 'time_from' => date("H:i:s", strtotime($this->input->post('late_out_from'))),
                 'time_to' => date("H:i:s", strtotime($this->input->post('late_out_to'))),
-                'presetmsg_id' => 2,
+                'presetmsg_id' => $this->input->post('preset_message_late_out_id') ? $this->input->post('preset_message_late_out_id') : 2,
                 'schedule_id' => $schedule_id,
             );
             $this->db->insert('dtr_time_settings', $data);
@@ -115,7 +128,7 @@ class SchedulesController extends CI_Controller {
                 'name' => 'EARLY_IN',
                 'time_from' => date("H:i:s", strtotime($this->input->post('early_in_from'))),
                 'time_to' => date("H:i:s", strtotime($this->input->post('early_in_to'))),
-                'presetmsg_id' => 3,
+                'presetmsg_id' => $this->input->post('preset_message_early_in_id') ? $this->input->post('preset_message_early_in_id') : 3,
                 'schedule_id' => $schedule_id,
             );
             $this->db->insert('dtr_time_settings', $data);
@@ -124,7 +137,7 @@ class SchedulesController extends CI_Controller {
                 'name' => 'EARLY_OUT',
                 'time_from' => date("H:i:s", strtotime($this->input->post('early_out_from'))),
                 'time_to' => date("H:i:s", strtotime($this->input->post('early_out_to'))),
-                'presetmsg_id' => 3,
+                'presetmsg_id' => $this->input->post('preset_message_early_out_id') ? $this->input->post('preset_message_early_out_id') : 4,
                 'schedule_id' => $schedule_id,
             );
             $this->db->insert('dtr_time_settings', $data);
@@ -133,7 +146,7 @@ class SchedulesController extends CI_Controller {
                 'name' => 'NORMAL_IN',
                 'time_from' => date("H:i:s", strtotime($this->input->post('normal_in_from'))),
                 'time_to' => date("H:i:s", strtotime($this->input->post('normal_in_to'))),
-                'presetmsg_id' => 4,
+                'presetmsg_id' => $this->input->post('preset_message_normal_in_id') ? $this->input->post('preset_message_normal_in_id') : 5,
                 'schedule_id' => $schedule_id,
             );
             $this->db->insert('dtr_time_settings', $data);
@@ -142,7 +155,7 @@ class SchedulesController extends CI_Controller {
                 'name' => 'NORMAL_OUT',
                 'time_from' => date("H:i:s", strtotime($this->input->post('normal_out_from'))),
                 'time_to' => date("H:i:s", strtotime($this->input->post('normal_out_to'))),
-                'presetmsg_id' => 5,
+                'presetmsg_id' => $this->input->post('preset_message_normal_out_id') ? $this->input->post('preset_message_normal_out_id') : 6,
                 'schedule_id' => $schedule_id,
             );
             $this->db->insert('dtr_time_settings', $data);
@@ -184,6 +197,7 @@ class SchedulesController extends CI_Controller {
                 case 'LATE_OUT':
                     $schedule->late_out_from = date("H:i:s", strtotime($settings['time_from']));
                     $schedule->late_out_to = date("H:i:s", strtotime($settings['time_to']));
+                    $schedule->preset_message_early_out_id = $settings['presetmsg_id'];
                     break;
                 case 'NORMAL_IN':
                     $schedule->normal_in_from = date("H:i:s", strtotime($settings['time_from']));

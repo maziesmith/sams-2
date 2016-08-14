@@ -1,4 +1,9 @@
 jQuery(document).ready(function ($) {
+    $('#message-template-list .list-group-item button').on('click', function (e) {
+        $('#new-sms-textarea').val($('#new-sms-textarea').val() + $(this).parent().find('span').text());
+        $(this).parents('#send-templates-modal').find('.close').click();
+        e.preventDefault();
+    });
     $('#new-sms-textarea').on('inputchange', function (e) {
         console.log("asd");
     })

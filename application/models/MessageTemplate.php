@@ -44,10 +44,11 @@ class MessageTemplate extends CI_Model {
         return $this->form_validation->run() == FALSE;
     }
 
-    public function dropdown_list($select)
+    public function dropdown_list($select, $where=null, $value=null)
     {
-        $query = $this->db->select($select)->get($this->table);
-        return $query;
+        $query = $this->db->select($select);
+        if (null !== $where) $this->db->where($where, $value);
+        return $query->get($this->table);
     }
 
     public function insert($data)

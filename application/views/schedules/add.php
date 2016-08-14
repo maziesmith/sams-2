@@ -45,7 +45,7 @@
                                 <div class="col-md-6">
                                     <div class="form-control-label"><strong>NORMAL_IN</strong><br>Usual Time in</div>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <div class="form-type form-group-validation">
                                                     <div class="fg-line">
@@ -55,7 +55,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <div class="form-type form-group-validation">
                                                     <div class="fg-line">
@@ -65,9 +65,23 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="form-type form-group-validation">
+                                                    <div class="fg-line">
+                                                        <label for="message_template_in">Template</label>
+                                                        <select id="message_template_in" class="form-control input-selectize" name="message_template_in">
+                                                            <?php foreach ($form['message_template_'] as $mti) {
+                                                                echo "<option value='$mti->id'><strong class='name'>$mti->code</strong><div>$mti->name</div></option>";
+                                                            } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-control-label"><strong>NORMAL_OUT</strong><br>Usual Time out</div>
                                     <div class="row">
                                         <div class="col-md-6">

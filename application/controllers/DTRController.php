@@ -42,7 +42,7 @@ class DTRController extends CI_Controller {
 		$this->curl_to_monitor("http://www.monitor-dtr.edu.ph/read?stud_no=$stud_no&e_date=$e_date&e_time=$e_time&e_mode=$e_mode");
 
 		$data = array(
-		   "member_id" => $stud_no,
+		   "member_id" => $member->id,//$stud_no,
 		   "timelog" => $timelog,
 		   "mode" => $e_mode,
 		);
@@ -50,7 +50,7 @@ class DTRController extends CI_Controller {
 		$this->DTRLog->insert($data);
 
 		# DTR
-		$dtr_data = $this->DTR->find($stud_no, "member_id");
+		$dtr_data = $this->DTR->find($member->id, "member_id");
 		$is_timein=false;
 		$is_timeout=false;
 		if ($dtr_data) {
@@ -61,7 +61,7 @@ class DTRController extends CI_Controller {
 		} else {
 			$is_timein = true;
 
-		    $member_id = $stud_no;
+		    $member_id = $member->id;
 		    $datein = date("Y-m-d", strtotime($e_date));
 		    $timein = date("H:i:s", strtotime($e_time));
 		    $data = array(

@@ -31,8 +31,8 @@ function init_table () {
         },
         formatters: {
             commands: function (column, row) {
-                return  '<button title="Send now" role="button" class="wave-effect btn btn-icon command-resend"    data-row-id="' + row.id + '"><span class="fa fa-paper-plane"></span></button> ' +
-                        '<button title="Cancel Sending" type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button> ';
+                return  '<button title="Send now" role="button" class="wave-effect btn btn-icon command-resend"    data-row-id="' + row.id + '"><span class="fa fa-paper-plane"></span></button> '
+                        // '<button title="Cancel Sending" type="button" class="wave-effect btn btn-icon command-delete"  data-row-id="' + row.id + '"><span class="zmdi zmdi-delete"></span></button> ';
             }
         },
 
@@ -53,7 +53,7 @@ function init_table () {
         },
         responseHandler: function (response) {
             console.log(response);
-            $('#table-track-text').find('#td-scheduled span').text(response.scheduled);
+            $('#table-track-text').find('#td-contacts span').text(response.contacts);
             $('#table-track-text').find('#td-pending span').text(response.pending);
             $('#table-track-text').find('#td-failed span').text(response.failed);
             $('#table-track-text').find('#td-success span').text(response.success);

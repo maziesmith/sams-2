@@ -1,4 +1,64 @@
 jQuery(document).ready(function ($) {
+    $('.input-selectize').each(function (e) {
+        var Ds = $(this);
+        var Ds_selectize = $(this).selectize({
+            plugins: ['remove_button', 'restore_on_backspace'],
+            delimiter: $(this).data('selectize-delimiter') ? $(this).data('selectize-delimiter') : ',',
+            options: [],
+            persist: false,
+            maxItems: null,
+            create: function(input) {
+                console.log(input);
+                resetWarningMessages('.form-group-validation');
+                if (null !== input.match(/\d/g) && input.match(/\d/g).length === 11) {
+                    return {
+                        value: input,
+                        name: input,
+                        msisdn: input
+                    }
+                }
+                $('form').find('#phone-field-container').addClass('has-warning').append('<small class="error help-block">Phone is not valid</small>');
+                return false;
+            },
+
+            valueField: 'name',
+            labelField: 'code',
+            searchField: ['name', 'code'],
+
+            render: {
+                item: function(item, escape) {
+                    console.log(item);
+                    var caption = item.name ? item.name : item.msisdn;
+                    return '<div><span class="name">' + escape(caption) + '</span></div>';
+                },
+                option: function(item, escape) {
+                    console.log(item);
+                    var label = item.name || item.msisdn;
+                    var caption = item.name ? item.msisdn : null;
+                    return '<div>' +
+                        '<strong>' + escape(label) + '</strong>' +
+                        (caption.length > 1 && caption ? '<div class="caption text-muted">' + escape(caption) + '</div>' : '') +
+                    '</div>';
+                }
+            },
+            focus: function (e) {
+                console.log(e);
+            },
+            load: function (query, callback) {
+                if (!query.length) return callback();
+                var attr = Ds.attr('data-selectize-ajax');
+                var url = base_url('schedules/new');
+                if (typeof attr !== typeof undefined && attr !== false) {
+                    url = attr;
+                }
+                $.get(url, function (data) {
+                    console.log($.parseJSON(data));
+                    callback($.parseJSON(data));
+                });
+            },
+        });
+    });
+
     /*
     | ---------------------------------------
     | # Delete Many

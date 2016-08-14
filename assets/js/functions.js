@@ -25,6 +25,26 @@ $('.profile-menu > a').css({
     'display':'block',
     'background-image': 'url('+base_url('assets/img/headers/10.png')+')', //+(Math.floor(Math.random()*12)+1)+
 });
+
+/**
+ * TextArea
+ */
+$('textarea').keypress(function (e) {
+    var maxLength = $(this).attr('maxlength');
+    $( $(this).data('target') ).html(maxLength - $(this).val().length);
+    if (e.which < 0x20) {
+        // e.which < 0x20, then it's not a printable character
+        // e.which === 0 - Not a character
+        return;     // Do nothing
+    }
+    if (this.value.length == max) {
+        e.preventDefault();
+    } else if (this.value.length > max) {
+        // Maximum exceeded
+        this.value = this.value.substring(0, max);
+    }
+});
+
 /*
 * Layout
 */

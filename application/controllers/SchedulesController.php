@@ -13,6 +13,7 @@ class SchedulesController extends CI_Controller {
         $this->user_id = $this->session->userdata('id');
 
         $this->load->model('Schedule', '', TRUE);
+        $this->load->model('MessageTemplate', '', TRUE);
 
         $this->Data['Headers'] = get_page_headers();
         $this->Data['Headers']->CSS = '<link rel="stylesheet" href="'.base_url('assets/vendors/bootgrid/jquery.bootgrid.min.css').'">';
@@ -32,6 +33,7 @@ class SchedulesController extends CI_Controller {
     public function index()
     {
         $this->Data['trash']['count'] = $this->Schedule->get_all(0, 0, null, true)->num_rows();
+        $this->Data['form']['message_templates'] = dropdown_list($this->MessageTemplate->dropdown_list('id, name, code')->result_array(), ['id', 'name'], '', false);
         $this->load->view('layouts/main', $this->Data);
     }
 

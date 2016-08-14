@@ -1,13 +1,13 @@
 <div class="modal fade" id="add-member" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="card m-t-25">
                 <div class="card-header bgm-green">
                     <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
                     <h2>New Member</h2>
                 </div>
-                <?php echo form_open_multipart("members/upload_photo", array('id'=>'dropzoneMember', 'class'=>'dropzone m-t-25')); ?>
-                    <p><strong>Upload Photo</strong></p>
+                <?php echo form_open_multipart("members/upload_photo", array('id'=>'dropzoneMember', 'class'=>'dropzone m-t-25 member-photo-upload')); ?>
+                    <p class="text-center"><strong>Click/Drop Photo to upload</strong></p>
                     <div class="fileinput fileinput-new fallback" data-provides="fileinput">
                         <span class="btn btn-primary btn-file m-r-10">
                             <span class="fileinput-new">Select file</span>

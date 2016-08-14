@@ -19,6 +19,11 @@ class Migration_create_schedules_table extends CI_Migration {
                 'type' => 'TEXT',
                 'constraint' => '225'
             ),
+            'message_template_id' => array(
+                'type' => 'INT',
+                'constraint' => '225',
+                'null' => true,
+            ),
         ));
 
         $this->dbforge->add_field('created_by INT');

@@ -64,13 +64,15 @@
 
     <li><hr></li>
 
-    <li class="sub-menu <?php echo check_link(['messaging/new', 'messaging/inbox', 'messaging/outbox', 'messaging/tracking', 'messaging/templates']) ?>">
+    <li class="sub-menu <?php echo check_link(['messaging/new', 'messaging/inbox', 'messaging/outbox', 'messaging/tracking', 'messaging/configuration', 'messaging/templates']) ?>">
         <a role="button"><i class="zmdi zmdi-email"></i> Messaging</a>
         <ul>
             <li class="<?php echo check_link('messaging/new') ?>" ><?php echo anchor( base_url('messaging/new'), 'New' ); ?></li>
             <li class="<?php echo check_link('messaging/inbox') ?>" ><?php echo anchor( base_url('messaging/inbox'), 'Inbox' ); ?></li>
             <li class="<?php echo check_link('messaging/outbox') ?>" ><?php echo anchor( base_url('messaging/outbox'), 'Outbox' ); ?></li>
             <li class="<?php echo check_link('messaging/tracking') ?>" ><?php echo anchor( base_url('messaging/tracking'), 'Tracking' ); ?></li>
+            <li class="<?php echo check_link('messaging/templates') ?>" ><?php echo anchor( base_url('messaging/templates'), 'Templates' ); ?></li>
+            <li class="<?php echo check_link('messaging/configuration') ?>" ><?php echo anchor( base_url('messaging/configuration'), 'Configuration' ); ?></li>
         </ul>
     </li>
 

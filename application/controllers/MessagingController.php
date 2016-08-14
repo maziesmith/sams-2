@@ -259,10 +259,16 @@ class MessagingController extends CI_Controller {
             }
 
             foreach ($outboxs as $key => $outbox) {
+                $students = $this->Member->find_member_via_msisdn($outbox['msisdn']);
+                $student = [];
+                foreach ($students as $s) {
+                    $student[] = $s->firstname . " " . $s->lastname;
+                }
 
                 $bootgrid_arr[] = array(
                     'count_id'           => $key + 1 + $start_from,
                     'id'        => $outbox['id'],
+                    'member'   => implode(",<br>", $student),
                     'message' => $this->Message->find($outbox['message_id'])->message,
                     'msisdn' => $outbox['msisdn'],
                     'smsc' => $outbox['smsc'],
@@ -301,6 +307,67 @@ class MessagingController extends CI_Controller {
     }
 
     public function tracking_listing_grouped()
+    {
+        $bootgrid_arr = [];
+        $group_by     = 'message';
+        $current      = $this->input->post('current');
+        $limit        = $this->input->post('rowCount') == -1 ? 0 : $this->input->post('rowCount');
+        $page         = $current !== null ? $current : 1;
+        $start_from   = ($page-1) * $limit;
+        $sort         = null != $this->input->post('sort') ? $this->input->post('sort') : null;
+        $wildcard     = null != $this->input->post('searchPhrase') ? $this->input->post('searchPhrase') : null;
+        $removed_only = null !== $this->input->post('removedOnly') ? $this->input->post('removedOnly') : false;
+        $total        = $this->Outbox->tracking_all(0, 0, null, $removed_only)->num_rows();
+
+        if( null != $wildcard ) {
+            $tracking = $this->Outbox->tracking($wildcard, $start_from, $limit, $sort, $removed_only)->result();
+            $total    = $this->Outbox->tracking($wildcard, 0, 0, null, $removed_only)->num_rows();
+        } else {
+            $tracking = $this->Outbox->tracking_all($start_from, $limit, $sort, $removed_only)->result();
+        }
+
+        foreach ($tracking as $key => $message) {
+
+            $bootgrid_arr[] = array(
+                'count_id'           => $key + 1 + $start_from,
+                'id'        => $message->id,
+                'message' => $message->message,
+                'contacts' => $message->contacts,
+                'pending' => $message->pending,
+                'successful' => $message->successful,
+                'rejected' => $message->rejected,
+                'failure' => $message->failure,
+                'buffered' => $message->buffered,
+            );
+        }
+
+        $pending = $this->Outbox->tracking_status_count('pending')->row()->pending;
+        $failed = $this->Outbox->tracking_status_count('failed')->row()->failed;
+        $success = $this->Outbox->tracking_status_count('success')->row()->success;
+        $rejected = $this->Outbox->tracking_status_count('rejected')->row()->rejected;
+        $buffered = $this->Outbox->tracking_status_count('buffered')->row()->buffered;
+
+        $data = array(
+            "current"       => intval($current),
+            "rowCount"      => $limit,
+            "searchPhrase"  => $wildcard,
+            "total"         => intval( $total ),
+            "rows"          => $bootgrid_arr,
+            "trash"         => array(
+                "count" => $this->Scheduler->get_all(0, 0, null, true)->num_rows(),
+            ),
+            "contacts" => $total,
+            "pending" => $pending,
+            "failed" => $failed,
+            "success" => $success,
+            "rejected" => $rejected,
+            "buffered" => $buffered,
+        );
+        echo json_encode( $data );
+        exit();
+
+    }
+    public function tracking_listing_grouped_disabled()
     {
         $bootgrid_arr = [];
         $group_by     = 'message';
@@ -432,6 +499,27 @@ class MessagingController extends CI_Controller {
             );
             echo json_encode( $data );
             exit();
+        }
+    }
+
+    public function configuration()
+    {
+        $this->Data['form']['dtr_sending_config'] = $this->db->query("SELECT * FROM dtr_sending_config")->result();
+        $this->load->view('layouts/main', $this->Data);
+    }
+
+    public function postConfiguration()
+    {
+        $config = $this->input->post('config');
+
+        $this->db->query("UPDATE dtr_sending_config SET enabled=0");
+        if (0 != $config) $this->db->query("UPDATE dtr_sending_config SET enabled=1 WHERE config='$config'");
+
+        if ($this->db->affected_rows() > 0 || 0 == $config) {
+            $this->session->set_flashdata('message', array('type'=>'success', 'message'=>"Configuration Saved."));
+            redirect(base_url('messaging/configuration'));
+        } else {
+            die("error");
         }
     }
 

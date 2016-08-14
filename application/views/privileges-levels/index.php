@@ -18,7 +18,7 @@
                             <th data-column-id="name" data-css-class="name" data-order="asc">Name</th>
                             <th data-column-id="code" data-css-class="code" data-order="asc">Code</th>
                             <th data-column-id="description" data-css-class="description" data-order="asc">Description</th>
-                            <th data-column-id="modules" data-css-class="modules" data-order="asc">Modules</th>
+                            <th data-column-id="modules" data-css-class="modules" data-visible="false" data-order="asc">Modules</th>
                             <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-header-css-class="fixed-width">Actions</th>
                         </tr>
                     </thead>

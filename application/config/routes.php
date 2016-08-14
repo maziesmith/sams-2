@@ -320,13 +320,31 @@ $route['messaging/bulk-send/later']['post'] = 'SchedulerController/schedule';
 $route['messaging/bulk-send/later']['get'] = 'SchedulerController/schedule';
 $route['messaging/send-scheduled-messages']['post'] = 'SchedulerController/send';
 $route['messaging/tracking']['get'] = 'MessagingController/tracking';
+// $route['messaging/tracking-debug']['get'] = 'MessagingController/tracking_listing_grouped';
 $route['messages/tracking-listing']['post'] = 'MessagingController/tracking_listing';
 $route['messages/tracking-listing_grouped']['post'] = 'MessagingController/tracking_listing_grouped';
+$route['messages/tracking-listing_grouped']['get'] = 'MessagingController/tracking_listing_grouped';
 // $route['messaging/bulk-send']['get'] = 'MessagingController/bulk_send';
 $route['messaging/inbox']['get'] = 'InboxController/index';
 $route['messaging/inbox/(:any)']['post'] = 'InboxController/index/$1';
 $route['messaging/outbox']['get'] = 'MessagingController/outbox';
 $route['messaging/groups']['get'] = 'MessagingController/groups';
+$route['messaging/configuration']['get'] = 'MessagingController/configuration';
+$route['messaging/post-configuration']['post'] = 'MessagingController/postConfiguration';
+
+/*
+| --------------------
+| # Message Template
+| --------------------
+*/
+$route['messaging/templates']['get'] = 'MessageTemplatesController/index';
+$route['messaging/templates/listing']['post'] = 'MessageTemplatesController/listing';
+$route['messaging/templates/add']['post'] = 'MessageTemplatesController/add';
+$route['messaging/templates/edit/(:num)']['post'] = 'MessageTemplatesController/edit/$1';
+$route['messaging/templates/update/(:num)']['post'] = 'MessageTemplatesController/update/$1';
+$route['messaging/templates/trash']['get'] = 'MessageTemplatesController/trash';
+$route['messaging/templates/remove/(:num)']['post'] = 'MessageTemplatesController/remove/$1';
+$route['messaging/templates/restore/(:num)']['post'] = 'MessageTemplatesController/restore/$1';
 
 /*
 | ---------------

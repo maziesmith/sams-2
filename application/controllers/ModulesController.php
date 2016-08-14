@@ -43,6 +43,12 @@ class ModulesController extends CI_Controller {
      */
     public function index()
     {
+        if( !$this->Auth->can(['modules', 'modules/', 'modules/listing']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
+
         # Override the default layout, which was `users/modules` based on the route
         $this->Data['modules'] = $this->Module->all();
         // $this->Data['form']['groups_list'] = dropdown_list($this->Group->dropdown_list('groups_id, groups_name')->result_array(), ['groups_id', 'groups_name'], '', false);
@@ -204,6 +210,12 @@ class ModulesController extends CI_Controller {
 
     public function trash()
     {
+        if( !$this->Auth->can(['modules', 'modules/trash']) ) {
+            $this->Data['Headers']->Page = 'errors/403';
+            $this->load->view('layouts/errors', $this->Data);
+            return false;
+        }
+
         $this->Data['modules'] = $this->Module->all(true);
 
         $this->Data['Headers']->JS .= '<script src="'.base_url('assets/js/specifics/modulesTrash.js').'"></script>';

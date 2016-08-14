@@ -555,6 +555,55 @@ class PageController extends CI_Controller {
             'slug' => 'privileges-levels/import',
         );
 
+        /**
+         * Modules
+         */
+        $modules[] = array(
+            'name' => 'Modules',
+            'description' => 'Modules list function',
+            'slug' => 'modules',
+        );
+        $modules[] = array(
+            'name' => 'List Modules',
+            'description' => 'Modules list function',
+            'slug' => 'modules/listing',
+        );
+        $modules[] = array(
+            'name' => 'Add Modules',
+            'description' => 'Modules add function',
+            'slug' => 'modules/add',
+        );
+        $modules[] = array(
+            'name' => 'Edit Modules',
+            'description' => 'Modules edit function',
+            'slug' => 'modules/edit',
+        );
+        $modules[] = array(
+            'name' => 'Update Modules',
+            'description' => 'Modules update function',
+            'slug' => 'modules/update',
+        );
+        $modules[] = array(
+            'name' => 'Remove Modules',
+            'description' => 'Modules remove function',
+            'slug' => 'modules/remove',
+        );
+        $modules[] = array(
+            'name' => 'Restore Modules',
+            'description' => 'Modules restore function',
+            'slug' => 'modules/restore',
+        );
+        $modules[] = array(
+            'name' => 'Export Modules',
+            'description' => 'Modules export function',
+            'slug' => 'modules/export',
+        );
+        $modules[] = array(
+            'name' => 'Import Modules',
+            'description' => 'Privileges Level import function',
+            'slug' => 'modules/import',
+        );
+
         foreach ($modules as $module) {
             if (!$this->Module->exists($module['slug'], "slug")) {
                 $this->Module->insert($module);

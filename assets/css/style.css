@@ -352,7 +352,7 @@ noscript {
 	padding: 0;
 }
 #messages-main .ms-menu .lv-item.active {
-    background: #ffc107;
+    background: #ffc107 !important;
 	font-weight: bold;
 }
 #messages-main .ms-menu .lv-item.active .lv-small {
@@ -419,6 +419,26 @@ noscript {
 
 .gs-w .blog-post .bp-header > img:hover {
 	cursor: move;
+}
+
+.p-t-20 {
+	padding-top: 20px !important;
+}
+
+small.btn {
+	font-size: 0.9rem;
+}
+
+.member-photo-upload {
+	overflow: hidden;
+	margin: 0px 2rem;
+	width: 200px;
+	height: 200px;
+	position: relative;
+	min-height: 0px;
+}
+.member-photo-upload .dz-message {
+	background-image: none !important;
 }
 
 

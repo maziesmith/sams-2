@@ -1,18 +1,53 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Outbox extends CI_Model {
-    private $table = 'outbox';
+class MessageTemplate extends CI_Model {
+    private $table = 'message_templates';
     private $column_id = 'id';
     private $column_softDelete = 'removed_at';
     private $column_softDeletedBy = 'removed_by';
-    public $validate = array(
-        array( 'field' => 'msisdn', 'label' => 'Name', 'rules' => 'trim' ),
+    public $validations = array(
+        array( 'field' => 'name', 'label' => 'Name', 'rules' => 'trim|require' ),
     );
 
     function __construct()
     {
         parent::__construct();
+    }
+
+    public function validate($is_first_time=false, $id=null, $value=null)
+    {
+        $this->load->library('form_validation');
+
+        foreach ($this->validations as $validation) {
+            $this->form_validation->set_rules( $validation['field'], $validation['label'], $validation['rules'] );
+        }
+
+        # If the Validation is running on the Add Function
+        if( $is_first_time ) {
+            $this->form_validation->set_message('is_unique', 'The %s is already in use');
+            $this->form_validation->set_rules( 'code', 'Code', 'trim|is_unique['.$this->table.'.code]' );
+        } else {
+            $original = $this->db->where($this->column_id, $id)->get($this->table)->row()->code;
+
+            /**
+             * Only reset the rules if the
+             * Original value is not equal to
+             * the current value
+             */
+            if( $value != $original ) {
+                $this->form_validation->set_message('is_unique', 'The %s is already in use');
+                $this->form_validation->set_rules( 'code', 'Email', 'trim|is_unique['.$this->table.'.code]' );
+            }
+        }
+
+        return $this->form_validation->run() == FALSE;
+    }
+
+    public function dropdown_list($select)
+    {
+        $query = $this->db->select($select)->get($this->table);
+        return $query;
     }
 
     public function insert($data)
@@ -58,14 +93,10 @@ class Outbox extends CI_Model {
 
     public function like($wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)
     {
-        $this->db->where('message_id LIKE ', '%'. $wildcard . '%')
-                ->or_where('member_id LIKE ', '%'. $wildcard . '%')
+        $this->db->where('id LIKE ', '%'. $wildcard . '%')
+                ->or_where('name LIKE ', '%'. $wildcard . '%')
 
-                ->or_where('group_id', '%'. $wildcard)
-
-                ->or_where('msisdn LIKE ', '%'. $wildcard . '%')
-                ->or_where('sms LIKE ', '%'. $wildcard . '%')
-                ->or_where('status LIKE ', '%'. $wildcard . '%')
+                ->or_where('code', '%'. $wildcard)
 
                 ->from($this->table)
                 ->select('*');
@@ -80,6 +111,37 @@ class Outbox extends CI_Model {
 
         if( $removed_only ) return $this->db->where($this->column_softDelete . " !=", NULL)->get();
         return $this->db->where($this->column_softDelete, NULL)->get();
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, $data);
+        return true;
+    }
+
+    public function remove($id)
+    {
+        if( is_array($id) ) {
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
+            return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, [$this->column_softDelete => date('Y-m-d H:i:s'), $this->column_softDeletedBy => $this->session->userdata('id')]);
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function restore($id)
+    {
+        if( is_array($id) ) {
+            $this->db->where_in($this->column_id, $id)->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
+            return $this->db->affected_rows() > 0;
+        }
+
+        $this->db->where($this->column_id, $id);
+        $this->db->update($this->table, [$this->column_softDelete => NULL, $this->column_softDeletedBy => NULL]);
+        return $this->db->affected_rows() > 0;
     }
 
     public function tracking($wildcard='', $start_from=0, $limit=0, $sort=null, $removed_only=false)

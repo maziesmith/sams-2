@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // Production
-// $config['base_url'] = 'http://sjsp-sams.edu';
+ $config['base_url'] = 'http://www.sjsp-sams.edu';
 // Local
-$config['base_url'] = 'http://projects/sams';
+//$config['base_url'] = 'http://projects/sams';
 
 /*
 |--------------------------------------------------------------------------

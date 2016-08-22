@@ -72,10 +72,14 @@ function init_table () {
         reload_dom();
         currentPage = $("#messaging-tracking-table").bootgrid("getCurrentPage");
 
-        $("#messaging-tracking-table .command-resend").on('click', function function_name(argument) {
-            $.post(base_url('messaging/send-scheduled-messages'), function (data) {
-                console.log(data);
-                var data = $.parseJSON(data);
+        $("#messaging-tracking-table .command-resend").on('click', function () {
+		//$.ajax({
+		//	type		
+
+		//}); 
+           //$.post(base_url('messaging/send-scheduled-messages'), function (data) {
+                //console.log(data);
+                //var data = $.parseJSON(data);
                 swal({
                     title: "Confirmation",
                     text: "You are about to resend the pending messages.",
@@ -92,7 +96,7 @@ function init_table () {
                         notify(data.message, data.type, 9000);
                     })
                 });
-            })
-        })
+            //})
+        });
     });
 }

@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-link">Add</button>
+                    <button id="message-template-add" type="submit" class="btn btn-link">Add</button>
                     <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
                 </div>
             <?php echo form_close() ?>

@@ -112,6 +112,9 @@ function update_resource() {
 }
 
 function add_resource() {
+    $('#message-template-add').on('click', function (e) {
+        $('#add-new-message-template-form')[0].reset();
+    });
 	var $addForm = $('#add-new-message-template-form').validate({
         rules: {
             name: 'required',
@@ -178,7 +181,7 @@ function add_resource() {
 }
 
 function reload_table() {
-	$('#preset-message-table-command').bootgrid('reload');
+	$('#message-templates-command').bootgrid('reload');
 }
 
 function init_bootgrid() {

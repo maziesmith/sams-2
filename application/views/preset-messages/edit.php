@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-fluid">
         <div class="modal-content">
 
-            <?php echo form_open("schedule/preset-messages/update", array('id'=>'edit-preset-message-form', 'class'=>'m-t-25 card', 'method'=>'POST'), array('id'=>'AJAX_CALL_ONLY')); ?>
+            <?php echo form_open("schedules/preset-messages/update", array('id'=>'edit-preset-message-form', 'class'=>'m-t-25 card', 'method'=>'POST'), array('id'=>'AJAX_CALL_ONLY')); ?>
                 <div class="card-header bgm-amber">
                     <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
                     <h2>Edit Preset Message</h2>

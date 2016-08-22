@@ -144,6 +144,35 @@ class PresetMessagesController extends CI_Controller {
         }
     }
 
+    public function update($id)
+    {
+        if( $this->PresetMessage->validate(false, $id, '') ) {
+            # Update
+            $preset = array(
+                'name' => $this->input->post('name'),
+                'modified_by' => $this->user_id,
+            );
+            $this->PresetMessage->update($id, $preset);
+
+            # Response
+            $data = array(
+                'message' => 'Preset Message was successfully updated',
+                'type' => 'success',
+            );
+        } else {
+            $data = array(
+                'message'=>$this->form_validation->toArray(),
+                'type'=>'error',
+            );
+        }
+
+        if( $this->input->is_ajax_request() ) {
+            echo json_encode( $data ); exit();
+        } else {
+            $this->session->set_flashdata('message', $data);
+        }
+    }
+
 
     public function trash()
     {

@@ -1,24 +1,29 @@
 jQuery(document).ready(function ($) {
+    init_keys();
     init_table();
     add_resource();
-    init_keys();
+    update_resource();
 });
 
 function init_keys() {
     $('button.keys-add-stud_no').on('click', function (e) {
         $('#add-new-preset-message-form [name=name]').val($('#add-new-preset-message-form [name=name]').val() + "<STUD_NO>");
+        $('#edit-preset-message-form [name=name]').val($('#edit-preset-message-form [name=name]').val() + "<STUD_NO>");
         // e.preventDefault();
     });
     $('button.keys-add-stud_name').on('click', function (e) {
         $('#add-new-preset-message-form [name=name]').val($('#add-new-preset-message-form [name=name]').val() + "<STUD_NAME>");
+        $('#edit-preset-message-form [name=name]').val($('#edit-preset-message-form [name=name]').val() + "<STUD_NAME>");
         // e.preventDefault();
     });
     $('button.keys-add-date').on('click', function (e) {
         $('#add-new-preset-message-form [name=name]').val($('#add-new-preset-message-form [name=name]').val() + "<DATE>");
+        $('#edit-preset-message-form [name=name]').val($('#edit-preset-message-form [name=name]').val() + "<DATE>");
         // e.preventDefault();
     });
     $('button.keys-add-time').on('click', function (e) {
         $('#add-new-preset-message-form [name=name]').val($('#add-new-preset-message-form [name=name]').val() + "<TIME>");
+        $('#edit-preset-message-form [name=name]').val($('#edit-preset-message-form [name=name]').val() + "<TIME>");
         // e.preventDefault();
     });
 }
@@ -171,13 +176,14 @@ function init_table() {
         presetMsgTable.find(".command-edit").on("click", function (e) {
             var id = $(this).parents('tr').data('row-id'),
                 url = base_url('schedules/preset-messages/edit/' + id);
-                console.log(url);
+                // console.log(url);
             $.ajax({
                 type: 'POST',
                 url: url,
                 data: {id: id},
                 success: function (data) {
                     var presetMessage = $.parseJSON(data);
+                    console.log(data);
                     if( undefined !== presetMessage.type && presetMessage.type == 'error' ) {
                         swal(presetMessage.title, presetMessage.message, presetMessage.type);
                     } else {
@@ -228,5 +234,61 @@ function init_table() {
             });
         });
 
+    });
+}
+
+function update_resource() {
+    $('#edit-preset-message-form').validate({
+        rules: {
+            name: 'required',
+        },
+        messages: {
+            name: {
+                required: "The First Name field is required"
+            }
+        },
+        errorElement: 'small',
+        errorPlacement: function (error, element) {
+            $(error).addClass('help-block');
+            $(element).parents('.form-group-validation').addClass('has-warning').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').addClass('has-warning');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).parents('.form-group-validation').removeClass('has-warning');
+            $(element).parents('.form-group-validation').find('.help-block').remove();
+        },
+        submitHandler: function (form) {
+            var id = $(form).find('[name=id]').val();
+            if( id === 'AJAX_CALL_ONLY' ) {
+                swal("Error", "The Member's ID is invalid. Please reload the page and try again.", 'error');
+                $('[name=close]').click();
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: $(form).attr('action') + '/' + id,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        var data = JSON.parse(data);
+                        console.log(data);
+                        resetWarningMessages('.form-group-validation');
+                        if( data.type != 'success' ) {
+                            var errors = data.message;
+                            $.each(errors, function (k, v) {
+                                $('#edit-preset-message-form').find('input[name='+k+']').parents('.form-group-validation').addClass('has-warning').append('<small class="help-block">'+v+'</small>');
+                            });
+                        } else {
+                            $('#edit-preset-message-form').find('button[name=close]').delay(900).queue(function(next){ $(this).click(); next(); });
+                            notify(data.message, data.type, 9000);
+                            reload_table();
+                            $('#edit-preset-message-form')[0].reset();
+                            // reload_selectpickers();
+                        }
+                    },
+                });
+            }
+
+        }
     });
 }

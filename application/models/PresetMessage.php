@@ -28,17 +28,17 @@ class PresetMessage extends CI_Model {
             $this->form_validation->set_message('is_unique', 'The %s is already in use');
             $this->form_validation->set_rules( 'code', 'Code', 'trim|is_unique['.$this->table.'.code]' );
         } else {
-            $original = $this->db->where($this->column_id, $id)->get($this->table)->row()->code;
+            // $original = $this->db->where($this->column_id, $id)->get($this->table)->row()->code;
 
             /**
              * Only reset the rules if the
              * Original value is not equal to
              * the current value
              */
-            if( $value != $original ) {
-                $this->form_validation->set_message('is_unique', 'The %s is already in use');
-                $this->form_validation->set_rules( 'code', 'Code', 'trim|is_unique['.$this->table.'.code]' );
-            }
+            // if( $value != $original ) {
+            //     $this->form_validation->set_message('is_unique', 'The %s is already in use');
+            //     $this->form_validation->set_rules( 'code', 'Code', 'trim|is_unique['.$this->table.'.code]' );
+            // }
         }
 
         return $this->form_validation->run() == FALSE;

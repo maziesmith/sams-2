@@ -168,6 +168,5 @@ class Scheduler extends CI_Model {
         $sql = "SELECT * FROM $this->table WHERE status IN ('pending', 'failure', 'failed', 'rejected', 'buffered') AND send_at < NOW();";
         return $this->db->query($sql)->result();
     }
-
 }
  ?>

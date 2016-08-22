@@ -525,4 +525,27 @@ class MessagingController extends CI_Controller {
         }
     }
 
+    public function resend($id)
+    {
+        $data = array(
+            'title' => 'Error',
+            'type' => 'error',
+            'message' => 'No message id found',
+        );
+
+        $message = $this->Message->find($id);
+        if (!$message) { echo json_encode($data); exit(); }
+
+        $outbox_id = $this->Outbox->find($id, 'message_id')->id;
+        $msisdn = $message->msisdn;
+        $body = $message->message;
+        $this->Message->send($outbox_id, $msisdn, $this->Message->get_network($msisdn), $body);
+        $data = array(
+            'title' => 'Success',
+            'type' => 'info',
+            'message' => 'Message resending...',
+        );
+        echo json_encode($data); exit();
+    }
+
 }

@@ -139,6 +139,5 @@ class Outbox extends CI_Model {
         // $q .= " OFFSET ". (!empty($start_from)?$start_from:-1);
         return $this->db->query($q);
     }
-
 }
  ?>

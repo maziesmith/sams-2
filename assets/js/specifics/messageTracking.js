@@ -73,30 +73,25 @@ function init_table () {
         currentPage = $("#messaging-tracking-table").bootgrid("getCurrentPage");
 
         $("#messaging-tracking-table .command-resend").on('click', function () {
-		//$.ajax({
-		//	type		
 
-		//}); 
-           //$.post(base_url('messaging/send-scheduled-messages'), function (data) {
-                //console.log(data);
-                //var data = $.parseJSON(data);
-                swal({
-                    title: "Confirmation",
-                    text: "You are about to resend the pending messages.",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Resend Now",
-                    closeOnConfirm: true
-                }, function(){
-                    // on deleting button
-                    $.post(base_url('messaging/send-scheduled-messages'), function (data) {
-                        var data = $.parseJSON(data);
-                        console.log(data);
-                        notify(data.message, data.type, 9000);
-                    })
-                });
-            //})
+            swal({
+                title: "Confirmation",
+                text: "You are about to resend the pending messages.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Resend Now",
+                closeOnConfirm: true
+            }, function(){
+                // on deleting button
+                $.post(base_url('messaging/resend-message/1'), function (data) {
+                    var data = $.parseJSON(data);
+                    console.log(data);
+                    notify(data.message, data.type, 9000);
+                })
+            });
+
         });
+
     });
 }

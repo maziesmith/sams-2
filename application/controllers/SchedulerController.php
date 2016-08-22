@@ -165,5 +165,4 @@ class SchedulerController extends CI_Controller {
             ]); exit();
         }
     }
-
 }
